@@ -22,11 +22,3 @@ function toRegister(event) {
     console.log("Calle är rasse");
 }
 
-function hejSan2() {
-    console.log("hejsan 2");
-    console.log("Hello");
-}
-
-function hejsan() {
-    console.log("hej");
-}
