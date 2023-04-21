@@ -13,6 +13,8 @@ $filename = "../../database/users.json";
 if(file_exists($filename)){
     $data = file_get_contents($filename);
     $users = json_decode($data, true);
+} else {
+    $data = [];
 }
 
 $received_data = json_decode(file_get_contents("php://input"), true);
@@ -22,7 +24,7 @@ $password = $received_data["password"];
 
 if ($action = "register") {
     $new_user = ["username" => $username, "password" => $password];
-    
+
 
 }
 

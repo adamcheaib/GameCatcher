@@ -4,7 +4,7 @@ const form = document.getElementById("form");
 const to_register = document.getElementById("too_register");
 
 form.addEventListener("submit", tryToLogin);
-to_register.addEventListener("click", toRegister);
+// to_register.addEventListener("click", toRegister);
 
 function tryToLogin(event) {
     event.preventDefault();
