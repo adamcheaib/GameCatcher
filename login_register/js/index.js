@@ -19,5 +19,9 @@ function tryToLogin(event) {
 };
 
 function toRegister(event) {
-    console.log("Hello");
+    console.log("Calle är rasse");
+}
+
+function hejSan2() {
+    console.log("hejsan 2");
 }
