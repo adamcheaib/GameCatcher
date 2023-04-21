@@ -21,3 +21,7 @@ function tryToLogin(event) {
 function toRegister(event) {
     console.log("Hello");
 }
+
+function hejsan() {
+    console.log("hej");
+}
