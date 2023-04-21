@@ -1,9 +1,10 @@
 "use strict"
 
 const form = document.getElementById("form");
-console.log(form);
+const to_register = document.getElementById("too_register");
 
 form.addEventListener("submit", tryToLogin);
+to_register.addEventListener("click", toRegister);
 
 function tryToLogin(event) {
     event.preventDefault();
@@ -13,7 +14,10 @@ function tryToLogin(event) {
     fetch("./login_register/php/user_database.php", {
         method: "POST",
         header: { "Content-type": "application/json" },
-        body: JSON.stringify({ username: username_field.value, password: password_field.value })
+        body: JSON.stringify({ username: username_field.value, password: password_field.value, action: "login" })
     })
+};
 
+function toRegister(event) {
+    console.log("Hello");
 }

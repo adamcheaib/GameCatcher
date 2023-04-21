@@ -60,6 +60,10 @@ button {
     text-decoration: underline;
 }
 
+#too_register:hover {
+    cursor: pointer;
+}
+
 #logo {
     width: 100px;
     height: 100px;
