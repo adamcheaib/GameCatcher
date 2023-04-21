@@ -18,7 +18,4 @@ function tryToLogin(event) {
     })
 };
 
-function toRegister(event) {
-    console.log("Calle är rasse");
-}
-
+// ADD A FUNCTION HERE THAT TRIGGERS THE REGISTER PAGE!
