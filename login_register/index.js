@@ -1,7 +1,6 @@
 "use strict"
 
-const input_section = document.getElementById("input_section");
-const form = input_section.querySelector("form");
+const form = document.getElementById("form");
 console.log(form);
 
 form.addEventListener("submit", tryToLogin);
