@@ -6,21 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="./css/login.css">
     <script defer src="index.js"></script>
 </head>
 
 <body>
 
     <section id="container">
-        <h1>PREVIEW</h1>
-        <div id="input_section">
-            <form action="INSERT_HERE" method="GET">
-                <input type="text" name="username">
-                <input type="password" name="password">
-                <button type="submit">LOGIN</button>
-            </form>
-            <footer>Don't have an account? Click here to register</footer>
+        <div id="flex_container">
+            <div id="input_section">
+                <div id="logo"></div>
+                <form action="INSERT_HERE" method="GET">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit">LOGIN</button>
+                </form>
+                <div id="too_register">Don't have an account? Click here to register</div>
+            </div>
         </div>
     </section>
 
