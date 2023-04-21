@@ -17,3 +17,25 @@ function tryToLogin(event) {
     })
 
 }
+
+const register_page = document.getElementById("too_register");
+register_page.addEventListener("click", register);
+
+function register(event){
+    document.getElementById("container").classList.toggle("registration");
+    
+    document.querySelector("body").innerHTML = `
+    <section id="container">
+        <div id="flex_container">
+            <div id="input_section">
+                <div id="logo"></div>
+                <form action="INSERT_HERE" method="GET" id="form">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit">REGISTER</button>
+                </form>
+                <div id="too_register">Already have an account? Click here to log in!</div>
+            </div>
+        </div>
+    </section>`
+}
