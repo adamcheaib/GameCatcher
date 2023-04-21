@@ -24,4 +24,9 @@ function toRegister(event) {
 
 function hejSan2() {
     console.log("hejsan 2");
+    console.log("Hello");
+}
+
+function hejsan() {
+    console.log("hej");
 }
