@@ -22,33 +22,21 @@ function tryToLogin(event) {
 const register_page = document.getElementById("too_register");
 register_page.addEventListener("click", register);
 
-function register(event){
+function register(event) {
     let container = document.querySelector("#container");
     container.classList.toggle("registration");
 
-    if(container.classList.contains("registration")){
+    if (container.classList.contains("registration")) {
         document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
         document.querySelector("button").textContent = "REGISTER"
+        document.querySelector("h1").innerHTML = "Register";
         //document.querySelector("#container").style.backgroundImage = "url(../media/443579.jpg)";
         //fixa bild
     }
-    else{
-        document.querySelector("body").innerHTML = `
-        <section id="container">
-        <div id="flex_container">
-            <div id="input_section">
-                <div id="logo"></div>
-                <form action="INSERT_HERE" method="GET" id="form">
-                    <input type="text" name="username" placeholder="Username">
-                    <input type="password" name="password" placeholder="Password">
-                    <button type="submit">LOGIN</button>
-                </form>
-                <div id="too_register">Don't have an account? Click here to register</div>
-            </div>
-        </div>
-    </section>
-    `
-    const register_page = document.getElementById("too_register");
-    register_page.addEventListener("click", register);
+    else {
+        document.querySelector("h1").innerHTML = "Login";
+        document.querySelector("#too_register").innerHTML = "Don't have an account? Click here to register"
+        const register_page = document.getElementById("too_register");
+        register_page.addEventListener("click", register);
     }
 }
