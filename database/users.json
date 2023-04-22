@@ -1,0 +1,32 @@
+[
+    {
+        "username": "rastaman",
+        "password": "rastman",
+        "id": 1
+    },
+    {
+        "username": "aram",
+        "password": "aram",
+        "id": 3
+    },
+    {
+        "username": "kakariko",
+        "password": "kakariko",
+        "id": 4
+    },
+    {
+        "username": "kakariko",
+        "password": "ss",
+        "id": 5
+    },
+    {
+        "username": "kakariko",
+        "password": "ss",
+        "id": 6
+    },
+    {
+        "username": "kakariko",
+        "password": "ss",
+        "id": 7
+    }
+]
