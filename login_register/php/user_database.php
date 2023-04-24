@@ -11,10 +11,9 @@ function sendJSON($message, $http_code = 200) {
 
 $filename = "../../database/users.json";
 if(file_exists($filename)){
-    $data = file_get_contents($filename);
-    $users = json_decode($data, true);
+    $users = json_decode(file_get_contents($filename), true);
 } else {
-    $data = [];
+    $users = [];
 }
 
 $received_data = json_decode(file_get_contents("php://input"), true);
@@ -36,13 +35,25 @@ if ($action == "register") {
                 $id = $single_user["id"];
             }
         }
+    };
+
+    if ($users != null) {
+        foreach($users as $user) {
+            if ($user["username"] == $received_data["username"]) {
+                $message = ["message" => "Username is already taken"];
+                sendJSON($message, 400);
+            }
+        }
     }
     $new_user["id"] = $id + 1;
     $users[] = $new_user;
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-    $message = ["username" => $new_user["username"]];
+    $message = ["username" => $new_user["username"] . " " . "has been registered successfully!"];
     sendJSON($message);
 }
+
+
+
 
 if ($action == "login") {
     foreach ($users as $single_user) {
@@ -52,7 +63,7 @@ if ($action == "login") {
         }
     } 
 
-    $message = ["Error" => "User not found"];
+    $message = ["message" => "User not found"];
     sendJSON($message, 404);
 
 }

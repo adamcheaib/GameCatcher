@@ -3,28 +3,50 @@
 const form = document.getElementById("form");
 const to_register = document.getElementById("too_register");
 
+const username_field = document.querySelector("form > input[name=username]");
+const password_field = document.querySelector("form > input[name=password]");
+username_field.value = "";
+password_field.value = "";
+
 form.addEventListener("submit", register_or_login);
 
 function register_or_login(event) {
     event.preventDefault();
-    const username_field = document.querySelector("form > input:nth-child(1)").value;
-    const password_field = document.querySelector("form > input:nth-child(2)").value;
+    const username = username_field.value;
+    const password = username_field.value;
     const submit_button = document.querySelector("button[type=submit]");
     if (submit_button.textContent == "LOGIN") {
-        tryToLogin({ username: username_field, password: password_field });
+        tryToLogin({ username: username, password: password });
     } else {
-        tryToRegister({ username: username_field, password: password_field });
+        tryToRegister({ username: username, password: password });
     }
 }
 
 
-function tryToLogin({ username, password }) {
+async function tryToLogin({ username, password }) {
+    const feedback = document.getElementById("status");
 
-    fetch("./login_register/php/user_database.php", {
-        method: "POST",
-        header: { "Content-type": "application/json" },
-        body: JSON.stringify({ username: username, password: password, action: "login" })
-    })
+    try {
+        const response = await fetch("./login_register/php/user_database.php", {
+            method: "POST",
+            header: { "Content-type": "application/json" },
+            body: JSON.stringify({ username: username, password: password, action: "login" })
+        });
+
+        const resource = await response.json();
+        username_field.value = "";
+        password_field.value = "";
+
+        if (!response.ok) {
+            alert(resource.message); // Add the popup function instead
+        } else {
+            alert(resource.message); // Add the popup function instead
+        }
+    } catch (error) {
+        alert(error.message) // Add the popup function or change the innerHTML so that plain text is shown of the current status!
+    }
+
+
 };
 
 function tryToRegister({ username, password }) {
