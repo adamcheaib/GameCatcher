@@ -14,10 +14,8 @@ const object1 = {
 
 
 function fetch_games(fetch_object = { count, results, page, page_size }) {
-    let link = "https://api.rawg.io/api/platforms?key=a25ef91c11654298888f4907971ad496";
-    if (fetch_object.hasOwnProperty("count")) {
-        console.log("YAY");
-    }
+    let link = "https://api.rawg.io/api/genres?key=a25ef91c11654298888f4907971ad496";
+    fetch(link).then(r => r.json()).then(console.log);
 }
 
 fetch_games(object1);
