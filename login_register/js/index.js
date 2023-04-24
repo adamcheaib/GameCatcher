@@ -30,13 +30,16 @@ function register(event) {
         document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
         document.querySelector("button").textContent = "REGISTER"
         document.querySelector("h1").innerHTML = "Register";
-        //document.querySelector("#container").style.backgroundImage = "url(../media/443579.jpg)";
-        //fixa bild
+        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/443579.jpg)";
+        
     }
     else {
         document.querySelector("h1").innerHTML = "Login";
+        document.querySelector("button").textContent = "LOGIN"
         document.querySelector("#too_register").innerHTML = "Don't have an account? Click here to register"
         const register_page = document.getElementById("too_register");
         register_page.addEventListener("click", register);
+
+        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/pxfuel.jpg)";
     }
 }
