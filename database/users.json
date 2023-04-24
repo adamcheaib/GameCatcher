@@ -11,16 +11,6 @@
     },
     {
         "username": "kakariko",
-        "password": "kakariko",
-        "id": 4
-    },
-    {
-        "username": "kakariko",
-        "password": "ss",
-        "id": 5
-    },
-    {
-        "username": "kakariko",
         "password": "ss",
         "id": 6
     },
@@ -28,5 +18,15 @@
         "username": "kakariko",
         "password": "ss",
         "id": 7
+    },
+    {
+        "username": "erik",
+        "password": "sss",
+        "id": 8
+    },
+    {
+        "username": "bobmarley",
+        "password": "adam",
+        "id": 9
     }
 ]
