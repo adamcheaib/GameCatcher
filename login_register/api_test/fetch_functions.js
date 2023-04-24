@@ -2,9 +2,11 @@
 
 // To control whether an object has a certain key you write: objectName.hasOwnProperty("keyname") <-- Returns TRUE or FALSE.
 const fetch_button = document.getElementById("fetch");
+fetch_button.addEventListener("click", fetch_games)
 
 // https://api.rawg.io/api/platforms?key=a25ef91c11654298888f4907971ad496
 const api_key = "a25ef91c11654298888f4907971ad496";
+let prefix = "https://api.rawg.io/api/";
 
 
 const object1 = {
@@ -13,9 +15,19 @@ const object1 = {
 };
 
 
-function fetch_games(fetch_object = { count, results, page, page_size }) {
-    let link = "https://api.rawg.io/api/genres?key=a25ef91c11654298888f4907971ad496";
-    fetch(link).then(r => r.json()).then(console.log);
-}
+function TEST_fetch_games(count) { // Fetches games based on genre!
+    let link = prefix + "games?&key=a25ef91c11654298888f4907971ad496";
+    fetch(link).then(r => r.json()).then(game => {
+        console.log(game);
+        game.results.forEach(desc => {
+            desc.genres.forEach(gameNew => {
+                if (gameNew.name == "Adventure") { // Choose the genre that you want to search for!
+                    console.log(desc.name);
+                }
+            })
+        })
+    });
+};
 
-fetch_games(object1);
+
+fetch_games({ type: "games" });
