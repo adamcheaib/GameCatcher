@@ -6,28 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Test</title>
-    <script defer src="./fetch_functions.js"></script>
+    <script defer src="./games_fetch.js"></script>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
 
         button {
-            width: 400px;
+            width: 200px;
             height: 200px;
             font-size: 40px;
             font-weight: bold;
+        }
+
+        #game_preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 800px;
+            border: solid 1px;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        input {
+            height: 100px;
+            width: 100px;
         }
     </style>
 </head>
 
 <body>
-    <div id="container">
+    <div id="container" style="display: flex; gap: 20px;">
+        <button id="previous">Previous page</button>
         <button id="fetch">FETCH GAMES</button>
+        <button id="next">Next page</button>
     </div>
+
+    <div id="game_preview"></div>
+    <input type="checkbox" name="adventure" id="horror">
 </body>
 
 </html>
