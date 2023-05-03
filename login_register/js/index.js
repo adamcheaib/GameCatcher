@@ -27,7 +27,7 @@ async function tryToLogin({ username, password }) {
     const feedback = document.getElementById("status");
 
     try {
-        const response = await fetch("./login_register/php/user_database.php", {
+        const response = await fetch("./php/user_database.php", {
             method: "POST",
             header: { "Content-type": "application/json" },
             body: JSON.stringify({ username: username, password: password, action: "login" })
@@ -50,7 +50,7 @@ async function tryToLogin({ username, password }) {
 };
 
 function tryToRegister({ username, password }) {
-    fetch("./login_register/php/user_database.php", {
+    fetch("./php/user_database.php", {
         method: "POST",
         header: { "Content-type": "application/json" },
         body: JSON.stringify({ username: username, password: password, action: "register" })
