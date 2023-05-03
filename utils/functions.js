@@ -27,4 +27,5 @@ function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-// Fetch games based on the genre!
+
+
