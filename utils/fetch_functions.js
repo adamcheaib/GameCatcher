@@ -22,15 +22,11 @@ async function TEST_fetch_all_games(page = 1) { // Fetches games based on genre!
 };
 
 async function TEST_fetch_genre_games(event) {
-
-    async function fetch_specific_genre(genre) {
-        try {
-            const genre_fetch = prefix + `games?page=${page}&genres=${genre}${api_key}`;
-            const resource = await (await fetch(genre_fetch)).json();
-            console.log(resource);
-        } catch (err) {
-            console.log(err);
-        }
+    try {
+        const genre_fetch = prefix + `games?page=1&genres=action${api_key}`;
+        const resource = await (await fetch(genre_fetch)).json();
+        console.log(resource);
+    } catch (err) {
+        console.log(err);
     }
-
 }
