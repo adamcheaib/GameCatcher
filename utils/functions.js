@@ -1,11 +1,13 @@
 "use strict"
 
 function popUpFunction(message) {
-    const body = document.querySelector("body");
+    button.disabled = true;
+    console.log("hef");
+    body = document.querySelector("body");
     document.querySelector("div").style.opacity = "0.5";
 
-    const popup = document.createElement("div");
-    const exit_button = document.createElement("div");
+    popup = document.createElement("div");
+    exit_button = document.createElement("div");
 
     body.appendChild(popup);
     popup.classList.add("popup");
@@ -19,7 +21,7 @@ function popUpFunction(message) {
 }
 function remove_message(event) {
     console.log(event);
-    const div = event.originalTarget.parentElement;
+    div = event.originalTarget.parentElement;
     div.remove();
     button.disabled = false;
     document.querySelector("div").style.opacity = "1";
