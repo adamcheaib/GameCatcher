@@ -27,4 +27,4 @@ function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-// Modafucka
+// Modafucka hello elliot
