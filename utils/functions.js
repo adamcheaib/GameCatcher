@@ -1,8 +1,6 @@
 "use strict"
 
 function popUpFunction(message) {
-    button.disabled = true; // Vad menar Calle med detta? <3
-    console.log("hef");
     const body = document.querySelector("body");
     document.querySelector("div").style.opacity = "0.5";
 
