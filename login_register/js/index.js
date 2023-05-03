@@ -50,7 +50,7 @@ async function tryToLogin({ username, password }) {
 };
 
 function tryToRegister({ username, password }) {
-    fetch("./php/user_database.php", {
+    fetch("./login_register/php/user_database.php", {
         method: "POST",
         header: { "Content-type": "application/json" },
         body: JSON.stringify({ username: username, password: password, action: "register" })
