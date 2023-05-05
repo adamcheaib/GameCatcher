@@ -1,13 +1,11 @@
 "use strict"
 
 function popUpFunction(message) {
-    button.disabled = true;
-    console.log("hef");
-    body = document.querySelector("body");
+    const body = document.querySelector("body");
     document.querySelector("div").style.opacity = "0.5";
 
-    popup = document.createElement("div");
-    exit_button = document.createElement("div");
+    const popup = document.createElement("div");
+    const exit_button = document.createElement("div");
 
     body.appendChild(popup);
     popup.classList.add("popup");
@@ -21,10 +19,14 @@ function popUpFunction(message) {
 }
 function remove_message(event) {
     console.log(event);
-    div = event.originalTarget.parentElement;
+    const div = event.originalTarget.parentElement;
     div.remove();
     button.disabled = false;
     document.querySelector("div").style.opacity = "1";
 }
 
+<<<<<<< HEAD
 // Modafucka hello elliot
+=======
+// Modafucka
+>>>>>>> parent of 7944e7b (Merge branch 'utils_functions' into GameCatcher_frontpage)
