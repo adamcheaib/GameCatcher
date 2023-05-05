@@ -6,7 +6,7 @@
 const api_key = "key=a25ef91c11654298888f4907971ad496";
 let prefix = "https://api.rawg.io/api/";
 
-async function TEST_fetch_all_games(page = 1) { // Fetches games based on genre!
+async function fetch_all_games(page = 1) { // Fetches games based on genre!
     const link = prefix + `games?page=${page}&` + api_key;
     try {
         const resource = await (await fetch(link)).json();
@@ -18,7 +18,7 @@ async function TEST_fetch_all_games(page = 1) { // Fetches games based on genre!
     }
 };
 
-TEST_fetch_all_games();
+fetch_all_games();
 
 async function TEST_fetch_genre_games(event) {
     // Fetch genre based on a certain DOM that contains the name of the genre. The name of the genre will be placed within the "genre" variable.
@@ -43,6 +43,7 @@ async function search_game_event(event) {
             console.log(resource);
             resource.results.forEach(game => {
                 if (!game.name.includes("Demo") && !game.name.includes("Trial") && !game.name.includes("DEMO")) {
+                    // I våran conditions, fixa att man undviker demos osv.
                     console.log(game.name);
                 }
             })
