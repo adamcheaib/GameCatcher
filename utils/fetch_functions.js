@@ -1,8 +1,8 @@
 "use strict"
 
 // To control whether an object has a certain key you write: objectName.hasOwnProperty("keyname") <-- Returns TRUE or FALSE.
-const fetch_button = document.getElementById("fetch");
-fetch_button.addEventListener("click", TEST_fetch_all_games)
+//const fetch_button = document.getElementById("fetch");
+//fetch_button.addEventListener("click", TEST_fetch_all_games)
 
 // https://api.rawg.io/api/platforms?key=a25ef91c11654298888f4907971ad496
 const api_key = "&key=a25ef91c11654298888f4907971ad496";
