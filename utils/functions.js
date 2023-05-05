@@ -25,8 +25,4 @@ function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-<<<<<<< HEAD
 // Modafucka hello elliot
-=======
-// Modafucka
->>>>>>> parent of 7944e7b (Merge branch 'utils_functions' into GameCatcher_frontpage)
