@@ -58,7 +58,7 @@ if ($action == "register") {
 if ($action == "login") {
     foreach ($users as $single_user) {
         if($username == $single_user["username"] and $password == $single_user["password"]) {
-            $message = ["username" => $single_user["username"], "message" => "Login successful!"];
+            $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "message" => "Login successful!"];
             sendJSON($message);
         }
     } 
