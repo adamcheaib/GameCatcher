@@ -25,4 +25,4 @@ function remove_message(event) {
     div.remove();
     button.disabled = false;
     document.querySelector("div").style.opacity = "1";
-}
+};
