@@ -1,8 +1,6 @@
 "use strict"
 
 // To control whether an object has a certain key you write: objectName.hasOwnProperty("keyname") <-- Returns TRUE or FALSE.
-const fetch_button = document.getElementById("fetch");
-fetch_button.addEventListener("click", TEST_fetch_all_games)
 
 // https://api.rawg.io/api/platforms?key=a25ef91c11654298888f4907971ad496
 const api_key = "&key=a25ef91c11654298888f4907971ad496";
@@ -15,15 +13,20 @@ async function TEST_fetch_all_games(page = 1) { // Fetches games based on genre!
     try {
         const resource = await (await fetch(link)).json();
         console.log(resource);
+        return resource;
 
     } catch (error) {
         alert("Something went wrong!");
     }
 };
 
+TEST_fetch_all_games()
+
 async function TEST_fetch_genre_games(event) {
+    // Fetch genre based on a certain DOM that contains the name of the genre. The name of the genre will be placed within the "genre" variable.
+    let genre = "action";
     try {
-        const genre_fetch = prefix + `games?page=1&genres=action${api_key}`;
+        const genre_fetch = prefix + `games?page=1&genres=${genre}${api_key}`;
         const resource = await (await fetch(genre_fetch)).json();
         console.log(resource);
     } catch (err) {
