@@ -22,4 +22,5 @@ function init_collection() {
     `
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
+    document.querySelector("#chat").addEventListener("click", init_forum)
 }
