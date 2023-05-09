@@ -5,8 +5,8 @@ function init_forum() {
 
     document.querySelector("#center_piece").innerHTML = `
         <div id="forum_display">
-            <div id="first_part"></div>
-            <div id="second_part"></div>
+            <div class="part_of_forum" id="first_part"></div>
+            <div class="part_of_forum" id="second_part"></div>
         </div>
         <textarea></textarea>
         <button>Send</button>
@@ -16,3 +16,6 @@ function init_forum() {
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
 }
+
+
+function create_post(message)
