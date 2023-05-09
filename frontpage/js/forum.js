@@ -4,7 +4,10 @@ function init_forum() {
     document.querySelector("link").setAttribute("href", "./frontpage/css/forum.css");
 
     document.querySelector("#center_piece").innerHTML = `
-        <div id="forum_display"></div>
+        <div id="forum_display">
+            <div id="first_part"></div>
+            <div id="second_part"></div>
+        </div>
         <textarea></textarea>
         <button>Send</button>
     `;
