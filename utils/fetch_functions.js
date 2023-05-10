@@ -37,6 +37,12 @@ async function TEST_fetch_genre_games(event) {
 async function search_game_event(event) {
 
     async function search_for_game(game_name) {
+        /*
+        PC: id 4,
+        Nintendo Switch: id 7,
+        Xbox Series X: id 186,
+        Playstation 5: id 187
+        */
         try {
             const link = prefix + `games?search=${game_name}&platforms=4,187,18,&search_precise=true&` + api_key;
             const resource = await (await fetch(link)).json();
