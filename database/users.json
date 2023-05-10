@@ -68,5 +68,53 @@
         "username": "quarto",
         "password": "hej calle sug min kuk",
         "id": 17
+    },
+    {
+        "username": "feaffea",
+        "password": "fae",
+        "id": 18
+    },
+    {
+        "username": "elliotkolonit",
+        "password": "",
+        "id": 19
+    },
+    {
+        "username": "elliotkolonist",
+        "password": "wallah",
+        "id": 20
+    },
+    {
+        "username": "feaf",
+        "password": "f",
+        "id": 21
+    },
+    {
+        "username": "genretest",
+        "password": "test",
+        "id": 22
+    },
+    {
+        "username": "vgtvgt",
+        "password": "vg",
+        "id": 23,
+        "genre": 0
+    },
+    {
+        "username": "testagain",
+        "password": "testagain",
+        "id": 24,
+        "genres": 0
+    },
+    {
+        "username": "tester",
+        "password": "tester",
+        "id": 25,
+        "genres": 0
+    },
+    {
+        "username": "nogenreaccount",
+        "password": "try",
+        "id": 26
     }
 ]

@@ -45,8 +45,6 @@ async function tryToLogin({ username, password }) {
     } catch (error) {
         alert(error.message) // Add the popup function or change the innerHTML so that plain text is shown of the current status!
     }
-
-
 };
 
 function tryToRegister({ username, password }) {
