@@ -1,4 +1,7 @@
-function init_frontpage() {
+import { init_forum } from "./forum.js";
+import { init_collection } from "./game_collection.js";
+
+export function init_frontpage() {
 
     document.querySelector("link").setAttribute("href", "./frontpage/css/frontpage.css");
     document.body.innerHTML = `

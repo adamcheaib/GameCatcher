@@ -68,9 +68,11 @@ button {
     display: flex;
 }
 
-.part_of_forum{
+.part_of_forum {
+    padding: 20px;
     width: 50%;
     height: 100%;
+    color: black;
 }
 
 textarea {
