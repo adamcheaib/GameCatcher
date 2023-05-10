@@ -13,7 +13,7 @@ form.addEventListener("submit", register_or_login);
 function register_or_login(event) {
     event.preventDefault();
     const username = username_field.value;
-    const password = username_field.value;
+    const password = password_field.value;
     const submit_button = document.querySelector("button[type=submit]");
     if (submit_button.textContent == "LOGIN") {
         tryToLogin({ username: username, password: password });
@@ -70,7 +70,7 @@ function register(event) {
         document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
         document.querySelector("button").textContent = "REGISTER"
         document.querySelector("h1").innerHTML = "Register";
-        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/443579.jpg)";
+        document.querySelector("#container").style.backgroundImage = "url(./media/443579.jpg)";
 
     }
     else {
@@ -81,6 +81,6 @@ function register(event) {
         const register_page = document.getElementById("too_register");
         register_page.addEventListener("click", register);
 
-        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/pxfuel.jpg)";
+        document.querySelector("#container").style.backgroundImage = "url(./media/pxfuel.jpg)";
     }
 }
