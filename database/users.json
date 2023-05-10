@@ -1,0 +1,120 @@
+[
+    {
+        "username": "rastaman",
+        "password": "rastman",
+        "id": 1
+    },
+    {
+        "username": "aram",
+        "password": "aram",
+        "id": 3
+    },
+    {
+        "username": "kakariko",
+        "password": "ss",
+        "id": 6
+    },
+    {
+        "username": "kakariko",
+        "password": "ss",
+        "id": 7
+    },
+    {
+        "username": "erik",
+        "password": "sss",
+        "id": 8
+    },
+    {
+        "username": "bobmarley",
+        "password": "adam",
+        "id": 9
+    },
+    {
+        "username": "bobmarley",
+        "password": "sss",
+        "id": 10
+    },
+    {
+        "username": "bobmarley",
+        "password": "sss",
+        "id": 11
+    },
+    {
+        "username": "bobmarley",
+        "password": "sss",
+        "id": 12
+    },
+    {
+        "username": "kakarikokakaka",
+        "password": "123",
+        "id": 13
+    },
+    {
+        "username": "ee",
+        "password": "ee",
+        "id": 14
+    },
+    {
+        "username": "calle Mufic",
+        "password": "calle Mufic",
+        "id": 15
+    },
+    {
+        "username": "rastamanakdoadkasd",
+        "password": "rastamanakdoadkasd",
+        "id": 16
+    },
+    {
+        "username": "quarto",
+        "password": "hej calle sug min kuk",
+        "id": 17
+    },
+    {
+        "username": "feaffea",
+        "password": "fae",
+        "id": 18
+    },
+    {
+        "username": "elliotkolonit",
+        "password": "",
+        "id": 19
+    },
+    {
+        "username": "elliotkolonist",
+        "password": "wallah",
+        "id": 20
+    },
+    {
+        "username": "feaf",
+        "password": "f",
+        "id": 21
+    },
+    {
+        "username": "genretest",
+        "password": "test",
+        "id": 22
+    },
+    {
+        "username": "vgtvgt",
+        "password": "vg",
+        "id": 23,
+        "genre": 0
+    },
+    {
+        "username": "testagain",
+        "password": "testagain",
+        "id": 24,
+        "genres": 0
+    },
+    {
+        "username": "tester",
+        "password": "tester",
+        "id": 25,
+        "genres": 0
+    },
+    {
+        "username": "nogenreaccount",
+        "password": "try",
+        "id": 26
+    }
+]
