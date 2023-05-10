@@ -35,10 +35,12 @@ export function init_frontpage() {
 
                     <div id="genres">
                         <div id="first_arrow">&#8592;</div>
-                        <div id="first_genra"></div>
-                        <div id="second_genra"></div>
-                        <div id="third_genra"></div>
-                        <div id="fourth_genra"></div>
+                        <div id="genre_wrapper">
+                            <div id="first_genra"></div>
+                            <div id="second_genra"></div>
+                            <div id="third_genra"></div>
+                            <div id="fourth_genra"></div>
+                        </div>
                         <div id="second_arrow">&#8594;</div>
                     </div>
 

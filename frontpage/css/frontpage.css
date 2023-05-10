@@ -98,9 +98,15 @@ p {
 
 }
 
-
 #genres {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#genre_wrapper {
     display: flex;
     justify-content: center;
     align-items: center;

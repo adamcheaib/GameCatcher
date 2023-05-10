@@ -33,8 +33,8 @@ async function genre_scroll() { // Scroll function for the displayed genres.
     let counter = 0;
 
     if (counter === 0) {
-        document.querySelector("#back").style.backgroundColor = "gray";
-        document.querySelector("#back").removeEventListener("click", click_right_arrow)
+        document.querySelector("#first_arrow").style.backgroundColor = "gray";
+        document.querySelector("#first_arrow").removeEventListener("click", click_right_arrow)
     }
 
     let response = await fetch("https://api.rawg.io/api/genres?key=c6881186f1044f2bb2a5cc2ea0ea4faa");
@@ -52,7 +52,7 @@ async function genre_scroll() { // Scroll function for the displayed genres.
     console.log(genre_names);
 
 
-    let all_dom_boxes = document.querySelectorAll(".box");
+    let all_dom_boxes = document.querySelectorAll("#genre_wrapper > div");
 
     for (let i = 0; i < 4; i++) {
         all_dom_boxes[i].style.backgroundImage = `url(${genre_images[i]})`
@@ -68,16 +68,16 @@ async function genre_scroll() { // Scroll function for the displayed genres.
     function click_right_arrow() {
 
         if (counter === genre_names.length - 4) {
-            document.querySelector("#front").style.backgroundColor = "gray";
-            document.querySelector("#front").removeEventListener("click", click_right_arrow)
+            document.querySelector("#second_arrow").style.backgroundColor = "gray";
+            document.querySelector("#second_arrow").removeEventListener("click", click_right_arrow)
         }
         else {
             index += 1;
             counter += 1;
             console.log(counter)
             if (counter !== 0) {
-                document.querySelector("#back").style.backgroundColor = "black";
-                document.querySelector("#back").addEventListener("click", click_left_arrow)
+                document.querySelector("#first_arrow").style.backgroundColor = "black";
+                document.querySelector("#first_arrow").addEventListener("click", click_left_arrow)
             }
 
 
@@ -106,27 +106,26 @@ async function genre_scroll() { // Scroll function for the displayed genres.
     }
 
 
-
     function click_left_arrow() {
         if (counter === 0) {
-            document.querySelector("#back").style.backgroundColor = "gray";
-            document.querySelector("#back").removeEventListener("click", click_left_arrow)
+            document.querySelector("#first_arrow").style.backgroundColor = "gray";
+            document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
         }
         else {
             index -= 1;
             counter -= 1;
             if (counter !== genre_names.length - 4) {
 
-                document.querySelector("#front").style.backgroundColor = "black";
-                document.querySelector("#front").addEventListener("click", click_right_arrow)
+                document.querySelector("#second_arrow").style.backgroundColor = "black";
+                document.querySelector("#second_arrow").addEventListener("click", click_right_arrow)
             }
             if (counter === 0) {
-                document.querySelector("#back").style.backgroundColor = "gray";
-                document.querySelector("#back").removeEventListener("click", click_left_arrow)
+                document.querySelector("#first_arrow").style.backgroundColor = "gray";
+                document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
             }
             else {
-                document.querySelector("#back").style.backgroundColor = "black";
-                document.querySelector("#back").addEventListener("click", click_left_arrow)
+                document.querySelector("#first_arrow").style.backgroundColor = "black";
+                document.querySelector("#first_arrow").addEventListener("click", click_left_arrow)
             }
 
 
@@ -153,8 +152,8 @@ async function genre_scroll() { // Scroll function for the displayed genres.
         }
     }
 
-    document.querySelector("#front").addEventListener("click", click_right_arrow);
-    document.querySelector("#back").addEventListener("click", click_left_arrow);
+    document.querySelector("#second_arrow").addEventListener("click", click_right_arrow);
+    document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
 
 }
 
