@@ -30,7 +30,9 @@ function create_post() {
             <div id="profile_picture"></div>
             <div id="the_post_text">${document.querySelector("textarea").value}</div>
         `;
-        document.querySelector("#first_part").appendChild(post_dom);
+        if (document.querySelector("textarea").value !== "") {
+            document.querySelector("#first_part").appendChild(post_dom);
+        }
         document.querySelector("textarea").value = "";
     })
 }
