@@ -1,5 +1,6 @@
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
+import { genre_scroll } from "../../utils/functions.js";
 localStorage.setItem("hello", "hello");
 export function init_frontpage() {
 
@@ -72,6 +73,7 @@ export function init_frontpage() {
 
     </div>
     `;
+    genre_scroll();
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
