@@ -65,7 +65,6 @@ export function init_frontpage() {
                     </div>
                 </div>
 
-
                 <footer>
                     Footer
                 </footer>

@@ -60,8 +60,15 @@ async function genre_scroll() { // Scroll function for the displayed genres.
         <div class="genre_text_wrapper">
         <div class="genre_text">${genre_names[i]}</div>
         </div>
-        
       `;
+        all_dom_boxes[i].addEventListener("click", (event) => {
+            // console.log(event.target);
+            const parent_node = document.getElementById("genre_wrapper");
+            parent_node.querySelectorAll("div").forEach(genre_icon => genre_icon.style.transform = "scale(1)");
+            window.localStorage.setItem("name", event.target.querySelector(".genre_text").textContent.toLowerCase());
+            event.target.parentElement.style.transform = "scale(1.1)";
+            console.log(window.localStorage);
+        })
     }
 
 
@@ -77,7 +84,7 @@ async function genre_scroll() { // Scroll function for the displayed genres.
             console.log(counter)
             if (counter !== 0) {
                 document.querySelector("#first_arrow").style.backgroundColor = "black";
-                document.querySelector("#first_arrow").addEventListener("click", click_left_arrow)
+                document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
             }
 
 
@@ -106,7 +113,7 @@ async function genre_scroll() { // Scroll function for the displayed genres.
     }
 
 
-    function click_left_arrow() {
+    function click_left_arrow(event) {
         if (counter === 0) {
             document.querySelector("#first_arrow").style.backgroundColor = "gray";
             document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
