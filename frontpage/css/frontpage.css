@@ -107,6 +107,10 @@ p {
     gap: 20px;
 }
 
+#genres>div:hover {
+    cursor: pointer;
+}
+
 #first_genra {
     width: 200px;
     height: 200px;
@@ -150,6 +154,19 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#first_arrow:hover,
+#second_arrow:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+#first_arrow:active,
+#second_arrow:active {
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.415);
+    user-select: none;
 }
 
 #second_arrow {
