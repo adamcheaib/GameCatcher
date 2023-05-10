@@ -15,7 +15,7 @@ export function init_forum() {
 
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
-    document.querySelector("#chat").addEventListener("click", init_forum)
+    document.querySelector("#chat").addEventListener("click", init_forum);
     create_post();
 }
 
@@ -32,5 +32,5 @@ function create_post() {
         `;
         document.querySelector("#first_part").appendChild(post_dom);
         document.querySelector("textarea").value = "";
-    })
+    });
 }

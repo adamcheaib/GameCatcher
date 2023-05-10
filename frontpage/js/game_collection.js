@@ -20,7 +20,8 @@ export function init_collection() {
         <div class="box"></div>
         <div class="box"></div>
         <div class="box"></div>
-    `
+    `;
+
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
