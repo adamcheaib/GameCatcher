@@ -52,13 +52,13 @@ async function genre_scroll() { // Scroll function for the displayed genres.
     console.log(genre_names);
 
 
-    let all_dom_boxes = document.querySelectorAll("#genre_wrapper > div");
+    let all_dom_boxes = document.querySelectorAll("#genre_wrapper div");
 
     for (let i = 0; i < 4; i++) {
         all_dom_boxes[i].style.backgroundImage = `url(${genre_images[i]})`
         all_dom_boxes[i].innerHTML = `
         <div class="genre_text_wrapper">
-        <div class="genre_text">${genre_names[i]}</div>
+            <div class="genre_text">${genre_names[i]}</div>
         </div>
       `;
         all_dom_boxes[i].addEventListener("click", (event) => {
