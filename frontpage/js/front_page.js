@@ -1,6 +1,6 @@
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-
+localStorage.setItem("hello", "hello");
 export function init_frontpage() {
 
     document.querySelector("link").setAttribute("href", "./frontpage/css/frontpage.css");
@@ -76,6 +76,3 @@ export function init_frontpage() {
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
 }
-
-
-init_frontpage();

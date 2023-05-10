@@ -34,15 +34,17 @@ async function tryToLogin({ username, password }) {
         });
 
         const resource = await response.json();
-        username_field.value = "";
-        password_field.value = "";
+
 
         if (!response.ok) {
             alert(resource.message); // Add the popup function instead
         } else {
             alert(resource.message); // Add the popup function instead
-            window.location.replace("http://localhost:80/frontpage");
+            window.location.replace("http://localhost/frontpage");
+            localStorage.setItem("username", "hello");
         }
+        username_field.value = "";
+        password_field.value = "";
     } catch (error) {
         alert(error.message) // Add the popup function or change the innerHTML so that plain text is shown of the current status!
     }
