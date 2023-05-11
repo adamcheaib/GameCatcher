@@ -41,7 +41,7 @@ async function tryToLogin({ username, password }) {
             alert(resource.message); // Add the popup function instead
         } else {
             alert(resource.message); // Add the popup function instead
-            window.location.replace("http://localhost:80/frontpage");
+            window.location.replace(`http://localhost/frontpage?username=${username}`);
         }
     } catch (error) {
         alert(error.message) // Add the popup function or change the innerHTML so that plain text is shown of the current status!
