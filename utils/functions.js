@@ -3,7 +3,7 @@
 
 
 
-async function genre_scroll() { // Scroll function for the displayed genres.    
+export async function genre_scroll() { // Scroll function for the displayed genres.    
     let index = 0;
     let counter = 0;
 
@@ -12,7 +12,7 @@ async function genre_scroll() { // Scroll function for the displayed genres.
         document.querySelector("#first_arrow").removeEventListener("click", click_right_arrow)
     }
 
-    let response = await fetch("https://api.rawg.io/api/genres?key=c6881186f1044f2bb2a5cc2ea0ea4faa");
+    let response = await fetch("https://api.rawg.io/api/genres?key=a25ef91c11654298888f4907971ad496");
     let genre_data = await response.json();
 
     let genre_names = [];
