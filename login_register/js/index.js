@@ -7,6 +7,9 @@ const password_field = document.querySelector("form > input[name=password]");
 username_field.value = "";
 password_field.value = "";
 
+console.log(sessionStorage);
+console.log(localStorage);
+
 form.addEventListener("submit", register_or_login);
 
 function register_or_login(event) {
@@ -39,14 +42,7 @@ async function tryToLogin(login_object) {
             alert(resource.message); // Add the popup function instead
         } else {
             alert(resource.message); // Add the popup function instead
-            const logged_user_request = await fetch("../login_register/php/logged_on_user.php", {
-                method: "POST",
-                header: { "Content-type": "application/json" },
-                body: JSON.stringify({ logged_on_user: resource.username })
-            })
-
-            const logged_on_user = await logged_user_request.json();
-            console.log(logged_on_user);
+            localStorage.setItem("username", resource.username);
 
             window.location.replace("http://localhost:1234/frontpage");
         }

@@ -2,20 +2,14 @@ import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 // import { genre_scroll } from "../../utils/functions.js";
 
-async function get_logged_on_user() {
-    const response = await fetch("../../login_register/php/logged_on_user.php");
-    const resource = await response.json();
-    console.log(resource);
+console.log(localStorage);
 
-    if (!response.ok) {
-        window.location.replace("http://localhost:1234/login_register");
-    } else {
-        window.localStorage.setItem("username", resource.logged_on_user);
-        init_frontpage();
-    }
-};
+if (!localStorage.hasOwnProperty("username")) {
+    window.location.replace("http://localhost:1234/login_register");
+} else {
+    init_frontpage();
+}
 
-get_logged_on_user();
 
 export function init_frontpage() {
     document.body.innerHTML = "";
@@ -36,7 +30,7 @@ export function init_frontpage() {
 
                 <div id="profile_and_welcome_text">
                     <div id="welcome_text">
-                        <h1>Hello ${window.localStorage.getItem("username")}!</h1>
+                        <h1>Hello ${localStorage.getItem("username")}!</h1>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing</p>
                     </div>
 
@@ -89,8 +83,8 @@ export function init_frontpage() {
 
     </div>
     `;
-    genre_scroll();
+    // genre_scroll();
     document.querySelector("#saved").addEventListener("click", init_collection);
-    document.querySelector("#main_page").addEventListener("click", get_logged_on_user);
+    document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
 }
