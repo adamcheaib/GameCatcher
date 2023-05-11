@@ -1,6 +1,7 @@
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { genre_scroll } from "../../utils/functions.js";
+
 localStorage.setItem("hello", "hello");
 export function init_frontpage() {
 
