@@ -1,6 +1,6 @@
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { genre_scroll } from "../../utils/functions.js";
+// import { genre_scroll } from "../../utils/functions.js";
 
 async function get_logged_on_user() {
     const response = await fetch("../../login_register/php/logged_on_user.php");
