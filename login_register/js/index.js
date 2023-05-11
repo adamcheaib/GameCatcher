@@ -1,4 +1,9 @@
 "use strict"
+
+if (localStorage.getItem("username") !== null) {
+    window.location.replace("http://localhost:1234/frontpage");
+}
+
 const form = document.getElementById("form");
 const to_register = document.getElementById("too_register");
 
@@ -43,7 +48,6 @@ async function tryToLogin(login_object) {
         } else {
             alert(resource.message); // Add the popup function instead
             localStorage.setItem("username", resource.username);
-
             window.location.replace("http://localhost:1234/frontpage");
         }
         username_field.value = "";
