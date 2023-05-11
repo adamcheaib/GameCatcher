@@ -27,7 +27,7 @@
 
             <div id="profile_and_welcome_text">
                 <div id="welcome_text">
-                    <h1>Hello Elliot</h1>
+                    <h1>Hello !</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing</p>
                 </div>
 

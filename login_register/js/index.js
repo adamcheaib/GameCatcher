@@ -1,5 +1,4 @@
 "use strict"
-
 const form = document.getElementById("form");
 const to_register = document.getElementById("too_register");
 
@@ -40,8 +39,16 @@ async function tryToLogin({ username, password }) {
             alert(resource.message); // Add the popup function instead
         } else {
             alert(resource.message); // Add the popup function instead
-            window.location.replace("http://localhost/frontpage");
-            localStorage.setItem("username", "hello");
+            const logged_user_request = await fetch("./php/logged_on_user.php", {
+                method: "POST",
+                header: { "Content-type": "application/json" },
+                body: JSON.stringify({ logged_on_user: resource.username })
+            })
+
+            const logged_on_user = await logged_user_request.json();
+            console.log(logged_on_user);
+
+            window.location.replace("http://localhost:1234/frontpage");
         }
         username_field.value = "";
         password_field.value = "";

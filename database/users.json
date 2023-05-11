@@ -12,11 +12,6 @@
     {
         "username": "kakariko",
         "password": "ss",
-        "id": 6
-    },
-    {
-        "username": "kakariko",
-        "password": "ss",
         "id": 7
     },
     {
@@ -116,5 +111,15 @@
         "username": "nogenreaccount",
         "password": "try",
         "id": 26
+    },
+    {
+        "username": "critter2121221",
+        "password": "adam",
+        "id": 27
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28
     }
 ]
