@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $currently_logged_on = json_decode(file_get_contents("../../database/logged_on_user.json"), true);
 
-    if ($currently_logged_on != null) {
+    if ($currently_logged_on !== null) {
         $message = ["logged_on_user" => $currently_logged_on["logged_on_user"]];
         sendJSON($message);
     } else {

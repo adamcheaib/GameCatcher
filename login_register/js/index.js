@@ -11,25 +11,25 @@ form.addEventListener("submit", register_or_login);
 
 function register_or_login(event) {
     event.preventDefault();
-    const username = username_field.value;
-    const password = password_field.value;
+    const usernamee = username_field.value;
+    const passwordd = password_field.value;
     const submit_button = document.querySelector("button[type=submit]");
     if (submit_button.textContent == "LOGIN") {
-        tryToLogin({ username: username, password: password });
+        tryToLogin({ username: usernamee, password: passwordd });
     } else {
-        tryToRegister({ username: username, password: password });
+        tryToRegister({ username: usernamee, password: passwordd });
     }
 }
 
 
-async function tryToLogin({ username, password }) {
+async function tryToLogin(login_object) {
     const feedback = document.getElementById("status");
 
     try {
         const response = await fetch("../login_register/php/user_database.php", {
             method: "POST",
             header: { "Content-type": "application/json" },
-            body: JSON.stringify({ username: username, password: password, action: "login" })
+            body: JSON.stringify({ username: login_object.username, password: login_object.password, action: "login" })
         });
 
         const resource = await response.json();
@@ -39,7 +39,7 @@ async function tryToLogin({ username, password }) {
             alert(resource.message); // Add the popup function instead
         } else {
             alert(resource.message); // Add the popup function instead
-            const logged_user_request = await fetch("./php/logged_on_user.php", {
+            const logged_user_request = await fetch("../login_register/php/logged_on_user.php", {
                 method: "POST",
                 header: { "Content-type": "application/json" },
                 body: JSON.stringify({ logged_on_user: resource.username })
@@ -57,11 +57,11 @@ async function tryToLogin({ username, password }) {
     }
 };
 
-function tryToRegister({ username, password }) {
+function tryToRegister(register_object) {
     fetch("../login_register/php/user_database.php", {
         method: "POST",
         header: { "Content-type": "application/json" },
-        body: JSON.stringify({ username: username, password: password, action: "register" })
+        body: JSON.stringify({ username: register_object.username, password: register_object.password, action: "register" })
     })
 }
 

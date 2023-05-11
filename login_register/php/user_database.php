@@ -17,6 +17,7 @@ if(file_exists($filename)){
 }
 
 $received_data = json_decode(file_get_contents("php://input"), true);
+
 $action = $received_data["action"];
 $username = $received_data["username"];
 $password = $received_data["password"];
@@ -58,7 +59,7 @@ if ($action == "register") {
 
 if ($action == "login") {
     foreach ($users as $single_user) {
-        if($username == $single_user["username"] and $password == $single_user["password"]) {
+        if($username === $single_user["username"] and $password === $single_user["password"]) {
             $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "message" => "Login successful!"];
             sendJSON($message);
         }
