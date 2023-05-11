@@ -9,7 +9,7 @@ if (!localStorage.hasOwnProperty("username")) {
 } else {
     init_frontpage();
 }
-
+// Hello
 
 export function init_frontpage() {
     document.body.innerHTML = "";
