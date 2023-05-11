@@ -29,7 +29,7 @@ function remove_message(event) {
 
 
 
-async function genre_scroll() { // Scroll function for the displayed genres.
+async function genre_scroll() { // Scroll function for the displayed genres.    
     let index = 0;
     let counter = 0;
 
