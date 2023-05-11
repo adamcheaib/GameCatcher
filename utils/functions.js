@@ -30,7 +30,6 @@ function remove_message(event) {
 
 
 async function genre_scroll() { // Scroll function for the displayed genres.
-    localStorage.clear()
     let index = 0;
     let counter = 0;
 
