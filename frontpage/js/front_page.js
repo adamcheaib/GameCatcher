@@ -1,8 +1,6 @@
 import { init_forum } from "./forum.js";
-import { init_collection } from "./game_collection.js";
+// import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
 import { genre_scroll } from "../../utils/functions.js";
-
-console.log(localStorage);
 
 
 if (!localStorage.hasOwnProperty("username")) {
@@ -82,8 +80,7 @@ export function init_frontpage() {
                 </footer>
         </div>
 
-    </div>
-    `;
+    </div>`;
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
