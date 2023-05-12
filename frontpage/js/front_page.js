@@ -8,6 +8,9 @@ fetch_game_by_plattform_and_genre("action", "186");
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 } 
+else{
+    init_frontpage()
+}
 
 export function init_frontpage() {
     document.body.innerHTML = "";

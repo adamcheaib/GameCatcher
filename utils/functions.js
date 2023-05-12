@@ -287,7 +287,3 @@ function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-
-
-
-genre_scroll()
