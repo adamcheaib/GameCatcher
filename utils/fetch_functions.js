@@ -44,7 +44,7 @@ async function search_game_event(event) {
         Playstation 5: id 187
         */
         try {
-            const link = prefix + `games?search=${game_name}&platforms=4,187,18,&search_precise=true&` + api_key;
+            const link = prefix + `games?search=${game_name}&platforms=4,187,18,186&search_precise=true&` + api_key;
             const resource = await (await fetch(link)).json();
             console.log(resource);
             resource.results.forEach(game => {
@@ -78,6 +78,13 @@ async function specific_game_event(event) {
     await specific_game_search("3498"); // Make it so that the game ID is saved somewhere (maybe as a dataset-attribute) and then fetch game information from the API
 }
 
+async function fetch_game_by_plattform_and_genre(genre, platform){
+    const url = prefix + `games/key=${api_key}genres=${genre}platforms=${platform}`
+    let response = await fetch(url);
+    let data = await response.json();
+    console.log(data);
+}
+
+fetch_all_games("action", "7");
 specific_game_event();
 
-fetch("https://api.rawg.io/api/platforms?key=a25ef91c11654298888f4907971ad496").then(r => r.json()).then(console.log)
