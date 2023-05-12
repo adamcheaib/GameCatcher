@@ -1,7 +1,9 @@
 import { init_forum } from "./forum.js";
 // import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
 import { genre_scroll } from "../../utils/functions.js";
+import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
 
+fetch_game_by_plattform_and_genre("action", "186");
 
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
@@ -84,5 +86,7 @@ export function init_frontpage() {
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
+    
     genre_scroll();
 }
+

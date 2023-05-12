@@ -78,13 +78,19 @@ async function specific_game_event(event) {
     await specific_game_search("3498"); // Make it so that the game ID is saved somewhere (maybe as a dataset-attribute) and then fetch game information from the API
 }
 
-async function fetch_game_by_plattform_and_genre(genre, platform){
-    const url = prefix + `games/key=${api_key}genres=${genre}platforms=${platform}`
-    let response = await fetch(url);
-    let data = await response.json();
-    console.log(data);
+export async function fetch_game_by_plattform_and_genre(genre, platform){
+    try{
+        const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre}&platforms=${platform}`
+        let response = await fetch(url);
+        let data = await response.json();
+        console.log(data);
+
+    }
+    catch(error){
+        console.log(error);
+    }
 }
 
-fetch_all_games("action", "7");
+
 specific_game_event();
 

@@ -61,12 +61,14 @@
                 </div>
 
                 <div id="games">
-                    <div id="first_arrow">=Z</div>
-                    <div id="first_game"></div>
-                    <div id="second_game"></div>
-                    <div id="third_game"></div>
-                    <div id="fourth_game"></div>
-                    <div id="second_arrow"> Z= </div>
+                    <div id="first_arrow">&#8592;</div>
+                    <div class="wrapper">
+                        <div id="first_game"></div>
+                        <div id="second_game"></div>
+                        <div id="third_game"></div>
+                        <div id="fourth_game"></div>
+                    </div>
+                    <div id="second_arrow"> &#8594; </div>
                 </div>
             </div>
 
@@ -81,6 +83,7 @@
     <script type="module" src="./frontpage/js/forum.js"></script>
     <script type="module" src="./frontpage/js/game_collection.js"></script>
     <script type="module" src="../utils/functions.js"></script>
+    <script type="module" src="../utils/fetch_functions.js"></script>
 </body>
 
 </html>
