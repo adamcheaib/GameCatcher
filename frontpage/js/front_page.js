@@ -1,5 +1,5 @@
 import { init_forum } from "./forum.js";
-// import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
+import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
 import { genre_scroll } from "../../utils/functions.js";
 import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
 
@@ -7,10 +7,7 @@ fetch_game_by_plattform_and_genre("action", "186");
 
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
-} else {
-    init_frontpage();
-}
-// Hello
+} 
 
 export function init_frontpage() {
     document.body.innerHTML = "";
@@ -68,12 +65,12 @@ export function init_frontpage() {
                     </div>
 
                     <div id="games">
-                        <div id="first_arrow">=Z</div>
+                        <div id="first_arrow">&#8592;</div>
                         <div id="first_game"></div>
                         <div id="second_game"></div>
                         <div id="third_game"></div>
                         <div id="fourth_game"></div>
-                        <div id="second_arrow"> Z= </div>
+                        <div id="second_arrow"> &#8594; </div>
                     </div>
                 </div>
 
@@ -83,10 +80,10 @@ export function init_frontpage() {
         </div>
 
     </div>`;
-    document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
-    
+    document.querySelector("#saved").addEventListener("click", init_collection);
     genre_scroll();
+    
 }
 
