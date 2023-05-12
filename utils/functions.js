@@ -63,8 +63,6 @@ async function genre_scroll() { // Scroll function for the displayed genres.
         </div>
         
       `;
-<<<<<<< Updated upstream
-=======
         all_dom_boxes[i].addEventListener("click", (event) => {
             // console.log(event.target);
             const parent_node = document.getElementById("genre_wrapper");
@@ -73,7 +71,6 @@ async function genre_scroll() { // Scroll function for the displayed genres.
             event.target.parentElement.style.transform = "scale(1.1)";
             console.log(window.localStorage);
         })
->>>>>>> Stashed changes
     }
 
 
