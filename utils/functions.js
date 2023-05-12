@@ -63,6 +63,17 @@ async function genre_scroll() { // Scroll function for the displayed genres.
         </div>
         
       `;
+<<<<<<< Updated upstream
+=======
+        all_dom_boxes[i].addEventListener("click", (event) => {
+            // console.log(event.target);
+            const parent_node = document.getElementById("genre_wrapper");
+            parent_node.querySelectorAll("div").forEach(genre_icon => genre_icon.style.transform = "scale(1)");
+            window.localStorage.setItem("genre", event.target.querySelector(".genre_text").textContent.toLowerCase());
+            event.target.parentElement.style.transform = "scale(1.1)";
+            console.log(window.localStorage);
+        })
+>>>>>>> Stashed changes
     }
 
 
@@ -159,4 +170,33 @@ async function genre_scroll() { // Scroll function for the displayed genres.
 
 }
 
+<<<<<<< Updated upstream
 genre_scroll()
+=======
+function popUpFunction(message) {
+    const body = document.querySelector("body");
+    document.querySelector("div").style.opacity = "0.5";
+
+    const popup = document.createElement("div");
+    const exit_button = document.createElement("div");
+
+    body.appendChild(popup);
+    popup.classList.add("popup");
+    popup.textContent = message;
+
+    popup.style.opacity = "1"
+    exit_button.classList.add("exit")
+    exit_button.textContent = "X"
+    exit_button.addEventListener("click", remove_message)
+    popup.appendChild(exit_button);
+}
+function remove_message(event) {
+    console.log(event);
+    const div = event.originalTarget.parentElement;
+    div.remove();
+    button.disabled = false;
+    document.querySelector("div").style.opacity = "1";
+}
+
+
+>>>>>>> Stashed changes
