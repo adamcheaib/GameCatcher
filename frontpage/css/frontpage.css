@@ -268,3 +268,10 @@ p {
     height: 200px;
     border-radius: 12px;
 }
+
+#games_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}

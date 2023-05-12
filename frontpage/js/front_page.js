@@ -47,12 +47,12 @@ export function init_frontpage() {
 
                     <div id="genres">
                         <div id="first_arrow">&#8592;</div>
-                        <div id="genre_wrapper">
-                            <div id="first_genra"></div>
-                            <div id="second_genra"></div>
-                            <div id="third_genra"></div>
-                            <div id="fourth_genra"></div>
-                        </div>
+                            <div id="genre_wrapper">
+                                <div id="first_genra"></div>
+                                <div id="second_genra"></div>
+                                <div id="third_genra"></div>
+                                <div id="fourth_genra"></div>
+                            </div>
                         <div id="second_arrow">&#8594;</div>
                     </div>
 
@@ -69,10 +69,12 @@ export function init_frontpage() {
 
                     <div id="games">
                         <div id="first_arrow">&#8592;</div>
-                        <div id="first_game"></div>
-                        <div id="second_game"></div>
-                        <div id="third_game"></div>
-                        <div id="fourth_game"></div>
+                            <div id="games_wrapper">
+                                <div id="first_game"></div>
+                                <div id="second_game"></div>
+                                <div id="third_game"></div>
+                                <div id="fourth_game"></div>
+                            </div>
                         <div id="second_arrow"> &#8594; </div>
                     </div>
                 </div>
@@ -86,6 +88,22 @@ export function init_frontpage() {
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
+    
+    document.querySelectorAll("#genre_wrapper div").forEach(genre =>{
+        genre.addEventListener("click", () =>{
+            localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
+            localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
+            console.log(localStorage);
+        });
+    })
+
+    document.querySelectorAll("#games_wrapper").forEach(game =>{
+        game.addEventListener("click", () =>{
+            console.log("click");
+        });
+    })
+
+
     genre_scroll();
     
 }
