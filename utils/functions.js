@@ -63,17 +63,6 @@ async function genre_scroll() { // Scroll function for the displayed genres.
         </div>
         
       `;
-<<<<<<< Updated upstream
-=======
-        all_dom_boxes[i].addEventListener("click", (event) => {
-            // console.log(event.target);
-            const parent_node = document.getElementById("genre_wrapper");
-            parent_node.querySelectorAll("div").forEach(genre_icon => genre_icon.style.transform = "scale(1)");
-            window.localStorage.setItem("genre", event.target.querySelector(".genre_text").textContent.toLowerCase());
-            event.target.parentElement.style.transform = "scale(1.1)";
-            console.log(window.localStorage);
-        })
->>>>>>> Stashed changes
     }
 
 
