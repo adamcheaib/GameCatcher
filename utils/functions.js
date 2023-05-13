@@ -1,12 +1,12 @@
 "use strict"
 
 async function fetch_game_by_plattform_and_genre(genre, platform){
+
     try{
         const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
         let response = await fetch(url);
         let data = await response.json();
         return data;
-
     }
     catch(error){
         console.log(error);

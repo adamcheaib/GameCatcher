@@ -1,14 +1,19 @@
 import { init_forum } from "./forum.js";
-import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
+import { init_collection } from "./game_collection.js"; 
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
 // import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
-
 
 
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 } 
 else{
+    if(localStorage.getItem("selected_genre") === null){ // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
+        localStorage.setItem("selected_genre", "action");
+    }
+    if(localStorage.getItem("platform_selected") === null){ // Denna finns för att om en användare är helt ny så ger den automatiskt en selected platform så att spelen inte blir tomma
+        localStorage.setItem("platform_selected", "4");
+    }
     init_frontpage()
 }
 
@@ -22,6 +27,7 @@ export function init_frontpage() {
                 <div id="main_page"></div>
                 <div id="saved"></div>
                 <div id="chat"></div>
+                <div id="friends"></div>
                 <div id="settings"></div>
 
             </div>
@@ -57,7 +63,7 @@ export function init_frontpage() {
                     </div>
 
                     <div id="platfroms">
-                        <div id="platfroms_Text">Platforms</div>
+                        <div id="platfroms_Text"></div>
                         <div class="wrapper">
                             <div data-id="186" class="platform" id="Xbox"></div>
                             <div data-id="187" class="platform" id="Playstation"></div>
@@ -80,7 +86,7 @@ export function init_frontpage() {
                 </div>
 
                 <footer>
-                    Footer
+                    
                 </footer>
         </div>
 

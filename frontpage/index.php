@@ -51,7 +51,7 @@
                 </div>
 
                 <div id="platfroms">
-                    <div id="platfroms_Text">Platforms</div>
+                    <div id="platfroms_Text"></div>
                     <div class="wrapper">
                         <div data-id="186" class="platform" id="Xbox"></div>
                         <div data-id="187" class="platform" id="Playstation"></div>
@@ -74,7 +74,7 @@
 
 
             <footer>
-                Footer
+                
             </footer>
         </div>
 
