@@ -24,12 +24,10 @@ export async function game_scroll() { // Scroll function for the displayed genre
     }
 
     let games_data = await fetch_game_by_plattform_and_genre(localStorage.getItem("selected_genre"), localStorage.getItem("platform_selected"));
-    console.log(games_data);
 
 
     let game_names = [];
     let game_images = [];
-
     games_data.results.forEach(game => {
         game_names.push(game.name);
         game_images.push(game.background_image);
@@ -38,8 +36,16 @@ export async function game_scroll() { // Scroll function for the displayed genre
     console.log(game_images);
     console.log(game_names);
 
-
+    let wrapper = document.querySelector("#games_wrapper");
+    wrapper.innerHTML = "";
+    for (let n = 1; n <= 4; n++) {
+        let game_dom = document.createElement("div");
+        game_dom.classList.add(`game_${n}`);
+        wrapper.appendChild(game_dom)
+    
+    }
     let all_dom_boxes = document.querySelectorAll("#games_wrapper div");
+    
 
     for (let i = 0; i < 4; i++) {
         all_dom_boxes[i].style.backgroundImage = `url(${game_images[i]})`

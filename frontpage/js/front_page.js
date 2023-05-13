@@ -70,10 +70,10 @@ export function init_frontpage() {
                     <div id="games">
                         <div id="first_arrow2">&#8592;</div>
                             <div id="games_wrapper">
-                                <div id="first_game"></div>
-                                <div id="second_game"></div>
-                                <div id="third_game"></div>
-                                <div id="fourth_game"></div>
+                                <div id="game_1"></div>
+                                <div id="game_2"></div>
+                                <div id="game_3"></div>
+                                <div id="game_4"></div>
                             </div>
                         <div id="second_arrow2"> &#8594; </div>
                     </div>
@@ -94,6 +94,7 @@ export function init_frontpage() {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
             console.log(localStorage);
+            game_scroll();
         });
     })
 
@@ -105,8 +106,10 @@ export function init_frontpage() {
 
     document.querySelectorAll(".platform").forEach(platform =>{
         platform.addEventListener("click", () =>{
+            localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id)
             console.log(localStorage);
+            game_scroll();
         })
     })
     genre_scroll();

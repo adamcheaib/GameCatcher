@@ -206,7 +206,7 @@ p {
 }
 
 
-#first_game {
+.game_1 {
        background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
@@ -216,7 +216,7 @@ p {
     border-radius: 12px;
 }
 
-#second_game {
+.game_2 {
        background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
@@ -226,7 +226,7 @@ p {
     border-radius: 12px;
 }
 
-#third_game {
+.game_3 {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
@@ -235,7 +235,7 @@ p {
     border-radius: 12px;
 }
 
-#fourth_game {
+.game_4 {
        background-size: cover;
    background-position: center;
    background-repeat: no-repeat;

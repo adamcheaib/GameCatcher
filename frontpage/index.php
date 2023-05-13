@@ -63,10 +63,10 @@
                 <div id="games">
                     <div id="first_arrow2">&#8592;</div>
                     <div class="wrapper">
-                        <div id="first_game"></div>
-                        <div id="second_game"></div>
-                        <div id="third_game"></div>
-                        <div id="fourth_game"></div>
+                        <div class="game_1"></div>
+                        <div class="game_2"></div>
+                        <div class="game_3"></div>
+                        <div class="game_4"></div>
                     </div>
                     <div id="second_arrow2"> &#8594; </div>
                 </div>
