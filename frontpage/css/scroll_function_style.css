@@ -3,7 +3,7 @@ body {
     gap: 20px;
 }
 
-#genre_wrapper>div {
+#genre_wrapper>div{
     width: 200px;
     height: 200px;
     background-size: cover;
@@ -14,7 +14,7 @@ body {
     transition-duration: 0.5s;
 }
 
-#genre_wrapper>div:hover {
+#genre_wrapper>div:hover{
     user-select: none;
     transform: scale(1.1);
 }
@@ -51,7 +51,7 @@ body {
     gap: 20px;
 }
 
-.genre_text_wrapper {
+.genre_text_wrapper, .game_text_wrapper {
     width: 100%;
     height: 100%;
     display: flex;
@@ -59,7 +59,7 @@ body {
     align-items: flex-end;
 }
 
-.genre_text {
+.genre_text, .game_text{
     color: white;
     background-color: rgb(65, 53, 138);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -71,4 +71,11 @@ body {
     border-radius: 0px 0px 20px 20px;
     font-size: 20px;
     letter-spacing: 2px;
+}
+
+.game_text{
+    border-radius: 0px 0px 10px 10px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-align: center;
 }
