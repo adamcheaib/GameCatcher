@@ -3,11 +3,16 @@ import { init_collection } from "./game_collection.js"; // Orsakar dublett i gam
 import { genre_scroll } from "../../utils/functions.js";
 import { game_scroll } from "../../utils/functions.js";
 
-
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 } 
 else{
+    if(localStorage.getItem("selected_genre") === null){ // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
+        localStorage.setItem("selected_genre", "action");
+    }
+    if(localStorage.getItem("platform_selected") === null){ // Denna finns för att om en användare är helt ny så ger den automatiskt en selected platform så att spelen inte blir tomma
+        localStorage.setItem("platform_selected", "4");
+    }
     init_frontpage()
 }
 
@@ -21,6 +26,7 @@ export function init_frontpage() {
                 <div id="main_page"></div>
                 <div id="saved"></div>
                 <div id="chat"></div>
+                <div id="friends"></div>
                 <div id="settings"></div>
 
             </div>
@@ -56,7 +62,7 @@ export function init_frontpage() {
                     </div>
 
                     <div id="platfroms">
-                        <div id="platfroms_Text">Platforms</div>
+                        <div id="platfroms_Text"></div>
                         <div class="wrapper">
                             <div data-id="186" class="platform" id="Xbox"></div>
                             <div data-id="187" class="platform" id="Playstation"></div>
@@ -69,17 +75,17 @@ export function init_frontpage() {
                     <div id="games">
                         <div id="first_arrow2">&#8592;</div>
                             <div id="games_wrapper">
-                                <div id="first_game"></div>
-                                <div id="second_game"></div>
-                                <div id="third_game"></div>
-                                <div id="fourth_game"></div>
+                                <div id="game_1"></div>
+                                <div id="game_2"></div>
+                                <div id="game_3"></div>
+                                <div id="game_4"></div>
                             </div>
                         <div id="second_arrow2"> &#8594; </div>
                     </div>
                 </div>
 
                 <footer>
-                    Footer
+                    
                 </footer>
         </div>
 
@@ -93,6 +99,7 @@ export function init_frontpage() {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
             console.log(localStorage);
+            game_scroll();
         });
     })
 
@@ -104,8 +111,10 @@ export function init_frontpage() {
 
     document.querySelectorAll(".platform").forEach(platform =>{
         platform.addEventListener("click", () =>{
+            localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id)
             console.log(localStorage);
+            game_scroll();
         })
     })
     genre_scroll();
