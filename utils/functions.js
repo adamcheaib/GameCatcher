@@ -1,40 +1,51 @@
 "use strict"
 
-export async function game_scroll() { // Scroll function for the displayed genres.    
-    let index = 0;
-    let counter = 0;
+async function fetch_game_by_plattform_and_genre(genre, platform){
+    try{
+        const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
+        let response = await fetch(url);
+        let data = await response.json();
+        return data;
 
-    if (counter === 0) {
-        document.querySelector("#first_arrow").style.backgroundColor = "gray";
-        document.querySelector("#first_arrow").removeEventListener("click", click_right_arrow)
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+export async function game_scroll() { // Scroll function for the displayed genres.    
+    let index2 = 0;
+    let counter2 = 0;
+
+    if (counter2 === 0) {
+        document.querySelector("#first_arrow2").style.backgroundColor = "gray";
+        document.querySelector("#first_arrow2").removeEventListener("click", click_right_arrow)
+        document.querySelector("#second_arrow2").style.backgroundColor = "black";
     }
 
-    const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre}&platforms=${platform}`
-    let response = await fetch(url);
-    let data = await response.json();
-   
-    console.log(data);
+    let games_data = await fetch_game_by_plattform_and_genre(localStorage.getItem("selected_genre"), localStorage.getItem("platform_selected"));
+    console.log(games_data);
 
 
     let game_names = [];
     let game_images = [];
 
-    genre_data.results.forEach(genre => {
-        game_names.push(genre.name);
-        game_images.push(genre.image_background);
+    games_data.results.forEach(game => {
+        game_names.push(game.name);
+        game_images.push(game.background_image);
     });
 
     console.log(game_images);
     console.log(game_names);
 
 
-    let all_dom_boxes = document.querySelectorAll("#game_wrapper div");
+    let all_dom_boxes = document.querySelectorAll("#games_wrapper div");
 
     for (let i = 0; i < 4; i++) {
-        all_dom_boxes[i].style.backgroundImage = `url(${genre_images[i]})`
+        all_dom_boxes[i].style.backgroundImage = `url(${game_images[i]})`
         all_dom_boxes[i].innerHTML = `
         <div class="game_text_wrapper">
-            <div class="game_text">${genre_names[i]}</div>
+            <div class="game_text">${game_names[i]}</div>
         </div>
       `;
     }
@@ -42,17 +53,17 @@ export async function game_scroll() { // Scroll function for the displayed genre
 
     function click_right_arrow() {
 
-        if (counter === genre_names.length - 4) {
-            document.querySelector("#second_arrow").style.backgroundColor = "gray";
-            document.querySelector("#second_arrow").removeEventListener("click", click_right_arrow)
+        if (counter2 === game_names.length - 4) {
+            document.querySelector("#second_arrow2").style.backgroundColor = "gray";
+            document.querySelector("#second_arrow2").removeEventListener("click", click_right_arrow)
         }
         else {
-            index += 1;
-            counter += 1;
-            console.log(counter)
-            if (counter !== 0) {
-                document.querySelector("#first_arrow").style.backgroundColor = "black";
-                document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
+            index2 += 1;
+            counter2 += 1;
+            console.log(counter2)
+            if (counter2 !== 0) {
+                document.querySelector("#first_arrow2").style.backgroundColor = "black";
+                document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
             }
 
 
@@ -60,7 +71,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
             let the_new_game_names = [];
 
 
-            for (let i = index; i < (4 + index); i++) {
+            for (let i = index2; i < (4 + index2); i++) {
                 the_new_game_images.push(game_images[i]);
                 the_new_game_names.push(game_names[i]);
             }
@@ -82,43 +93,47 @@ export async function game_scroll() { // Scroll function for the displayed genre
 
 
     function click_left_arrow(event) {
-        if (counter === 0) {
-            document.querySelector("#first_arrow").style.backgroundColor = "gray";
-            document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
+        if (counter2 === 0) {
+            document.querySelector("#first_arrow2").style.backgroundColor = "gray";
+            document.querySelector("#first_arrow2").removeEventListener("click", click_left_arrow)
         }
         else {
-            index -= 1;
-            counter -= 1;
-            if (counter !== genre_names.length - 4) {
+            index2 -= 1;
+            counter2 -= 1;
+            if (counter2 !== game_names.length - 4) {
 
-                document.querySelector("#second_arrow").style.backgroundColor = "black";
-                document.querySelector("#second_arrow").addEventListener("click", click_right_arrow)
+                document.querySelector("#second_arrow2").style.backgroundColor = "black";
+                document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
             }
-            if (counter === 0) {
-                document.querySelector("#first_arrow").style.backgroundColor = "gray";
-                document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
+            else{
+                document.querySelector("#second_arrow2").style.backgroundColor = "black";
+                document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
+            }
+            if (counter2 === 0) {
+                document.querySelector("#first_arrow2").style.backgroundColor = "gray";
+                document.querySelector("#first_arrow2").removeEventListener("click", click_left_arrow)
             }
             else {
-                document.querySelector("#first_arrow").style.backgroundColor = "black";
-                document.querySelector("#first_arrow").addEventListener("click", click_left_arrow)
+                document.querySelector("#first_arrow2").style.backgroundColor = "black";
+                document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow)
             }
 
 
-            let the_new_genre_images = [];
-            let the_new_genre_names = [];
+            let the_new_games_images = [];
+            let the_new_games_names = [];
 
 
-            for (let i = index; i < (4 + index); i++) {
-                the_new_genre_images.push(genre_images[i]);
-                the_new_genre_names.push(genre_names[i]);
+            for (let i = index2; i < (4 + index2); i++) {
+                the_new_games_images.push(game_images[i]);
+                the_new_games_names.push(game_names[i]);
             }
 
 
             for (let i = 0; i < 4; i++) {
-                all_dom_boxes[i].style.backgroundImage = `url(${the_new_genre_images[i]})`
+                all_dom_boxes[i].style.backgroundImage = `url(${the_new_games_images[i]})`
                 all_dom_boxes[i].innerHTML = `
                 <div class="game_text_wrapper">
-                <div class="game_text">${the_new_genre_names[i]}</div>
+                <div class="game_text">${the_new_games_names[i]}</div>
                 </div>
                 
             `;
@@ -127,8 +142,8 @@ export async function game_scroll() { // Scroll function for the displayed genre
         }
     }
 
-    document.querySelector("#second_arrow").addEventListener("click", click_right_arrow);
-    document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
+    document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow);
+    document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
 
 }
 

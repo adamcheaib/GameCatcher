@@ -6,6 +6,23 @@
 const api_key = "key=a25ef91c11654298888f4907971ad496";
 let prefix = "https://api.rawg.io/api/";
 
+
+// export async function fetch_game_by_plattform_and_genre(genre, platform){
+//     try{
+//         const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
+//         let response = await fetch(url);
+//         let data = await response.json();
+//         console.log(data);
+//         return data;
+
+//     }
+//     catch(error){
+//         console.log(error);
+//     }
+// }
+
+
+
 async function fetch_all_games(page = 1) { // Fetches games based on genre!
     const link = prefix + `games?page=${page}&` + api_key;
     try {
@@ -39,7 +56,7 @@ async function search_game_event(event) {
     async function search_for_game(game_name) {
         /*
         PC: id 4,
-        Nintendo Switch: id 7,
+        Nintendo_Switch: id 7,
         Xbox Series X: id 186,
         Playstation 5: id 187
         */
@@ -78,19 +95,7 @@ async function specific_game_event(event) {
     await specific_game_search("3498"); // Make it so that the game ID is saved somewhere (maybe as a dataset-attribute) and then fetch game information from the API
 }
 
-export async function fetch_game_by_plattform_and_genre(genre, platform){
-    try{
-        const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre}&platforms=${platform}`
-        let response = await fetch(url);
-        let data = await response.json();
-        console.log(data);
-
-    }
-    catch(error){
-        console.log(error);
-    }
-}
 
 
-specific_game_event();
+
 

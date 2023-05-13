@@ -1,9 +1,9 @@
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
-import { genre_scroll } from "../../utils/functions.js";
-import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
+import { game_scroll, genre_scroll } from "../../utils/functions.js";
+// import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
 
-fetch_game_by_plattform_and_genre("action", "186");
+
 
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
@@ -32,7 +32,7 @@ export function init_frontpage() {
                 <div id="profile_and_welcome_text">
                     <div id="welcome_text">
                         <h1>Hello ${localStorage.getItem("username")}!</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing</p>
+                        <p>Lets begin todays game browsing</p>
                     </div>
 
                     <div id="profile_and_welcome_text_wrapper">
@@ -59,23 +59,23 @@ export function init_frontpage() {
                     <div id="platfroms">
                         <div id="platfroms_Text">Platforms</div>
                         <div class="wrapper">
-                            <div class="platform" id="platfrom_1"></div>
-                            <div class="platform" id="platfrom_2"></div>
-                            <div class="platform" id="platfrom_3"></div>
-                            <div class="platform" id="platfrom_4"></div>
+                            <div data-id="186" class="platform" id="Xbox"></div>
+                            <div data-id="187" class="platform" id="Playstation"></div>
+                            <div data-id="7" class="platform" id="Nintendo_Switch"></div>
+                            <div data-id="4" class="platform" id="PC"></div>
                         </div>
 
                     </div>
 
                     <div id="games">
-                        <div id="first_arrow">&#8592;</div>
+                        <div id="first_arrow2">&#8592;</div>
                             <div id="games_wrapper">
                                 <div id="first_game"></div>
                                 <div id="second_game"></div>
                                 <div id="third_game"></div>
                                 <div id="fourth_game"></div>
                             </div>
-                        <div id="second_arrow"> &#8594; </div>
+                        <div id="second_arrow2"> &#8594; </div>
                     </div>
                 </div>
 
@@ -103,8 +103,14 @@ export function init_frontpage() {
         });
     })
 
-
+    document.querySelectorAll(".platform").forEach(platform =>{
+        platform.addEventListener("click", () =>{
+            localStorage.setItem("platform_selected", platform.dataset.id)
+            console.log(localStorage);
+        })
+    })
     genre_scroll();
+    game_scroll();
     
 }
 
