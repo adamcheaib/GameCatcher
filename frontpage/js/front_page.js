@@ -1,6 +1,7 @@
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js"; 
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
+
 // import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
 
 
@@ -76,10 +77,10 @@ export function init_frontpage() {
                     <div id="games">
                         <div id="first_arrow2">&#8592;</div>
                             <div id="games_wrapper">
-                                <div id="game_1"></div>
-                                <div id="game_2"></div>
-                                <div id="game_3"></div>
-                                <div id="game_4"></div>
+                                <div class="game_1"></div>
+                                <div class="game_2"></div>
+                                <div class="game_3"></div>
+                                <div class="game_4"></div>
                             </div>
                         <div id="second_arrow2"> &#8594; </div>
                     </div>
@@ -104,12 +105,7 @@ export function init_frontpage() {
         });
     })
 
-    document.querySelectorAll("#games_wrapper").forEach(game =>{
-        game.addEventListener("click", () =>{
-            console.log("click");
-        });
-    })
-
+    
     document.querySelectorAll(".platform").forEach(platform =>{
         platform.addEventListener("click", () =>{
             localStorage.removeItem("platform_selected");
@@ -120,6 +116,6 @@ export function init_frontpage() {
     })
     genre_scroll();
     game_scroll();
-    
+
 }
 
