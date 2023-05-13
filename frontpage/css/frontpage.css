@@ -42,7 +42,7 @@ p {
     min-height: 100vh;
 }
 
-#main_page{
+#main_page {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/logo.png");
@@ -51,7 +51,7 @@ p {
     background-repeat: no-repeat;
 }
 
-#friends{
+#friends {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/friends_logo.svg");
@@ -64,7 +64,7 @@ p {
     margin-bottom: 100px;
 }
 
-#chat{
+#chat {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/chat.svg");
@@ -73,7 +73,7 @@ p {
     background-repeat: no-repeat;
 }
 
-#saved{
+#saved {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/collection.svg");
@@ -82,7 +82,7 @@ p {
     background-repeat: no-repeat;
 }
 
-#settings{
+#settings {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/settings.svg");
@@ -192,7 +192,10 @@ p {
     background-color: gray;
 }
 
-#first_arrow, #first_arrow2, #second_arrow, #second_arrow2 {
+#first_arrow,
+#first_arrow2,
+#second_arrow,
+#second_arrow2 {
     width: 50px;
     height: 50px;
     border-radius: 20px;
@@ -203,7 +206,9 @@ p {
 }
 
 #first_arrow:hover,
-#second_arrow:hover, #first_arrow2:hover, #second_arrow:hover {
+#second_arrow:hover,
+#first_arrow2:hover,
+#second_arrow:hover {
     cursor: pointer;
     user-select: none;
 }
@@ -249,7 +254,7 @@ p {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
+
     width: 200px;
     height: 200px;
     border-radius: 12px;
@@ -259,32 +264,32 @@ p {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  
+
     width: 200px;
     height: 200px;
     border-radius: 12px;
 }
 
 .game_3 {
-   background-size: cover;
-   background-position: center;
-   background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 200px;
     height: 200px;
     border-radius: 12px;
 }
 
 .game_4 {
-       background-size: cover;
-   background-position: center;
-   background-repeat: no-repeat;
-    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     width: 200px;
     height: 200px;
     border-radius: 12px;
 }
 
-#games_wrapper{
+#games_wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -292,7 +297,7 @@ p {
 }
 
 .platform {
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 80px;
@@ -300,18 +305,54 @@ p {
     border-radius: 12px;
 }
 
-#Xbox{
+#Xbox {
     background-image: url("../platforms_media/xbox.jpg");
 }
 
-#Playstation{
+#Playstation {
     background-image: url("../platforms_media/ps_logo-01_4x.webp");
 }
 
-#Nintendo_Switch{
+#Nintendo_Switch {
     background-image: url("../platforms_media/Nintendo_Switch_logo\,_square.png");
 }
 
-#PC{
+#PC {
     background-image: url("../platforms_media/pc-logo-monogram-with-slash-style-design-template-free-vector.webp");
+}
+
+.wrapper {
+    user-select: none;
+}
+
+.wrapper>div {
+    transition-duration: 0.5s;
+}
+
+.wrapper>div:hover
+
+/* ändra namn kanse till platfrom_wrapper */
+    {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+#games_wrapper {
+    user-select: none;
+}
+
+#first_arrow2:hover,
+#second_arrow2:hover {
+    cursor: pointer;
+}
+
+#games_wrapper>div {
+    transition-duration: 0.5s;
+}
+
+#games_wrapper>div:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+    cursor: pointer;
 }
