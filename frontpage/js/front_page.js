@@ -1,5 +1,5 @@
 import { init_forum } from "./forum.js";
-// import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
+import { init_collection } from "./game_collection.js"; // Orsakar dublett i game_scroll pga att den körs två gånger
 import { genre_scroll } from "../../utils/functions.js";
 
 
