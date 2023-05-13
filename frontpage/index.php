@@ -62,7 +62,7 @@
 
                 <div id="games">
                     <div id="first_arrow2">&#8592;</div>
-                    <div class="wrapper">
+                    <div id="games_wrapper">
                         <div class="game_1"></div>
                         <div class="game_2"></div>
                         <div class="game_3"></div>
@@ -82,8 +82,8 @@
     <script src="./frontpage/js/front_page.js"></script>
     <script type="module" src="./frontpage/js/forum.js"></script>
     <script type="module" src="./frontpage/js/game_collection.js"></script>
-    <script type="module" src="../utils/functions.js"></script>
     <script type="module" src="../utils/fetch_functions.js"></script>
+    <script type="module" src="../utils/functions.js"></script>
 </body>
 
 </html>

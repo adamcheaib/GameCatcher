@@ -1,4 +1,9 @@
 "use strict"
+/*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
+function show_game_display_dom(game_data){ 
+    let the_dom = document.createElement("div");
+}
+
 
 async function fetch_game_by_plattform_and_genre(genre, platform){
 
@@ -10,6 +15,34 @@ async function fetch_game_by_plattform_and_genre(genre, platform){
     }
     catch(error){
         console.log(error);
+    }
+}
+
+async function search_game(game_name) {
+    const api_key = "key=a25ef91c11654298888f4907971ad496";
+    let prefix = "https://api.rawg.io/api/";
+    /*
+    PC: id 4,
+    Nintendo_Switch: id 7,
+    Xbox Series X: id 186,
+    Playstation 5: id 187
+    */
+    try {
+        let the_right_one = []
+        const link = prefix + `games?search=${game_name}&platforms=4,187,18,186&search_precise=true&` + api_key;
+        const resource = await (await fetch(link)).json();
+        console.log(resource);
+        resource.results.forEach(game => {
+            if ( game_name === game.name ) {
+                // I våran conditions, fixa att man undviker demos osv.
+                console.log(game.name);
+                the_right_one.push(game);
+                
+            }
+        })
+        return the_right_one;
+    } catch (err) {
+        console.log(err)
     }
 }
 
@@ -36,6 +69,10 @@ export async function game_scroll() { // Scroll function for the displayed genre
     console.log(game_images);
     console.log(game_names);
 
+    /*Denna behövs för att refreshen av spel ska funka då om man klickar på en pil så ska de fyra nya s
+    spelen visas
+    */
+   
     let wrapper = document.querySelector("#games_wrapper");
     wrapper.innerHTML = "";
     for (let n = 1; n <= 4; n++) {
@@ -44,6 +81,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
         wrapper.appendChild(game_dom)
     
     }
+
     let all_dom_boxes = document.querySelectorAll("#games_wrapper div");
     
 
@@ -57,7 +95,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
     }
 
 
-    function click_right_arrow() {
+    async function click_right_arrow() {
 
         if (counter2 === game_names.length - 4) {
             document.querySelector("#second_arrow2").style.backgroundColor = "gray";
@@ -94,11 +132,20 @@ export async function game_scroll() { // Scroll function for the displayed genre
             }
         }
 
-
+        /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
+        document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game =>{
+            game.addEventListener("click", async () =>{
+                localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
+                localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
+                console.log(localStorage);
+                let the_game = await search_game(localStorage.getItem("selected_game"));
+                console.log(the_game[0]);
+            })
+        })
     }
 
 
-    function click_left_arrow(event) {
+    async function click_left_arrow(event) {
         if (counter2 === 0) {
             document.querySelector("#first_arrow2").style.backgroundColor = "gray";
             document.querySelector("#first_arrow2").removeEventListener("click", click_left_arrow)
@@ -144,13 +191,32 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 
             `;
             }
-
+            /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
+            document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game =>{
+                game.addEventListener("click", async () =>{
+                    localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
+                    localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
+                    console.log(localStorage);
+                    let the_game = await search_game(localStorage.getItem("selected_game"));
+                    console.log(the_game[0]);
+                })
+            })
         }
     }
 
     document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow);
     document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
 
+/*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
+    document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game =>{
+        game.addEventListener("click", async () =>{
+            localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
+            localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
+            console.log(localStorage);
+            let the_game = await search_game(localStorage.getItem("selected_game"));
+            console.log(the_game[0]);
+        })
+    })
 }
 
 
@@ -226,8 +292,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
             `;
             }
         }
-
-
     }
 
 
