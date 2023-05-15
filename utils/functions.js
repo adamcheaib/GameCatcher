@@ -1,19 +1,47 @@
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
-function show_game_display_dom(game_data){ 
+function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
+    the_dom.classList.add("display_game_dom");
+    let the_parent_dom = document.querySelector("#frontpage_wrapper");
+
+    the_dom.innerHTML = `
+        <div id="liked_games_button">Add to liked games</div>
+        <div id="game_image"></div>
+        <div id="game_text">
+            This game is really good
+            wow i really like it, dam it makes me feel 
+            pretty cool. I like Minecraft.
+        </div>
+        <div id="rating_header">Rating</div>
+        <div id="wrapper_ratings">
+            <div class="rating"></div>
+            <div class="rating"></div>
+            <div class="rating"></div>
+        </div>
+        <div id="rating_names_wrapper">
+            <div class="rating_name">Erik rating</div>
+            <div class="rating_name">Adam rating</div>
+            <div class="rating_name">Calles rating</div>
+        </div>
+        <div id="trailer"></div>
+    `;
+
+
+    the_parent_dom.appendChild(the_dom);
+    document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`
 }
 
 
-async function fetch_game_by_plattform_and_genre(genre, platform){
+async function fetch_game_by_plattform_and_genre(genre, platform) {
 
-    try{
+    try {
         const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
         let response = await fetch(url);
         let data = await response.json();
         return data;
     }
-    catch(error){
+    catch (error) {
         console.log(error);
     }
 }
@@ -33,11 +61,11 @@ async function search_game(game_name) {
         const resource = await (await fetch(link)).json();
         console.log(resource);
         resource.results.forEach(game => {
-            if ( game_name === game.name ) {
+            if (game_name === game.name) {
                 // I våran conditions, fixa att man undviker demos osv.
                 console.log(game.name);
                 the_right_one.push(game);
-                
+
             }
         })
         return the_right_one;
@@ -72,18 +100,18 @@ export async function game_scroll() { // Scroll function for the displayed genre
     /*Denna behövs för att refreshen av spel ska funka då om man klickar på en pil så ska de fyra nya s
     spelen visas
     */
-   
+
     let wrapper = document.querySelector("#games_wrapper");
     wrapper.innerHTML = "";
     for (let n = 1; n <= 4; n++) {
         let game_dom = document.createElement("div");
         game_dom.classList.add(`game_${n}`);
         wrapper.appendChild(game_dom)
-    
+
     }
 
     let all_dom_boxes = document.querySelectorAll("#games_wrapper div");
-    
+
 
     for (let i = 0; i < 4; i++) {
         all_dom_boxes[i].style.backgroundImage = `url(${game_images[i]})`
@@ -133,13 +161,18 @@ export async function game_scroll() { // Scroll function for the displayed genre
         }
 
         /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
-        document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game =>{
-            game.addEventListener("click", async () =>{
+        document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
+            game.addEventListener("click", async () => {
                 localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
                 localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
                 console.log(localStorage);
                 let the_game = await search_game(localStorage.getItem("selected_game"));
                 console.log(the_game[0]);
+                if (document.querySelector(".display_game_dom") !== null) {
+                    document.querySelector(".display_game_dom").remove();
+                }
+
+                show_game_display_dom(the_game[0]);
             })
         })
     }
@@ -158,7 +191,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 document.querySelector("#second_arrow2").style.backgroundColor = "black";
                 document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
             }
-            else{
+            else {
                 document.querySelector("#second_arrow2").style.backgroundColor = "black";
                 document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
             }
@@ -192,13 +225,19 @@ export async function game_scroll() { // Scroll function for the displayed genre
             `;
             }
             /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
-            document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game =>{
-                game.addEventListener("click", async () =>{
+            document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
+                game.addEventListener("click", async () => {
                     localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
                     localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
                     console.log(localStorage);
                     let the_game = await search_game(localStorage.getItem("selected_game"));
                     console.log(the_game[0]);
+
+                    if (document.querySelector(".display_game_dom") !== null) {
+                        document.querySelector(".display_game_dom").remove();
+                    }
+
+                    show_game_display_dom(the_game[0]);
                 })
             })
         }
@@ -207,14 +246,18 @@ export async function game_scroll() { // Scroll function for the displayed genre
     document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow);
     document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
 
-/*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
-    document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game =>{
-        game.addEventListener("click", async () =>{
+    /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
+    document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
+        game.addEventListener("click", async () => {
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
             console.log(localStorage);
             let the_game = await search_game(localStorage.getItem("selected_game"));
             console.log(the_game[0]);
+            if (document.querySelector(".display_game_dom") !== null) {
+                document.querySelector(".display_game_dom").remove();
+            }
+            show_game_display_dom(the_game[0]);
         })
     })
 }
