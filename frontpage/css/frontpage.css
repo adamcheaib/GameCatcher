@@ -415,17 +415,23 @@ p {
 }
 
 .rating {
-    width: 60px;
-    height: 60px;
-    background-color: gray;
-    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+    background-color: rgb(93, 67, 220);
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(225, 71, 197);
 }
 
-#trailer {
+#gameplay {
     margin: 40px;
     min-width: 80%;
     min-height: 200px;
-    background-color: gray;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 20px
 }
 
@@ -513,4 +519,9 @@ dialog>div {
 
 #search_results>div {
     min-height: 200px;
+
+}
+
+h2 {
+    margin-top: 20px;
 }
