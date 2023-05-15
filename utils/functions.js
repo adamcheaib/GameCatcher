@@ -38,7 +38,7 @@ function show_game_display_dom(game_data) {
     document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
     setInterval(() => {
         counter_for_interval[0] += 1;
-        document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
+        // document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
         if (counter_for_interval[0] === game_data.short_screenshots.length - 1) {
             counter_for_interval[0] = 1
         }

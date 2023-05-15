@@ -3,7 +3,7 @@
 // To control whether an object has a certain key you write: objectName.hasOwnProperty("keyname") <-- Returns TRUE or FALSE.
 
 // https://api.rawg.io/api/platforms?key=a25ef91c11654298888f4907971ad496
-const api_key = "key=7537434a316c4729b0ac0130147be146";
+export const api_key = "key=7537434a316c4729b0ac0130147be146";
 let prefix = "https://api.rawg.io/api/";
 
 
