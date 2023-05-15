@@ -1,12 +1,16 @@
 "use strict"
-/*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
+
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
     the_dom.classList.add("display_game_dom");
     let the_parent_dom = document.querySelector("#frontpage_wrapper");
 
+
+
     the_dom.innerHTML = `
         <div id="liked_games_button">Add to liked games</div>
+
+        <h2>${game_data.name}</h2>
         <div id="game_image"></div>
         <div id="game_text">
             This game is really good
@@ -15,28 +19,54 @@ function show_game_display_dom(game_data) {
         </div>
         <div id="rating_header">Rating</div>
         <div id="wrapper_ratings">
-            <div class="rating"></div>
-            <div class="rating"></div>
-            <div class="rating"></div>
+            <div class="rating">${game_data.ratings[0].percent}</div>
+            <div class="rating">${game_data.ratings[1].percent}</div>
+            <div class="rating">${game_data.ratings[2].percent}</div>
         </div>
         <div id="rating_names_wrapper">
-            <div class="rating_name">Erik rating</div>
-            <div class="rating_name">Adam rating</div>
-            <div class="rating_name">Calles rating</div>
+            <div class="rating_name">${game_data.ratings[0].title}</div>
+            <div class="rating_name">${game_data.ratings[1].title}</div>
+            <div class="rating_name">${game_data.ratings[2].title}</div>
         </div>
-        <div id="trailer"></div>
+        <div id="gameplay"></div>
     `;
 
-
+    let counter_for_interval = [1]; // behöver passa by refrence för att den sen ska kunna resetas
     the_parent_dom.appendChild(the_dom);
-    document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`
+    document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
+    setInterval(() => {
+        counter_for_interval[0] += 1;
+        document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
+        if (counter_for_interval[0] === game_data.short_screenshots.length - 1) {
+            counter_for_interval[0] = 1
+        }
+    }, 3000);
+    document.querySelector("#liked_games_button").addEventListener("click", () => {
+
+    });
+    document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
+
+    document.querySelector("#liked_games_button").addEventListener("click", async () => {
+        let send_object = {
+            name: game_data.name,
+            image: game_data.background_image,
+            username: localStorage.getItem("username"),
+        };
+        fetch("../frontpage/php/game_collection.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(send_object),
+        }).then(r => r.json()).then(data => {
+            console.log(data);
+        });
+    });
 }
 
 
 async function fetch_game_by_plattform_and_genre(genre, platform) {
 
     try {
-        const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
+        const url = `https://api.rawg.io/api/games?key=7537434a316c4729b0ac0130147be146&genres=${genre.toLowerCase()}&platforms=${platform}`
         let response = await fetch(url);
         let data = await response.json();
         return data;
@@ -47,7 +77,7 @@ async function fetch_game_by_plattform_and_genre(genre, platform) {
 }
 
 async function search_game(game_name) {
-    const api_key = "key=a25ef91c11654298888f4907971ad496";
+    const api_key = "key=7537434a316c4729b0ac0130147be146";
     let prefix = "https://api.rawg.io/api/";
     /*
     PC: id 4,
@@ -272,7 +302,7 @@ export async function genre_scroll() { // Scroll function for the displayed genr
         document.querySelector("#first_arrow").removeEventListener("click", click_right_arrow)
     }
 
-    let response = await fetch("https://api.rawg.io/api/genres?key=a25ef91c11654298888f4907971ad496");
+    let response = await fetch("https://api.rawg.io/api/genres?key=7537434a316c4729b0ac0130147be146");
     let genre_data = await response.json();
 
     let genre_names = [];

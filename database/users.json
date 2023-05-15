@@ -45,11 +45,6 @@
         "id": 13
     },
     {
-        "username": "ee",
-        "password": "ee",
-        "id": 14
-    },
-    {
         "username": "calle Mufic",
         "password": "calle Mufic",
         "id": 15
@@ -92,20 +87,17 @@
     {
         "username": "vgtvgt",
         "password": "vg",
-        "id": 23,
-        "genre": 0
+        "id": 23
     },
     {
         "username": "testagain",
         "password": "testagain",
-        "id": 24,
-        "genres": 0
+        "id": 24
     },
     {
         "username": "tester",
         "password": "tester",
-        "id": 25,
-        "genres": 0
+        "id": 25
     },
     {
         "username": "nogenreaccount",
@@ -118,11 +110,6 @@
         "id": 27
     },
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28
-    },
-    {
         "username": "tonibozinov",
         "password": "toni",
         "id": 29
@@ -130,6 +117,102 @@
     {
         "username": "ew",
         "password": "ew",
-        "id": 30
+        "id": 30,
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Tomb Raider (2013)",
+                "image": "https:\/\/media.rawg.io\/media\/games\/021\/021c4e21a1824d2526f925eff6324653.jpg"
+            }
+        ]
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Portal",
+                "image": "https:\/\/media.rawg.io\/media\/games\/7fa\/7fa0b586293c5861ee32490e953a4996.jpg"
+            },
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            },
+            {
+                "name": "XCOM: Enemy Unknown",
+                "image": "https:\/\/media.rawg.io\/media\/games\/238\/2383a172b4d50a7b44e07980eb7141ea.jpg"
+            },
+            {
+                "name": "Brutal Legend",
+                "image": "https:\/\/media.rawg.io\/media\/games\/af7\/af7a831001c5c32c46e950cc883b8cb7.jpg"
+            },
+            {
+                "name": "Sid Meier's Civilization V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/55e\/55ee6432ac2bf224610fa17e4c652107.jpg"
+            },
+            {
+                "name": "Company of Heroes 2",
+                "image": "https:\/\/media.rawg.io\/media\/games\/0bd\/0bd5646a3d8ee0ac3314bced91ea306d.jpg"
+            },
+            {
+                "name": "Sid Meier\u2019s Civilization VI",
+                "image": "https:\/\/media.rawg.io\/media\/games\/997\/997ab4d67e96fb20a4092383477d4463.jpg"
+            }
+        ]
+    },
+    {
+        "username": "ee",
+        "password": "ee",
+        "id": 14,
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Cyberpunk 2077",
+                "image": "https:\/\/media.rawg.io\/media\/games\/26d\/26d4437715bee60138dab4a7c8c59c92.jpg"
+            },
+            {
+                "name": "Control",
+                "image": "https:\/\/media.rawg.io\/media\/games\/253\/2534a46f3da7fa7c315f1387515ca393.jpg"
+            },
+            {
+                "name": "Hades",
+                "image": "https:\/\/media.rawg.io\/media\/games\/1f4\/1f47a270b8f241e4676b14d39ec620f7.jpg"
+            },
+            {
+                "name": "BioShock Infinite",
+                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
+            }
+        ]
     }
 ]

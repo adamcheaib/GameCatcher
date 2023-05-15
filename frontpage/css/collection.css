@@ -68,6 +68,14 @@ body {
     gap: 20px;
 }
 
+.collection_grid_container div {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .box {
     width: 100%;
     height: 100%;
@@ -83,7 +91,7 @@ body {
     background-color: gray;
 }
 
-#main_page{
+#main_page {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/logo.png");
@@ -92,7 +100,7 @@ body {
     background-repeat: no-repeat;
 }
 
-#friends{
+#friends {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/friends_logo.svg");
@@ -105,7 +113,7 @@ body {
     margin-bottom: 100px;
 }
 
-#chat{
+#chat {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/chat.svg");
@@ -114,7 +122,7 @@ body {
     background-repeat: no-repeat;
 }
 
-#saved{
+#saved {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/collection.svg");
@@ -123,7 +131,7 @@ body {
     background-repeat: no-repeat;
 }
 
-#settings{
+#settings {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/settings.svg");

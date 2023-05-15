@@ -7,6 +7,9 @@ if (localStorage.getItem("counter_for_forum") === null) {
 
 console.log(localStorage);
 export function init_forum() {
+    if (document.querySelector(".display_game_dom") !== null) {
+        document.querySelector(".display_game_dom").remove();
+    }
     document.querySelector("link").setAttribute("href", "./frontpage/css/forum.css");
 
     document.querySelector("#center_piece").innerHTML = `
