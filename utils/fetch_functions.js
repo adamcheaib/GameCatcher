@@ -7,21 +7,6 @@ const api_key = "key=a25ef91c11654298888f4907971ad496";
 let prefix = "https://api.rawg.io/api/";
 
 
-// export async function fetch_game_by_plattform_and_genre(genre, platform){
-//     try{
-//         const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
-//         let response = await fetch(url);
-//         let data = await response.json();
-//         console.log(data);
-//         return data;
-
-//     }
-//     catch(error){
-//         console.log(error);
-//     }
-// }
-
-
 
 async function fetch_all_games(page = 1) { // Fetches games based on genre!
     const link = prefix + `games?page=${page}&` + api_key;

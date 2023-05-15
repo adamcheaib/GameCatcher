@@ -1,18 +1,16 @@
 import { init_forum } from "./forum.js";
-import { init_collection } from "./game_collection.js"; 
+import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
-
-// import { fetch_game_by_plattform_and_genre } from "../../utils/fetch_functions.js";
 
 
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
-} 
-else{
-    if(localStorage.getItem("selected_genre") === null){ // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
+}
+else {
+    if (localStorage.getItem("selected_genre") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
         localStorage.setItem("selected_genre", "action");
     }
-    if(localStorage.getItem("platform_selected") === null){ // Denna finns för att om en användare är helt ny så ger den automatiskt en selected platform så att spelen inte blir tomma
+    if (localStorage.getItem("platform_selected") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected platform så att spelen inte blir tomma
         localStorage.setItem("platform_selected", "4");
     }
     init_frontpage()
@@ -95,9 +93,9 @@ export function init_frontpage() {
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
-    
-    document.querySelectorAll("#genre_wrapper div").forEach(genre =>{
-        genre.addEventListener("click", () =>{
+
+    document.querySelectorAll("#genre_wrapper div").forEach(genre => {
+        genre.addEventListener("click", () => {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
             console.log(localStorage);
@@ -105,9 +103,9 @@ export function init_frontpage() {
         });
     })
 
-    
-    document.querySelectorAll(".platform").forEach(platform =>{
-        platform.addEventListener("click", () =>{
+
+    document.querySelectorAll(".platform").forEach(platform => {
+        platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id)
             console.log(localStorage);

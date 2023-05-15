@@ -228,6 +228,7 @@ p {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    margin-bottom: 40px;
 }
 
 #platfroms {
@@ -358,6 +359,4 @@ p {
 }
 
 
-.display_game_dom{
-    
-}
+.display_game_dom {}
