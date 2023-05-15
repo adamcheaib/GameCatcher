@@ -1,8 +1,9 @@
+import { fetch_all_games, search_for_game } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
 
-if (!localStorage.hasOwnProperty("username")) {
+if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 }
 else {
@@ -12,7 +13,8 @@ else {
     if (localStorage.getItem("platform_selected") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected platform så att spelen inte blir tomma
         localStorage.setItem("platform_selected", "4");
     }
-    init_frontpage()
+    init_frontpage();
+    fetch_all_games();
 }
 
 export function init_frontpage() {
@@ -115,5 +117,50 @@ export function init_frontpage() {
 
 }
 
-const search_bar = document.getElementById("search_function");
-search_bar.addEventListener("click", popUpFunction);
+const search_icon_button = document.getElementById("search_function");
+search_icon_button.addEventListener("click", search_popup);
+const dialoger = document.createElement("dialog");
+
+document.body.appendChild(dialoger);
+
+async function search_popup(event) {
+    dialoger.showModal();
+    dialoger.innerHTML = `
+    <div>
+        <div id="dialogCloseButtonContainer">
+            <span>X</span>
+        </div>
+        
+        <div id="searchBarContainer">
+            <input type="text" placeholder="Search for games..."><button>Search</button>
+        </div>
+
+        <div id="search_results"></div>
+    </div>
+    `;
+
+    const search_button = document.querySelector("#searchBarContainer > button");
+
+    search_button.addEventListener("click", async (event) => {
+        const dom_search_results = document.getElementById("search_results");
+        dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
+        const search_results = await search_for_game();
+        dom_search_results.innerHTML = "";
+        console.log(search_results);
+        search_results.forEach(game => {
+            const game_box = document.createElement("div");
+            game_box.innerHTML = `
+            <div class="game_text_wrapper">
+                <div class="game_text">${game.name}</div>
+                </div>
+            </div>`;
+            game_box.style.backgroundImage = `url(${game.background_image})`
+            game_box.classList.add("gamesSearchResults");
+            dom_search_results.appendChild(game_box);
+        })
+
+    });
+
+    const close_button = dialoger.querySelector("#dialogCloseButtonContainer > span");
+    close_button.addEventListener("click", () => dialoger.close());
+}

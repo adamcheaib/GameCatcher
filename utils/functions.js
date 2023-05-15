@@ -1,4 +1,5 @@
 "use strict"
+import { api_key } from "./fetch_functions.js";
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
@@ -36,7 +37,7 @@ function show_game_display_dom(game_data) {
 async function fetch_game_by_plattform_and_genre(genre, platform) {
 
     try {
-        const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
+        const url = `https://api.rawg.io/api/games?${api_key}&genres=${genre.toLowerCase()}&platforms=${platform}`
         let response = await fetch(url);
         let data = await response.json();
         return data;
@@ -47,7 +48,6 @@ async function fetch_game_by_plattform_and_genre(genre, platform) {
 }
 
 async function search_game(game_name) {
-    const api_key = "key=a25ef91c11654298888f4907971ad496";
     let prefix = "https://api.rawg.io/api/";
     /*
     PC: id 4,
@@ -260,7 +260,7 @@ export async function genre_scroll() { // Scroll function for the displayed genr
         document.querySelector("#first_arrow").removeEventListener("click", click_right_arrow)
     }
 
-    let response = await fetch("https://api.rawg.io/api/genres?key=a25ef91c11654298888f4907971ad496");
+    let response = await fetch("https://api.rawg.io/api/genres?" + api_key);
     let genre_data = await response.json();
 
     let genre_names = [];
@@ -372,7 +372,7 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
 }
 
-function popUpFunction(message) {
+export function popUpFunction(message) {
     const body = document.querySelector("body");
     document.querySelector("div").style.opacity = "0.5";
 
@@ -390,7 +390,7 @@ function popUpFunction(message) {
     popup.appendChild(exit_button);
 }
 
-function remove_message(event) {
+export function remove_message(event) {
     const div = event.originalTarget.parentElement;
     div.remove();
     button.disabled = false;
