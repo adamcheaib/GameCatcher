@@ -12,7 +12,6 @@ async function fetch_all_games(page = 1) { // Fetches games based on genre!
     const link = prefix + `games?page=${page}&` + api_key;
     try {
         const resource = await (await fetch(link)).json();
-        console.log(resource);
         return resource;
 
     } catch (error) {
@@ -28,7 +27,6 @@ async function TEST_fetch_genre_games(event) {
     try {
         const link = prefix + `games?page=1&genres=${genre}&` + api_key;
         const resource = await (await fetch(link)).json();
-        console.log(resource);
     } catch (err) {
         console.log(err);
     }
@@ -37,7 +35,6 @@ async function TEST_fetch_genre_games(event) {
 
 
 async function search_game_event(event) {
-
     async function search_for_game(game_name) {
         /*
         PC: id 4,
@@ -71,7 +68,6 @@ async function specific_game_event(event) {
 
         try {
             const specific_game_fetched = await (await fetch(link)).json();
-            console.log(specific_game_fetched);
         } catch (err) {
             console.log(err);
         }

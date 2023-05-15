@@ -59,11 +59,9 @@ async function search_game(game_name) {
         let the_right_one = []
         const link = prefix + `games?search=${game_name}&platforms=4,187,18,186&search_precise=true&` + api_key;
         const resource = await (await fetch(link)).json();
-        console.log(resource);
         resource.results.forEach(game => {
             if (game_name === game.name) {
                 // I våran conditions, fixa att man undviker demos osv.
-                console.log(game.name);
                 the_right_one.push(game);
 
             }
@@ -93,9 +91,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
         game_names.push(game.name);
         game_images.push(game.background_image);
     });
-
-    console.log(game_images);
-    console.log(game_names);
 
     /*Denna behövs för att refreshen av spel ska funka då om man klickar på en pil så ska de fyra nya s
     spelen visas
@@ -132,7 +127,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
         else {
             index2 += 1;
             counter2 += 1;
-            console.log(counter2)
             if (counter2 !== 0) {
                 document.querySelector("#first_arrow2").style.backgroundColor = "black";
                 document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
@@ -165,9 +159,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
             game.addEventListener("click", async () => {
                 localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
                 localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
-                console.log(localStorage);
                 let the_game = await search_game(localStorage.getItem("selected_game"));
-                console.log(the_game[0]);
                 if (document.querySelector(".display_game_dom") !== null) {
                     document.querySelector(".display_game_dom").remove();
                 }
@@ -229,9 +221,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 game.addEventListener("click", async () => {
                     localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
                     localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
-                    console.log(localStorage);
                     let the_game = await search_game(localStorage.getItem("selected_game"));
-                    console.log(the_game[0]);
 
                     if (document.querySelector(".display_game_dom") !== null) {
                         document.querySelector(".display_game_dom").remove();
@@ -251,9 +241,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
         game.addEventListener("click", async () => {
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
-            console.log(localStorage);
             let the_game = await search_game(localStorage.getItem("selected_game"));
-            console.log(the_game[0]);
             if (document.querySelector(".display_game_dom") !== null) {
                 document.querySelector(".display_game_dom").remove();
             }
@@ -283,10 +271,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
         genre_images.push(genre.image_background);
     });
 
-    console.log(genre_images);
-    console.log(genre_names);
-
-
     let all_dom_boxes = document.querySelectorAll("#genre_wrapper div");
 
     for (let i = 0; i < 4; i++) {
@@ -308,7 +292,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
         else {
             index += 1;
             counter += 1;
-            console.log(counter)
             if (counter !== 0) {
                 document.querySelector("#first_arrow").style.backgroundColor = "black";
                 document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
@@ -388,7 +371,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
     document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
 
 }
-"use strict"
 
 function popUpFunction(message) {
     const body = document.querySelector("body");
@@ -407,11 +389,13 @@ function popUpFunction(message) {
     exit_button.addEventListener("click", remove_message)
     popup.appendChild(exit_button);
 }
+
 function remove_message(event) {
-    console.log(event);
     const div = event.originalTarget.parentElement;
     div.remove();
     button.disabled = false;
     document.querySelector("div").style.opacity = "1";
 }
+
+console.log("Hello");
 

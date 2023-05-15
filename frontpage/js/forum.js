@@ -5,7 +5,6 @@ if (localStorage.getItem("counter_for_forum") === null) {
     localStorage.setItem("counter_for_forum", 0);
 }
 
-console.log(localStorage);
 export function init_forum() {
     document.querySelector("link").setAttribute("href", "./frontpage/css/forum.css");
 
@@ -30,7 +29,6 @@ function create_post() {
         let counter_value = parseInt(localStorage.getItem("counter_for_forum"));
         counter_value += 1;
         let post_dom = document.createElement("div");
-        console.log(counter_value);
         post_dom.classList.add("post_dom");
 
         post_dom.innerHTML = `
@@ -53,7 +51,6 @@ function create_post() {
         document.querySelector("textarea").value = "";
         localStorage.removeItem("counter_for_forum");
         localStorage.setItem("counter_for_forum", counter_value);
-        console.log(localStorage)
     });
 }
 

@@ -2,7 +2,6 @@ import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
 
-
 if (!localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 }
@@ -98,7 +97,6 @@ export function init_frontpage() {
         genre.addEventListener("click", () => {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
-            console.log(localStorage);
             game_scroll();
         });
     })
@@ -107,7 +105,7 @@ export function init_frontpage() {
     document.querySelectorAll(".platform").forEach(platform => {
         platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
-            localStorage.setItem("platform_selected", platform.dataset.id)
+            localStorage.setItem("platform_selected", platform.dataset.id);
             console.log(localStorage);
             game_scroll();
         })
@@ -117,3 +115,5 @@ export function init_frontpage() {
 
 }
 
+const search_bar = document.getElementById("search_function");
+search_bar.addEventListener("click", popUpFunction);

@@ -130,6 +130,10 @@ p {
     background-size: cover;
 }
 
+#search_function:hover {
+    cursor: pointer;
+}
+
 
 #games_section {
     margin-top: 50px;
