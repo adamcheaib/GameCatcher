@@ -1,4 +1,4 @@
-import { fetch_all_games, search_for_game } from "../../utils/fetch_functions.js";
+import { fetch_all_games, search_for_game, searched_game_information } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
@@ -140,26 +140,35 @@ export function init_frontpage() {
 
         async function init_search(event) {
             const dom_search_results = document.getElementById("search_results");
-            dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
+            dom_search_results.innerHTML = "<h1 id='search_status'>Getting game list...</h1>";
             const search_results = await search_for_game();
-            dom_search_results.innerHTML = "";
-            search_results.forEach(game => {
-                const game_box = document.createElement("div");
-                game_box.innerHTML = `
-                <div class="game_text_wrapper">
-                    <div class="game_text">${game.name}</div>
-                    </div>
-                </div>`;
-                game_box.style.backgroundImage = `url(${game.background_image})`
-                game_box.classList.add("gamesSearchResults");
-                game_box.addEventListener("click", searched_game_information);
+            console.log(search_results);
 
-                async function searched_game_information(event) {
-                    console.log(game.name);
-                }
+            if (search_results.length != 0) {
+                dom_search_results.innerHTML = "";
+                search_results.forEach(game => {
+                    const game_box = document.createElement("div");
+                    game_box.innerHTML = `
+                    <div class="game_text_wrapper">
+                        <div class="game_text">${game.name}</div>
+                        </div>
+                    </div>`;
+                    game_box.style.backgroundImage = `url(${game.background_image})`
+                    game_box.classList.add("gamesSearchResults");
+                    game_box.addEventListener("click", display_searched_game_information);
 
-                dom_search_results.appendChild(game_box);
-            })
+                    async function display_searched_game_information(event) {
+                        searched_game_information(game.name);
+                        const searched_game_dialog = document.getElementById("searched_game_dialog");
+
+                        const searched_game_dom = document.createElement("div");
+                    }
+
+                    dom_search_results.appendChild(game_box);
+                })
+            } else {
+                dom_search_results.innerHTML = "<h1 id='search_status'>No games were found...</h1>";
+            }
         }
 
         const searchfield_input = document.querySelector("#searchBarContainer > input");

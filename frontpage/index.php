@@ -79,6 +79,9 @@
         </div>
 
     </div>
+
+    <dialog id="search_function_dialog"></dialog>
+    
     <script src="./frontpage/js/front_page.js"></script>
     <script type="module" src="./frontpage/js/forum.js"></script>
     <script type="module" src="./frontpage/js/game_collection.js"></script>

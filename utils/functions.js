@@ -200,6 +200,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
         })
     }
 
+    console.log(localStorage);
 
     async function click_left_arrow(event) {
         if (counter2 === 0) {
