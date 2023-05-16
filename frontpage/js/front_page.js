@@ -110,59 +110,69 @@ export function init_frontpage() {
         platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id);
-            console.log(localStorage);
             game_scroll();
         })
     })
     genre_scroll();
     game_scroll();
 
-}
+    const search_icon_button = document.getElementById("search_function");
+    search_icon_button.addEventListener("click", search_popup);
+    const dialog_dom = document.createElement("dialog");
 
-const search_icon_button = document.getElementById("search_function");
-search_icon_button.addEventListener("click", search_popup);
-const dialoger = document.createElement("dialog");
+    document.body.appendChild(dialog_dom);
 
-document.body.appendChild(dialoger);
-
-async function search_popup(event) {
-    dialoger.showModal();
-    dialoger.innerHTML = `
-    <div>
-        <div id="dialogCloseButtonContainer">
-            <span>X</span>
+    async function search_popup(event) {
+        dialog_dom.showModal();
+        dialog_dom.innerHTML = `
+        <div>
+            <div id="dialogCloseButtonContainer">
+                <span>X</span>
+            </div>
+            
+            <div id="searchBarContainer">
+                <input type="text" placeholder="Search for games..."><button>Search</button>
+            </div>
+    
+            <div id="search_results"></div>
         </div>
-        
-        <div id="searchBarContainer">
-            <input type="text" placeholder="Search for games..."><button>Search</button>
-        </div>
+        `;
 
-        <div id="search_results"></div>
-    </div>
-    `;
+        async function init_search(event) {
+            const dom_search_results = document.getElementById("search_results");
+            dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
+            const search_results = await search_for_game();
+            dom_search_results.innerHTML = "";
+            search_results.forEach(game => {
+                const game_box = document.createElement("div");
+                game_box.innerHTML = `
+                <div class="game_text_wrapper">
+                    <div class="game_text">${game.name}</div>
+                    </div>
+                </div>`;
+                game_box.style.backgroundImage = `url(${game.background_image})`
+                game_box.classList.add("gamesSearchResults");
+                game_box.addEventListener("click", searched_game_information);
 
-    const search_button = document.querySelector("#searchBarContainer > button");
+                async function searched_game_information(event) {
+                    console.log(game.name);
+                }
 
-    search_button.addEventListener("click", async (event) => {
-        const dom_search_results = document.getElementById("search_results");
-        dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
-        const search_results = await search_for_game();
-        dom_search_results.innerHTML = "";
-        console.log(search_results);
-        search_results.forEach(game => {
-            const game_box = document.createElement("div");
-            game_box.innerHTML = `
-            <div class="game_text_wrapper">
-                <div class="game_text">${game.name}</div>
-                </div>
-            </div>`;
-            game_box.style.backgroundImage = `url(${game.background_image})`
-            game_box.classList.add("gamesSearchResults");
-            dom_search_results.appendChild(game_box);
-        })
+                dom_search_results.appendChild(game_box);
+            })
+        }
 
-    });
+        const searchfield_input = document.querySelector("#searchBarContainer > input");
+        searchfield_input.addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+                init_search();
+            };
+        });
 
-    const close_button = dialoger.querySelector("#dialogCloseButtonContainer > span");
-    close_button.addEventListener("click", () => dialoger.close());
+        const search_button = document.querySelector("#searchBarContainer > button");
+        search_button.addEventListener("click", init_search);
+
+        const close_button = dialog_dom.querySelector("#dialogCloseButtonContainer > span");
+        close_button.addEventListener("click", () => dialog_dom.close());
+    }
 }

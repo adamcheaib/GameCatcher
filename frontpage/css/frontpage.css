@@ -281,7 +281,7 @@ p {
 }
 
 .gamesSearchResults:hover {
-    transform: scale(1.1);
+    transform: scale(1.07);
     cursor: pointer;
     transition-duration: 0.5s;
 }
@@ -447,7 +447,7 @@ p {
 dialog {
     height: 100vh;
     width: 100vw;
-    background: rgba(0, 0, 0, 60%);
+    background: rgba(0, 0, 0, 80%);
 }
 
 dialog>div {
