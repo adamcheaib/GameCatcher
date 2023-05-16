@@ -36,6 +36,25 @@ export async function init_collection() {
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
+
+    document.querySelectorAll(".delete_button_for_game").forEach((button) => {
+        button.addEventListener("click", async () => {
+            button.parentElement.parentElement.remove();
+            let body_for_fetch = {
+                username: localStorage.getItem("username"),
+                the_game_to_delete: button.parentElement.querySelector("p").innerHTML,
+            }
+            console.log(body_for_fetch.the_game_to_delete);
+            let response = await fetch("./frontpage/php/game_collection.php", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body_for_fetch),
+            });
+            let data = await response.text();
+            console.log(data);
+        })
+    })
+
 }
 
 document.querySelector("#saved").addEventListener("click", init_collection)
