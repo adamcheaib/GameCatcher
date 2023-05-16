@@ -2,7 +2,7 @@
 import { api_key } from "./fetch_functions.js";
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 
-function add_to_game_collection() {
+export function add_to_game_collection() {
     let send_object = {
         name: game_data.name,
         image: game_data.background_image,

@@ -1,7 +1,7 @@
 import { fetch_all_games, search_for_game, searched_game_information } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { game_scroll, genre_scroll } from "../../utils/functions.js";
+import { game_scroll, genre_scroll, add_to_game_collection } from "../../utils/functions.js";
 
 
 
@@ -48,8 +48,6 @@ export function init_frontpage() {
                         <div id="profile"></div>
                     </div>
                 </div>
-
-
 
                 <div id="games_section">
 
@@ -154,6 +152,7 @@ export function init_frontpage() {
                         <div class="game_text">${game.name}</div>
                         </div>
                     </div>`;
+
                     game_box.style.backgroundImage = `url(${game.background_image})`
                     game_box.classList.add("gamesSearchResults");
                     game_box.addEventListener("click", display_searched_game_information);
@@ -193,6 +192,25 @@ export function init_frontpage() {
 
                         dialog_dom.appendChild(searched_game_dialog);
                         searched_game_dialog.showModal();
+                        document.getElementById("liked_games_button").addEventListener("click", async (event) => {
+                            const game_data = await search_results[0];
+                            console.log(search_results)
+
+                            let send_object = {
+                                name: game_data.name,
+                                image: game_data.background_image,
+                                username: localStorage.getItem("username"),
+                            };
+
+                            fetch("../frontpage/php/game_collection.php", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(send_object),
+                            }).then(r => r.json()).then(data => {
+                                console.log(data);
+                                alert("Added!");
+                            });
+                        });
                         document.querySelector(".search_game_dialog_close_button").addEventListener("click", (event) => searched_game_dialog.remove());
                     }
 

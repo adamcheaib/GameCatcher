@@ -156,6 +156,11 @@
         "username": "adamcheaib",
         "password": "adamcheaib",
         "id": 28,
-        "favorite_games": []
+        "favorite_games": [
+            {
+                "name": "Monster Hunter(Contraband Entertainment)",
+                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
+            }
+        ]
     }
 ]
