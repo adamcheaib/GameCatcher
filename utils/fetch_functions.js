@@ -12,7 +12,6 @@ export async function fetch_all_games(page = 1) { // Fetches games based on genr
     const link = prefix + `games?page=${page}&` + api_key;
     try {
         const resource = await (await fetch(link)).json();
-        console.log(resource);
         return resource;
 
     } catch (error) {
@@ -36,7 +35,6 @@ async function TEST_fetch_genre_games(event) {
 
 
 export async function search_for_game(game_name = document.querySelector("#searchBarContainer > input").value) {
-    console.log("rastaman")
     /*
     PC: id 4,
     Nintendo_Switch: id 7,

@@ -110,7 +110,6 @@ export function init_frontpage() {
         platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id);
-            console.log(localStorage);
             game_scroll();
         })
     })
@@ -144,7 +143,6 @@ export function init_frontpage() {
             dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
             const search_results = await search_for_game();
             dom_search_results.innerHTML = "";
-            console.log(search_results);
             search_results.forEach(game => {
                 const game_box = document.createElement("div");
                 game_box.innerHTML = `
@@ -154,6 +152,12 @@ export function init_frontpage() {
                 </div>`;
                 game_box.style.backgroundImage = `url(${game.background_image})`
                 game_box.classList.add("gamesSearchResults");
+                game_box.addEventListener("click", searched_game_information);
+
+                async function searched_game_information(event) {
+                    console.log(game.name);
+                }
+
                 dom_search_results.appendChild(game_box);
             })
         }
