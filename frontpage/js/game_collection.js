@@ -21,6 +21,15 @@ export async function init_collection() {
     for (let i = 0; i < collection_data.length; i++) {
         let a_favorite_game_dom = document.createElement("div");
         a_favorite_game_dom.classList.add("collection_game");
+        a_favorite_game_dom.innerHTML = `
+            
+            <div class="text_for_game_collection_box">
+                <p>${collection_data[i].name}</p>
+                <div class="delete_button_for_game"></div>
+            </div>
+    
+        `;
+        a_favorite_game_dom.setAttribute("id", `${collection_data[i].name}`)
         a_favorite_game_dom.style.backgroundImage = `url(${collection_data[i].image})`;
         document.querySelector(".collection_grid_container").appendChild(a_favorite_game_dom);
     }
