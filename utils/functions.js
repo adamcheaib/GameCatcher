@@ -428,6 +428,3 @@ export function remove_message(event) {
     button.disabled = false;
     document.querySelector("div").style.opacity = "1";
 }
-
-console.log("Hello");
-

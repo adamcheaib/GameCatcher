@@ -123,6 +123,7 @@ export function init_frontpage() {
     document.body.appendChild(dialog_dom);
 
     async function search_popup(event) {
+        dialog_dom.id = "search_dialog";
         dialog_dom.showModal();
         dialog_dom.innerHTML = `
         <div>
@@ -159,7 +160,36 @@ export function init_frontpage() {
 
                     async function display_searched_game_information(event) {
                         searched_game_information(game.name);
-                        const searched_game_dialog = document.getElementById("searched_game_dialog");
+                        const searched_game_dialog = document.createElement("dialog");
+                        searched_game_dialog.id = "searched_game_dialog";
+                        searched_game_dialog.innerHTML = `
+                        <div class="searched_game_information">
+                        <div id="add_to_collection_container">
+                            <div id="liked_games_button">Add to liked games</div>
+                            <div class="search_game_dialog_close_button">X</div>
+                        </div>
+
+                        <h2>${game.name}</h2>
+                        <div id="gmage" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
+                        <div id="gext" class="searched_game_text">
+                            This game is really good
+                            wow i really like it, dam it makes me feel 
+                            pretty cool. I like Minecraft.
+                        </div>
+                        <div id="rating_header">Rating</div>
+                        <div id="wrapper_ratings">
+                            <div class="rating">${game.ratings[0].percent}</div>
+                        </div>
+                        <div id="rating_names_wrapper">
+                            <div class="rating_name">${game.ratings[0].title}</div>
+                        </div>
+                        <div id="gameplay"></div>
+                        </div> 
+                        `
+
+                        dialog_dom.appendChild(searched_game_dialog);
+                        searched_game_dialog.showModal();
+
 
                         const searched_game_dom = document.createElement("div");
                     }
