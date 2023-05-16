@@ -117,52 +117,51 @@ export function init_frontpage() {
     genre_scroll();
     game_scroll();
 
-}
+    const search_icon_button = document.getElementById("search_function");
+    search_icon_button.addEventListener("click", search_popup);
+    const dialoger = document.createElement("dialog");
 
-const search_icon_button = document.getElementById("search_function");
-search_icon_button.addEventListener("click", search_popup);
-const dialoger = document.createElement("dialog");
+    document.body.appendChild(dialoger);
 
-document.body.appendChild(dialoger);
-
-async function search_popup(event) {
-    dialoger.showModal();
-    dialoger.innerHTML = `
-    <div>
-        <div id="dialogCloseButtonContainer">
-            <span>X</span>
+    async function search_popup(event) {
+        dialoger.showModal();
+        dialoger.innerHTML = `
+        <div>
+            <div id="dialogCloseButtonContainer">
+                <span>X</span>
+            </div>
+            
+            <div id="searchBarContainer">
+                <input type="text" placeholder="Search for games..."><button>Search</button>
+            </div>
+    
+            <div id="search_results"></div>
         </div>
-        
-        <div id="searchBarContainer">
-            <input type="text" placeholder="Search for games..."><button>Search</button>
-        </div>
+        `;
 
-        <div id="search_results"></div>
-    </div>
-    `;
+        const search_button = document.querySelector("#searchBarContainer > button");
 
-    const search_button = document.querySelector("#searchBarContainer > button");
+        search_button.addEventListener("click", async (event) => {
+            const dom_search_results = document.getElementById("search_results");
+            dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
+            const search_results = await search_for_game();
+            dom_search_results.innerHTML = "";
+            console.log(search_results);
+            search_results.forEach(game => {
+                const game_box = document.createElement("div");
+                game_box.innerHTML = `
+                <div class="game_text_wrapper">
+                    <div class="game_text">${game.name}</div>
+                    </div>
+                </div>`;
+                game_box.style.backgroundImage = `url(${game.background_image})`
+                game_box.classList.add("gamesSearchResults");
+                dom_search_results.appendChild(game_box);
+            })
 
-    search_button.addEventListener("click", async (event) => {
-        const dom_search_results = document.getElementById("search_results");
-        dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
-        const search_results = await search_for_game();
-        dom_search_results.innerHTML = "";
-        console.log(search_results);
-        search_results.forEach(game => {
-            const game_box = document.createElement("div");
-            game_box.innerHTML = `
-            <div class="game_text_wrapper">
-                <div class="game_text">${game.name}</div>
-                </div>
-            </div>`;
-            game_box.style.backgroundImage = `url(${game.background_image})`
-            game_box.classList.add("gamesSearchResults");
-            dom_search_results.appendChild(game_box);
-        })
+        });
 
-    });
-
-    const close_button = dialoger.querySelector("#dialogCloseButtonContainer > span");
-    close_button.addEventListener("click", () => dialoger.close());
+        const close_button = dialoger.querySelector("#dialogCloseButtonContainer > span");
+        close_button.addEventListener("click", () => dialoger.close());
+    }
 }

@@ -123,17 +123,6 @@
         "id": 31
     },
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28,
-        "favorite_games": [
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            }
-        ]
-    },
-    {
         "username": "ew",
         "password": "ew",
         "id": 30,
@@ -180,6 +169,21 @@
             {
                 "name": "Hollow Knight",
                 "image": "https:\/\/media.rawg.io\/media\/games\/4cf\/4cfc6b7f1850590a4634b08bfab308ab.jpg"
+            }
+        ]
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": [
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            },
+            {
+                "name": "Tomb Raider (2013)",
+                "image": "https:\/\/media.rawg.io\/media\/games\/021\/021c4e21a1824d2526f925eff6324653.jpg"
             }
         ]
     }
