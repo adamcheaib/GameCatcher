@@ -576,12 +576,16 @@ dialog>div {
     grid-column: 2;
     justify-self: end;
     margin-right: 10px;
-    font-size: 20px;
-    transition-duration: 0.5s;
     transition-property: background-color;
+    transition-duration: 0.5s;
     text-align: center;
-    cursor: pointer;
-    background-color: rgba(105, 105, 255);
+    border-radius: 3px;
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+    padding: 10px;
+    background: rgba(73, 73, 177, 0.614);
+    user-select: none;
 }
 
 #add_to_collection_container>.search_game_dialog_close_button:hover {
