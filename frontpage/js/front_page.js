@@ -123,6 +123,7 @@ export function init_frontpage() {
     document.body.appendChild(dialog_dom);
 
     async function search_popup(event) {
+        dialog_dom.id = "search_dialog";
         dialog_dom.showModal();
         dialog_dom.innerHTML = `
         <div>
@@ -142,9 +143,9 @@ export function init_frontpage() {
             const dom_search_results = document.getElementById("search_results");
             dom_search_results.innerHTML = "<h1 id='search_status'>Getting game list...</h1>";
             const search_results = await search_for_game();
-            console.log(search_results);
 
             if (search_results.length != 0) {
+                console.log(search_results);
                 dom_search_results.innerHTML = "";
                 search_results.forEach(game => {
                     const game_box = document.createElement("div");
@@ -158,10 +159,41 @@ export function init_frontpage() {
                     game_box.addEventListener("click", display_searched_game_information);
 
                     async function display_searched_game_information(event) {
+                        const searched_game_dialog = document.createElement("dialog");
                         searched_game_information(game.name);
-                        const searched_game_dialog = document.getElementById("searched_game_dialog");
+                        searched_game_dialog.id = "searched_game_dialog";
+                        searched_game_dialog.innerHTML = `
+                        <div class="searched_game_information">
 
-                        const searched_game_dom = document.createElement("div");
+                            <div id="add_to_collection_container">
+                                <div id="liked_games_button">Add to liked games</div>
+                                <div class="search_game_dialog_close_button">X</div>
+                            </div>
+                        
+                            <h2>${game.name}</h2>
+                            <div id="gmage" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
+                            
+                            <div id="gext" class="searched_game_text">
+                                This game is really good wow i really like it, dam it makes me feel  pretty cool. I like Minecraft.
+                            </div>
+                        
+                            <div id="rating_header">Rating</div>
+                        
+                                <div id="wrapper_ratings">
+                                    <div class="rating">${game.ratings[0].percent}</div>
+                                </div>
+                        
+                            <div id="rating_names_wrapper">
+                                <div class="rating_name">${game.ratings[0].title}</div>
+                            </div>                       
+
+                            <div id="gameplay"></div>
+                        </div> 
+                        `
+
+                        dialog_dom.appendChild(searched_game_dialog);
+                        searched_game_dialog.showModal();
+                        document.querySelector(".search_game_dialog_close_button").addEventListener("click", (event) => searched_game_dialog.remove());
                     }
 
                     dom_search_results.appendChild(game_box);

@@ -138,21 +138,6 @@
         ]
     },
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28,
-        "favorite_games": [
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            },
-            {
-                "name": "Tomb Raider (2013)",
-                "image": "https:\/\/media.rawg.io\/media\/games\/021\/021c4e21a1824d2526f925eff6324653.jpg"
-            }
-        ]
-    },
-    {
         "username": "ee",
         "password": "ee",
         "id": 14,
@@ -166,5 +151,11 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/8cc\/8cce7c0e99dcc43d66c8efd42f9d03e3.jpg"
             }
         ]
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": []
     }
 ]
