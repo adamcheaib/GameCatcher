@@ -3,6 +3,8 @@ import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll } from "../../utils/functions.js";
 
+
+
 if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 }

@@ -123,6 +123,32 @@
         "id": 31
     },
     {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": [
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            }
+        ]
+    },
+    {
+        "username": "ew",
+        "password": "ew",
+        "id": 30,
+        "favorite_games": [
+            {
+                "name": "Red Dead Redemption 2",
+                "image": "https:\/\/media.rawg.io\/media\/games\/511\/5118aff5091cb3efec399c808f8c598f.jpg"
+            },
+            {
+                "name": "BioShock Infinite",
+                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
+            }
+        ]
+    },
+    {
         "username": "ee",
         "password": "ee",
         "id": 14,
@@ -146,32 +172,14 @@
             {
                 "name": "Hellblade: Senua's Sacrifice",
                 "image": "https:\/\/media.rawg.io\/media\/games\/63f\/63f0e68688cad279ed38cde931dbfcdb.jpg"
-            }
-        ]
-    },
-    {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28,
-        "favorite_games": [
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            }
-        ]
-    },
-    {
-        "username": "ew",
-        "password": "ew",
-        "id": 30,
-        "favorite_games": [
-            {
-                "name": "Red Dead Redemption 2",
-                "image": "https:\/\/media.rawg.io\/media\/games\/511\/5118aff5091cb3efec399c808f8c598f.jpg"
             },
             {
-                "name": "BioShock Infinite",
-                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
+                "name": "Undertale",
+                "image": "https:\/\/media.rawg.io\/media\/games\/ffe\/ffed87105b14f5beff72ff44a7793fd5.jpg"
+            },
+            {
+                "name": "Hollow Knight",
+                "image": "https:\/\/media.rawg.io\/media\/games\/4cf\/4cfc6b7f1850590a4634b08bfab308ab.jpg"
             }
         ]
     }
