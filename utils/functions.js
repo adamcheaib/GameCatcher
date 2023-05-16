@@ -59,8 +59,20 @@ function show_game_display_dom(game_data) {
             counter_for_interval[0] = 1
         }
     }, 3000);
-    document.querySelector("#liked_games_button").addEventListener("click", () => {
-
+    document.querySelector("#liked_games_button").addEventListener("click", async () => {
+        let send_object = {
+            name: game_data.name,
+            image: game_data.background_image,
+            username: localStorage.getItem("username"),
+        };
+        fetch("../frontpage/php/game_collection.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(send_object),
+        }).then(r => r.json()).then(data => {
+            console.log(data);
+            alert("added");
+        });
     });
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
 
