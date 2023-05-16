@@ -2,21 +2,6 @@
 import { api_key } from "./fetch_functions.js";
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 
-export function add_to_game_collection() {
-    let send_object = {
-        name: game_data.name,
-        image: game_data.background_image,
-        username: localStorage.getItem("username"),
-    };
-    fetch("../frontpage/php/game_collection.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(send_object),
-    }).then(r => r.json()).then(data => {
-        console.log(data);
-    });
-}
-
 
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
@@ -59,12 +44,23 @@ function show_game_display_dom(game_data) {
             counter_for_interval[0] = 1
         }
     }, 3000);
-    document.querySelector("#liked_games_button").addEventListener("click", () => {
-
+    document.querySelector("#liked_games_button").addEventListener("click", async () => {
+        let send_object = {
+            name: game_data.name,
+            image: game_data.background_image,
+            username: localStorage.getItem("username"),
+        };
+        fetch("../frontpage/php/game_collection.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(send_object),
+        }).then(r => r.json()).then(data => {
+            console.log(data);
+            alert("added");
+        });
     });
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
 
-    document.querySelector("#liked_games_button").addEventListener("click", add_to_game_collection);
 }
 
 
