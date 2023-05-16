@@ -56,5 +56,26 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         }
     }
 }
+
+
+if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+    $all_users = json_decode(file_get_contents("../../database/users.json"), true);
+    $data = json_decode(file_get_contents("php://input"), true);
+    for ($i = 0 ; $i < count($all_users); $i++) { 
+        if($data["username"] === $all_users[$i]["username"]){
+            for ($j = 0; $j < count($all_users[$i]["favorite_games"]); $j++) { 
+                if($all_users[$i]["favorite_games"][$j]["name"] === $data["the_game_to_delete"]){
+                    $deleted_game = array_splice($all_users[$i]["favorite_games"],$j , 1);
+                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                    header("Content-Type: application/json");
+                    echo json_encode($deleted_game);
+                    exit();
+                }
+            }
+        }
+    }
+    
+
+}
   
 ?>
