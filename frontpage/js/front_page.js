@@ -119,13 +119,13 @@ export function init_frontpage() {
 
     const search_icon_button = document.getElementById("search_function");
     search_icon_button.addEventListener("click", search_popup);
-    const dialoger = document.createElement("dialog");
+    const dialog_dom = document.createElement("dialog");
 
-    document.body.appendChild(dialoger);
+    document.body.appendChild(dialog_dom);
 
     async function search_popup(event) {
-        dialoger.showModal();
-        dialoger.innerHTML = `
+        dialog_dom.showModal();
+        dialog_dom.innerHTML = `
         <div>
             <div id="dialogCloseButtonContainer">
                 <span>X</span>
@@ -139,9 +139,7 @@ export function init_frontpage() {
         </div>
         `;
 
-        const search_button = document.querySelector("#searchBarContainer > button");
-
-        search_button.addEventListener("click", async (event) => {
+        async function init_search(event) {
             const dom_search_results = document.getElementById("search_results");
             dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
             const search_results = await search_for_game();
@@ -158,10 +156,19 @@ export function init_frontpage() {
                 game_box.classList.add("gamesSearchResults");
                 dom_search_results.appendChild(game_box);
             })
+        }
 
+        const searchfield_input = document.querySelector("#searchBarContainer > input");
+        searchfield_input.addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+                init_search();
+            };
         });
 
-        const close_button = dialoger.querySelector("#dialogCloseButtonContainer > span");
-        close_button.addEventListener("click", () => dialoger.close());
+        const search_button = document.querySelector("#searchBarContainer > button");
+        search_button.addEventListener("click", init_search);
+
+        const close_button = dialog_dom.querySelector("#dialogCloseButtonContainer > span");
+        close_button.addEventListener("click", () => dialog_dom.close());
     }
 }

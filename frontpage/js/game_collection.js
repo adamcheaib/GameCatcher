@@ -16,7 +16,6 @@ export async function init_collection() {
     `
     let response = await fetch(`./frontpage/php/game_collection.php?username=${localStorage.getItem("username")}`);
     let collection_data = await response.json();
-    console.log(response);
 
     for (let i = 0; i < collection_data.length; i++) {
         let a_favorite_game_dom = document.createElement("div");
