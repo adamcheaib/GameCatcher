@@ -1,14 +1,14 @@
 "use strict"
 
-async function fetch_game_by_plattform_and_genre(genre, platform){
-    try{
+async function fetch_game_by_plattform_and_genre(genre, platform) {
+    try {
         const url = `https://api.rawg.io/api/games?key=a25ef91c11654298888f4907971ad496&genres=${genre.toLowerCase()}&platforms=${platform}`
         let response = await fetch(url);
         let data = await response.json();
         return data;
 
     }
-    catch(error){
+    catch (error) {
         console.log(error);
     }
 }
@@ -35,10 +35,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
         game_images.push(game.background_image);
     });
 
-    console.log(game_images);
-    console.log(game_names);
-
-
     let all_dom_boxes = document.querySelectorAll("#games_wrapper div");
 
     for (let i = 0; i < 4; i++) {
@@ -49,7 +45,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
         </div>
       `;
     }
-
 
     function click_right_arrow() {
 
@@ -105,7 +100,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 document.querySelector("#second_arrow2").style.backgroundColor = "black";
                 document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
             }
-            else{
+            else {
                 document.querySelector("#second_arrow2").style.backgroundColor = "black";
                 document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
             }
@@ -224,7 +219,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
     }
 
-
     function click_left_arrow(event) {
         if (counter === 0) {
             document.querySelector("#first_arrow").style.backgroundColor = "gray";
@@ -275,30 +269,3 @@ export async function genre_scroll() { // Scroll function for the displayed genr
     document.querySelector("#first_arrow").addEventListener("click", click_left_arrow);
 
 }
-"use strict"
-
-function popUpFunction(message) {
-    const body = document.querySelector("body");
-    document.querySelector("div").style.opacity = "0.5";
-
-    const popup = document.createElement("div");
-    const exit_button = document.createElement("div");
-
-    body.appendChild(popup);
-    popup.classList.add("popup");
-    popup.textContent = message;
-
-    popup.style.opacity = "1"
-    exit_button.classList.add("exit")
-    exit_button.textContent = "X"
-    exit_button.addEventListener("click", remove_message)
-    popup.appendChild(exit_button);
-}
-function remove_message(event) {
-    console.log(event);
-    const div = event.originalTarget.parentElement;
-    div.remove();
-    button.disabled = false;
-    document.querySelector("div").style.opacity = "1";
-}
-
