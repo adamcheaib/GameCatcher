@@ -5,8 +5,10 @@ if (localStorage.getItem("counter_for_forum") === null) {
     localStorage.setItem("counter_for_forum", 0);
 }
 
-console.log(localStorage);
 export function init_forum() {
+    if (document.querySelector(".display_game_dom") !== null) {
+        document.querySelector(".display_game_dom").remove();
+    }
     document.querySelector("link").setAttribute("href", "./frontpage/css/forum.css");
 
     document.querySelector("#center_piece").innerHTML = `
@@ -30,7 +32,6 @@ function create_post() {
         let counter_value = parseInt(localStorage.getItem("counter_for_forum"));
         counter_value += 1;
         let post_dom = document.createElement("div");
-        console.log(counter_value);
         post_dom.classList.add("post_dom");
 
         post_dom.innerHTML = `
@@ -50,9 +51,11 @@ function create_post() {
             post_dom.style.gridColumn = `2/3`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value + 1}`;
         }
-        document.querySelector("textarea").value = "";
+
+
         localStorage.removeItem("counter_for_forum");
         localStorage.setItem("counter_for_forum", counter_value);
+        document.querySelector("textarea").value = "";
 <<<<<<< Updated upstream
         console.log(localStorage)
 =======
