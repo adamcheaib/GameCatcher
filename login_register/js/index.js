@@ -1,3 +1,4 @@
+import { registration_notification } from "../../utils/functions.js"
 "use strict"
 
 if (localStorage.getItem("username") !== null) {
@@ -44,7 +45,7 @@ async function tryToLogin(login_object) {
 
 
         if (!response.ok) {
-            alert(resource.message); // Add the popup function instead
+            registration_notification(); // Add the popup function instead
         } else {
             alert(resource.message); // Add the popup function instead
             localStorage.setItem("username", resource.username);
