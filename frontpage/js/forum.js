@@ -53,17 +53,10 @@ function create_post() {
         }
 
 
+        document.querySelector("textarea").value = "";
         localStorage.removeItem("counter_for_forum");
         localStorage.setItem("counter_for_forum", counter_value);
-        document.querySelector("textarea").value = "";
-<<<<<<< Updated upstream
         console.log(localStorage)
-=======
-
-        fetch(e)
-
-        document.querySelector("textarea").value = "";
->>>>>>> Stashed changes
     });
 }
 
