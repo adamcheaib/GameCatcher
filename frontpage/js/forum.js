@@ -1,6 +1,5 @@
 import { init_frontpage } from "./front_page.js";
 import { init_collection } from "./game_collection.js";
-localStorage.setItem("counter_for_forum", 0);
 if (localStorage.getItem("counter_for_forum") === null) {
     localStorage.setItem("counter_for_forum", 0);
 }
@@ -57,6 +56,25 @@ function create_post() {
         localStorage.removeItem("counter_for_forum");
         localStorage.setItem("counter_for_forum", counter_value);
         console.log(localStorage)
+        send_message(post_dom);
     });
 }
+
+async function send_message(the_post_dom) {
+
+    let body_for_fetch = {
+        username: localStorage.getItem("username"),
+        message: the_post_dom.querySelector("#the_post_text > p").innerHTML,
+    }
+
+    let response = await fetch("./frontpage/php/forum.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch)
+    });
+
+    let data = await response.json();
+    console.log(data);
+}
+
 
