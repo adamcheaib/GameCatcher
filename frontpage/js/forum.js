@@ -51,9 +51,11 @@ function create_post() {
             post_dom.style.gridColumn = `2/3`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value + 1}`;
         }
-        document.querySelector("textarea").value = "";
+
+
         localStorage.removeItem("counter_for_forum");
         localStorage.setItem("counter_for_forum", counter_value);
+        document.querySelector("textarea").value = "";
     });
 }
 
