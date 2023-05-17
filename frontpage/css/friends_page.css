@@ -16,7 +16,7 @@ body {
     width: 100%;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
 }
@@ -88,4 +88,89 @@ body {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+
+/*The actuall css for the site*/
+
+
+
+#navigation {
+    width: 80%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.nav_div {
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 40px;
+    background-color: rgb(61, 255, 47);
+    color: white;
+    border-radius: 10px;
+    font-size: 23px;
+}
+
+.unselected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: 23px;
+
+}
+
+#search_wrapper {
+    width: 80%;
+    height: 70px;
+    border-radius: 20px;
+    font-size: 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#search {
+    width: 88%;
+    height: 70px;
+    border-radius: 20px;
+    background-color: white;
+    border: none;
+    font-size: 25px;
+}
+
+#search_image {
+    width: 50px;
+    height: 50px;
+    background-image: url("../general_media/pngwing.com.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#display {
+    width: 80%;
+    height: 500px;
+    overflow-y: scroll;
+    background-color: white;
+    border-radius: 30px;
 }
