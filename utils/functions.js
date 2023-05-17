@@ -457,17 +457,17 @@ export function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-export function registration_notification(textContent) {
+export function registration_notification(dialog_box_text) {
     const registration_dialog = document.createElement("dialog");
     registration_dialog.style.height = "100vh";
     registration_dialog.style.width = "100vw";
     registration_dialog.style.backgroundColor = "black";
-    registration_dialog.style.opacity = 0.6;
+    registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
 
     const registration_notification_container = document.createElement("div");
     registration_notification_container.className = "registration_notification";
     registration_notification_container.innerHTML = `
-    <h3>Registration is successfull!</h3>
+    <h3>${dialog_box_text}</h3>
     <button id="close">Close</button>
     `;
 

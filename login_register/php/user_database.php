@@ -50,7 +50,7 @@ if ($action == "register") {
     $new_user["id"] = $id + 1;
     $users[] = $new_user;
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-    $message = ["username" => $new_user["username"] . " " . "has been registered successfully!"];
+    $message = ["message" => $new_user["username"] . " " . "has been registered successfully!"];
     sendJSON($message);
 }
 
