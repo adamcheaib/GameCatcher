@@ -16,30 +16,7 @@
     <div id="general_notifications_container"></div>
 
     <script>
-        const button = document.querySelector("button");
-        button.addEventListener("click", () => {
-            const general_notifications_container = document.getElementById("general_notifications_container");
 
-            const notification = document.createElement("div");
-            notification.className = "general_notifications";
-            notification.innerHTML = `
-            <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
-                Notification!</div>
-            Game has been sucessfully added!
-        </div>
-            `;
-
-            //         animation: general_notification_movement;
-            // animation-duration: 2s;
-            // animation-iteration-count: 1;
-            // animation-fill-mode: forwards;
-
-            general_notifications_container.prepend(notification);
-
-            setTimeout(() => {
-                notification.remove();
-            }, 1800);
-        })
     </script>
 
 </body>

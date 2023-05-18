@@ -476,3 +476,22 @@ export function registration_notification(dialog_box_text) {
     registration_dialog.showModal();
     document.querySelector("#close").addEventListener("click", () => registration_dialog.remove());
 }
+
+function general_notifications(event) {
+    const general_notifications_container = document.getElementById("general_notifications_container");
+
+    const notification = document.createElement("div");
+    notification.className = "general_notifications";
+    notification.innerHTML = `
+    <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
+        Notification!</div>
+    Game has been sucessfully added!
+</div>
+    `;
+
+    general_notifications_container.prepend(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 1800);
+}
