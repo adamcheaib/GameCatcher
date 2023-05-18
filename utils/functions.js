@@ -71,25 +71,10 @@ function show_game_display_dom(game_data) {
             body: JSON.stringify(send_object),
         }).then(r => r.json()).then(data => {
             console.log(data);
-            alert("added");
+            general_notifications();
         });
     });
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
-
-    document.querySelector("#liked_games_button").addEventListener("click", async () => {
-        let send_object = {
-            name: game_data.name,
-            image: game_data.background_image,
-            username: localStorage.getItem("username"),
-        };
-        fetch("../frontpage/php/game_collection.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(send_object),
-        }).then(r => r.json()).then(data => {
-            console.log(data);
-        });
-    });
 }
 
 
@@ -477,7 +462,7 @@ export function registration_notification(dialog_box_text) {
     document.querySelector("#close").addEventListener("click", () => registration_dialog.remove());
 }
 
-function general_notifications(event) {
+export function general_notifications(event) {
     const general_notifications_container = document.getElementById("general_notifications_container");
 
     const notification = document.createElement("div");
@@ -493,5 +478,26 @@ function general_notifications(event) {
 
     setTimeout(() => {
         notification.remove();
-    }, 1800);
+    }, 2300);
+}
+
+
+
+export function general_notifications_search(event) {
+    const search_dialog_notifications_container = document.getElementById("general_notifications_container_search");
+
+    const notification = document.createElement("div");
+    notification.className = "general_notifications";
+    notification.innerHTML = `
+    <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
+        Notification!</div>
+    Game has been sucessfully added!
+</div>`;
+
+    search_dialog_notifications_container.prepend(notification);
+    document.getElementById("searched_game_dialog").appendChild(search_dialog_notifications_container);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 2300);
 }
