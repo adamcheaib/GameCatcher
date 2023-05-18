@@ -1,5 +1,6 @@
 import { search_for_game } from "../../utils/fetch_functions.js";
 import { searched_game_information } from "../../utils/fetch_functions.js";
+import { general_notifications, general_notifications_search } from "../../utils/functions.js";
 
 export async function search_popup(event) {
 
@@ -109,7 +110,7 @@ export async function search_popup(event) {
                             body: JSON.stringify(send_object),
                         }).then(r => r.json()).then(data => {
                             console.log(data);
-                            alert("Added!");
+                            general_notifications_search();
                         });
                     });
                     document.querySelector(".search_game_dialog_close_button").addEventListener("click", (event) => searched_game_dialog.remove());
