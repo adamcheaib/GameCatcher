@@ -74,7 +74,7 @@
 
 
             <footer>
-                
+
             </footer>
         </div>
 
@@ -84,6 +84,7 @@
     <script type="module" src="./frontpage/js/game_collection.js"></script>
     <script type="module" src="../utils/fetch_functions.js"></script>
     <script type="module" src="../utils/functions.js"></script>
+    <script type="module" src="./frontpage/search_game.js"></script>
 </body>
 
 </html>

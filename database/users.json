@@ -267,6 +267,14 @@
             {
                 "name": "The Sims 4",
                 "image": "https:\/\/media.rawg.io\/media\/games\/e44\/e445335e611b4ccf03af71fffcbd30a4.jpg"
+            },
+            {
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
             }
         ],
         "messages": [
@@ -297,6 +305,10 @@
             {
                 "username": "ee",
                 "message": "qqqqq"
+            },
+            {
+                "username": "ee",
+                "message": "fdsfds"
             },
             {
                 "username": "ee",
