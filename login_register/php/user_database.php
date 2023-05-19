@@ -70,7 +70,11 @@ if ($action == "register") {
 if ($action == "login") {
     foreach ($users as $single_user) {
         if ($username === $single_user["username"] and $password === $single_user["password"]) {
-            $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "message" => "Login successful!"];
+            if (!isset($single_user["favorite_games"])) {
+                $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "message" => "Login successful!"];
+                sendJSON($message);
+            }
+            $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "favorite_games" => $single_user["favorite_games"], "message" => "Login successful!"];
             sendJSON($message);
         }
     }
