@@ -83,12 +83,15 @@ export function init_frontpage() {
                         <div id="second_arrow2"> &#8594; </div>
                     </div>
                 </div>
+                
+                <div id="general_notifications_container"></div>
+                <div id="general_notifications_container_search"></div>
+
 
                 <footer>
                     <button>Logout</button>
                 </footer>
         </div>
-
     </div>`;
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
@@ -121,7 +124,4 @@ export function init_frontpage() {
         localStorage.clear();
         window.location.replace("http://localhost:1234/login_register");
     })
-
-
-
 }
