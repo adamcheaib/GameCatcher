@@ -138,87 +138,39 @@
         ]
     },
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28,
+        "username": "hassan",
+        "password": "zoher",
+        "id": 32,
         "favorite_games": [
             {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
+                "name": "The Last of Us Part II",
+                "image": "https:\/\/media.rawg.io\/media\/games\/909\/909974d1c7863c2027241e265fe7011f.jpg"
             },
             {
-                "name": "World of Warcraft",
-                "image": "https:\/\/media.rawg.io\/media\/games\/0d9\/0d930ea604ee240c5af30c58f73ddf48.jpg"
+                "name": "Just Cause",
+                "image": "https:\/\/media.rawg.io\/media\/games\/e60\/e601c02ec49ef4f1d5ef147994b3935f.jpg"
+            }
+        ],
+        "messages": [
+            {
+                "username": "hassan",
+                "message": "hej hassan"
             },
             {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "Metro 2033",
-                "image": "https:\/\/media.rawg.io\/media\/games\/120\/1201a40e4364557b124392ee50317b99.jpg"
-            },
-            {
-                "name": "BioShock Infinite",
-                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "The Elder Scrolls V: Skyrim",
-                "image": "https:\/\/media.rawg.io\/media\/games\/7cf\/7cfc9220b401b7a300e409e539c9afd5.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "The Elder Scrolls V: Skyrim",
-                "image": "https:\/\/media.rawg.io\/media\/games\/7cf\/7cfc9220b401b7a300e409e539c9afd5.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "Monster Hunter(Contraband Entertainment)",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
-            },
-            {
-                "name": "BioShock Infinite",
-                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
-            },
-            {
-                "name": "The Walking Dead: Season 1",
-                "image": "https:\/\/media.rawg.io\/media\/games\/8d6\/8d69eb6c32ed6acfd75f82d532144993.jpg"
-            },
-            {
-                "name": "World of Warcraft",
-                "image": "https:\/\/media.rawg.io\/media\/games\/0d9\/0d930ea604ee240c5af30c58f73ddf48.jpg"
-            },
-            {
-                "name": "World of Warcraft",
-                "image": "https:\/\/media.rawg.io\/media\/games\/0d9\/0d930ea604ee240c5af30c58f73ddf48.jpg"
+                "username": "hassan",
+                "message": "hej adam"
             }
         ]
+    },
+    {
+        "username": "adamcheaibs",
+        "password": "adamcheaib",
+        "id": 33
+    },
+    {
+        "username": "adamcheaibadsad",
+        "password": "adamcheaib",
+        "id": 34
     },
     {
 <<<<<<< Updated upstream
@@ -253,23 +205,6 @@
             {
                 "name": "The Sims 4",
                 "image": "https:\/\/media.rawg.io\/media\/games\/e44\/e445335e611b4ccf03af71fffcbd30a4.jpg"
-            },
-            {
-                "name": "Counter-Strike: Global Offensive",
-                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
-            },
-            {
-                "name": "F-16 Multirole Fighter",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/936\/9366f8426b6de321553593bed7f2dcc3.jpg"
-            },
-            {
-                "name": "Grand Theft Auto V",
-                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
-            },
-            {
-                "name": "Left 4 Dead 2",
-                "image": "https:\/\/media.rawg.io\/media\/games\/d58\/d588947d4286e7b5e0e12e1bea7d9844.jpg"
->>>>>>> Stashed changes
             }
         ],
         "messages": [
@@ -300,22 +235,13 @@
             {
                 "username": "ee",
                 "message": "qqqqq"
-<<<<<<< Updated upstream
-=======
-            },
-            {
-                "username": "ee",
-                "message": "fdsfds"
-            },
-            {
-                "username": "ee",
-                "message": "fdsfds"
-            },
-            {
-                "username": "ee",
-                "message": "aaaaaaahhh"
->>>>>>> Stashed changes
             }
         ]
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": []
     }
 ]

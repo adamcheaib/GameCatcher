@@ -61,7 +61,7 @@ export async function searched_game_information(game_name) {
     try {
         const link = prefix + `games?search=${game_name}&platforms=4,187,18,186&search_precise=true&` + api_key;
         const fetched_searched_game = await (await fetch(link)).json();
-        console.log(fetched_searched_game);
+        return fetched_searched_game;
     }
     catch (err) {
         console.log(err)

@@ -1,3 +1,4 @@
+import { registration_notification } from "../../utils/functions.js"
 "use strict"
 
 if (localStorage.getItem("username") !== null) {
@@ -44,9 +45,8 @@ async function tryToLogin(login_object) {
 
 
         if (!response.ok) {
-            alert(resource.message); // Add the popup function instead
+            registration_notification(resource.message); // Add the popup function instead or add text that gets appended just below the "LOGIN" element.
         } else {
-            alert(resource.message); // Add the popup function instead
             localStorage.setItem("username", resource.username);
             window.location.replace("http://localhost:1234/frontpage");
         }
@@ -57,12 +57,25 @@ async function tryToLogin(login_object) {
     }
 };
 
-function tryToRegister(register_object) {
-    fetch("../login_register/php/user_database.php", {
-        method: "POST",
-        header: { "Content-type": "application/json" },
-        body: JSON.stringify({ username: register_object.username, password: register_object.password, action: "register" })
-    })
+async function tryToRegister(register_object) {
+    try {
+        const response = await fetch("../login_register/php/user_database.php", {
+            method: "POST",
+            header: { "Content-type": "application/json" },
+            body: JSON.stringify({ username: register_object.username, password: register_object.password, action: "register" })
+        });
+
+        const resource = await response.json();
+
+        if (!response.ok) {
+            registration_notification(resource.message);
+        } else {
+            registration_notification(resource.message);
+        }
+
+    } catch (err) {
+        registration_notification(err.message);
+    }
 }
 
 
@@ -78,7 +91,7 @@ function register(event) {
         document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
         document.querySelector("button").textContent = "REGISTER"
         document.querySelector("h1").innerHTML = "Register";
-        document.querySelector("#container").style.backgroundImage = "url(./media/443579.jpg)";
+        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/443579.jpg)";
 
     }
     else {
@@ -89,6 +102,6 @@ function register(event) {
         const register_page = document.getElementById("too_register");
         register_page.addEventListener("click", register);
 
-        document.querySelector("#container").style.backgroundImage = "url(./media/pxfuel.jpg)";
+        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/pxfuel.jpg)";
     }
 }

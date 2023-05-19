@@ -1,5 +1,5 @@
-"use strict"
 import { api_key } from "./fetch_functions.js";
+"use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 
 async function add_to_game_collection() {
@@ -71,25 +71,10 @@ function show_game_display_dom(game_data) {
             body: JSON.stringify(send_object),
         }).then(r => r.json()).then(data => {
             console.log(data);
-            alert("added");
+            general_notifications();
         });
     });
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
-
-    document.querySelector("#liked_games_button").addEventListener("click", async () => {
-        let send_object = {
-            name: game_data.name,
-            image: game_data.background_image,
-            username: localStorage.getItem("username"),
-        };
-        fetch("../frontpage/php/game_collection.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(send_object),
-        }).then(r => r.json()).then(data => {
-            console.log(data);
-        });
-    });
 }
 
 
@@ -457,5 +442,62 @@ export function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-console.log("Hello");
+export function registration_notification(dialog_box_text) {
+    const registration_dialog = document.createElement("dialog");
+    registration_dialog.style.height = "100vh";
+    registration_dialog.style.width = "100vw";
+    registration_dialog.style.backgroundColor = "black";
+    registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
 
+    const registration_notification_container = document.createElement("div");
+    registration_notification_container.className = "registration_notification";
+    registration_notification_container.innerHTML = `
+    <h3>${dialog_box_text}</h3>
+    <button id="close">Close</button>
+    `;
+
+    registration_dialog.appendChild(registration_notification_container);
+    document.body.appendChild(registration_dialog);
+    registration_dialog.showModal();
+    document.querySelector("#close").addEventListener("click", () => registration_dialog.remove());
+}
+
+export function general_notifications(event) {
+    const general_notifications_container = document.getElementById("general_notifications_container");
+
+    const notification = document.createElement("div");
+    notification.className = "general_notifications";
+    notification.innerHTML = `
+    <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
+        Notification!</div>
+    Game has been sucessfully added!
+</div>
+    `;
+
+    general_notifications_container.prepend(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 2300);
+}
+
+
+
+export function general_notifications_search(event) {
+    const search_dialog_notifications_container = document.getElementById("general_notifications_container_search");
+
+    const notification = document.createElement("div");
+    notification.className = "general_notifications";
+    notification.innerHTML = `
+    <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
+        Notification!</div>
+    Game has been sucessfully added!
+</div>`;
+
+    search_dialog_notifications_container.prepend(notification);
+    document.getElementById("searched_game_dialog").appendChild(search_dialog_notifications_container);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 2300);
+}

@@ -153,3 +153,35 @@ h1 {
     }
 
 }
+
+.registration_notification {
+    height: 250px;
+    width: 500px;
+    display: grid;
+    grid-template-rows: 0.8fr, 0.2fr;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(70, 45, 80, 0.9);
+}
+
+.registration_notification>h3 {
+    color: white;
+    align-self: end;
+    justify-self: center;
+}
+
+.registration_notification>button {
+    width: 80px;
+    height: 40px;
+    justify-self: center;
+    align-self: center;
+    font-size: 20px;
+}
+
+.registration_notification>button:hover {
+    cursor: pointer;
+}
