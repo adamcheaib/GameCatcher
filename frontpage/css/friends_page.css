@@ -103,6 +103,7 @@ body {
     align-items: center;
     background-color: white;
     border-radius: 20px;
+    margin-top: 40px;
 }
 
 .nav_div {
@@ -119,7 +120,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 125px;
+    width: 150px;
     height: 40px;
     background-color: rgb(61, 255, 47);
     color: white;
@@ -169,7 +170,7 @@ body {
 
 #display {
     width: 80%;
-    height: 500px;
+    height: 550px;
     overflow-y: scroll;
     background-color: white;
     border-radius: 30px;

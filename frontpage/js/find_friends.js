@@ -1,32 +1,6 @@
-// document.addEventListener("keydown", get_users);
 import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-
-
-
-
-
-// function get_users(event){
-//     if(event.key === "Enter"){
-//         console.log("Rätt");
-//         fetch("../../database/users.json")
-//         .then(r => r.json()).then(resource => find_friend(resource));
-//     }
-
-// }
-
-// function find_friend(usersArray){
-//     let username = document.querySelector("#username").value;
-//     for(let i = 0; i < usersArray.length;i++){
-//         if(usersArray[i].username === username){
-//             console.log(usersArray[i]);
-//         }
-//     }
-//     console.log("User not found :(");
-// }
-
-
 
 
 export async function init_friends_page() {
@@ -58,7 +32,7 @@ export async function init_friends_page() {
 async function find_friend() {
     let account_name = document.querySelector("input").value;
     let response = await fetch(`./frontpage/php/find_friend.php?account_name=${account_name}`);
-    let account_data = await response.json();
+    let account_data = await response.text();
     console.log(account_data);
 }
 
