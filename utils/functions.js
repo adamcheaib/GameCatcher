@@ -287,10 +287,46 @@ export async function game_scroll() { // Scroll function for the displayed genre
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
             let the_game = await search_game(localStorage.getItem("selected_game"));
+            console.log(localStorage);
+
+            // Kollar om användaren redan har spelet i sin library.
+            const user_favorite_library = await (await fetch("../login_register/php/user_database.php",
+                {
+                    method: "PATCH",
+                    headers: { "Content-type": "application/json" },
+                    body: JSON.stringify({ username: localStorage.getItem("username"), action: "favorite_library" })
+                })).json();
+
+            console.log(user_favorite_library);
+
             if (document.querySelector(".display_game_dom") !== null) {
                 document.querySelector(".display_game_dom").remove();
             }
             show_game_display_dom(the_game[0]);
+
+            user_favorite_library.fav_games.forEach(game => {
+                if (game.name === localStorage.getItem("selected_game")) {
+                    document.getElementById("liked_games_button").remove();
+                    const remove_game_from_collection_button = document.createElement("div");
+                    remove_game_from_collection_button.style.fontSize = "30px";
+                    remove_game_from_collection_button.innerHTML = "&#128465;";
+                    remove_game_from_collection_button.id = "liked_games_button";
+                    document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
+
+                    remove_game_from_collection_button.addEventListener("click", async () => {
+                        let body_for_fetch = {
+                            username: localStorage.getItem("username"),
+                            the_game_to_delete: localStorage.getItem("selected_game"),
+                        }
+
+                        let response = await fetch("./frontpage/php/game_collection.php", {
+                            method: "DELETE",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(body_for_fetch),
+                        });
+                    })
+                }
+            })
         })
     })
 }

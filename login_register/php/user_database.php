@@ -21,10 +21,10 @@ $received_data = json_decode(file_get_contents("php://input"), true);
 
 $action = $received_data["action"];
 $username = $received_data["username"];
-$password = $received_data["password"];
 
 
 if ($action == "register") {
+    $password = $received_data["password"];
     if ($users == null) {
         $users = [];
     }
@@ -39,7 +39,7 @@ if ($action == "register") {
 
     $id = 0;
     if (1 < count($users)) {
-        $new_user = ["username" => $username, "password" => $password];
+        $new_user = ["username" => $username, "password" => $password, "favorite_games" => []];
         foreach ($users as $single_user) {
             if ($id < $single_user["id"]) {
                 $id = $single_user["id"];
@@ -68,6 +68,7 @@ if ($action == "register") {
 
 
 if ($action == "login") {
+    $password = $received_data["password"];
     foreach ($users as $single_user) {
         if ($username === $single_user["username"] and $password === $single_user["password"]) {
             if (!isset($single_user["favorite_games"])) {
@@ -82,5 +83,16 @@ if ($action == "login") {
     $message = ["message" => "User not found"];
     sendJSON($message, 404);
 
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
+    if ($action == "favorite_library") {
+        foreach ($users as $user) {
+            if ($user["username"] == $username) {
+                $message = ["fav_games" => $user["favorite_games"]];
+                sendJSON($message);
+            }
+        }
+    }
 }
 ?>

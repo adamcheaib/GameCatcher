@@ -48,11 +48,6 @@ async function tryToLogin(login_object) {
             registration_notification(resource.message); // Add the popup function instead or add text that gets appended just below the "LOGIN" element.
         } else {
             localStorage.setItem("username", resource.username); // Gör så att spelen sparas hos användarna även fast man inte har nyckeln "favorite_games".
-            if (localStorage.hasOwnProperty("favorite_games")) {
-                localStorage.setItem("favorite_games", resource.favorite_games);
-            }
-            console.log(resource);
-            console.log(localStorage);
             window.location.replace("http://localhost:1234/frontpage");
         }
         username_field.value = "";
