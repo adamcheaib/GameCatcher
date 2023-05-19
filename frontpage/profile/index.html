@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontpage/profile/css/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <header>
+            <div id="profile_image"  alt="Profile Picture"></div>
+            <form id="profile_pic_form"  action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
+                <input type="file" id="upload_profile_picture" name="upload"></input>
+                <button type="submit">UPLOAD</button>
+            </form>
+            
+            <h2>Callw</h2>
+        </header>
+        <form id="banner_picture" action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="upload" id="upload_banner_picture">
+        </form>
+    </main>
+<section>
+    <div id="menu">
+       <p id="friends">Friends</p>
+       <p id="about">About</p>
+    </div>
+</section>
+<div id="split">
+    <div id="nav">
+        <div>home</div>
+        <div>games</div>
+        <div>chat</div>
+        <div>settings</div>
+    </div>
+    <div id="profile_stuff">
+        <div id="feeling">
+            <p>How i'm feeling</p>
+            <p>Mood</p>
+            <p id="emoji"></p>
+        </div>
+
+        <div id="transparency"></div>
+
+        <div id="favorite">
+            <p>Favorite Game</p>
+            <div id="favorite_game_image" alt="Favorite Game"></div>
+        </div>
+        <form id="upload_favorite_game" action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
+            <input type="file" id="upload_favorite" name="upload"></input>
+            <button type="submit">UPLOAD</button>
+        </form>
+        
+    </div>
+
+    <form id="profile_forum" action="./profile/php/upload.php" method="POST">
+        <div class="comments_section">
+            <div id="comment_profile" alt="Profile Picture"></div>
+            <input id="message" name="profile_message" type="text" placeholder="Write something..." >
+            <button id="send_message">Send Message!</button>
+        </div>
+    </form>
+</div>
+
+</body>
+<script src="/frontpage/profile/js/index.js"></script>
+</html>
