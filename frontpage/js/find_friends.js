@@ -3,6 +3,8 @@ import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 
 
+
+
 export async function init_friends_page() {
 
 
@@ -14,9 +16,9 @@ export async function init_friends_page() {
 
     document.querySelector("#center_piece").innerHTML = `
         <div id="navigation">
-            <div class="selected" ">Add Friends</div>
-            <div class="unselected" >Pending</div>
-            <div class="unselected" >Blocked</div>
+            <div id="add_friends" class="selected" ">Add Friends</div>
+            <div id="pending" class="unselected" >Pending</div>
+            <div id="blocked" class="unselected" >Blocked</div>
         </div>
         <div id="search_wrapper">
             <input id="search"></input>
@@ -27,6 +29,8 @@ export async function init_friends_page() {
     `;
 
     document.querySelector("#search_image").addEventListener("click", find_friend);
+
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }
 
 
@@ -83,7 +87,45 @@ async function find_friend() {
     document.querySelectorAll(".add_friend").forEach((add_btn) => {
         add_btn.addEventListener("click", send_friend_request);
     })
+
 }
+
+
+async function get_all_pending_friend_requests(event) {
+
+
+    document.querySelector("#center_piece").innerHTML = `
+            <div id="navigation">
+                <div id="add_friends" class="unselected">Add Friends</div>
+                <div id="pending" class="selected" >Pending</div>
+                <div id="blocked" class="unselected" >Blocked</div>
+            </div>
+            <div id="search_wrapper">
+                <input id="search"></input>
+                <div id="search_image"></div>
+            </div>
+            <div id="display"></div>
+        `;
+
+    document.querySelector("#add_friends").addEventListener("click", init_friends_page) // Måste ha denna kod rad här för att await väntar på att fetchen har skickat så då körs inte denna rad
+
+    let username = localStorage.getItem("username");
+    let body_for_fetch = {
+        all_pending: "get_all_pending",
+        the_request_user: username,
+    }
+    let response = await fetch("./frontpage/php/find_friend.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch)
+    })
+
+    let data = await response.json();
+    console.log(data);
+
+}
+
+
 
 document.querySelector("#main_page").addEventListener("click", init_frontpage);
 document.querySelector("#chat").addEventListener("click", init_forum)
