@@ -80,28 +80,38 @@ async function tryToRegister(register_object) {
 
 
 const register_page = document.getElementById("too_register");
+register_page.addEventListener("click", (event) => {
+    document.getElementById("container").style.filter = "blur(1.5rem)";
+
+    setTimeout(() => document.getElementById("container").style.filter = "blur(0)", 200);
+})
 register_page.addEventListener("click", register);
 
 function register(event) {
-    let container = document.querySelector("#container");
-    container.classList.toggle("registration");
+    setTimeout(
+        () => {
+            let container = document.querySelector("#container");
+            container.classList.toggle("registration");
 
-    if (container.classList.contains("registration")) {
-        document.querySelector("h1").style.color = "white";
-        document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
-        document.querySelector("button").textContent = "REGISTER"
-        document.querySelector("h1").innerHTML = "Register";
-        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/443579.jpg)";
+            if (container.classList.contains("registration")) {
+                document.querySelector("h1").style.color = "white";
+                document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
+                document.querySelector("button").textContent = "REGISTER"
+                document.querySelector("h1").innerHTML = "Register";
+                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/443579.jpg)";
 
-    }
-    else {
-        document.querySelector("h1").style.color = "black";
-        document.querySelector("h1").innerHTML = "Login";
-        document.querySelector("button").textContent = "LOGIN"
-        document.querySelector("#too_register").innerHTML = "Don't have an account? Click here to register"
-        const register_page = document.getElementById("too_register");
-        register_page.addEventListener("click", register);
+            }
+            else {
+                document.querySelector("h1").style.color = "black";
+                document.querySelector("h1").innerHTML = "Login";
+                document.querySelector("button").textContent = "LOGIN"
+                document.querySelector("#too_register").innerHTML = "Don't have an account? Click here to register"
+                const register_page = document.getElementById("too_register");
+                register_page.addEventListener("click", register);
 
-        document.querySelector("#container").style.backgroundImage = "url(./login_register/media/pxfuel.jpg)";
-    }
+                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/pxfuel.jpg)";
+            }
+
+        }
+        , 200)
 }
