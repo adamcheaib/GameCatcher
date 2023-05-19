@@ -1,7 +1,9 @@
-import { fetch_all_games, search_for_game } from "../../utils/fetch_functions.js";
+import { fetch_all_games } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { game_scroll, genre_scroll } from "../../utils/functions.js";
+import { game_scroll, genre_scroll, } from "../../utils/functions.js";
+import { init_friends_page } from "./find_friends.js";
+import { search_popup } from "./search_game.js";
 
 
 
@@ -49,8 +51,6 @@ export function init_frontpage() {
                     </div>
                 </div>
 
-
-
                 <div id="games_section">
 
                     <div id="genres">
@@ -86,16 +86,20 @@ export function init_frontpage() {
                         <div id="second_arrow2"> &#8594; </div>
                     </div>
                 </div>
+                
+                <div id="general_notifications_container"></div>
+                <div id="general_notifications_container_search"></div>
+
 
                 <footer>
-                    
+                    <button>Logout</button>
                 </footer>
         </div>
-
     </div>`;
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
+    document.querySelector("#friends").addEventListener("click", init_friends_page);
 
     document.querySelectorAll("#genre_wrapper div").forEach(genre => {
         genre.addEventListener("click", () => {
@@ -118,61 +122,10 @@ export function init_frontpage() {
 
     const search_icon_button = document.getElementById("search_function");
     search_icon_button.addEventListener("click", search_popup);
-    const dialog_dom = document.createElement("dialog");
 
-    document.body.appendChild(dialog_dom);
-
-    async function search_popup(event) {
-        dialog_dom.showModal();
-        dialog_dom.innerHTML = `
-        <div>
-            <div id="dialogCloseButtonContainer">
-                <span>X</span>
-            </div>
-            
-            <div id="searchBarContainer">
-                <input type="text" placeholder="Search for games..."><button>Search</button>
-            </div>
-    
-            <div id="search_results"></div>
-        </div>
-        `;
-
-        async function init_search(event) {
-            const dom_search_results = document.getElementById("search_results");
-            dom_search_results.innerHTML = "<h1 style='color: white'>Getting game list...</h1>";
-            const search_results = await search_for_game();
-            dom_search_results.innerHTML = "";
-            search_results.forEach(game => {
-                const game_box = document.createElement("div");
-                game_box.innerHTML = `
-                <div class="game_text_wrapper">
-                    <div class="game_text">${game.name}</div>
-                    </div>
-                </div>`;
-                game_box.style.backgroundImage = `url(${game.background_image})`
-                game_box.classList.add("gamesSearchResults");
-                game_box.addEventListener("click", searched_game_information);
-
-                async function searched_game_information(event) {
-                    console.log(game.name);
-                }
-
-                dom_search_results.appendChild(game_box);
-            })
-        }
-
-        const searchfield_input = document.querySelector("#searchBarContainer > input");
-        searchfield_input.addEventListener("keyup", (event) => {
-            if (event.key === "Enter") {
-                init_search();
-            };
-        });
-
-        const search_button = document.querySelector("#searchBarContainer > button");
-        search_button.addEventListener("click", init_search);
-
-        const close_button = dialog_dom.querySelector("#dialogCloseButtonContainer > span");
-        close_button.addEventListener("click", () => dialog_dom.close());
-    }
+    document.querySelector("button").addEventListener("click", () => {
+        console.log("click");
+        localStorage.clear();
+        window.location.replace("http://localhost:1234/login_register");
+    })
 }

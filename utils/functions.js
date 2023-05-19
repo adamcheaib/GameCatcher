@@ -1,6 +1,22 @@
-"use strict"
 import { api_key } from "./fetch_functions.js";
+"use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
+
+async function add_to_game_collection() {
+    let send_object = {
+        name: game_data.name,
+        image: game_data.background_image,
+        username: localStorage.getItem("username"),
+    };
+    fetch("../frontpage/php/game_collection.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(send_object),
+    }).then(r => r.json()).then(data => {
+        console.log(data);
+    });
+}
+
 
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
@@ -43,11 +59,6 @@ function show_game_display_dom(game_data) {
             counter_for_interval[0] = 1
         }
     }, 3000);
-    document.querySelector("#liked_games_button").addEventListener("click", () => {
-
-    });
-    document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
-
     document.querySelector("#liked_games_button").addEventListener("click", async () => {
         let send_object = {
             name: game_data.name,
@@ -60,8 +71,10 @@ function show_game_display_dom(game_data) {
             body: JSON.stringify(send_object),
         }).then(r => r.json()).then(data => {
             console.log(data);
+            general_notifications();
         });
     });
+    document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
 }
 
 
@@ -200,6 +213,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
         })
     }
 
+    console.log(localStorage);
 
     async function click_left_arrow(event) {
         if (counter2 === 0) {
@@ -273,10 +287,46 @@ export async function game_scroll() { // Scroll function for the displayed genre
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
             let the_game = await search_game(localStorage.getItem("selected_game"));
+            console.log(localStorage);
+
+            // Kollar om användaren redan har spelet i sin library.
+            const user_favorite_library = await (await fetch("../login_register/php/user_database.php",
+                {
+                    method: "PATCH",
+                    headers: { "Content-type": "application/json" },
+                    body: JSON.stringify({ username: localStorage.getItem("username"), action: "favorite_library" })
+                })).json();
+
+            console.log(user_favorite_library);
+
             if (document.querySelector(".display_game_dom") !== null) {
                 document.querySelector(".display_game_dom").remove();
             }
             show_game_display_dom(the_game[0]);
+
+            user_favorite_library.fav_games.forEach(game => {
+                if (game.name === localStorage.getItem("selected_game")) {
+                    document.getElementById("liked_games_button").remove();
+                    const remove_game_from_collection_button = document.createElement("div");
+                    remove_game_from_collection_button.style.fontSize = "30px";
+                    remove_game_from_collection_button.innerHTML = "&#128465;";
+                    remove_game_from_collection_button.id = "liked_games_button";
+                    document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
+
+                    remove_game_from_collection_button.addEventListener("click", async () => {
+                        let body_for_fetch = {
+                            username: localStorage.getItem("username"),
+                            the_game_to_delete: localStorage.getItem("selected_game"),
+                        }
+
+                        let response = await fetch("./frontpage/php/game_collection.php", {
+                            method: "DELETE",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(body_for_fetch),
+                        });
+                    })
+                }
+            })
         })
     })
 }
@@ -428,5 +478,62 @@ export function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-console.log("Hello");
+export function registration_notification(dialog_box_text) {
+    const registration_dialog = document.createElement("dialog");
+    registration_dialog.style.height = "100vh";
+    registration_dialog.style.width = "100vw";
+    registration_dialog.style.backgroundColor = "black";
+    registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
 
+    const registration_notification_container = document.createElement("div");
+    registration_notification_container.className = "registration_notification";
+    registration_notification_container.innerHTML = `
+    <h3>${dialog_box_text}</h3>
+    <button id="close">Close</button>
+    `;
+
+    registration_dialog.appendChild(registration_notification_container);
+    document.body.appendChild(registration_dialog);
+    registration_dialog.showModal();
+    document.querySelector("#close").addEventListener("click", () => registration_dialog.remove());
+}
+
+export function general_notifications(event) {
+    const general_notifications_container = document.getElementById("general_notifications_container");
+
+    const notification = document.createElement("div");
+    notification.className = "general_notifications";
+    notification.innerHTML = `
+    <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
+        Notification!</div>
+    Game has been sucessfully added!
+</div>
+    `;
+
+    general_notifications_container.prepend(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 2300);
+}
+
+
+
+export function general_notifications_search(event) {
+    const search_dialog_notifications_container = document.getElementById("general_notifications_container_search");
+
+    const notification = document.createElement("div");
+    notification.className = "general_notifications";
+    notification.innerHTML = `
+    <div style="background-color: purple; color: white; border-radius: 10px 10px 0 0">
+        Notification!</div>
+    Game has been sucessfully added!
+</div>`;
+
+    search_dialog_notifications_container.prepend(notification);
+    document.getElementById("searched_game_dialog").appendChild(search_dialog_notifications_container);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 2300);
+}

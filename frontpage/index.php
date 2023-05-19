@@ -74,14 +74,19 @@
 
 
             <footer>
-                
+
             </footer>
         </div>
 
     </div>
-    <script src="./frontpage/js/front_page.js"></script>
+
+
+    <div id="general_notifications_container"></div>
+
+    <script type="module" src="./frontpage/js/front_page.js"></script>
     <script type="module" src="./frontpage/js/forum.js"></script>
     <script type="module" src="./frontpage/js/game_collection.js"></script>
+    <script type="module" src="./frontpage/js/search_game.js"></script>
     <script type="module" src="../utils/fetch_functions.js"></script>
     <script type="module" src="../utils/functions.js"></script>
 </body>

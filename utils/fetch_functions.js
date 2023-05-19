@@ -57,6 +57,16 @@ export async function search_for_game(game_name = document.querySelector("#searc
     }
 }
 
+export async function searched_game_information(game_name) {
+    try {
+        const link = prefix + `games?search=${game_name}&platforms=4,187,18,186&search_precise=true&` + api_key;
+        const fetched_searched_game = await (await fetch(link)).json();
+        return fetched_searched_game;
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
 
 async function specific_game_event(event) {
 

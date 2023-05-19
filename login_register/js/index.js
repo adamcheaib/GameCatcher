@@ -1,3 +1,4 @@
+import { registration_notification } from "../../utils/functions.js"
 "use strict"
 
 if (localStorage.getItem("username") !== null) {
@@ -44,10 +45,9 @@ async function tryToLogin(login_object) {
 
 
         if (!response.ok) {
-            alert(resource.message); // Add the popup function instead
+            registration_notification(resource.message); // Add the popup function instead or add text that gets appended just below the "LOGIN" element.
         } else {
-            alert(resource.message); // Add the popup function instead
-            localStorage.setItem("username", resource.username);
+            localStorage.setItem("username", resource.username); // Gör så att spelen sparas hos användarna även fast man inte har nyckeln "favorite_games".
             window.location.replace("http://localhost:1234/frontpage");
         }
         username_field.value = "";
@@ -57,38 +57,61 @@ async function tryToLogin(login_object) {
     }
 };
 
-function tryToRegister(register_object) {
-    fetch("../login_register/php/user_database.php", {
-        method: "POST",
-        header: { "Content-type": "application/json" },
-        body: JSON.stringify({ username: register_object.username, password: register_object.password, action: "register" })
-    })
+async function tryToRegister(register_object) {
+    try {
+        const response = await fetch("../login_register/php/user_database.php", {
+            method: "POST",
+            header: { "Content-type": "application/json" },
+            body: JSON.stringify({ username: register_object.username, password: register_object.password, action: "register" })
+        });
+
+        const resource = await response.json();
+
+        if (!response.ok) {
+            registration_notification(resource.message);
+        } else {
+            registration_notification(resource.message);
+        }
+
+    } catch (err) {
+        registration_notification(err.message);
+    }
 }
 
 
 const register_page = document.getElementById("too_register");
+register_page.addEventListener("click", (event) => {
+    document.getElementById("container").style.filter = "blur(1.5rem)";
+
+    setTimeout(() => document.getElementById("container").style.filter = "blur(0)", 200);
+})
 register_page.addEventListener("click", register);
 
 function register(event) {
-    let container = document.querySelector("#container");
-    container.classList.toggle("registration");
+    setTimeout(
+        () => {
+            let container = document.querySelector("#container");
+            container.classList.toggle("registration");
 
-    if (container.classList.contains("registration")) {
-        document.querySelector("h1").style.color = "white";
-        document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
-        document.querySelector("button").textContent = "REGISTER"
-        document.querySelector("h1").innerHTML = "Register";
-        document.querySelector("#container").style.backgroundImage = "url(./media/443579.jpg)";
+            if (container.classList.contains("registration")) {
+                document.querySelector("h1").style.color = "white";
+                document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
+                document.querySelector("button").textContent = "REGISTER"
+                document.querySelector("h1").innerHTML = "Register";
+                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/registration.jpg)";
 
-    }
-    else {
-        document.querySelector("h1").style.color = "black";
-        document.querySelector("h1").innerHTML = "Login";
-        document.querySelector("button").textContent = "LOGIN"
-        document.querySelector("#too_register").innerHTML = "Don't have an account? Click here to register"
-        const register_page = document.getElementById("too_register");
-        register_page.addEventListener("click", register);
+            }
+            else {
+                document.querySelector("h1").style.color = "black";
+                document.querySelector("h1").innerHTML = "Login";
+                document.querySelector("button").textContent = "LOGIN"
+                document.querySelector("#too_register").innerHTML = "Don't have an account? Click here to register"
+                const register_page = document.getElementById("too_register");
+                register_page.addEventListener("click", register);
 
-        document.querySelector("#container").style.backgroundImage = "url(./media/pxfuel.jpg)";
-    }
+                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/login.jpg)";
+            }
+
+        }
+        , 200)
 }
