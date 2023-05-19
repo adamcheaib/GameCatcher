@@ -174,4 +174,60 @@ body {
     overflow-y: scroll;
     background-color: white;
     border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile_dom {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+#profile_wrapper {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.profile_picture {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.add_friend {
+    width: 100px;
+    height: 50px;
+    color: white;
+    background-color: lightgreen;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.block_friend {
+    width: 100px;
+    height: 50px;
+    color: white;
+    background-color: rgb(226, 132, 132);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -20,22 +20,25 @@
         "id": 8
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley1",
         "password": "adam",
-        "id": 9
+        "id": 9,
+        "pending": [
+            "ee"
+        ]
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley2",
         "password": "sss",
         "id": 10
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley3",
         "password": "sss",
         "id": 11
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley4",
         "password": "sss",
         "id": 12
     },
@@ -135,6 +138,9 @@
                 "name": "BioShock Infinite",
                 "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
             }
+        ],
+        "pendings": [
+            "ee"
         ]
     },
     {
@@ -185,12 +191,10 @@
                 "name": "The Sims 4",
                 "image": "https:\/\/media.rawg.io\/media\/games\/e44\/e445335e611b4ccf03af71fffcbd30a4.jpg"
             }
+        ],
+        "pending": [],
+        "pening": [
+            "bobmarley1"
         ]
-    },
-    {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28,
-        "favorite_games": []
     }
 ]
