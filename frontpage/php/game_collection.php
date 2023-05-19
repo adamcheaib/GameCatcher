@@ -27,8 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "favorite_games" => $old_user[0]["favorite_games"],
                 ];
             }
+            else
 
-            if (array_key_exists("favorite_games", $old_user) == false) {
+            if (array_key_exists("favorite_games", $old_user) == false) { 
 
 
                 foreach ($old_user[0]["favorite_games"] as $game) {

@@ -125,13 +125,22 @@ async function get_all_pending_friend_requests(event) {
 
     for (let i = 0; i < data.length; i++) {
         let pending_dom = document.createElement("div");
+        pending_dom.classList.add("pending_wrapper")
         pending_dom.innerHTML = `
-            <div class="account_username_pending">${data[i]}<div>
+            <div class="profile_picture"></div>
+            <div class="account_username_pending">${data[i]}</div>
+            <div class="wrapper_for_alternatives">
+                <div class="accept">Accept</div>
+                <div class="decline">Decline</div>
+            </div>
         `;
 
         document.querySelector("#display").appendChild(pending_dom);
+        document.querySelectorAll(".profile_picture").forEach(pic => {
+            pic.style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)";
+        })
     }
-
+    
 }
 
 
