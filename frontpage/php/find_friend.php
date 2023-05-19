@@ -34,6 +34,21 @@
             }
         }
 
+        if(array_key_exists("all_pending", $fetch_data) === true){
+
+            for ($w = 0; $w < count($all_users); $w++) { 
+                if($all_users[$w]["username"] === $fetch_data["the_request_user"] && array_key_exists("pending", $all_users[$w]) == true){
+                    $all_pending = [];
+                    for ($o = 0; $o < count($all_users[$w]["pending"]); $o++) { 
+                        $all_pending[] = $all_users[$w]["pending"][$o];
+                    }
+                    header("Content-Type: application/json");
+                    echo json_encode($all_pending);
+                    exit();
+                }
+            }
+        }
+
     }
 
 ?>
