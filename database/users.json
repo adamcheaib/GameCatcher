@@ -221,6 +221,25 @@
         ]
     },
     {
+<<<<<<< Updated upstream
+=======
+        "username": "adamcheaibs",
+        "password": "adamcheaib",
+        "id": 33
+    },
+    {
+        "username": "adamcheaibadsad",
+        "password": "adamcheaib",
+        "id": 34
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": []
+    },
+    {
+>>>>>>> Stashed changes
         "username": "ee",
         "password": "ee",
         "id": 14,
@@ -228,6 +247,29 @@
             {
                 "name": "Tetris Effect: Connected",
                 "image": "https:\/\/media.rawg.io\/media\/games\/377\/3770f2c7020bcb6cc2072f073f27fb4c.jpg"
+<<<<<<< Updated upstream
+=======
+            },
+            {
+                "name": "The Sims 4",
+                "image": "https:\/\/media.rawg.io\/media\/games\/e44\/e445335e611b4ccf03af71fffcbd30a4.jpg"
+            },
+            {
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
+            },
+            {
+                "name": "F-16 Multirole Fighter",
+                "image": "https:\/\/media.rawg.io\/media\/screenshots\/936\/9366f8426b6de321553593bed7f2dcc3.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Left 4 Dead 2",
+                "image": "https:\/\/media.rawg.io\/media\/games\/d58\/d588947d4286e7b5e0e12e1bea7d9844.jpg"
+>>>>>>> Stashed changes
             }
         ],
         "messages": [
@@ -258,6 +300,21 @@
             {
                 "username": "ee",
                 "message": "qqqqq"
+<<<<<<< Updated upstream
+=======
+            },
+            {
+                "username": "ee",
+                "message": "fdsfds"
+            },
+            {
+                "username": "ee",
+                "message": "fdsfds"
+            },
+            {
+                "username": "ee",
+                "message": "aaaaaaahhh"
+>>>>>>> Stashed changes
             }
         ]
     }
