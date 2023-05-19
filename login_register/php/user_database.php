@@ -32,7 +32,7 @@ if ($action == "register") {
     if ($username == "" or $password == "") {
         $message = ["message" => "Username or password are empty!"];
         sendJSON($message, 400);
-    } elseif (strlen($username) > 3 or strlen($password) < 3) {
+    } elseif (strlen($username) <= 3 or strlen($password) <= 3) {
         $message = ["message" => "Username and password cannot be shorter than 3 characters!"];
         sendJSON($message);
     }
