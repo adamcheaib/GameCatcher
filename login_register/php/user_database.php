@@ -2,7 +2,8 @@
 
 ini_set("display_errors", 1);
 
-function sendJSON($message, $http_code = 200) {
+function sendJSON($message, $http_code = 200)
+{
     header("content-type: application/json");
     http_response_code($http_code);
     echo json_encode($message);
@@ -10,7 +11,7 @@ function sendJSON($message, $http_code = 200) {
 }
 
 $filename = "../../database/users.json";
-if(file_exists($filename)){
+if (file_exists($filename)) {
     $users = json_decode(file_get_contents($filename), true);
 } else {
     $users = [];
@@ -28,25 +29,34 @@ if ($action == "register") {
         $users = [];
     }
 
+    if ($username == "" or $password == "") {
+        $message = ["message" => "Username or password are empty!"];
+        sendJSON($message, 400);
+    } elseif (strlen($username) > 3 or strlen($password) < 3) {
+        $message = ["message" => "Username and password cannot be shorter than 3 characters!"];
+        sendJSON($message);
+    }
+
     $id = 0;
     if (1 < count($users)) {
         $new_user = ["username" => $username, "password" => $password];
-        foreach ($users as  $single_user) {
+        foreach ($users as $single_user) {
             if ($id < $single_user["id"]) {
                 $id = $single_user["id"];
             }
         }
-    };
+    }
+    ;
 
     if ($users != null) {
-        foreach($users as $user) {
+        foreach ($users as $user) {
             if ($user["username"] == $received_data["username"]) {
                 $message = ["message" => "Username is already taken"];
                 sendJSON($message, 400);
             }
         }
     }
-    
+
     $new_user["id"] = $id + 1;
     $users[] = $new_user;
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
@@ -59,11 +69,11 @@ if ($action == "register") {
 
 if ($action == "login") {
     foreach ($users as $single_user) {
-        if($username === $single_user["username"] and $password === $single_user["password"]) {
+        if ($username === $single_user["username"] and $password === $single_user["password"]) {
             $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "message" => "Login successful!"];
             sendJSON($message);
         }
-    } 
+    }
 
     $message = ["message" => "User not found"];
     sendJSON($message, 404);
