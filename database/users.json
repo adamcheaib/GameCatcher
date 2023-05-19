@@ -20,24 +20,29 @@
         "id": 8
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley1",
         "password": "adam",
         "id": 9
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley2",
         "password": "sss",
         "id": 10
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley3",
         "password": "sss",
         "id": 11
     },
     {
-        "username": "bobmarley",
+        "username": "bobmarley4",
         "password": "sss",
-        "id": 12
+        "id": 12,
+        "pending": [
+            "ee",
+            "Elliot",
+            "Adam"
+        ]
     },
     {
         "username": "kakarikokakaka",

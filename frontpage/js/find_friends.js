@@ -123,6 +123,15 @@ async function get_all_pending_friend_requests(event) {
     let data = await response.json();
     console.log(data);
 
+    for (let i = 0; i < data.length; i++) {
+        let pending_dom = document.createElement("div");
+        pending_dom.innerHTML = `
+            <div class="account_username_pending">${data[i]}<div>
+        `;
+
+        document.querySelector("#display").appendChild(pending_dom);
+    }
+
 }
 
 
