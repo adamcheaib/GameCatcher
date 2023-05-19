@@ -3,6 +3,7 @@ import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll, } from "../../utils/functions.js";
 import { init_friends_page } from "./find_friends.js";
+import { search_popup } from "./search_game.js";
 
 
 

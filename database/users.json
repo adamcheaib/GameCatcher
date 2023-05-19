@@ -171,39 +171,15 @@
     {
         "username": "adamcheaibs",
         "password": "adamcheaib",
-        "id": 33
+        "id": 33,
+        "pending": [
+            "ee"
+        ]
     },
     {
         "username": "adamcheaibadsad",
         "password": "adamcheaib",
         "id": 34
-    },
-    {
-        "username": "ee",
-        "password": "ee",
-        "id": 14,
-        "favorite_games": [
-            {
-                "name": "Tetris Effect: Connected",
-                "image": "https:\/\/media.rawg.io\/media\/games\/377\/3770f2c7020bcb6cc2072f073f27fb4c.jpg"
-            },
-            {
-                "name": "The Sims 4",
-                "image": "https:\/\/media.rawg.io\/media\/games\/e44\/e445335e611b4ccf03af71fffcbd30a4.jpg"
-            },
-            {
-                "name": "Counter-Strike: Global Offensive",
-                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
-            },
-            {
-                "name": "Grand Theft Auto V",
-                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
-            }
-        ],
-        "pending": [],
-        "pening": [
-            "bobmarley1"
-        ]
     },
     {
         "username": "asdjasldaslkdj",
@@ -283,6 +259,41 @@
                 "name": "Grand Theft Auto V",
                 "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
             }
+        ]
+    },
+    {
+        "username": "ee",
+        "password": "ee",
+        "id": 14,
+        "favorite_games": [
+            {
+                "name": "Tetris Effect: Connected",
+                "image": "https:\/\/media.rawg.io\/media\/games\/377\/3770f2c7020bcb6cc2072f073f27fb4c.jpg"
+            },
+            {
+                "name": "The Sims 4",
+                "image": "https:\/\/media.rawg.io\/media\/games\/e44\/e445335e611b4ccf03af71fffcbd30a4.jpg"
+            },
+            {
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "WOR-DOS",
+                "image": "https:\/\/media.rawg.io\/media\/screenshots\/e3e\/e3e8a576bc5b583f3a269a918447e236.jpg"
+            },
+            {
+                "name": "Left 4 Dead 2",
+                "image": "https:\/\/media.rawg.io\/media\/games\/d58\/d588947d4286e7b5e0e12e1bea7d9844.jpg"
+            }
+        ],
+        "pending": [],
+        "pening": [
+            "bobmarley1"
         ]
     }
 ]
