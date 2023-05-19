@@ -1,4 +1,7 @@
 <?php
+
+require_once "./functions.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);
@@ -13,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (array_key_exists("favorite_games", $old_user) == true) {
 
-
                 $a_favorite_game = [
                     "name" => $data["name"],
                     "image" => $data["image"],
@@ -27,6 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             if (array_key_exists("favorite_games", $old_user) == false) {
+
+
+                foreach ($old_user[0]["favorite_games"] as $game) {
+                    if ($game["name"] == $data["name"]) {
+                        $message = ["message" => "Remove game &#xe020;"];
+                        sendJSON($message);
+                    }
+                }
+
+
                 $old_user["favorite_games"] = [];
                 $a_favorite_game = [
                     "name" => $data["name"],
@@ -45,9 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-    header("Content-Type: application/json");
-    echo json_encode($old_user_with_out_password_for_send);
-    exit();
+    sendJSON($old_user_with_out_password_for_send);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -55,9 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);
     for ($index2 = 0; $index2 < count($all_users); $index2++) {
         if ($the_username == $all_users[$index2]["username"]) {
-            header("Content-Type: application/json");
-            echo json_encode($all_users[$index2]["favorite_games"]);
-            exit();
+            sendJSON($all_users[$index2]["favorite_games"]);
         }
     }
 }
@@ -72,9 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
                 if ($all_users[$i]["favorite_games"][$j]["name"] == $data["the_game_to_delete"]) {
                     $deleted_game = array_splice($all_users[$i]["favorite_games"], $j, 1);
                     file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-                    header("Content-Type: application/json");
-                    echo json_encode($deleted_game);
-                    exit();
+                    sendJSON($deleted_game);
                 }
             }
         }
