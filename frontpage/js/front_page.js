@@ -2,7 +2,10 @@ import { fetch_all_games } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll, } from "../../utils/functions.js";
+import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
+
+
 
 if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
@@ -96,6 +99,7 @@ export function init_frontpage() {
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
+    document.querySelector("#friends").addEventListener("click", init_friends_page);
 
     document.querySelectorAll("#genre_wrapper div").forEach(genre => {
         genre.addEventListener("click", () => {
