@@ -333,17 +333,6 @@
         "id": 47
     },
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "id": 28,
-        "favorite_games": [
-            {
-                "name": "Grand Theft Auto V",
-                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
-            }
-        ]
-    },
-    {
         "username": "calle",
         "password": "calle",
         "id": 32,
@@ -361,5 +350,49 @@
         "profile_picture": "Vagabond_Musashi.webp",
         "banner_picture": "Vagabond-2.avif",
         "profile_comments": []
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "id": 28,
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            }
+        ]
+    },
+    {
+        "username": "erifkon",
+        "password": "adam123",
+        "favorite_games": [
+            {
+                "name": "XCOM: Enemy Unknown",
+                "image": "https:\/\/media.rawg.io\/media\/games\/238\/2383a172b4d50a7b44e07980eb7141ea.jpg"
+            },
+            {
+                "name": "Sid Meier's Civilization V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/55e\/55ee6432ac2bf224610fa17e4c652107.jpg"
+            }
+        ],
+        "id": 48,
+        "messages": [
+            {
+                "username": "erifkon",
+                "message": "njfnas\n\n"
+            },
+            {
+                "username": "erifkon",
+                "message": "fasf"
+            },
+            {
+                "username": "erifkon",
+                "message": "fasf"
+            }
+        ]
     }
 ]

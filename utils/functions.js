@@ -59,20 +59,57 @@ function show_game_display_dom(game_data) {
             counter_for_interval[0] = 1
         }
     }, 3000);
-    document.querySelector("#liked_games_button").addEventListener("click", async () => {
-        let send_object = {
-            name: game_data.name,
-            image: game_data.background_image,
-            username: localStorage.getItem("username"),
-        };
-        fetch("../frontpage/php/game_collection.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(send_object),
-        }).then(r => r.json()).then(data => {
-            console.log(data);
-            general_notifications();
-        });
+    document.querySelector("#liked_games_button").addEventListener("click", async (event) => {
+
+        const parentNode = event.target.parentNode;
+        const notification = document.createElement("span");
+        parentNode.insertBefore(notification, parentNode.querySelector("h2"));
+        notification.id = "game_collection_notification";
+
+        if (event.target.textContent === "Add to liked games") {
+            let send_object = {
+                name: game_data.name,
+                image: game_data.background_image,
+                username: localStorage.getItem("username"),
+            };
+            fetch("../frontpage/php/game_collection.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(send_object),
+            }).then(r => r.json()).then(data => {
+                console.log(data);
+                general_notifications();
+            });
+
+            notification.textContent = "Added to your list!";
+            notification.style.color = "green";
+            console.log(parentNode);
+            event.target.textContent = "Remove game from your list";
+
+            event.target.style.pointerEvents = "none";
+
+            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+        } else {
+            let body_for_fetch = {
+                username: localStorage.getItem("username"),
+                the_game_to_delete: localStorage.getItem("selected_game"),
+            }
+
+            let response = await fetch("./frontpage/php/game_collection.php", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body_for_fetch),
+            });
+
+            notification.textContent = "Removed from your list!";
+            notification.style.color = "red";
+            event.target.textContent = "Add to liked games";
+
+            event.target.style.pointerEvents = "none";
+
+            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+        }
+
     });
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
 }
@@ -297,36 +334,45 @@ export async function game_scroll() { // Scroll function for the displayed genre
                     body: JSON.stringify({ username: localStorage.getItem("username"), action: "favorite_library" })
                 })).json();
 
-            console.log(user_favorite_library);
 
             if (document.querySelector(".display_game_dom") !== null) {
                 document.querySelector(".display_game_dom").remove();
             }
             show_game_display_dom(the_game[0]);
 
+            console.log(user_favorite_library);
+            console.log(document.getElementById("liked_games_button"));
+
             user_favorite_library.fav_games.forEach(game => {
                 if (game.name === localStorage.getItem("selected_game")) {
-                    document.getElementById("liked_games_button").remove();
-                    const remove_game_from_collection_button = document.createElement("div");
-                    remove_game_from_collection_button.style.fontSize = "30px";
-                    remove_game_from_collection_button.innerHTML = "&#128465;";
-                    remove_game_from_collection_button.id = "liked_games_button";
-                    document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
-
-                    remove_game_from_collection_button.addEventListener("click", async () => {
-                        let body_for_fetch = {
-                            username: localStorage.getItem("username"),
-                            the_game_to_delete: localStorage.getItem("selected_game"),
-                        }
-
-                        let response = await fetch("./frontpage/php/game_collection.php", {
-                            method: "DELETE",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(body_for_fetch),
-                        });
-                    })
+                    const like_or_remove_button = document.getElementById("liked_games_button");
+                    like_or_remove_button.textContent = "Remove game from collection";
                 }
             })
+
+            // user_favorite_library.fav_games.forEach(game => {
+            //     if (game.name === localStorage.getItem("selected_game")) {
+            //         document.getElementById("liked_games_button").remove();
+            //         const remove_game_from_collection_button = document.createElement("div");
+            //         remove_game_from_collection_button.style.fontSize = "30px";
+            //         remove_game_from_collection_button.innerHTML = "&#128465;";
+            //         remove_game_from_collection_button.id = "liked_games_button";
+            //         document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
+
+            //         remove_game_from_collection_button.addEventListener("click", async () => {
+            //             let body_for_fetch = {
+            //                 username: localStorage.getItem("username"),
+            //                 the_game_to_delete: localStorage.getItem("selected_game"),
+            //             }
+
+            //             let response = await fetch("./frontpage/php/game_collection.php", {
+            //                 method: "DELETE",
+            //                 headers: { "Content-Type": "application/json" },
+            //                 body: JSON.stringify(body_for_fetch),
+            //             });
+            //         })
+            //     }
+            // })
         })
     })
 }

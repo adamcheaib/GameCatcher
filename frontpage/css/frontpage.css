@@ -376,10 +376,12 @@ p {
     justify-content: center;
     align-items: center;
     user-select: none;
+    text-align: center;
 }
 
 #liked_games_button:hover {
     cursor: pointer;
+    background-color: rgb(145, 39, 111);
 }
 
 #game_image {
