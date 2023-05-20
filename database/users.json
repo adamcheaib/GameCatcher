@@ -35,18 +35,6 @@
         "id": 11
     },
     {
-        "username": "bobmarley4",
-        "password": "sss",
-        "id": 12,
-        "pending": [
-            "Adam"
-        ],
-        "friends": [
-            "ee",
-            "Elliot"
-        ]
-    },
-    {
         "username": "kakarikokakaka",
         "password": "123",
         "id": 13
@@ -379,6 +367,7 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/55e\/55ee6432ac2bf224610fa17e4c652107.jpg"
             }
         ],
+<<<<<<< Updated upstream
         "id": 48,
         "messages": [
             {
@@ -392,6 +381,25 @@
             {
                 "username": "erifkon",
                 "message": "fasf"
+=======
+        "id": 48
+    },
+    {
+        "username": "bobmarley4",
+        "password": "sss",
+        "id": 12,
+        "pending": [
+            "Adam"
+        ],
+        "friends": [
+            "ee",
+            "Elliot"
+        ],
+        "favorite_games": [
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+>>>>>>> Stashed changes
             }
         ]
     }
