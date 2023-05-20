@@ -38,7 +38,7 @@ if ($action == "register") {
     }
 
     $id = 0;
-    if (1 < count($users)) {
+    if (0 <= count($users)) {
         $new_user = ["username" => $username, "password" => $password, "favorite_games" => []];
         foreach ($users as $single_user) {
             if ($id < $single_user["id"]) {
@@ -46,7 +46,7 @@ if ($action == "register") {
             }
         }
     }
-    ;
+
 
     if ($users != null) {
         foreach ($users as $user) {
