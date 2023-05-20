@@ -1,0 +1,19 @@
+[
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [],
+        "id": 1
+    },
+    {
+        "username": "johanbigdickhezbollah",
+        "password": "johan",
+        "favorite_games": [
+            {
+                "name": "Stardew Valley",
+                "image": "https:\/\/media.rawg.io\/media\/games\/713\/713269608dc8f2f40f5a670a14b2de94.jpg"
+            }
+        ],
+        "id": 2
+    }
+]

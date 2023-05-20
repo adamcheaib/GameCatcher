@@ -116,9 +116,11 @@ function show_game_display_dom(game_data) {
 
 
 async function fetch_game_by_plattform_and_genre(genre, platform) {
-
+    let url = `https://api.rawg.io/api/games?${api_key}&genres=${genre.toLowerCase()}&platforms=${platform}`
+    if (genre === "RPG") {
+        url = `https://api.rawg.io/api/games?${api_key}&genres=5&platforms=${platform}`
+    }
     try {
-        const url = `https://api.rawg.io/api/games?${api_key}&genres=${genre.toLowerCase()}&platforms=${platform}`
         let response = await fetch(url);
         let data = await response.json();
         return data;
