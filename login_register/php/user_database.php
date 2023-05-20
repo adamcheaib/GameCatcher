@@ -25,28 +25,27 @@ $username = $received_data["username"];
 
 if ($action == "register") {
     $password = $received_data["password"];
-    if ($users == null) {
+    if ($users === null) {
         $users = [];
     }
 
     if ($username == "" or $password == "") {
         $message = ["message" => "Username or password are empty!"];
         sendJSON($message, 400);
-    } elseif (strlen($username) <= 3 or strlen($password) <= 3) {
+    } elseif (strlen($username) <= 3 or strlen($password) <= 3) { // Kollar om username eller password är mindre 3 char
         $message = ["message" => "Username and password cannot be shorter than 3 characters!"];
         sendJSON($message);
     }
 
     $id = 0;
-    if (1 < count($users)) {
+    if (1 < count($users) or $users === null) {
         $new_user = ["username" => $username, "password" => $password, "favorite_games" => []];
         foreach ($users as $single_user) {
             if ($id < $single_user["id"]) {
                 $id = $single_user["id"];
             }
         }
-    }
-    ;
+    };
 
     if ($users != null) {
         foreach ($users as $user) {
