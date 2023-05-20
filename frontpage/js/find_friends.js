@@ -125,16 +125,70 @@ async function get_all_pending_friend_requests(event) {
 
     for (let i = 0; i < data.length; i++) {
         let pending_dom = document.createElement("div");
+        pending_dom.classList.add("pending_wrapper")
         pending_dom.innerHTML = `
-            <div class="account_username_pending">${data[i]}<div>
+            <div class="profile_picture"></div>
+            <div class="account_username_pending">${data[i]}</div>
+            <div class="wrapper_for_alternatives">
+                <div class="accept">Accept</div>
+                <div class="decline">Decline</div>
+            </div>
         `;
 
         document.querySelector("#display").appendChild(pending_dom);
-    }
+        document.querySelectorAll(".profile_picture").forEach(pic => {
+            pic.style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)";
+        })
 
+        document.querySelectorAll(".accept").forEach(accept_btn => {
+            accept_btn.addEventListener("click", add_friend)
+        });
+        document.querySelectorAll(".decline").forEach(decline_btn => {
+            decline_btn.addEventListener("click", decline_friend)
+        });
+    }
+    
 }
 
+async function add_friend(event){
+    let added_friend_username = event.target.parentElement.parentElement.querySelector(".account_username_pending").innerHTML;
+    console.log(added_friend_username)
+    let body_for_fetch = {
+        added_friend_username: added_friend_username,
+        the_username: localStorage.getItem("username"),
+        accepted_friend_request: true,
+    }
 
+    let response = await fetch("./frontpage/php/find_friend.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch)
+    });
+
+    let data = await response.json();
+    console.log(data);
+
+    event.target.parentElement.parentElement.remove();
+}
+
+async function decline_friend(event){
+    let declined_friend_username = event.target.parentElement.parentElement.querySelector(".account_username_pending").innerHTML;
+    console.log(declined_friend_username)
+    let body_for_fetch = {
+        declined_friend_username: declined_friend_username,
+        the_username: localStorage.getItem("username"),
+    }
+    let response = await fetch("./frontpage/php/find_friend.php", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch)
+    });
+
+    let data = response.json();
+    console.log(data);
+
+    event.target.parentElement.parentElement.remove();
+}
 
 document.querySelector("#main_page").addEventListener("click", init_frontpage);
 document.querySelector("#chat").addEventListener("click", init_forum)

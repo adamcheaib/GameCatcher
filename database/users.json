@@ -39,9 +39,11 @@
         "password": "sss",
         "id": 12,
         "pending": [
-            "ee",
-            "Elliot",
             "Adam"
+        ],
+        "friends": [
+            "ee",
+            "Elliot"
         ]
     },
     {

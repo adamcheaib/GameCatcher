@@ -49,6 +49,43 @@
             }
         }
 
+        if(array_key_exists("accepted_friend_request", $fetch_data) === true){
+
+            for ($w = 0; $w < count($all_users); $w++) { 
+                if($all_users[$w]["username"] === $fetch_data["the_username"] && array_key_exists("friends", $all_users[$w]) == true){
+                    $all_users[$w]["friends"][] = $fetch_data["added_friend_username"];
+                    for ($n = 0; $n < count($all_users[$w]["pending"]); $n++) { 
+                        if($fetch_data["added_friend_username"] === $all_users[$w]["pending"][$n]){
+                            array_splice( $all_users[$w]["pending"], $n, 1);
+                            break;
+                        }
+                    }
+                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                    header("Content-Type: application/json");
+                    echo json_encode($all_users[$w]);
+                    exit();
+                }
+                elseif($all_users[$w]["username"] === $fetch_data["the_username"] && array_key_exists("friends", $all_users[$w]) !== true){
+                    $all_users[$w]["friends"] = [];
+                    $all_users[$w]["friends"][] = $fetch_data["added_friend_username"];
+                    for ($n = 0; $n < count($all_users[$w]["pending"]); $n++) { 
+                        if($fetch_data["added_friend_username"] === $all_users[$w]["pending"][$n]){
+                            array_splice( $all_users[$w]["pending"], $n, 1);
+                            break;
+                        }
+                    }
+                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                    header("Content-Type: application/json");
+                    echo json_encode($all_users[$w]);
+                    exit();
+                }
+            }
+        }
+
+    }
+
+    if($_SERVER["REQUEST_METHOD"] === "PATCH"){
+
     }
 
 ?>
