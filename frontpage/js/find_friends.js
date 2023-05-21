@@ -7,8 +7,6 @@ import { init_collection } from "./game_collection.js";
 
 export async function init_friends_page() {
 
-
-
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
@@ -16,24 +14,76 @@ export async function init_friends_page() {
 
     document.querySelector("#center_piece").innerHTML = `
         <div id="navigation">
-            <div id="add_friends" class="selected" ">Add Friends</div>
+            <div id="my_friends" class="selected"> My Friends</div>
+            <div id="add_friends" class="unselected" ">Add Friends</div>
             <div id="pending" class="unselected" >Pending</div>
             <div id="blocked" class="unselected" >Blocked</div>
-        </div>
-        <div id="search_wrapper">
-            <input id="search"></input>
-            <div id="search_image"></div>
         </div>
         <div id="display"></div>
     
     `;
 
-    document.querySelector("#search_image").addEventListener("click", find_friend);
+    show_my_friends()
 
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }
 
+async function show_my_friends(event){
 
+    document.querySelector("#display").innerHTML = "";
+
+    document.querySelector("#center_piece").innerHTML = `
+        <div id="navigation">
+            <div id="my_friends" class="selected"> My Friends</div>
+            <div id="add_friends" class="unselected" ">Add Friends</div>
+            <div id="pending" class="unselected" >Pending</div>
+            <div id="blocked" class="unselected" >Blocked</div>
+        </div>
+        <div id="display"></div>
+
+    `;
+    let body_for_fetch = {
+        the_user: localStorage.getItem("username"),
+        find_all_friends: true,
+    }
+    let response = await fetch("./frontpage/php/find_friend.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch)
+    })
+
+    let friend_data = await response.json();
+    console.log(friend_data);
+
+    for (let i = 0; i < friend_data.length; i++) {
+
+        let profile_dom = document.createElement("div");
+        profile_dom.classList.add("profile_dom");
+        profile_dom.innerHTML = `
+        
+            <div id="profile_wrapper">
+                <div class="profile_picture"></div>
+                <div class="username">${friend_data[i]}</div>
+                
+                <div class="chat"></div>
+                <div class="more_options">...</div>
+            </div>
+
+        `;
+
+        document.querySelector("#display").appendChild(profile_dom);
+    }
+    document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
+        profile_pic.style.backgroundImage = `url(./frontpage/general_media/default_profile_pic.svg)`
+    })
+    document.querySelectorAll(".chat").forEach((profile_pic, index) => {
+        profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
+    })
+
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+}
 
 async function send_friend_request(event) {
     let username = event.target.parentElement.querySelector(".username").innerHTML;
@@ -47,12 +97,14 @@ async function send_friend_request(event) {
         body: JSON.stringify(body_for_fetch)
     })
 
+    event.target.parentElement.remove();
+
     let data = await response.json();
     console.log(data);
 }
 
 
-async function find_friend() {
+async function find_user() {
     document.querySelector("#display").innerHTML = "";
     let find_account_name = document.querySelector("input").value;
     let request_account_name = localStorage.getItem("username");
@@ -90,12 +142,12 @@ async function find_friend() {
 
 }
 
-
 async function get_all_pending_friend_requests(event) {
-
+    document.querySelector("#center_piece").innerHTML = ""
 
     document.querySelector("#center_piece").innerHTML = `
             <div id="navigation">
+                <div id="my_friends" class="unselected">My Friends</div>
                 <div id="add_friends" class="unselected">Add Friends</div>
                 <div id="pending" class="selected" >Pending</div>
                 <div id="blocked" class="unselected" >Blocked</div>
@@ -107,7 +159,8 @@ async function get_all_pending_friend_requests(event) {
             <div id="display"></div>
         `;
 
-    document.querySelector("#add_friends").addEventListener("click", init_friends_page) // Måste ha denna kod rad här för att await väntar på att fetchen har skickat så då körs inte denna rad
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
 
     let username = localStorage.getItem("username");
     let body_for_fetch = {
@@ -147,7 +200,28 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
-    
+   
+}
+
+
+function init_add_friends(){
+    document.querySelector("#display").innerHTML = "";
+    document.querySelector("#center_piece").innerHTML = `
+        <div id="navigation">
+            <div id="my_friends" class="unselected">My Friends</div>
+            <div id="add_friends" class="selected">Add Friends</div>
+            <div id="pending" class="unselected" >Pending</div>
+            <div id="blocked" class="unselected" >Blocked</div>
+        </div>
+        <div id="search_wrapper">
+            <input id="search"></input>
+            <div id="search_image"></div>
+        </div>
+        <div id="display"></div>
+    `;  
+    document.querySelector("#search_image").addEventListener("click", find_user)
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }
 
 async function add_friend(event){
@@ -165,10 +239,10 @@ async function add_friend(event){
         body: JSON.stringify(body_for_fetch)
     });
 
+    event.target.parentElement.parentElement.remove();
     let data = await response.json();
     console.log(data);
 
-    event.target.parentElement.parentElement.remove();
 }
 
 async function decline_friend(event){

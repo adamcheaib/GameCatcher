@@ -23,7 +23,7 @@
         
         if(array_key_exists("user_that_wants_to_befriend", $fetch_data) === true){
             for ($j = 0; $j < count($all_users); $j++) { 
-                if($all_users[$j]["username"] === $fetch_data["the_request_user"]){
+                if($all_users[$j]["username"] === $fetch_data["the_request_user"] and array_key_exists("pending", $all_users[$j]) === false  ){
                     $all_users[$j]["pending"] = [];
                     $all_users[$j]["pending"][] = $fetch_data["user_that_wants_to_befriend"];
                     file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
@@ -31,6 +31,14 @@
                     echo json_encode($all_users[$j]);
                     exit();
                 }
+                elseif($all_users[$j]["username"] === $fetch_data["the_request_user"] and array_key_exists("pending", $all_users[$j]) === true){
+                    $all_users[$j]["pending"][] = $fetch_data["user_that_wants_to_befriend"];
+                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                    header("Content-Type: application/json");
+                    echo json_encode($all_users[$j]);
+                    exit();
+                }
+                
             }
         }
 
@@ -77,6 +85,21 @@
                     file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
                     header("Content-Type: application/json");
                     echo json_encode($all_users[$w]);
+                    exit();
+                }
+            }
+        }
+
+
+        if(array_key_exists("find_all_friends", $fetch_data) === true){
+            for ($w = 0; $w < count($all_users); $w++) { 
+                if($all_users[$w]["username"] === $fetch_data["the_user"] && array_key_exists("friends", $all_users[$w]) == true){
+                    $all_friends = [];
+                    for ($o = 0; $o < count($all_users[$w]["friends"]); $o++) { 
+                        $all_friends[] = $all_users[$w]["friends"][$o];
+                    }
+                    header("Content-Type: application/json");
+                    echo json_encode($all_friends);
                     exit();
                 }
             }
