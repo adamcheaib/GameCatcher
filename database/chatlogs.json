@@ -1,0 +1,16 @@
+[
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 1,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 3,
+                "profile": "hi there"
+            }
+        ],
+        "chatlog": []
+    }
+]
