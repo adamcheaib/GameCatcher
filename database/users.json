@@ -11,40 +11,6 @@
         "id": 2
     },
     {
-        "username": "eeee",
-        "password": "eeee",
-        "favorite_games": [
-            {
-                "name": "Gwent: The Witcher Card Game",
-                "image": "https:\/\/media.rawg.io\/media\/games\/742\/7424c1f7d0a8da9ae29cd866f985698b.jpg"
-            },
-            {
-                "name": "Faeria",
-                "image": "https:\/\/media.rawg.io\/media\/games\/f64\/f6429c7e6e66c178fde186977ea1af75.jpg"
-            },
-            {
-                "name": "Grand Theft Auto V",
-                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
-            },
-            {
-                "name": "Tomb Raider (2013)",
-                "image": "https:\/\/media.rawg.io\/media\/games\/021\/021c4e21a1824d2526f925eff6324653.jpg"
-            },
-            {
-                "name": "BioShock Infinite",
-                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
-            },
-            {
-                "name": "The Elder Scrolls V: Skyrim",
-                "image": "https:\/\/media.rawg.io\/media\/games\/7cf\/7cfc9220b401b7a300e409e539c9afd5.jpg"
-            }
-        ],
-        "id": 3,
-        "pending": [
-            "adamcheaib"
-        ]
-    },
-    {
         "username": "aaaa",
         "password": "aaaa",
         "favorite_games": [
@@ -80,6 +46,47 @@
             "eeee",
             "eqqq",
             "aaaa"
+        ]
+    },
+    {
+        "username": "eeee",
+        "password": "eeee",
+        "favorite_games": [
+            {
+                "name": "Gwent: The Witcher Card Game",
+                "image": "https:\/\/media.rawg.io\/media\/games\/742\/7424c1f7d0a8da9ae29cd866f985698b.jpg"
+            },
+            {
+                "name": "Faeria",
+                "image": "https:\/\/media.rawg.io\/media\/games\/f64\/f6429c7e6e66c178fde186977ea1af75.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Tomb Raider (2013)",
+                "image": "https:\/\/media.rawg.io\/media\/games\/021\/021c4e21a1824d2526f925eff6324653.jpg"
+            },
+            {
+                "name": "BioShock Infinite",
+                "image": "https:\/\/media.rawg.io\/media\/games\/fc1\/fc1307a2774506b5bd65d7e8424664a7.jpg"
+            },
+            {
+                "name": "The Elder Scrolls V: Skyrim",
+                "image": "https:\/\/media.rawg.io\/media\/games\/7cf\/7cfc9220b401b7a300e409e539c9afd5.jpg"
+            }
+        ],
+        "id": 3,
+        "pending": [],
+        "messages": [
+            {
+                "username": "eeee",
+                "message": "eee"
+            }
+        ],
+        "friends": [
+            "adamcheaib"
         ]
     }
 ]

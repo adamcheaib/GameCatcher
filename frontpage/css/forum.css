@@ -6,7 +6,6 @@ body {
     display: flex;
     width: 100vw;
     min-height: 100vh;
-
     color: white;
     background-color: rgb(24, 24, 33);
     overflow-x: hidden;
@@ -19,6 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    order: 3;
 }
 
 #profile {
@@ -45,6 +45,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 100px;
+    order: 1;
 }
 
 button {
@@ -109,7 +110,7 @@ textarea {
     background-color: gray;
 }
 
-#main_page{
+#main_page {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/logo.png");
@@ -118,7 +119,7 @@ textarea {
     background-repeat: no-repeat;
 }
 
-#friends{
+#friends {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/friends_logo.svg");
@@ -131,7 +132,7 @@ textarea {
     margin-bottom: 100px;
 }
 
-#chat{
+#chat {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/chat.svg");
@@ -140,7 +141,7 @@ textarea {
     background-repeat: no-repeat;
 }
 
-#saved{
+#saved {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/collection.svg");
@@ -149,11 +150,53 @@ textarea {
     background-repeat: no-repeat;
 }
 
-#settings{
+#settings {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/settings.svg");
     background-position: center;
     background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.friends_list {
+    min-width: 435px;
+    width: fit-content;
+    max-height: 100vh;
+    background-color: rgb(40, 40, 48);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    order: 2;
+    overflow-y: scroll;
+}
+
+#profile_wrapper {
+    margin-top: 40px;
+    min-width: 300px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    border-radius: 20px;
+    font-size: 25px;
+    color: black;
+    transition-property: all;
+    transition-duration: 0.1s;
+}
+
+#profile_wrapper:hover {
+    background-color: rgb(114, 49, 114);
+    color: white;
+}
+
+.profile_picture {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
