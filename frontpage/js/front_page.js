@@ -126,6 +126,6 @@ export function init_frontpage() {
     document.querySelector("button").addEventListener("click", () => {
         console.log("click");
         localStorage.clear();
-        window.location.replace("http://localhost:1234/login_register");
+        window.location.replace("./login_register");
     })
 }
