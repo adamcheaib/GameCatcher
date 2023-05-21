@@ -1,8 +1,9 @@
 import { registration_notification } from "../../utils/functions.js"
 "use strict"
 
+console.log(window.location);
 if (localStorage.getItem("username") !== null) {
-    window.location.replace("http://localhost:1234/frontpage");
+    window.location.pathname = "./frontpage";
 }
 
 const form = document.getElementById("form");
@@ -12,9 +13,6 @@ const username_field = document.querySelector("form > input[name=username]");
 const password_field = document.querySelector("form > input[name=password]");
 username_field.value = "";
 password_field.value = "";
-
-console.log(sessionStorage);
-console.log(localStorage);
 
 form.addEventListener("submit", register_or_login);
 
@@ -48,7 +46,7 @@ async function tryToLogin(login_object) {
             registration_notification(resource.message); // Add the popup function instead or add text that gets appended just below the "LOGIN" element.
         } else {
             localStorage.setItem("username", resource.username); // Gör så att spelen sparas hos användarna även fast man inte har nyckeln "favorite_games".
-            window.location.replace("http://localhost:1234/frontpage");
+            window.location.replace("./frontpage");
         }
         username_field.value = "";
         password_field.value = "";
