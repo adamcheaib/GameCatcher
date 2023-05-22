@@ -61,10 +61,17 @@ async function get_all_friends() {
         profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
     })
 
-    // Ger hela 
+    // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
     function the_whole_juser_element_gets_click_event() {
+
+
+
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
             profile_dom.addEventListener("click", (event) => {
+                let your_friend_that_you_click_on = event.target.querySelector(".username").innerHTML;
+                let your_username = localStorage.getItem("username");
+
+
                 console.log(event.target.querySelector(".username").innerHTML)
             });
         })
