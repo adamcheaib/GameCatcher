@@ -1,4 +1,4 @@
-function change_username_password(event){
+/*function change_username_password(event){
     let change;
     let new_value = event.target.value
     if(event.target.value === "change_username"){
@@ -20,6 +20,4 @@ function change_username_password(event){
     fetch(request)
         .then(resource => resource.json())
         .then(data => {console.log(data)})
-
-
-}
+}*/

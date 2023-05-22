@@ -3,6 +3,7 @@ ini_set("display_errors", 1);
 $filename = "../../../database/users.json";
 $data = file_get_contents($filename);
 $users = json_decode($data, true);
+require_once "../../php/functions.php";
 
 
 if(!file_exists("../images/")){
@@ -108,9 +109,9 @@ if(isset($info["change"])){
     foreach ($users as $index => $user) {
         if ($user["username"] === $info["username"]){
             if($info["change"] === "change_username"){
-                $users["index"]["username"] === $info["new_value"];
+                $users[$index]["username"] = $info["new_value"];
             }else{
-                $users["index"]["password"] === $info["new_value"];
+                $users[$index]["password"] = $info["new_value"];
             }
         }
     }

@@ -257,3 +257,30 @@ function remove_comment(event){
             event.target.parentElement.remove();
         })
 }
+document.querySelector("#settings").addEventListener("click", change_username_password)
+
+function change_username_password(event){
+    let action;
+    let check = event.target.textContent
+    let changed_value = document.querySelector("#new_action")
+    if(check === "change_username"){
+        action = "change_username"
+    }else{
+        action = "change_password"
+    }
+    console.log(event);
+
+    let request = new Request("/frontpage/profile/php/upload.php", {
+        method: "POST",
+        body: JSON.stringify({
+            username: localStorage.getItem("username"),
+            new_value: changed_value,
+            change: action,
+        }),
+
+    });
+
+    fetch(request)
+        .then(resource => resource.json())
+        .then(data => {console.log(data)})
+}
