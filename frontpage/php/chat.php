@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
     echo "\n";
     echo $chatTargetUserId;
     echo "\n";
+
     // skickar chat id om userna stämmer överens med det som skickades i php://input
     if($chat_database != null or count($chat_database) > 0){
         for ($i = 0; $i < count($chat_database); $i++) 
