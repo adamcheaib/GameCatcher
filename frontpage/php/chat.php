@@ -42,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Först kollar den om hatloggen finns, annars skapar den och ger den ett ID nummer!
+
     $receivedInformation = json_decode(file_get_contents("php://input"), true);
 
     $loggedID = $receivedInformation["loggedID"];
@@ -108,5 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //     }
 // $new_user["id"] = $id + 1;
 
+
+// Fixa så att varje meddelande som skickas gör det i en PATCH-request.
 
 ?>
