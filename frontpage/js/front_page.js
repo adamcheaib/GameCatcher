@@ -1,7 +1,7 @@
 import { fetch_all_games } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { game_scroll, genre_scroll, } from "../../utils/functions.js";
+import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
@@ -20,6 +20,7 @@ else {
     init_frontpage();
     fetch_all_games();
 }
+
 
 export function init_frontpage() {
     document.body.innerHTML = "";
@@ -109,6 +110,7 @@ export function init_frontpage() {
         });
     })
 
+    document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
 
     document.querySelectorAll(".platform").forEach(platform => {
         platform.addEventListener("click", () => {
@@ -129,3 +131,72 @@ export function init_frontpage() {
         window.location.replace("./login_register");
     })
 }
+
+document.querySelector("#settings").addEventListener("click", show_settings)
+
+function show_settings(event){
+    console.log(event);
+    registration_notification("Manage Account");
+    document.querySelector("#change_username").addEventListener("click", new_value);
+    document.querySelector("#change_password").addEventListener("click", new_value);
+
+    document.querySelector("#logout").addEventListener("click", ("click", () => {
+        console.log("click");
+        localStorage.clear();
+        window.location.replace("./login_register");
+    }))
+}
+
+function new_value(event){
+    event.target.parentElement.style.height = "40vh"
+    let parent = event.target.parentElement;
+    let paragraph = document.createElement("p");
+    paragraph.setAttribute("id", "changed_message")
+    paragraph.textContent = "Enter new value"
+    let input = document.createElement("input")
+    let button = document.createElement("button")
+    button.textContent = "Submit!"
+
+    if(event.target.textContent === "Change Username"){
+        button.setAttribute("id", "change_username")
+    }else{
+        button.setAttribute("id", "change_password")
+    }
+    parent.append(paragraph);
+    parent.append(input);
+    parent.append(button)
+    button.addEventListener("click", change_username_password)
+}
+
+function change_username_password(event){ 
+    let action;
+    let check = event.target.id;
+    let user = localStorage.getItem("username");
+    let changed_value = document.querySelector("input").value;
+
+    if(check === "change_username"){
+        action = "change_username"
+        localStorage.setItem("username", changed_value);
+    }else{
+        action = "change_password"
+    }
+
+    let request = new Request("/frontpage/profile/php/upload.php", {
+        method: "POST",
+        body: JSON.stringify({
+            username: user,
+            new_value: changed_value,
+            change: action,
+        }),
+
+    });
+
+    fetch(request)
+        .then(resource => resource.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById("changed_message").textContent = "Success!"
+        })
+        console.log(localStorage);  
+}
+

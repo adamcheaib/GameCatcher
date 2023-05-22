@@ -4,6 +4,8 @@ $filename = "../../../database/users.json";
 $data = file_get_contents($filename);
 $users = json_decode($data, true);
 require_once "../../php/functions.php";
+$json = file_get_contents("php://input");
+$info = json_decode($json, true);
 
 
 if(!file_exists("../images/")){
@@ -42,17 +44,16 @@ if(isset($_FILES["upload"])){
                 } 
             }
           }
+        exit();
     }
-    $message = ["message" => "Success!"];
-    sendJSON($message);
+    
 }  
 ?>
 
 <?php
 
 
-$json = file_get_contents("php://input");
-$info = json_decode($json, true);
+
 if(isset($info["text"])){    
     
     foreach($users as $index => $user) {
@@ -82,9 +83,6 @@ if(isset($info["text"])){
 ?>
 
 <?php
-$json = file_get_contents("php://input");
-$info = json_decode($json, true);
-
 if(isset($info["remove"])){
     $username = $info["username"];
     foreach ($users as $index => $user) {

@@ -12,7 +12,7 @@ function get_preset_information(){
                 document.querySelector("main").style.backgroundImage = `url(./profile/images/${user.banner_picture})`;
                 document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${user.profile_picture})`;
 
-                show_messages(user.profile_comments, user.profile_picture);
+                show_messages(user.profile_comments);
                 localStorage.setItem("profile_picture", user.profile_picture);
 
             }
@@ -144,10 +144,12 @@ function upload_picture(event){
     event.preventDefault();
     let image;
     let formData;
+    let check_profile_pic = false;
     if(event.target.id === "upload_profile_picture"){
         image = document.querySelector("#profile_image");
         formData = new FormData(profile_picture);
         formData.append("action", "profile_picture");
+        check_profile_pic = true;
     }
     if(event.target.id === "upload_banner_picture"){
         image = document.querySelector("main");
@@ -159,7 +161,6 @@ function upload_picture(event){
         formData = new FormData(favorite_game);
         formData.append("action", "favorite_game_picture");
     }
-
     formData.append("username", localStorage.getItem("username"));
 
     let request = new Request("./profile/php/upload.php", {
@@ -172,6 +173,15 @@ function upload_picture(event){
         .then(data => {
             console.log(data);
             image.style.backgroundImage = `url(./profile/images/${data.filename})`;
+
+            if(check_profile_pic === true){
+                localStorage.setItem("profile_picture", data.filename);
+                document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                document.querySelectorAll(".profile_picture").forEach(element => {
+                    console.log(element);
+                    element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                })
+            }
         })
 }
 
@@ -209,9 +219,6 @@ function send_message(event){
             `
             document.querySelector(".delete").addEventListener("click", remove_comment);
         })
-
-        
-
     section.appendChild(div)
 }
 function show_messages(messages) {
@@ -236,8 +243,6 @@ function show_messages(messages) {
     }
 }
 
-
-
 function remove_comment(event){
     console.log(event);
     let timestamp = event.target.parentElement.querySelector("#timestamp").innerHTML;
@@ -257,30 +262,4 @@ function remove_comment(event){
             event.target.parentElement.remove();
         })
 }
-document.querySelector("#settings").addEventListener("click", change_username_password)
 
-function change_username_password(event){
-    let action;
-    let check = event.target.textContent
-    let changed_value = document.querySelector("#new_action")
-    if(check === "change_username"){
-        action = "change_username"
-    }else{
-        action = "change_password"
-    }
-    console.log(event);
-
-    let request = new Request("/frontpage/profile/php/upload.php", {
-        method: "POST",
-        body: JSON.stringify({
-            username: localStorage.getItem("username"),
-            new_value: changed_value,
-            change: action,
-        }),
-
-    });
-
-    fetch(request)
-        .then(resource => resource.json())
-        .then(data => {console.log(data)})
-}
