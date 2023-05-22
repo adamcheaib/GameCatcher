@@ -70,6 +70,13 @@ async function get_all_friends() {
                 const username = localStorage.getItem("username");
                 const targetUsername = event.target.querySelector(".username").innerHTML;
 
+                document.querySelectorAll(".selected").forEach(all_selected => {
+                    console.log(all_selected)
+                    all_selected.classList.remove("selected");
+                    all_selected.style.backgroundColor = "lightGray";
+                    all_selected.style.color = "black";
+                })
+                
                 let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
                 let response_data = await response_user1.json();
                 console.log(response_data);
