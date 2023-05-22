@@ -13,7 +13,7 @@ $user_database = json_decode(file_get_contents($user_database_path), true);
 
 $toSend;
 
-
+// Denna gör så att vi hittar och ser att users finns och retunerar ID:sen som vi ska använda
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $loggedOnUsername = $_GET["username"];
     $chatTargetUser = $_GET["targetUsername"];
@@ -42,30 +42,45 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $receivedInformation = json_decode(file_get_contents("php://input"), true);
-    $loggedOnUsername = $receivedInformation["userID1"];
-    $chatTargetUser = $receivedInformation["userID2"];
-
-    if ($chat_database == null) {
-        $chat_database = [];
+    $loggedOnUsername = $receivedInformation["loggedID"];
+    $chatTargetUser = $receivedInformation["user2_id"];
+    if(count($chat_database) !== 0){
+        for ($i=0; $i < count($chat_database); $i++) { 
+            for ($j = 0; $j < count($chat_database[$i]["chat_between"]) ; $j++) { 
+                if($user_database[$i]["chat_between"][$j]["userid1"] === $loggedOnUsername or $user_database[$i]["chat_between"][$j]["userid1"] === $chatTargetUser){
+                    if($user_database[$i]["chat_between"][$j]["userid2"] === $loggedOnUsername or $user_database[$i]["chat_between"][$j]["userid2"] === $chatTargetUser){
+                        
+                    }
+                }
+            }
+        }    
     }
-
-    $chatlog = [
-        "chatid" => 1,
-        "chat_between" => [
-            [
-                "userid1" => $loggedOnUsername,
-                "profile_picture" => "Somewhere"
+    else{
+        if ($chat_database == null) {
+            $chat_database = [];
+        }
+    
+        $chatlog = [
+            "chatid" => 1,
+            "chat_between" => [
+                [
+                    "userid1" => $loggedOnUsername,
+                    "profile_picture" => "Somewhere"
+                ],
+                [
+                    "userid2" => $chatTargetUser,
+                    "profile_picture" => "Somewhere"
+                ],
             ],
-            [
-                "userid2" => $chatTargetUser,
-                "profile" => "hi there"
-            ],
-        ],
-        "chatlog" => [],
-    ];
+            "chatlog" => [],
+        ];
+    
+        $chat_database[] = $chatlog;
+        file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
+    }
+    
 
-    $chat_database[] = $chatlog;
-    file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
+
 }
 
 // $id = 0;

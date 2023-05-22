@@ -3,25 +3,140 @@
         "chatid": 1,
         "chat_between": [
             {
-                "userid1": 1,
+                "userid1": 3,
                 "profile_picture": "Somewhere"
             },
             {
-                "userid2": 3,
+                "userid2": 1,
                 "profile_picture": "Somewhere"
             }
         ],
-        "chatlog": [
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
             {
-                "user": "calle",
-                "message": "Hej dude, Leauge?",
-                "timestam": "2023-05-22:14:56"
+                "userid1": 3,
+                "profile_picture": "Somewhere"
             },
             {
-                "user": "Adam",
-                "message": "Jajamen",
-                "timestam": "2023-05-22:14:52"
+                "userid2": 1,
+                "profile_picture": "Somewhere"
             }
-        ]
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 3,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 1,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": []
     }
 ]

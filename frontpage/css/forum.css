@@ -192,6 +192,7 @@ textarea {
     color: white;
 }
 
+
 .profile_picture {
     margin-right: 20px;
     width: 50px;
@@ -200,3 +201,5 @@ textarea {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.selected {}
