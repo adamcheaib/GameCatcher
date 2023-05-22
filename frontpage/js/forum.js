@@ -76,7 +76,7 @@ async function get_all_friends() {
                     all_selected.style.backgroundColor = "lightGray";
                     all_selected.style.color = "black";
                 })
-                
+
                 let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
                 let response_data = await response_user1.json();
                 console.log(response_data);
@@ -89,13 +89,14 @@ async function get_all_friends() {
                     body: JSON.stringify(response_data),
                 })
 
-                const resource2 = await response2.json(); // Här får vi chatloggen!
+                const resource2 = await response2.text(); // Här får vi chatloggen!
                 console.log(resource2);
 
 
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
                 profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
                 profile_dom.querySelector(".username").style.color = "white";
+                // VIKTIGT!!!! NÄSTA STEGET ÄR HÄRA
                 // localStorage.setItem("chat_selected",) Detta hära ska vara chatid:et som visar vilket chat som är selecterad
                 // TO-DO: Fixa så att Man får chatID:et som en response så att man vet vilken chat är selecterad
             });
