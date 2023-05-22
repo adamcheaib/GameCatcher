@@ -41,14 +41,9 @@ if(isset($_FILES["upload"])){
                 } 
             }
           }
-        exit();
     }
-    header("Content-Type: application/json");
-    http_response_code(400);
-    echo json_encode([
-        "message" => "Fail"
-    ]);
-    exit();
+    $message = ["message" => "Success!"];
+    sendJSON($message);
 }  
 ?>
 
@@ -74,15 +69,11 @@ if(isset($info["text"])){
 
             $users[$index]["profile_comments"][] = $comment;
             file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-
-            header("Content-Type: application/json");
-            http_response_code(201);
-            echo json_encode([
+            $message = ([
                 "message" => "Success!",
                 "timestamp" => $date,
-                
             ]);
-            exit();
+            sendJSON($message, 201);
             
         }
     }
@@ -93,7 +84,7 @@ if(isset($info["text"])){
 $json = file_get_contents("php://input");
 $info = json_decode($json, true);
 
-if(isset($info["timestamp"])){
+if(isset($info["remove"])){
     $username = $info["username"];
     foreach ($users as $index => $user) {
         if ($user["username"] === $info["username"]){
@@ -107,11 +98,24 @@ if(isset($info["timestamp"])){
         }
     }
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-        header("Content-Type: application/json");
-        http_response_code(201);
-        echo json_encode([
-            "message" => "Success!",
-            ]);
-            exit();
+    $message = ["message" => "Success!"];
+    sendJSON($message);
+}
+?>
+<?php
+if(isset($info["change"])){
+    $username = $info["username"];
+    foreach ($users as $index => $user) {
+        if ($user["username"] === $info["username"]){
+            if($info["change"] === "change_username"){
+                $users["index"]["username"] === $info["new_value"];
+            }else{
+                $users["index"]["password"] === $info["new_value"];
+            }
+        }
+    }
+    file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
+    $message = ["message" => "Success!"];
+    sendJSON($message);
 }
 ?>

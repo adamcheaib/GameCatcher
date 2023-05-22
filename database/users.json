@@ -78,9 +78,30 @@
             }
         ],
         "id": 3,
-        "pending": [],
+        "pending": [
+            "calle"
+        ],
         "friends": [
             "adamcheaib"
+        ]
+    },
+    {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [],
+        "id": 6,
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "profile_comments": [
+            {
+                "message": "hello",
+                "timestamp": "2023-05-22 09:35:13"
+            },
+            {
+                "message": "hellowhatsup",
+                "timestamp": "2023-05-22 09:35:18"
+            }
         ]
     }
 ]
