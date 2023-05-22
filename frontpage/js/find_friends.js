@@ -29,7 +29,7 @@ export async function init_friends_page() {
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }
 
-async function show_my_friends(event){
+async function show_my_friends(event) {
 
     document.querySelector("#display").innerHTML = "";
 
@@ -200,11 +200,11 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
-   
+
 }
 
 
-function init_add_friends(){
+function init_add_friends() {
     document.querySelector("#display").innerHTML = "";
     document.querySelector("#center_piece").innerHTML = `
         <div id="navigation">
@@ -218,13 +218,13 @@ function init_add_friends(){
             <div id="search_image"></div>
         </div>
         <div id="display"></div>
-    `;  
+    `;
     document.querySelector("#search_image").addEventListener("click", find_user)
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }
 
-async function add_friend(event){
+async function add_friend(event) {
     let added_friend_username = event.target.parentElement.parentElement.querySelector(".account_username_pending").innerHTML;
     console.log(added_friend_username)
     let body_for_fetch = {
@@ -245,7 +245,7 @@ async function add_friend(event){
 
 }
 
-async function decline_friend(event){
+async function decline_friend(event) {
     let declined_friend_username = event.target.parentElement.parentElement.querySelector(".account_username_pending").innerHTML;
     console.log(declined_friend_username)
     let body_for_fetch = {
