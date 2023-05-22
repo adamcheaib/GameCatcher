@@ -3,140 +3,35 @@
         "chatid": 1,
         "chat_between": [
             {
-                "userid1": 3,
+                "user1_id": 1,
                 "profile_picture": "Somewhere"
             },
             {
-                "userid2": 1,
+                "user2_id": 5,
                 "profile_picture": "Somewhere"
             }
         ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
+        "chatlog": [
             {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
+                "userid": 1,
+                "message": "I shall kill you!"
             },
             {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
+                "userid": 1,
+                "message": "Fr, I cant tolerate you!"
             },
             {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
+                "userid": 2,
+                "message": "But I love you!"
             },
             {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
+                "userid": 1,
+                "message": "But I don't love you back!"
             },
             {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
+                "userid": 2,
+                "message": "Why you no love me :("
             }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
-            },
-            {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
-            },
-            {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
-            },
-            {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
-            },
-            {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 1,
-        "chat_between": [
-            {
-                "userid1": 3,
-                "profile_picture": "Somewhere"
-            },
-            {
-                "userid2": 1,
-                "profile_picture": "Somewhere"
-            }
-        ],
-        "chatlog": []
+        ]
     }
 ]

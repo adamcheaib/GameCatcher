@@ -62,23 +62,27 @@ async function get_all_friends() {
     })
 
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
-    async function the_whole_juser_element_gets_click_event() {
-
-
+    async function the_whole_juser_element_gets_click_event(event) {
 
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
             profile_dom.addEventListener("click", async (event) => {
-                console.log("click");
+                const username = localStorage.getItem("username");
+                const targetUsername = event.target.querySelector(".username").innerHTML;
 
-                let respone = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
-                let response_data = await respone.json();
+                let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+                let response_data = await response_user1.json();
+                console.log(response_data);
+                localStorage.setItem("loggedID", response_data.loggedID);
+                console.log(localStorage);
 
-                let respone2 = await fetch(`./frontpage/php/chat.php`, {
+                let response2 = await fetch(`./frontpage/php/chat.php`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(response_data),
                 })
 
+                const resource2 = await response2.json(); // Här får vi chatloggen!
+                console.log(resource2);
 
 
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
@@ -108,7 +112,6 @@ async function get_all_friends() {
 function create_post() {
 
     document.querySelector("button").addEventListener("click", () => {
-
         let counter_value = parseInt(localStorage.getItem("counter_for_forum"));
         counter_value += 1;
         let post_dom = document.createElement("div");
@@ -149,7 +152,7 @@ async function send_message(the_post_dom) {
     }
 
     let response = await fetch("./frontpage/php/forum.php", {
-        method: "POST",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     });
