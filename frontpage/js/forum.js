@@ -67,23 +67,34 @@ async function get_all_friends() {
 
 
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
-            profile_dom.addEventListener("click", (event) => {
-                let your_friend_that_you_click_on = event.target.querySelector(".username").innerHTML;
-                let your_username = localStorage.getItem("username");
+            profile_dom.addEventListener("click", async (event) => {
+                console.log("click");
+
+                let respone = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+                let response_data = await respone.json();
+
+                let respone2 = await fetch(`./frontpage/php/chat.php`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(response_data),
+                })
 
 
-                console.log(event.target.querySelector(".username").innerHTML)
+
+                profile_dom.querySelector("#profile_wrapper").classList.add("selected");
+                profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
+                profile_dom.querySelector(".username").style.color = "white";
             });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
-            profile_dom.addEventListener("click", (event) => {
+            profile_dom.addEventListener("click", async (event) => {
                 console.log(event.target.parentElement.querySelector(".username").innerHTML)
                 event.stopImmediatePropagation();
             });
         })
 
         document.querySelectorAll(".username").forEach(profile_dom => {
-            profile_dom.addEventListener("click", (event) => {
+            profile_dom.addEventListener("click", async (event) => {
                 console.log(event.target.parentElement.querySelector(".username").innerHTML)
                 event.stopImmediatePropagation();
             });
