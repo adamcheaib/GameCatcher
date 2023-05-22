@@ -70,16 +70,18 @@ async function get_all_friends() {
             profile_dom.addEventListener("click", async (event) => {
                 console.log("click");
 
-                let respone = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+                let respone = await fetch(`./frontpage/php/chat.php?username=${localStorage.getItem("username")}&targetUsername=${event.target.querySelector(".username").innerHTML}`)
                 let response_data = await respone.json();
+                console.log(response_data);
 
-                let respone2 = await fetch(`./frontpage/php/chat.php`, {
+                let response2 = await fetch(`./frontpage/php/chat.php`, { // behöver ingen variable för att vi skickar inte något tillbaka
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(response_data),
                 })
 
-
+                let response_data2 = await response2.text();
+                console.log(response_data2);
 
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
                 profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
@@ -115,20 +117,20 @@ function create_post() {
         post_dom.classList.add("post_dom");
 
         post_dom.innerHTML = `
-            <div id="profile_picture"></div>
-            <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
+                    < div id = "profile_picture" ></div >
+                <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
         `;
 
         if (counter_value % 2 !== 0) {
 
             document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `1/2`;
+            post_dom.style.gridColumn = `1 / 2`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value}`;
 
         }
         else {
             document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `2/3`;
+            post_dom.style.gridColumn = `2 / 3`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value + 1}`;
         }
 
