@@ -8,9 +8,20 @@
             },
             {
                 "userid2": 3,
-                "profile": "hi there"
+                "profile_picture": "Somewhere"
             }
         ],
-        "chatlog": []
+        "chatlog": [
+            {
+                "user": "calle",
+                "message": "Hej dude, Leauge?",
+                "timestam": "2023-05-22:14:56"
+            },
+            {
+                "user": "Adam",
+                "message": "Jajamen",
+                "timestam": "2023-05-22:14:52"
+            }
+        ]
     }
 ]
