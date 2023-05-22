@@ -2,36 +2,9 @@
     {
         "chatid": 1,
         "chat_between": [
-            {
-                "user1_id": 1,
-                "profile_picture": "Somewhere"
-            },
-            {
-                "user2_id": 5,
-                "profile_picture": "Somewhere"
-            }
+            1,
+            3
         ],
-        "chatlog": [
-            {
-                "userid": 1,
-                "message": "I shall kill you!"
-            },
-            {
-                "userid": 1,
-                "message": "Fr, I cant tolerate you!"
-            },
-            {
-                "userid": 2,
-                "message": "But I love you!"
-            },
-            {
-                "userid": 1,
-                "message": "But I don't love you back!"
-            },
-            {
-                "userid": 2,
-                "message": "Why you no love me :("
-            }
-        ]
+        "chatlog": []
     }
 ]

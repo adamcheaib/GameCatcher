@@ -17,7 +17,7 @@ $toSend;
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $loggedOnUsername = $_GET["username"];
     $chatTargetUser = $_GET["targetUsername"];
-
+    
     for ($i = 0; $i < count($user_database); $i++) {
         if ($loggedOnUsername == $user_database[$i]["username"]) {
             $toSend["loggedID"] = $user_database[$i]["id"];
@@ -40,64 +40,78 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Först kollar den om hatloggen finns, annars skapar den och ger den ett ID nummer!
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") 
     $receivedInformation = json_decode(file_get_contents("php://input"), true);
+    $loggedOnUserId = $receivedInformation["loggedID"];
+    $chatTargetUserId = $receivedInformation["user2_id"];
+    $the_latest_id = 1;
+    echo $loggedOnUserId;
+    echo "\n";
+    echo $chatTargetUserId;
+    echo "\n";
 
-    $loggedID = $receivedInformation["loggedID"];
-    $chatTargetID = $receivedInformation["user2_id"];
-
-    if ($chat_database == null) {
-        $chat_database = [];
-    }
-
-
-
-    if (count($chat_database) != 0) {
-
-        for ($i = 0; $i < count($chat_database); $i++) {
-            $first_person = $chat_database[$i]["chat_between"][0];
-            $second_person = $chat_database[$i]["chat_between"][1];
-
-            for ($index = 0; $index < count($chat_database[$i]["chat_between"]); $index++) {
-                $send_chatlog = $chat_database[$i]["chatlog"];
-
-                if ($loggedID == $first_person["user1_id"] and $chatTargetID == $second_person["user2_id"] or $chatTargetID == $first_person["user1_id"] and $loggedID == $second_person["user2_id"]) {
-                    $message = ["message" => "First loop!"];
-                    sendJSON($send_chatlog);
-                } elseif ($chatTargetID == $first_person["user1_id"] and $loggedID == $second_person["user2_id"]) {
-                    $message = ["message" => "Second loop!"];
-                    sendJSON($send_chatlog);
-                }
-            }
+    // skickar chat id om userna stämmer överens med det som skickades i php://input
+    if($chat_database != null or count($chat_database) > 0){
+        for ($i = 0; $i < count($chat_database); $i++) 
+        { 
+            $the_latest_id = $chat_database[$i]["chatid"];
+            for ($j = 0; $j < count($chat_database[$i]["chat_between"]); $j++) 
+            { 
+                if($chat_database[$i]["chat_between"][$j] === $loggedOnUserId){
+                    if($chat_database[$i]["chat_between"][$j] === $chatTargetUserId )
+                    {
+                        echo $chat_database[$i]["chatid"];
+                        exit();
+                    }
+                } 
+                if($chat_database[$i]["chat_between"][$j] === $chatTargetUserId)
+                {
+                    if($chat_database[$i]["chat_between"][$j] === $loggedOnUserId)
+                    {
+                        echo $chat_database[$i]["chatid"];
+                        exit();
+                    } 
+                } 
+            } 
         }
-
-    } else {
-
+        
+        // Här körs koden om den inte hittar de två personerna id man skickar inte hittas
         $chatlog = [
-            "chatid" => 1,
-            "chat_between" => [
-                [
-                    "user1_id" => $loggedOnUsername,
-                    "profile_picture" => "Somewhere"
-                ],
-                [
-                    "user2_id" => $chatTargetUser,
-                    "profile_picture" => "Somewhere"
-                ],
+            "chatid" => $the_latest_id + 1,
+            "chat_between" => [ 
+                $loggedOnUserId,
+                $chatTargetUserId
             ],
             "chatlog" => [],
         ];
 
         $chat_database[] = $chatlog;
         file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
+        sendJSON(["First chat has been created"]);
+        exit();
     }
 
 
+    else{
+        
+        if ($chat_database == null) {
+            $chat_database = [];
+        }
+    
+        $chatlog = [
+            "chatid" => $the_latest_id,
+            "chat_between" => [ 
+                $loggedOnUserId,
+                $chatTargetUserId
+            ],
+            "chatlog" => [],
+        ];
+        $chat_database[] = $chatlog;
+        file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
+        sendJSON(["First chat has been created"]);
+        exit();
+    }
 
-}
 
 // $id = 0;
 //     if (0 <= count($users)) {

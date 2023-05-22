@@ -65,6 +65,7 @@ async function get_all_friends() {
     async function the_whole_juser_element_gets_click_event(event) {
 
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
+            profile_dom.classList.remove("selected");
             profile_dom.addEventListener("click", async (event) => {
                 const username = localStorage.getItem("username");
                 const targetUsername = event.target.querySelector(".username").innerHTML;
@@ -88,6 +89,8 @@ async function get_all_friends() {
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
                 profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
                 profile_dom.querySelector(".username").style.color = "white";
+                // localStorage.setItem("chat_selected",) Detta hära ska vara chatid:et som visar vilket chat som är selecterad
+                // TO-DO: Fixa så att Man får chatID:et som en response så att man vet vilken chat är selecterad
             });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
@@ -118,20 +121,20 @@ function create_post() {
         post_dom.classList.add("post_dom");
 
         post_dom.innerHTML = `
-            <div id="profile_picture"></div>
-            <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
+                    < div id = "profile_picture" ></div >
+                <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
         `;
 
         if (counter_value % 2 !== 0) {
 
             document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `1/2`;
+            post_dom.style.gridColumn = `1 / 2`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value}`;
 
         }
         else {
             document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `2/3`;
+            post_dom.style.gridColumn = `2 / 3`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value + 1}`;
         }
 
