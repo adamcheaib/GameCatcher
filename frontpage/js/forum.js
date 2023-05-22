@@ -62,7 +62,7 @@ async function get_all_friends() {
     })
 
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
-    function the_whole_juser_element_gets_click_event() {
+    async function the_whole_juser_element_gets_click_event() {
 
 
 

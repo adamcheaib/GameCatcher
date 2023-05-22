@@ -1,0 +1,27 @@
+[
+    {
+        "chatid": 1,
+        "chat_between": [
+            {
+                "userid1": 1,
+                "profile_picture": "Somewhere"
+            },
+            {
+                "userid2": 3,
+                "profile_picture": "Somewhere"
+            }
+        ],
+        "chatlog": [
+            {
+                "user": "calle",
+                "message": "Hej dude, Leauge?",
+                "timestam": "2023-05-22:14:56"
+            },
+            {
+                "user": "Adam",
+                "message": "Jajamen",
+                "timestam": "2023-05-22:14:52"
+            }
+        ]
+    }
+]
