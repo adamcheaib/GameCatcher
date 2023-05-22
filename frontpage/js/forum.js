@@ -74,7 +74,7 @@ async function get_all_friends() {
                     console.log(all_selected)
                     all_selected.classList.remove("selected");
                     all_selected.style.backgroundColor = "lightGray";
-                    all_selected.style.color = "black";
+                    all_selected.querySelector(".username").style.color = "black";
                 })
 
                 let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
