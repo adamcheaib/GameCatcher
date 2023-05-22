@@ -160,7 +160,7 @@ function upload_picture(event){
         formData.append("action", "favorite_game_picture");
     }
 
-    formData.append("username", localStorage.username);
+    formData.append("username", localStorage.getItem("username"));
 
     let request = new Request("./profile/php/upload.php", {
         method: "POST",
@@ -191,7 +191,7 @@ function send_message(event){
         method: "POST",
         body: JSON.stringify({
             text: message,
-            username: localStorage.username,
+            username: localStorage.getItem("username"),
             
         }),
 
@@ -202,7 +202,7 @@ function send_message(event){
         .then(data => { console.log(data)
             console.log(localStorage);
         div.innerHTML = `
-            <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.profile_picture}")'></div>
+            <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}")'></div>
             <p>${message}</p>
             <p id="timestamp">${data.timestamp}</p>
             <div class="delete">delete</div>
@@ -223,7 +223,7 @@ function show_messages(messages) {
         div.classList.add("comments_section");
 
         div.innerHTML = `
-        <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.profile_picture}");'></div>
+        <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}'></div>
         <p>${messages[i].message}</p>
         <p id="timestamp">${messages[i].timestamp}</p>
         <div class="delete">delete</div>
@@ -245,8 +245,9 @@ function remove_comment(event){
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({
+            action: "remove",
             timestamp: timestamp,
-            username: localStorage.username,
+            username: localStorage.getItem("username"),
         }),
 
     });
