@@ -17,7 +17,7 @@ $toSend;
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $loggedOnUsername = $_GET["username"];
     $chatTargetUser = $_GET["targetUsername"];
-
+    
     for ($i = 0; $i < count($user_database); $i++) {
         if ($loggedOnUsername == $user_database[$i]["username"]) {
             $toSend["loggedID"] = $user_database[$i]["id"];
@@ -40,48 +40,65 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") 
     $receivedInformation = json_decode(file_get_contents("php://input"), true);
-    $loggedOnUsername = $receivedInformation["loggedID"];
-    $chatTargetUser = $receivedInformation["user2_id"];
-    if(count($chat_database) !== 0){
-        for ($i=0; $i < count($chat_database); $i++) { 
-            for ($j = 0; $j < count($chat_database[$i]["chat_between"]) ; $j++) { 
-                if($user_database[$i]["chat_between"][$j]["userid1"] === $loggedOnUsername or $user_database[$i]["chat_between"][$j]["userid1"] === $chatTargetUser){
-                    if($user_database[$i]["chat_between"][$j]["userid2"] === $loggedOnUsername or $user_database[$i]["chat_between"][$j]["userid2"] === $chatTargetUser){
-                        
-                    }
+    $loggedOnUserId = $receivedInformation["loggedID"];
+    $chatTargetUserId = $receivedInformation["user2_id"];
+    $the_latest_id = 1;
+    // skickar chat id om userna stämmer överens med det som skickades i php://input
+    if($chat_database != null or count($chat_database) > 0){
+        for ($i = 0; $i < count($chat_database); $i++) 
+        { 
+            $the_latest_id = $chat_database[$i]["chatid"];
+          
+                if($chat_database[$i]["chat_between"][0] === $loggedOnUserId and $chat_database[$i]["chat_between"][1] === $chatTargetUserId){
+                    echo $chat_database[$i]["chatid"];
+                    exit();
+                } 
+                if($chat_database[$i]["chat_between"][1] === $loggedOnUserId and $chat_database[$i]["chat_between"][0] === $chatTargetUserId){
+                    echo $chat_database[$i]["chatid"];
+                    exit();
                 }
-            }
-        }    
+            
+        }
+        
+        // Här körs koden om den inte hittar de två personerna id man skickar inte hittas
+        $chatlog = [
+            "chatid" => $the_latest_id + 1,
+            "chat_between" => [ 
+                $loggedOnUserId,
+                $chatTargetUserId
+            ],
+            "chatlog" => [],
+        ];
+
+        $chat_database[] = $chatlog;
+        file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
+        sendJSON(["First chat has been created"]);
+        exit();
     }
+
+
     else{
+        
         if ($chat_database == null) {
             $chat_database = [];
         }
     
         $chatlog = [
-            "chatid" => 1,
-            "chat_between" => [
-                [
-                    "userid1" => $loggedOnUsername,
-                    "profile_picture" => "Somewhere"
-                ],
-                [
-                    "userid2" => $chatTargetUser,
-                    "profile_picture" => "Somewhere"
-                ],
+            "chatid" => $the_latest_id,
+            "chat_between" => [ 
+                $loggedOnUserId,
+                $chatTargetUserId
             ],
             "chatlog" => [],
         ];
-    
         $chat_database[] = $chatlog;
         file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
+        sendJSON(["First chat has been created"]);
+        exit();
     }
-    
 
-
-}
 
 // $id = 0;
 //     if (0 <= count($users)) {
@@ -94,5 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //     }
 // $new_user["id"] = $id + 1;
 
+
+// Fixa så att varje meddelande som skickas gör det i en PATCH-request.
 
 ?>
