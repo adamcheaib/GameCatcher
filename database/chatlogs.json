@@ -14,5 +14,13 @@
             5
         ],
         "chatlog": []
+    },
+    {
+        "chatid": 3,
+        "chat_between": [
+            6,
+            3
+        ],
+        "chatlog": []
     }
 ]

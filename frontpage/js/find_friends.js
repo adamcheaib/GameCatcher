@@ -2,7 +2,9 @@ import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 
-
+// TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
+// nu får bara ena user pending medanst andra har ingen anning om den har blivit acceptad eller inte man måste skicka
+// en till fetch när man personen clickar  
 
 
 export async function init_friends_page() {
@@ -242,6 +244,17 @@ async function add_friend(event) {
     event.target.parentElement.parentElement.remove();
     let data = await response.json();
     console.log(data);
+
+    let response2 = await fetch("./frontpage/php/find_friend.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch)
+    });
+
+
+    let data2 = await response2.json();
+    console.log(data2);
+
 
 }
 
