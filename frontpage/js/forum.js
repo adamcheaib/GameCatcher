@@ -67,8 +67,14 @@ async function get_all_friends() {
 
 
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
+            profile_dom.classList.remove("selected");
             profile_dom.addEventListener("click", async (event) => {
-                console.log("click");
+                document.querySelectorAll(".selected").forEach(all_selected => {
+                    console.log(all_selected)
+                    all_selected.classList.remove("selected");
+                    all_selected.style.backgroundColor = "lightGray";
+                    all_selected.style.color = "black";
+                })
 
                 let respone = await fetch(`./frontpage/php/chat.php?username=${localStorage.getItem("username")}&targetUsername=${event.target.querySelector(".username").innerHTML}`)
                 let response_data = await respone.json();
@@ -86,6 +92,8 @@ async function get_all_friends() {
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
                 profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
                 profile_dom.querySelector(".username").style.color = "white";
+                // localStorage.setItem("chat_selected",) Detta hära ska vara chatid:et som visar vilket chat som är selecterad
+                // TO-DO: Fixa så att Man får chatID:et som en response så att man vet vilken chat är selecterad
             });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
