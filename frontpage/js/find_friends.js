@@ -261,7 +261,9 @@ async function add_friend(event) {
 
 
     let data2 = await response2.json();
-    console.log(data2);
+
+    console.log(data2)
+
 
 
 }

@@ -55,13 +55,14 @@ button {
 
 #forum_display {
     border-radius: 20px;
-    max-width: 600px;
+    margin-bottom: 40px;
+    width: 600px;
     height: 500px;
     background-color: white;
-    margin-bottom: 40px;
-    display: grid;
-    grid-template-columns: repeat(2, 270px);
-    grid-template-rows: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: black;
     overflow-y: scroll;
 }
@@ -70,7 +71,7 @@ button {
     display: flex;
     justify-content: space-around;
     max-width: 250px;
-    min-height: 250px;
+    min-height: 150px;
     margin-top: 20px;
     margin-left: 20px;
 }

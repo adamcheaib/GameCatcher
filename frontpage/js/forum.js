@@ -67,6 +67,7 @@ async function get_all_friends() {
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
             profile_dom.classList.remove("selected");
             profile_dom.addEventListener("click", async (event) => {
+                document.querySelector("#forum_display").innerHTML = "";
                 const username = localStorage.getItem("username");
                 const targetUsername = event.target.querySelector(".username").innerHTML;
 
@@ -89,16 +90,41 @@ async function get_all_friends() {
                     body: JSON.stringify(response_data),
                 })
 
-                const resource2 = await response2.text(); // Här får vi chatloggen!
-                console.log(resource2);
-
+                const selected_chat_id = await response2.text(); // Här får vi chatloggen!
+                console.log(selected_chat_id);
+                localStorage.setItem("selected_chat_id", selected_chat_id)
+                console.log(localStorage);
 
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
                 profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
                 profile_dom.querySelector(".username").style.color = "white";
-                // VIKTIGT!!!! NÄSTA STEGET ÄR HÄRA
-                // localStorage.setItem("chat_selected",) Detta hära ska vara chatid:et som visar vilket chat som är selecterad
-                // TO-DO: Fixa så att Man får chatID:et som en response så att man vet vilken chat är selecterad
+
+                let body_for_fetch2 = {
+                    chatid: localStorage.getItem("selected_chat_id"),
+                };
+
+                let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body_for_fetch2),
+                })
+
+                let data3 = await response_all_previous_messages.json();
+                console.log(data3);
+                data3.forEach(each_message => {
+                    let message_dom = document.createElement("div");
+                    message_dom.classList.add("post_dom");
+                    message_dom.innerHTML = `
+                        <div id="profile_picture"></div >
+                        <div id="username">A Username Fix It</div>
+                        <div id="the_post_text">
+                            <p>${each_message}</p>
+                        </div>
+                    `
+                    document.querySelector("#forum_display").appendChild(message_dom)
+                })
+
+
             });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
@@ -129,23 +155,12 @@ function create_post() {
         post_dom.classList.add("post_dom");
 
         post_dom.innerHTML = `
-                    < div id = "profile_picture" ></div >
-                <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
+            <div id="profile_picture"></div >
+            <div id="username">${localStorage.getItem("username")}</div>
+            <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
         `;
 
-        if (counter_value % 2 !== 0) {
-
-            document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `1 / 2`;
-            post_dom.style.gridRow = `${counter_value} / ${counter_value}`;
-
-        }
-        else {
-            document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `2 / 3`;
-            post_dom.style.gridRow = `${counter_value} / ${counter_value + 1}`;
-        }
-
+        document.querySelector("#forum_display").appendChild(post_dom);
 
         document.querySelector("textarea").value = "";
         localStorage.removeItem("counter_for_forum");
@@ -158,17 +173,17 @@ function create_post() {
 async function send_message(the_post_dom) {
 
     let body_for_fetch = {
-        username: localStorage.getItem("username"),
+        chatid: localStorage.getItem("selected_chat_id"),
         message: the_post_dom.querySelector("#the_post_text > p").innerHTML,
     }
 
     let response = await fetch("./frontpage/php/forum.php", {
-        method: "PATCH",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     });
 
-    let data = await response.json();
+    let data = await response.text();
     console.log(data);
 }
 
