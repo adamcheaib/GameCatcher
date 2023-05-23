@@ -51,11 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         { 
             $the_latest_id = $chat_database[$i]["chatid"];
           
-                if($chat_database[$i]["chat_between"][0] === $loggedOnUserId and $chat_database[$i]["chat_between"][1] === $chatTargetUserId or $chat_database[$i]["chat_between"][1] === $chatTargetUserId and $chat_database[$i]["chat_between"][0] === $loggedOnUserId){
+                if($chat_database[$i]["chat_between"][0] === $loggedOnUserId and $chat_database[$i]["chat_between"][1] === $chatTargetUserId){
                     echo $chat_database[$i]["chatid"];
                     exit();
                 } 
-                
+                if($chat_database[$i]["chat_between"][1] === $loggedOnUserId and $chat_database[$i]["chat_between"][0] === $chatTargetUserId){
+                    echo $chat_database[$i]["chatid"];
+                    exit();
+                }
             
         }
         
