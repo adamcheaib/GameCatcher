@@ -136,7 +136,7 @@ document.querySelector("#settings").addEventListener("click", show_settings)
 
 function show_settings(event){
     console.log(event);
-    registration_notification("Manage Account");
+    registration_notification("Manage Account", "account_management");
     document.querySelector("#change_username").addEventListener("click", new_value);
     document.querySelector("#change_password").addEventListener("click", new_value);
 

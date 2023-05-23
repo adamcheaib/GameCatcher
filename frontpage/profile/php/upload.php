@@ -4,9 +4,9 @@ $filename = "../../../database/users.json";
 $data = file_get_contents($filename);
 $users = json_decode($data, true);
 require_once "../../php/functions.php";
+
 $json = file_get_contents("php://input");
 $info = json_decode($json, true);
-
 
 if(!file_exists("../images/")){
     mkdir("../images/");
@@ -46,16 +46,11 @@ if(isset($_FILES["upload"])){
           }
         exit();
     }
-    
 }  
 ?>
 
 <?php
-
-
-
 if(isset($info["text"])){    
-    
     foreach($users as $index => $user) {
         if ($user["username"] === $info["username"]) {
             if (!isset($users[$index]["profile_comments"])) {
@@ -75,30 +70,31 @@ if(isset($info["text"])){
                 "message" => "Success!",
                 "timestamp" => $date,
             ]);
-            sendJSON($message, 201);
-            
+            echo json_encode($message);
+            exit();
         }
     }
 }
 ?>
 
 <?php
-if(isset($info["remove"])){
+if(isset($info["action"])){
     $username = $info["username"];
     foreach ($users as $index => $user) {
         if ($user["username"] === $info["username"]){
             foreach ($users[$index]["profile_comments"] as $commentIndex => $comment) {
                 if($comment["timestamp"] === $info["timestamp"]){
+                    
                     array_splice($users[$index]["profile_comments"], $commentIndex, 1);
                     break; 
-                    
                 }
             }
         }
     }
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
     $message = ["message" => "Success!"];
-    sendJSON($message);
+    echo json_encode($message);
+    exit();
 }
 ?>
 <?php
@@ -115,6 +111,7 @@ if(isset($info["change"])){
     }
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
     $message = ["message" => "Success!"];
-    sendJSON($message);
+    echo json_encode($message);
+    exit();
 }
 ?>

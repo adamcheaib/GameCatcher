@@ -12,7 +12,9 @@ function get_preset_information(){
                 document.querySelector("main").style.backgroundImage = `url(./profile/images/${user.banner_picture})`;
                 document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${user.profile_picture})`;
 
-                show_messages(user.profile_comments);
+                if(user.profile_comments.length !== 0){
+                    show_messages(user.profile_comments);
+                }
                 localStorage.setItem("profile_picture", user.profile_picture);
 
             }
@@ -196,28 +198,25 @@ function send_message(event){
     div.textContent = message;
     div.classList.add("comments_section");
    
-
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({
             text: message,
             username: localStorage.getItem("username"),
-            
         }),
 
     });
 
     fetch(request)
         .then(resource => resource.json())
-        .then(data => { console.log(data)
-            console.log(localStorage);
-        div.innerHTML = `
-            <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}")'></div>
-            <p>${message}</p>
-            <p id="timestamp">${data.timestamp}</p>
-            <div class="delete">delete</div>
-            `
-            document.querySelector(".delete").addEventListener("click", remove_comment);
+        .then(data => { 
+            div.innerHTML = `
+                <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}")'></div>
+                <p>${message}</p>
+                <p id="timestamp">${data.timestamp}</p>
+                <div class="delete">delete</div>
+                `
+                document.querySelector(".delete").addEventListener("click", remove_comment);
         })
     section.appendChild(div)
 }
@@ -244,9 +243,7 @@ function show_messages(messages) {
 }
 
 function remove_comment(event){
-    console.log(event);
     let timestamp = event.target.parentElement.querySelector("#timestamp").innerHTML;
-    console.log(timestamp);
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({

@@ -529,23 +529,30 @@ export function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
-export function registration_notification(dialog_box_text) {
+export function registration_notification(dialog_box_text, action) {
     const registration_dialog = document.createElement("dialog");
     registration_dialog.style.height = "100vh";
     registration_dialog.style.width = "100vw";
     registration_dialog.style.backgroundColor = "white";
     registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
-
     const registration_notification_container = document.createElement("div");
-    registration_notification_container.className = "account_management";
-    registration_notification_container.innerHTML = `
-    <h3>${dialog_box_text}</h3>
-    <div id="change_username">Change Username</div>
-    <div id="change_password">Change Password</div>
-    <div id="logout">Logout</div>
-    <button id="close">Close</button>
-    `;
-
+    
+    if(action === "account_management"){
+        registration_notification_container.className = "account_management";
+        registration_notification_container.innerHTML = `
+        <h3>${dialog_box_text}</h3>
+        <div id="change_username">Change Username</div>
+        <div id="change_password">Change Password</div>
+        <div id="logout">Logout</div>
+        <button id="close">Close</button>
+        `;
+    }else{
+        registration_notification_container.className = "registration_notification";
+        registration_notification_container.innerHTML = `
+        <h3>${dialog_box_text}</h3>
+        button id="close">Close</button>
+        `;
+    }
     registration_dialog.appendChild(registration_notification_container);
     document.body.appendChild(registration_dialog);
     registration_dialog.showModal();
