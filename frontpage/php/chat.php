@@ -45,33 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
     $loggedOnUserId = $receivedInformation["loggedID"];
     $chatTargetUserId = $receivedInformation["user2_id"];
     $the_latest_id = 1;
-    echo $loggedOnUserId;
-    echo "\n";
-    echo $chatTargetUserId;
-    echo "\n";
     // skickar chat id om userna stämmer överens med det som skickades i php://input
     if($chat_database != null or count($chat_database) > 0){
         for ($i = 0; $i < count($chat_database); $i++) 
         { 
             $the_latest_id = $chat_database[$i]["chatid"];
-            for ($j = 0; $j < count($chat_database[$i]["chat_between"]); $j++) 
-            { 
-                if($chat_database[$i]["chat_between"][$j] === $loggedOnUserId){
-                    if($chat_database[$i]["chat_between"][$j] === $chatTargetUserId )
-                    {
-                        echo $chat_database[$i]["chatid"];
-                        exit();
-                    }
+          
+                if($chat_database[$i]["chat_between"][0] === $loggedOnUserId and $chat_database[$i]["chat_between"][1] === $chatTargetUserId or $chat_database[$i]["chat_between"][1] === $chatTargetUserId and $chat_database[$i]["chat_between"][0] === $loggedOnUserId){
+                    echo $chat_database[$i]["chatid"];
+                    exit();
                 } 
-                if($chat_database[$i]["chat_between"][$j] === $chatTargetUserId)
-                {
-                    if($chat_database[$i]["chat_between"][$j] === $loggedOnUserId)
-                    {
-                        echo $chat_database[$i]["chatid"];
-                        exit();
-                    } 
-                } 
-            } 
+                
+            
         }
         
         // Här körs koden om den inte hittar de två personerna id man skickar inte hittas
