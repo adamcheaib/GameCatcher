@@ -105,6 +105,24 @@
             }
         }
 
+
+        if(array_key_exists("send_back_for_user_that_sent_friend_req", $fetch_data) === true){
+            for ($w = 0; $w < count($all_users); $w++) { 
+                if($all_users[$w]["username"] === $fetch_data["added_friend_username2"] && array_key_exists("friends", $all_users[$w]) == true){
+                    $all_friends = [];
+                    for ($o = 0; $o < count($all_users[$w]["friends"]); $o++) { 
+                        $all_friends[] = $all_users[$w]["friends"][$o];
+                    }
+                    header("Content-Type: application/json");
+                    $all_friends[] = $fetch_data["logged_in_user"];
+                    $all_users[$w]["friends"] = $all_friends;
+                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                    echo json_encode($all_friends);
+                    exit();
+                }
+            }
+        }
+
     }
 
     if($_SERVER["REQUEST_METHOD"] === "PATCH"){

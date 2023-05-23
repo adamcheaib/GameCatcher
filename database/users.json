@@ -36,9 +36,10 @@
         "id": 1,
         "pending": [],
         "friends": [
-            "eeee",
             "eqqq",
-            "aaaa"
+            "aaaa",
+            "eeee",
+            "calle"
         ]
     },
     {
@@ -71,18 +72,10 @@
             }
         ],
         "id": 3,
-
-        "pending": [
-            "calle",
-            "calle",
-            "calle"
-        ],
-
         "pending": [],
-
         "friends": [
-            "adamcheaib",
-            "calle"
+            "calle",
+            "adamcheaib"
         ]
     },
     {
@@ -109,7 +102,8 @@
         ],
         "pending": [],
         "friends": [
-            "eeee"
+            "eeee",
+            "adamcheaib"
         ]
     }
 ]

@@ -245,10 +245,18 @@ async function add_friend(event) {
     let data = await response.json();
     console.log(data);
 
+    // Denna fetch behövs för att man måste skicka till usern som skickas 
+
+    let a_fetch_body = {
+        logged_in_user: localStorage.getItem("username"),
+        added_friend_username2: event.target.parentElement.parentElement.querySelector(".account_username_pending").innerHTML,
+        send_back_for_user_that_sent_friend_req: true,
+    };
+
     let response2 = await fetch("./frontpage/php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body_for_fetch)
+        body: JSON.stringify(a_fetch_body)
     });
 
 
