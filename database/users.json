@@ -1,16 +1,5 @@
 [
     {
-        "username": "johanbigdickhezbollah",
-        "password": "johan",
-        "favorite_games": [
-            {
-                "name": "Stardew Valley",
-                "image": "https:\/\/media.rawg.io\/media\/games\/713\/713269608dc8f2f40f5a670a14b2de94.jpg"
-            }
-        ],
-        "id": 2
-    },
-    {
         "username": "aaaa",
         "password": "aaaa",
         "favorite_games": [
@@ -25,7 +14,11 @@
         "username": "eqqq",
         "password": "eqqq",
         "favorite_games": [],
-        "id": 5
+        "id": 5,
+        "pending": [],
+        "friends": [
+            "eeee"
+        ]
     },
     {
         "username": "adamcheaib",
@@ -43,9 +36,10 @@
         "id": 1,
         "pending": [],
         "friends": [
-            "eeee",
             "eqqq",
-            "aaaa"
+            "aaaa",
+            "eeee",
+            "calle"
         ]
     },
     {
@@ -79,13 +73,36 @@
         ],
         "id": 3,
         "pending": [],
-        "messages": [
+        "friends": [
+            "calle",
+            "adamcheaib"
+        ]
+    },
+    {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [],
+        "id": 6,
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "profile_comments": [
             {
-                "username": "eeee",
-                "message": "eee"
+                "message": "ge",
+                "timestamp": "2023-05-22 14:21:32"
+            },
+            {
+                "message": "ge",
+                "timestamp": "2023-05-22 14:21:53"
+            },
+            {
+                "message": "gr",
+                "timestamp": "2023-05-23 09:52:22"
             }
         ],
+        "pending": [],
         "friends": [
+            "eeee",
             "adamcheaib"
         ]
     }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // fetch("./php/chat.php", {
+        //     method: "POST",
+        //     headers: { "content-type": "application/json" },
+        //     body: JSON.stringify({
+        //         username: "aaaa",
+        //         targetUsername: "eeee"
+        //     })
+        // }).then(r => r.json()).then(console.log);
+
+        async function user_ids(event) {
+            await fetch("./php/chat.php?username=adamcheaib&targetUsername=eeee").then(r => r.json()).then(chatUserID => {
+                test(chatUserID);
+            });
+        }
+
+        user_ids();
+
+        async function test({ loggedID, user2_id }) {
+            try {
+                const chat_between = { userID1: loggedID, userID2: user2_id };
+                const response = await fetch("./php/chat.php", {
+                    method: "POST",
+                    headers: { "Content-type": "application/json" },
+                    body: JSON.stringify(chat_between)
+                });
+
+                const resource = await response.json();
+                console.log(resource);
+
+            } catch (err) {
+                console.log(err);
+            }
+
+        }
+    </script>
+</body>
+
+</html>

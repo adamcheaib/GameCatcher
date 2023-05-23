@@ -655,3 +655,27 @@ dialog>div {
     width: 300px;
     border-radius: 10px;
 }
+.account_management{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(73, 73, 112);
+    height: 30vh;
+    width: 30vw;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+}
+.account_management div:hover{
+    background-color: rgb(41, 41, 86);
+}
+#close{
+    width: 10vw;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+#profile{
+    background-position: center;
+    background-size: cover;
+}

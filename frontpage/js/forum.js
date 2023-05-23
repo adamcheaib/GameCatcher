@@ -61,22 +61,55 @@ async function get_all_friends() {
         profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
     })
 
-    // Ger hela 
-    function the_whole_juser_element_gets_click_event() {
+    // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
+    async function the_whole_juser_element_gets_click_event(event) {
+
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
-            profile_dom.addEventListener("click", (event) => {
-                console.log(event.target.querySelector(".username").innerHTML)
+            profile_dom.classList.remove("selected");
+            profile_dom.addEventListener("click", async (event) => {
+                const username = localStorage.getItem("username");
+                const targetUsername = event.target.querySelector(".username").innerHTML;
+
+                document.querySelectorAll(".selected").forEach(all_selected => {
+                    console.log(all_selected)
+                    all_selected.classList.remove("selected");
+                    all_selected.style.backgroundColor = "lightGray";
+                    all_selected.querySelector(".username").style.color = "black";
+                })
+
+                let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+                let response_data = await response_user1.json();
+                console.log(response_data);
+                localStorage.setItem("loggedID", response_data.loggedID);
+                console.log(localStorage);
+
+                let response2 = await fetch(`./frontpage/php/chat.php`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(response_data),
+                })
+
+                const resource2 = await response2.text(); // Här får vi chatloggen!
+                console.log(resource2);
+
+
+                profile_dom.querySelector("#profile_wrapper").classList.add("selected");
+                profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
+                profile_dom.querySelector(".username").style.color = "white";
+                // VIKTIGT!!!! NÄSTA STEGET ÄR HÄRA
+                // localStorage.setItem("chat_selected",) Detta hära ska vara chatid:et som visar vilket chat som är selecterad
+                // TO-DO: Fixa så att Man får chatID:et som en response så att man vet vilken chat är selecterad
             });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
-            profile_dom.addEventListener("click", (event) => {
+            profile_dom.addEventListener("click", async (event) => {
                 console.log(event.target.parentElement.querySelector(".username").innerHTML)
                 event.stopImmediatePropagation();
             });
         })
 
         document.querySelectorAll(".username").forEach(profile_dom => {
-            profile_dom.addEventListener("click", (event) => {
+            profile_dom.addEventListener("click", async (event) => {
                 console.log(event.target.parentElement.querySelector(".username").innerHTML)
                 event.stopImmediatePropagation();
             });
@@ -90,27 +123,26 @@ async function get_all_friends() {
 function create_post() {
 
     document.querySelector("button").addEventListener("click", () => {
-
         let counter_value = parseInt(localStorage.getItem("counter_for_forum"));
         counter_value += 1;
         let post_dom = document.createElement("div");
         post_dom.classList.add("post_dom");
 
         post_dom.innerHTML = `
-            <div id="profile_picture"></div>
-            <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
+                    < div id = "profile_picture" ></div >
+                <div id="the_post_text"><p>${document.querySelector("textarea").value}</p></div>
         `;
 
         if (counter_value % 2 !== 0) {
 
             document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `1/2`;
+            post_dom.style.gridColumn = `1 / 2`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value}`;
 
         }
         else {
             document.querySelector("#forum_display").appendChild(post_dom);
-            post_dom.style.gridColumn = `2/3`;
+            post_dom.style.gridColumn = `2 / 3`;
             post_dom.style.gridRow = `${counter_value} / ${counter_value + 1}`;
         }
 
@@ -131,7 +163,7 @@ async function send_message(the_post_dom) {
     }
 
     let response = await fetch("./frontpage/php/forum.php", {
-        method: "POST",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     });

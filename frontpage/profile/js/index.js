@@ -12,7 +12,9 @@ function get_preset_information(){
                 document.querySelector("main").style.backgroundImage = `url(./profile/images/${user.banner_picture})`;
                 document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${user.profile_picture})`;
 
-                show_messages(user.profile_comments, user.profile_picture);
+                if(user.profile_comments.length !== 0){
+                    show_messages(user.profile_comments);
+                }
                 localStorage.setItem("profile_picture", user.profile_picture);
 
             }
@@ -144,10 +146,12 @@ function upload_picture(event){
     event.preventDefault();
     let image;
     let formData;
+    let check_profile_pic = false;
     if(event.target.id === "upload_profile_picture"){
         image = document.querySelector("#profile_image");
         formData = new FormData(profile_picture);
         formData.append("action", "profile_picture");
+        check_profile_pic = true;
     }
     if(event.target.id === "upload_banner_picture"){
         image = document.querySelector("main");
@@ -159,8 +163,7 @@ function upload_picture(event){
         formData = new FormData(favorite_game);
         formData.append("action", "favorite_game_picture");
     }
-
-    formData.append("username", localStorage.username);
+    formData.append("username", localStorage.getItem("username"));
 
     let request = new Request("./profile/php/upload.php", {
         method: "POST",
@@ -172,6 +175,15 @@ function upload_picture(event){
         .then(data => {
             console.log(data);
             image.style.backgroundImage = `url(./profile/images/${data.filename})`;
+
+            if(check_profile_pic === true){
+                localStorage.setItem("profile_picture", data.filename);
+                document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                document.querySelectorAll(".profile_picture").forEach(element => {
+                    console.log(element);
+                    element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                })
+            }
         })
 }
 
@@ -186,32 +198,26 @@ function send_message(event){
     div.textContent = message;
     div.classList.add("comments_section");
    
-
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({
             text: message,
-            username: localStorage.username,
-            
+            username: localStorage.getItem("username"),
         }),
 
     });
 
     fetch(request)
         .then(resource => resource.json())
-        .then(data => { console.log(data)
-            console.log(localStorage);
-        div.innerHTML = `
-            <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.profile_picture}")'></div>
-            <p>${message}</p>
-            <p id="timestamp">${data.timestamp}</p>
-            <div class="delete">delete</div>
-            `
-            document.querySelector(".delete").addEventListener("click", remove_comment);
+        .then(data => { 
+            div.innerHTML = `
+                <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}")'></div>
+                <p>${message}</p>
+                <p id="timestamp">${data.timestamp}</p>
+                <div class="delete">delete</div>
+                `
+                document.querySelector(".delete").addEventListener("click", remove_comment);
         })
-
-        
-
     section.appendChild(div)
 }
 function show_messages(messages) {
@@ -223,7 +229,7 @@ function show_messages(messages) {
         div.classList.add("comments_section");
 
         div.innerHTML = `
-        <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.profile_picture}");'></div>
+        <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}'></div>
         <p>${messages[i].message}</p>
         <p id="timestamp">${messages[i].timestamp}</p>
         <div class="delete">delete</div>
@@ -236,17 +242,14 @@ function show_messages(messages) {
     }
 }
 
-
-
 function remove_comment(event){
-    console.log(event);
     let timestamp = event.target.parentElement.querySelector("#timestamp").innerHTML;
-    console.log(timestamp);
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({
+            action: "remove",
             timestamp: timestamp,
-            username: localStorage.username,
+            username: localStorage.getItem("username"),
         }),
 
     });
@@ -256,3 +259,4 @@ function remove_comment(event){
             event.target.parentElement.remove();
         })
 }
+
