@@ -82,13 +82,15 @@ function show_game_display_dom(game_data) {
             });
 
             notification.textContent = "Added to your list!";
-            notification.style.color = "green";
+            notification.style.color = "lightgreen";
+            notification.style.fontWeight = "bold";
             console.log(parentNode);
             event.target.textContent = "Remove game from your list";
 
             event.target.style.pointerEvents = "none";
+            event.target.style.opacity = "40%";
 
-            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+            setTimeout(() => { event.target.style.pointerEvents = "all"; event.target.style.opacity = "100%"; notification.remove() }, 3000);
         } else {
             let body_for_fetch = {
                 username: localStorage.getItem("username"),
@@ -103,11 +105,13 @@ function show_game_display_dom(game_data) {
 
             notification.textContent = "Removed from your list!";
             notification.style.color = "red";
+            notification.style.fontWeight = "bold";
             event.target.textContent = "Add to liked games";
 
             event.target.style.pointerEvents = "none";
+            event.target.style.opacity = "40%";
 
-            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+            setTimeout(() => { event.target.style.pointerEvents = "all"; event.target.style.opacity = "100%"; notification.remove() }, 3000);
         }
 
     });
@@ -326,6 +330,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
     /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
     document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
         game.addEventListener("click", async () => {
+            console.log("hello")
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
             let the_game = await search_game(localStorage.getItem("selected_game"));
@@ -339,6 +344,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
                     body: JSON.stringify({ username: localStorage.getItem("username"), action: "favorite_library" })
                 })).json();
 
+            console.log(user_favorite_library);
 
             if (document.querySelector(".display_game_dom") !== null) {
                 document.querySelector(".display_game_dom").remove();
@@ -355,29 +361,30 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 }
             })
 
-            // user_favorite_library.fav_games.forEach(game => {
-            //     if (game.name === localStorage.getItem("selected_game")) {
-            //         document.getElementById("liked_games_button").remove();
-            //         const remove_game_from_collection_button = document.createElement("div");
-            //         remove_game_from_collection_button.style.fontSize = "30px";
-            //         remove_game_from_collection_button.innerHTML = "&#128465;";
-            //         remove_game_from_collection_button.id = "liked_games_button";
-            //         document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
+            user_favorite_library.fav_games.forEach(game => {
+                console.log("hello 2");
+                if (game.name === localStorage.getItem("selected_game")) {
+                    document.getElementById("liked_games_button").remove();
+                    const remove_game_from_collection_button = document.createElement("div");
+                    remove_game_from_collection_button.style.fontSize = "30px";
+                    remove_game_from_collection_button.innerHTML = "&#128465;";
+                    remove_game_from_collection_button.id = "liked_games_button";
+                    document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
 
-            //         remove_game_from_collection_button.addEventListener("click", async () => {
-            //             let body_for_fetch = {
-            //                 username: localStorage.getItem("username"),
-            //                 the_game_to_delete: localStorage.getItem("selected_game"),
-            //             }
+                    remove_game_from_collection_button.addEventListener("click", async () => {
+                        let body_for_fetch = {
+                            username: localStorage.getItem("username"),
+                            the_game_to_delete: localStorage.getItem("selected_game"),
+                        }
 
-            //             let response = await fetch("./frontpage/php/game_collection.php", {
-            //                 method: "DELETE",
-            //                 headers: { "Content-Type": "application/json" },
-            //                 body: JSON.stringify(body_for_fetch),
-            //             });
-            //         })
-            //     }
-            // })
+                        let response = await fetch("./frontpage/php/game_collection.php", {
+                            method: "DELETE",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(body_for_fetch),
+                        });
+                    })
+                }
+            })
         })
     })
 }

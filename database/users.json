@@ -11,12 +11,35 @@
         "id": 1
     },
     {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [
+            {
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
+            },
+            {
+                "name": "Monster Hunter(Contraband Entertainment)",
+                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            }
+        ],
+        "id": 3
+    },
+    {
         "username": "adam",
         "password": "adam",
         "favorite_games": [
             {
                 "name": "Stardew Valley",
                 "image": "https:\/\/media.rawg.io\/media\/games\/713\/713269608dc8f2f40f5a670a14b2de94.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
             }
         ],
         "id": 2
