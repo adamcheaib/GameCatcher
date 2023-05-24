@@ -1,16 +1,5 @@
 [
     {
-        "username": "adam",
-        "password": "eeee",
-        "favorite_games": [
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            }
-        ],
-        "id": 1
-    },
-    {
         "username": "adamcheai",
         "password": "adamcheaib",
         "favorite_games": [
@@ -50,82 +39,41 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/dbb\/dbba6100aae179b5f24052c9141d426d.jpg"
             }
         ],
-        "id": 3,
-        "pending": [],
+        "id": 2,
         "friends": [
-            "adamcheaib",
-            "calle"
+            "eqqq",
+            "qeqe"
+        ],
+        "pending": []
+    },
+    {
+        "username": "eqqq",
+        "password": "eqqq",
+        "favorite_games": [],
+        "id": 3,
+        "friends": [
+            "eeee",
+            "adam"
         ]
     },
     {
-        "username": "calle",
-        "password": "calle",
+        "username": "qeqe",
+        "password": "qeqe",
         "favorite_games": [
             {
                 "name": "Grand Theft Auto V",
                 "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
-            },
-            {
-                "name": "Skater XL",
-                "image": "https:\/\/media.rawg.io\/media\/games\/b95\/b957080fc9e91b2c781618f207e69846.jpg"
             }
         ],
-        "id": 6,
-        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
-        "profile_picture": "guts.jpg",
-        "banner_picture": "Vagabond-2.avif",
-        "profile_comments": [
-            {
-                "message": "ge",
-                "timestamp": "2023-05-22 14:21:32"
-            },
-            {
-                "message": "ge",
-                "timestamp": "2023-05-22 14:21:53"
-            },
-            {
-                "message": "gr",
-                "timestamp": "2023-05-23 09:52:22"
-            }
-        ],
-        "pending": [
-            "adamcheaib",
-            "adamcheaib"
-        ],
+        "id": 4,
         "friends": [
-            "adam",
-            "eqqq"
-        ],
-        "blocked": []
-    },
-    {
-        "username": "adam",
-        "password": "adam",
-        "favorite_games": [
-            {
-                "name": "Monster Hunter: World",
-                "image": "https:\/\/media.rawg.io\/media\/games\/21c\/21cc15d233117c6809ec86870559e105.jpg"
-            },
-            {
-                "name": "Monster Hunter Stories 2: Wings of Ruin",
-                "image": "https:\/\/media.rawg.io\/media\/games\/f79\/f79662d3267e50434ab6c674d47aa1f1.jpg"
-            },
-            {
-                "name": "World of Warcraft: Legion",
-                "image": "https:\/\/media.rawg.io\/media\/games\/e61\/e61f516a8a17eaa80ce484e5fd751e5b.jpg"
-            }
-        ],
-        "id": 3,
-        "pending": [],
-        "friends": [
-            "adamcheaib",
-            "calle"
+            "adam"
         ]
     },
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
+        "username": "aaaa",
+        "password": "aaaa",
         "favorite_games": [],
-        "id": 7
+        "id": 5
     }
 ]

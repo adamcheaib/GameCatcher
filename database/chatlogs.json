@@ -1,35 +1,22 @@
-
 [
     {
         "chatid": 1,
         "chat_between": [
-            1,
+            2,
             3
         ],
-        "chatlog": []
+        "chatlog": [
+            "fdsfsdf"
+        ]
     },
     {
         "chatid": 2,
         "chat_between": [
-            1,
-            5
+            2,
+            4
         ],
-        "chatlog": []
-    },
-    {
-        "chatid": 3,
-        "chat_between": [
-            6,
-            3
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 4,
-        "chat_between": [
-            6,
-            5
-        ],
-        "chatlog": []
+        "chatlog": [
+            "fdsfdsfsdfs"
+        ]
     }
 ]

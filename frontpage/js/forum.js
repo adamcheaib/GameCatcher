@@ -30,6 +30,7 @@ export function init_forum() {
 document.querySelector("#chat").addEventListener("click", init_forum)
 
 async function get_all_friends() {
+
     let body_for_fetch = {
         the_user: localStorage.getItem("username"),
         find_all_friends: true,
@@ -63,11 +64,15 @@ async function get_all_friends() {
     })
 
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
-    async function the_whole_juser_element_gets_click_event(event) {
+    async function the_whole_juser_element_gets_click_event() {
 
         document.querySelectorAll(".profile_dom").forEach(profile_dom => {
+
             profile_dom.classList.remove("selected");
+
             profile_dom.addEventListener("click", async (event) => {
+                localStorage.removeItem("selected_chat_id")
+
                 document.querySelector("#forum_display").innerHTML = "";
                 const username = localStorage.getItem("username");
                 const targetUsername = event.target.querySelector(".username").innerHTML;
@@ -82,19 +87,28 @@ async function get_all_friends() {
                 let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
                 let response_data = await response_user1.json();
                 console.log(response_data);
-                localStorage.setItem("loggedID", response_data.loggedID);
-                console.log(localStorage);
+
+
+
+
+                let fetch_bod_first = {
+                    get_chatlog_id: true,
+                    loggedID: response_data.loggedID,
+                    user2_id: response_data.user2_id,
+                }
 
                 let response2 = await fetch(`./frontpage/php/chat.php`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(response_data),
+                    body: JSON.stringify(fetch_bod_first),
                 })
 
-                const selected_chat_id = await response2.text(); // Här får vi chatloggen!
-                console.log(selected_chat_id);
-                localStorage.setItem("selected_chat_id", selected_chat_id)
-                console.log(localStorage);
+                let chat_id = await response2.json(); // Här får vi chatid:et!
+
+                console.log(chat_id);
+                localStorage.setItem("selected_chat_id", chat_id.chatid)
+
+
 
                 profile_dom.querySelector("#profile_wrapper").classList.add("selected");
                 profile_dom.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
@@ -102,6 +116,8 @@ async function get_all_friends() {
 
                 let body_for_fetch2 = {
                     chatid: localStorage.getItem("selected_chat_id"),
+                    da_user_logged_in: response_data.loggedID,
+                    target_user: response_data.user2_id,
                 };
 
                 let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
@@ -110,20 +126,24 @@ async function get_all_friends() {
                     body: JSON.stringify(body_for_fetch2),
                 })
 
-                let data3 = await response_all_previous_messages.json();
+                let data3 = await response_all_previous_messages.text();
+
                 console.log(data3);
-                data3.forEach(each_message => {
-                    let message_dom = document.createElement("div");
-                    message_dom.classList.add("post_dom");
-                    message_dom.innerHTML = `
-                        <div id="profile_picture"></div >
-                        <div id="username">A Username Fix It</div>
-                        <div id="the_post_text">
-                            <p>${each_message}</p>
-                        </div>
-                    `
-                    document.querySelector("#forum_display").appendChild(message_dom)
-                })
+
+                // if (data3.count !== 0 && data3 !== null) {
+                //     data3.forEach(each_message => {
+                //         let message_dom = document.createElement("div");
+                //         message_dom.classList.add("post_dom");
+                //         message_dom.innerHTML = `
+                //         <div id="profile_picture"></div >
+                //         <div id="username">A Username Fix It</div>
+                //         <div id="the_post_text">
+                //             <p>${each_message}</p>
+                //         </div>
+                //     `
+                //         document.querySelector("#forum_display").appendChild(message_dom)
+                //     })
+                // }
 
 
             });
@@ -184,7 +204,7 @@ async function send_message(the_post_dom) {
         body: JSON.stringify(body_for_fetch)
     });
 
-    let data = await response.text();
+    let data = await response.json();
     console.log(data);
 }
 
