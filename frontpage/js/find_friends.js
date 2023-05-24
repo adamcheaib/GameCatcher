@@ -104,25 +104,25 @@ async function show_my_friends(event) {
         element.addEventListener("click", show_options);
     });
 }
-function show_options(event){
-    if(document.getElementById("my_friends").classList.contains("selected")){
+function show_options(event) {
+    if (document.getElementById("my_friends").classList.contains("selected")) {
         registration_notification("Options", "show_options_blocked");
         document.getElementById("block_user").addEventListener("click", block_unblock_user);
         event.target.parentElement.children[1].setAttribute("id", "to_be_blocked");
-    }else{
+    } else {
         registration_notification("Options", "show_options_unblocked");
         document.getElementById("unblock_user").addEventListener("click", block_unblock_user);
         event.target.parentElement.children[1].setAttribute("id", "to_be_unblocked");
     }
 }
-function block_unblock_user(event){
+function block_unblock_user(event) {
     let actions;
     let user;
-    if(event.target.id === "block_user"){
+    if (event.target.id === "block_user") {
         actions = "block";
         user = document.getElementById("to_be_blocked").textContent;
     }
-    if(event.target.id === "unblock_user"){
+    if (event.target.id === "unblock_user") {
         actions = "unblock";
         user = document.getElementById("to_be_unblocked").textContent;
     }
@@ -177,14 +177,18 @@ async function find_user() {
         }
         console.log(account_data[i].username);
         let responses = await fetch(`../../../database/users.json`);
-            let users = await responses.json();
-            for (let i = 0; i < users.length; i++) {
-                if(users[i].username === localStorage.getItem("username")){
-                    if(users[i].blocked.includes(account_data[0].username)){
+        let users = await responses.json();
+        for (let i = 0; i < users.length; i++) {
+
+            if (users[i].hasOwnProperty("blocked")) {
+                if (users[i].username === localStorage.getItem("username")) {
+                    if (users[i].blocked.includes(account_data[0].username)) {
                         return;
                     }
-                }}
-        
+                }
+            }
+        }
+
         let profile_dom = document.createElement("div");
         profile_dom.classList.add("profile_dom");
         profile_dom.innerHTML = `
@@ -358,7 +362,7 @@ async function decline_friend(event) {
     event.target.parentElement.parentElement.remove();
 }
 
-async function init_blocked_users(event){
+async function init_blocked_users(event) {
     document.querySelector("#display").innerHTML = "";
 
     document.querySelector("#center_piece").innerHTML = `
@@ -370,12 +374,12 @@ async function init_blocked_users(event){
     </div>
     <div id="display"></div>
 `;
-document.querySelector("#my_friends").addEventListener("click", show_my_friends)
-document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
     let response = await fetch(`../../../database/users.json`);
     let users = await response.json();
     for (let i = 0; i < users.length; i++) {
-        if(users[i].username === localStorage.getItem("username")){
+        if (users[i].username === localStorage.getItem("username")) {
             users[i].blocked.forEach(element => {
                 let profile_dom = document.createElement("div");
                 profile_dom.textContent = element
