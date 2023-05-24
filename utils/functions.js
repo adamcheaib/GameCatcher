@@ -212,7 +212,16 @@ export async function game_scroll() { // Scroll function for the displayed genre
         }
         else {
 
-            console.log("hej");
+            const fourth_game_box = document.querySelector(".game_4");
+            console.log(fourth_game_box);
+            fourth_game_box.style.left = "20px";
+            fourth_game_box.style.opacity = "0%";
+            fourth_game_box.style.filter = "blur(1.5rem)";
+            setTimeout(() => {
+                fourth_game_box.style.left = "0px";
+                fourth_game_box.style.opacity = "100%";
+                fourth_game_box.style.filter = "blur(0)";
+            }, 200);
 
             index2 += 1;
             counter2 += 1;
@@ -261,11 +270,25 @@ export async function game_scroll() { // Scroll function for the displayed genre
     console.log(localStorage);
 
     async function click_left_arrow(event) {
+
+
         if (counter2 === 0) {
             document.querySelector("#first_arrow2").style.backgroundColor = "gray";
             document.querySelector("#first_arrow2").removeEventListener("click", click_left_arrow)
         }
         else {
+
+            const first_game_box = document.querySelector(".game_1");
+            console.log(first_game_box);
+            first_game_box.style.right = "20px";
+            first_game_box.style.opacity = "0%";
+            first_game_box.style.filter = "blur(1.5rem)";
+            setTimeout(() => {
+                first_game_box.style.right = "0px";
+                first_game_box.style.opacity = "100%";
+                first_game_box.style.filter = "blur(0)";
+            }, 200);
+
             index2 -= 1;
             counter2 -= 1;
             if (counter2 !== game_names.length - 4) {
@@ -420,18 +443,21 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
     function click_right_arrow() {
 
+
         if (counter === genre_names.length - 4) {
             document.querySelector("#second_arrow").style.backgroundColor = "gray";
             document.querySelector("#second_arrow").removeEventListener("click", click_right_arrow)
         }
         else {
 
-            const fourth_box = document.getElementById("fourth_genra");
-            fourth_box.style.left = "25px";
-            fourth_box.style.opacity = "0%";
+            const fourth_genre_box = document.getElementById("fourth_genra");
+            fourth_genre_box.style.left = "20px";
+            fourth_genre_box.style.opacity = "0%";
+            fourth_genre_box.style.filter = "blur(1.5rem)";
             setTimeout(() => {
-                fourth_box.style.left = "0px";
-                fourth_box.style.opacity = "100%";
+                fourth_genre_box.style.left = "0px";
+                fourth_genre_box.style.opacity = "100%";
+                fourth_genre_box.style.filter = "blur(0)";
             }, 200);
 
 
@@ -457,16 +483,29 @@ export async function genre_scroll() { // Scroll function for the displayed genr
                 all_dom_boxes[i].style.backgroundImage = `url(${the_new_genre_images[i]})`
                 all_dom_boxes[i].innerHTML = `
                 <div class="genre_text_wrapper">
-                  <div class="genre_text">${the_new_genre_names[i]}</div>
+                <div class="genre_text">${the_new_genre_names[i]}</div>
                 </div>
                 
-            `;
+                `;
             }
+            const genre_scroll_names = document.querySelectorAll(".genre_text");
+            genre_scroll_names.forEach(genre_dom => {
+                const genre_name = genre_dom.textContent;
+                if (localStorage.getItem("selected_genre") === genre_name) {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
+                    genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                } else {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1)";
+                    genre_dom.parentElement.parentElement.style.border = "none";
+                }
+            })
         }
     }
 
 
     function click_left_arrow(event) {
+        console.log("hej");
+
         if (counter === 0) {
             document.querySelector("#first_arrow").style.backgroundColor = "gray";
             document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
@@ -476,9 +515,11 @@ export async function genre_scroll() { // Scroll function for the displayed genr
             const first_box = document.getElementById("first_genra");
             first_box.style.right = "25px";
             first_box.style.opacity = "0%";
+            first_box.style.filter = "blur(1.5rem)";
             setTimeout(() => {
                 first_box.style.right = "0px";
                 first_box.style.opacity = "100%";
+                first_box.style.filter = "blur(0)";
             }, 200);
 
             index -= 1;
@@ -559,8 +600,8 @@ export function registration_notification(dialog_box_text, action) {
     registration_dialog.style.backgroundColor = "white";
     registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
     const registration_notification_container = document.createElement("div");
-    
-    if(action === "account_management"){
+
+    if (action === "account_management") {
         registration_notification_container.className = "account_management";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -570,7 +611,7 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === "show_options_blocked"){
+    if (action === "show_options_blocked") {
         registration_notification_container.className = "show_options";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -578,7 +619,7 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === "show_options_unblocked"){
+    if (action === "show_options_unblocked") {
         registration_notification_container.className = "show_options";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -586,7 +627,7 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === "registration_notification"){
+    if (action === "registration_notification") {
         registration_notification_container.className = "registration_notification";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
