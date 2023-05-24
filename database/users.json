@@ -50,6 +50,56 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/e61\/e61f516a8a17eaa80ce484e5fd751e5b.jpg"
             }
         ],
-        "id": 2
+
+        "id": 3,
+        "pending": [],
+        "friends": [
+            "adamcheaib",
+            "calle"
+        ]
+    },
+    {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Skater XL",
+                "image": "https:\/\/media.rawg.io\/media\/games\/b95\/b957080fc9e91b2c781618f207e69846.jpg"
+            }
+        ],
+        "id": 6,
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "profile_comments": [
+            {
+                "message": "ge",
+                "timestamp": "2023-05-22 14:21:32"
+            },
+            {
+                "message": "ge",
+                "timestamp": "2023-05-22 14:21:53"
+            },
+            {
+                "message": "gr",
+                "timestamp": "2023-05-23 09:52:22"
+            }
+        ],
+        "pending": [],
+        "friends": [
+            "adamcheaib",
+            "eeee"
+        ],
+        "blocked": [
+            "aaaa",
+            "eqqq"
+        ]
+
+        
+
     }
 ]
