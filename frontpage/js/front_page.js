@@ -8,7 +8,7 @@ import { search_popup } from "./search_game.js";
 
 
 if (!window.localStorage.hasOwnProperty("username")) {
-    window.location.replace("http://localhost:1234/login_register");
+    window.location.replace("./login_register");
 }
 else {
     if (localStorage.getItem("selected_genre") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
@@ -107,7 +107,22 @@ export function init_frontpage() {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
             game_scroll();
+            genre.style.border = "2px solid white";
+
+            const genre_scroll_names = document.querySelectorAll(".genre_text");
+            genre_scroll_names.forEach(genre_dom => {
+                const genre_name = genre_dom.textContent;
+                if (localStorage.getItem("selected_genre") === genre_name) {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
+                    genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                } else {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1)";
+                    genre_dom.parentElement.parentElement.style.border = "none";
+                }
+            })
         });
+
+
     })
 
     document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
@@ -116,6 +131,15 @@ export function init_frontpage() {
         platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id);
+            if (platform.dataset.id === localStorage.getItem("platform_selected")) {
+                platform.parentElement.querySelectorAll("div").forEach(other_platforms => {
+                    other_platforms.style.border = "none";
+                    other_platforms.style.transform = "scale(1)";
+                })
+                platform.style.transform = "scale(1.1)";
+                platform.style.border = "white 1px solid";
+            }
+
             game_scroll();
         })
     })
@@ -126,15 +150,15 @@ export function init_frontpage() {
     search_icon_button.addEventListener("click", search_popup);
 
     document.querySelector("button").addEventListener("click", () => {
-        console.log("click");
         localStorage.clear();
         window.location.replace("./login_register");
     })
+
 }
 
 document.querySelector("#settings").addEventListener("click", show_settings)
 
-function show_settings(event){
+function show_settings(event) {
     console.log(event);
     registration_notification("Manage Account", "account_management");
     document.querySelector("#change_username").addEventListener("click", new_value);
@@ -147,7 +171,7 @@ function show_settings(event){
     }))
 }
 
-function new_value(event){
+function new_value(event) {
     event.target.parentElement.style.height = "40vh"
     let parent = event.target.parentElement;
     let paragraph = document.createElement("p");
@@ -157,9 +181,9 @@ function new_value(event){
     let button = document.createElement("button")
     button.textContent = "Submit!"
 
-    if(event.target.textContent === "Change Username"){
+    if (event.target.textContent === "Change Username") {
         button.setAttribute("id", "change_username")
-    }else{
+    } else {
         button.setAttribute("id", "change_password")
     }
     parent.append(paragraph);
@@ -168,30 +192,30 @@ function new_value(event){
     button.addEventListener("click", change_username_password)
 }
 
-function change_username_password(event){ 
+function change_username_password(event) {
     //MÅSTE FIVA SKITEN
     let action;
     let check = event.target.id;
     let user = localStorage.getItem("username");
     let changed_value = document.querySelector("input").value;
-    console.log(localStorage); 
+    console.log(localStorage);
 
-    if(check === "change_username"){
+    if (check === "change_username") {
         fetch("../../../../database/users.json")
             .then(resource => resource.json())
             .then(users => {
-                for(let i = 0; i < users.length; i++){
+                for (let i = 0; i < users.length; i++) {
                     console.log(users[i]);
                     console.log(changed_value);
-                    if(users[i].username === changed_value){
+                    if (users[i].username === changed_value) {
                         document.getElementById("changed_message").textContent = "Username already taken, try another one!"
                         console.log("AJAJAJ");
                         return false;
                     }
                 }
             })
-            action = "change_username"        
-    }else{
+        action = "change_username"
+    } else {
         action = "change_password"
     }
 
@@ -211,8 +235,8 @@ function change_username_password(event){
             console.log(data)
             document.getElementById("changed_message").textContent = "Success!"
         })
-        localStorage.setItem("username", changed_value);
-        //location.reload();
-        console.log(localStorage);  
+    localStorage.setItem("username", changed_value);
+    //location.reload();
+    console.log(localStorage);
 }
 
