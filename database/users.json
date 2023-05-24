@@ -1,21 +1,5 @@
 [
     {
-        "username": "adam",
-        "password": "eeee",
-        "favorite_games": [
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            }
-        ],
-        "id": 1,
-        "pending": [],
-        "friends": [
-            "adam",
-            "eqqq"
-        ]
-    },
-    {
         "username": "adamcheai",
         "password": "adamcheaib",
         "favorite_games": [
@@ -57,7 +41,6 @@
         ],
         "id": 2,
         "friends": [
-            "eeee",
             "eqqq",
             "qeqe"
         ],
@@ -86,5 +69,11 @@
         "friends": [
             "adam"
         ]
+    },
+    {
+        "username": "aaaa",
+        "password": "aaaa",
+        "favorite_games": [],
+        "id": 5
     }
 ]

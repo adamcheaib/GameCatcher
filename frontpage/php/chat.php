@@ -36,52 +36,54 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     }
     
-
-    for ($i = 0; $i < count($chat_database); $i++) {
-        
-        $loggedOnUserId = $toSend["loggedID"];
-        $chatTargetUserId =  $toSend["user2_id"];
-       
-        $highest_id = $chat_database[$i]["chatid"];
-        
-        if($chat_database[$i]["chat_between"][0] == $loggedOnUserId and $chat_database[$i]["chat_between"][1] == $chatTargetUserId){
-           sendJSON($toSend);
-        } 
-        if($chat_database[$i]["chat_between"][1] == $loggedOnUserId and $chat_database[$i]["chat_between"][0] == $chatTargetUserId){
-            sendJSON($toSend);
+    $loggedOnUserId = $toSend["loggedID"];
+    $chatTargetUserId =  $toSend["user2_id"];
+    
+    if(count($chat_database) !== 0) {
+        for ($i = 0; $i < count($chat_database); $i++) {
+            
+            
+            $highest_id = $chat_database[$i]["chatid"];
+            
+            if($chat_database[$i]["chat_between"][0] == $loggedOnUserId and $chat_database[$i]["chat_between"][1] == $chatTargetUserId){
+               sendJSON($toSend);
+            } 
+            if($chat_database[$i]["chat_between"][1] == $loggedOnUserId and $chat_database[$i]["chat_between"][0] == $chatTargetUserId){
+                sendJSON($toSend);
+            }
+            
         }
-        
-    }
         // Creates a one if it does not exits
-        if(count($chat_database) !== 0){
-            $chatlog = [
-                    "chatid" => $highest_id + 1,
-                    "chat_between" => [ 
-                        $loggedOnUserId,
-                        $chatTargetUserId
-                    ],
-                    "chatlog" => []
-                ];
-            
-            $chat_database[] = $chatlog;
-            file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));   
-        }
+    
+        $chatlog = [
+                "chatid" => $highest_id + 1,
+                "chat_between" => [ 
+                    $loggedOnUserId,
+                    $chatTargetUserId
+                ],
+                "chatlog" => []
+            ];
+        
+        $chat_database[] = $chatlog;
+        file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));   
+                
+    }
         
 
-        if(count($chat_database) === 0){
-            $chatlog = [
-                    "chatid" => 1,
-                    "chat_between" => [ 
-                        $loggedOnUserId,
-                        $chatTargetUserId
-                    ],
-                    "chatlog" => []
-                ];
-            
-            $chat_database[] = $chatlog;
-            file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));   
-            sendJSON($toSend);
-        }
+    if(count($chat_database) === 0){
+        $chatlog = [
+                "chatid" => 1,
+                "chat_between" => [ 
+                    $loggedOnUserId,
+                    $chatTargetUserId
+                ],
+                "chatlog" => []
+            ];
+        
+        $chat_database[] = $chatlog;
+        file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));   
+        sendJSON($toSend);
+    }
         
     
 }
