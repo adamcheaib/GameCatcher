@@ -6,7 +6,8 @@
             3
         ],
         "chatlog": [
-            "fdsfsdf"
+            "fdsfsdf",
+            "fdsfdsfd"
         ]
     },
     {
@@ -16,7 +17,19 @@
             4
         ],
         "chatlog": [
-            "fdsfdsfsdfs"
+            "fdsfdsfsdfs",
+            "dsadasd"
+        ]
+    },
+    {
+        "chatid": 3,
+        "chat_between": [
+            2,
+            5
+        ],
+        "chatlog": [
+            "fdsfdsfds",
+            "wwww eyyyy"
         ]
     }
 ]
