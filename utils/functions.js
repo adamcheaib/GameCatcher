@@ -442,8 +442,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
 
     function click_right_arrow() {
-
-
         if (counter === genre_names.length - 4) {
             document.querySelector("#second_arrow").style.backgroundColor = "gray";
             document.querySelector("#second_arrow").removeEventListener("click", click_right_arrow)
@@ -512,6 +510,7 @@ export async function genre_scroll() { // Scroll function for the displayed genr
         }
         else {
 
+
             const first_box = document.getElementById("first_genra");
             first_box.style.right = "25px";
             first_box.style.opacity = "0%";
@@ -556,8 +555,20 @@ export async function genre_scroll() { // Scroll function for the displayed genr
                 <div class="genre_text">${the_new_genre_names[i]}</div>
                 </div>
                 
-            `;
+                `;
             }
+
+            const genre_scroll_names = document.querySelectorAll(".genre_text");
+            genre_scroll_names.forEach(genre_dom => {
+                const genre_name = genre_dom.textContent;
+                if (localStorage.getItem("selected_genre") === genre_name) {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
+                    genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                } else {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1)";
+                    genre_dom.parentElement.parentElement.style.border = "none";
+                }
+            })
 
         }
     }

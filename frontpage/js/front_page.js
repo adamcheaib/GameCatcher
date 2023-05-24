@@ -107,6 +107,19 @@ export function init_frontpage() {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
             game_scroll();
+            genre.style.border = "2px solid white";
+
+            const genre_scroll_names = document.querySelectorAll(".genre_text");
+            genre_scroll_names.forEach(genre_dom => {
+                const genre_name = genre_dom.textContent;
+                if (localStorage.getItem("selected_genre") === genre_name) {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
+                    genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                } else {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1)";
+                    genre_dom.parentElement.parentElement.style.border = "none";
+                }
+            })
         });
     })
 
@@ -117,11 +130,13 @@ export function init_frontpage() {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id);
             if (platform.dataset.id === localStorage.getItem("platform_selected")) {
-                platform.style.border = "white 1px solid";
+                platform.parentElement.querySelectorAll("div").forEach(other_platforms => {
+                    other_platforms.style.border = "none";
+                    other_platforms.style.transform = "scale(1)";
+                })
                 platform.style.transform = "scale(1.1)";
-            } else {
-                platform.style.transform = "scale(1)";
-                platform.style.border = "none";
+                platform.style.border = "white 1px solid";
+                console.log("SUCCESS");
             }
 
             game_scroll();
