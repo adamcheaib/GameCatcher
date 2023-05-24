@@ -3,7 +3,9 @@ import { searched_game_information } from "../../utils/fetch_functions.js";
 import { general_notifications, general_notifications_search } from "../../utils/functions.js";
 
 export async function search_popup(event) {
-
+    if (document.querySelector(".display_game_dom") != null) {
+        document.querySelector(".display_game_dom").remove(); // Tar bort spel informationen (som finns till höger) om man har klickat på ett spel utanför search function
+    }
     const dialog_dom = document.createElement("dialog");
     document.body.appendChild(dialog_dom);
     dialog_dom.id = "search_dialog";
@@ -100,7 +102,7 @@ export async function search_popup(event) {
                         const notification = document.createElement("span");
                         parentNode.insertBefore(notification, parentNode.querySelector("h2"));
                         notification.id = "game_collection_notification";
-                        notification.style.flexGrow = "1";
+                        notification.style.gridColumn = "1 / 3";
                         notification.style.textAlign = "center";
 
                         if (event.target.textContent === "Add to liked games") {
@@ -115,7 +117,7 @@ export async function search_popup(event) {
                                 body: JSON.stringify(send_object),
                             }).then(r => r.json()).then(data => {
                                 console.log(data);
-                                general_notifications();
+                                console.log("Helo!");
                             });
 
                             notification.textContent = "Added to your list!";
@@ -173,7 +175,7 @@ export async function search_popup(event) {
     search_button.addEventListener("click", init_search);
 
     const close_button = dialog_dom.querySelector("#dialogCloseButtonContainer > span");
-    close_button.addEventListener("click", () => dialog_dom.close());
+    close_button.addEventListener("click", () => dialog_dom.remove());
 
 }
 
