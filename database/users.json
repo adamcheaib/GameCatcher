@@ -30,7 +30,6 @@
         "id": 3
     },
     {
-
         "username": "adam",
         "password": "adam",
         "favorite_games": [
@@ -59,10 +58,7 @@
         ]
     },
     {
-        "username": "adam",
-
         "username": "calle",
-
         "password": "calle",
         "favorite_games": [
             {
@@ -96,11 +92,8 @@
         "friends": [
             "adam",
             "eqqq"
-
         ],
         "blocked": []
-
-        
     },
     {
         "username": "adam",
@@ -125,6 +118,11 @@
             "adamcheaib",
             "calle"
         ]
-
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [],
+        "id": 7
     }
 ]
