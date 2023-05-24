@@ -30,6 +30,7 @@
         "id": 3
     },
     {
+
         "username": "adam",
         "password": "adam",
         "favorite_games": [
@@ -59,6 +60,9 @@
     },
     {
         "username": "adam",
+
+        "username": "calle",
+
         "password": "calle",
         "favorite_games": [
             {
@@ -92,7 +96,35 @@
         "friends": [
             "adam",
             "eqqq"
+
         ],
         "blocked": []
+
+        
+    },
+    {
+        "username": "adam",
+        "password": "adam",
+        "favorite_games": [
+            {
+                "name": "Monster Hunter: World",
+                "image": "https:\/\/media.rawg.io\/media\/games\/21c\/21cc15d233117c6809ec86870559e105.jpg"
+            },
+            {
+                "name": "Monster Hunter Stories 2: Wings of Ruin",
+                "image": "https:\/\/media.rawg.io\/media\/games\/f79\/f79662d3267e50434ab6c674d47aa1f1.jpg"
+            },
+            {
+                "name": "World of Warcraft: Legion",
+                "image": "https:\/\/media.rawg.io\/media\/games\/e61\/e61f516a8a17eaa80ce484e5fd751e5b.jpg"
+            }
+        ],
+        "id": 3,
+        "pending": [],
+        "friends": [
+            "adamcheaib",
+            "calle"
+        ]
+
     }
 ]

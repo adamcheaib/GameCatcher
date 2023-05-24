@@ -3,7 +3,9 @@ import { searched_game_information } from "../../utils/fetch_functions.js";
 import { general_notifications, general_notifications_search } from "../../utils/functions.js";
 
 export async function search_popup(event) {
-
+    if (document.querySelector(".display_game_dom") != null) {
+        document.querySelector(".display_game_dom").remove(); // Tar bort spel informationen (som finns till höger) om man har klickat på ett spel utanför search function
+    }
     const dialog_dom = document.createElement("dialog");
     document.body.appendChild(dialog_dom);
     dialog_dom.id = "search_dialog";
@@ -44,10 +46,19 @@ export async function search_popup(event) {
                 game_box.addEventListener("click", display_searched_game_information);
 
                 async function display_searched_game_information(event) {
-                    const searched_game_dialog = document.createElement("dialog");
                     let response = await searched_game_information(game.name);
-
                     let the_clicked_game = response.results[0];
+
+                    const user_favorite_library = await (await fetch("../login_register/php/user_database.php",
+                        {
+                            method: "PATCH",
+                            headers: { "Content-type": "application/json" },
+                            body: JSON.stringify({ username: localStorage.getItem("username"), action: "favorite_library" })
+                        })).json();
+
+
+
+                    const searched_game_dialog = document.createElement("dialog");
 
                     let the_ratings = "";
 
@@ -64,43 +75,50 @@ export async function search_popup(event) {
 
                     searched_game_dialog.id = "searched_game_dialog";
                     searched_game_dialog.innerHTML = `
-                        <div class="searched_game_information">
-
-                            <div id="add_to_collection_container">
-                                <div id="liked_games_button">Add to liked games</div>
-                                <div class="search_game_dialog_close_button">X</div>
-                            </div>
-                        
-                            <h2>${the_clicked_game.name}</h2>
-                            <div id="gmage" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
-                            
-                            <div id="gext" class="searched_game_text">
-                                This game is really good wow i really like it, dam it makes me feel  pretty cool. I like Minecraft.
-                            </div>
-                        
-                            <div id="rating_header">Rating</div>
-                        
-                                <div id="wrapper_ratings">
-                                    ${the_ratings}
-                                </div>
-                        
-                            <div id="rating_names_wrapper">
-                                <div class="rating_name">${1}</div>
-                            </div>                       
-
-                            <div id="gameplay"></div>
-                        </div> 
-                        `
+                    <div class="searched_game_information">
+                    
+                    <div id="add_to_collection_container">
+                    <div id="liked_games_button">Add to liked games</div>
+                    <div class="search_game_dialog_close_button">X</div>
+                    </div>
+                    
+                    <h2>${the_clicked_game.name}</h2>
+                    <div id="gmage" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
+                    
+                    <div id="gext" class="searched_game_text">
+                    This game is really good wow i really like it, dam it makes me feel  pretty cool. I like Minecraft.
+                    </div>
+                    
+                    <div id="rating_header">Rating</div>
+                    
+                    <div id="wrapper_ratings">
+                    ${the_ratings}
+                    </div>
+                    
+                    <div id="rating_names_wrapper">
+                    <div class="rating_name">${1}</div>
+                    </div>                       
+                    
+                    <div id="gameplay"></div>
+                    </div> 
+                    `;
 
                     dialog_dom.appendChild(searched_game_dialog);
                     searched_game_dialog.showModal();
-                    document.querySelector("#liked_games_button").addEventListener("click", async (event) => {
+                    const like_or_remove_button = document.getElementById("liked_games_button");
+                    console.log(like_or_remove_button);
 
+                    user_favorite_library.fav_games.forEach(game => {
+                        if (game.name === the_clicked_game.name) {
+                            like_or_remove_button.textContent = "Remove game from collection";
+                        }
+                    })
+                    document.querySelector("#liked_games_button").addEventListener("click", async (event) => {
                         const parentNode = event.target.parentNode;
                         const notification = document.createElement("span");
                         parentNode.insertBefore(notification, parentNode.querySelector("h2"));
                         notification.id = "game_collection_notification";
-                        notification.style.flexGrow = "1";
+                        notification.style.gridColumn = "1 / 3";
                         notification.style.textAlign = "center";
 
                         if (event.target.textContent === "Add to liked games") {
@@ -115,7 +133,7 @@ export async function search_popup(event) {
                                 body: JSON.stringify(send_object),
                             }).then(r => r.json()).then(data => {
                                 console.log(data);
-                                general_notifications();
+                                console.log("Helo!");
                             });
 
                             notification.textContent = "Added to your list!";
@@ -131,7 +149,7 @@ export async function search_popup(event) {
                         } else {
                             let body_for_fetch = {
                                 username: localStorage.getItem("username"),
-                                the_game_to_delete: localStorage.getItem("selected_game"),
+                                the_game_to_delete: the_clicked_game.name,
                             }
 
                             let response = await fetch("./frontpage/php/game_collection.php", {
@@ -173,7 +191,7 @@ export async function search_popup(event) {
     search_button.addEventListener("click", init_search);
 
     const close_button = dialog_dom.querySelector("#dialogCloseButtonContainer > span");
-    close_button.addEventListener("click", () => dialog_dom.close());
+    close_button.addEventListener("click", () => dialog_dom.remove());
 
 }
 
