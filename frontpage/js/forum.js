@@ -1,6 +1,7 @@
 import { init_frontpage } from "./front_page.js";
 import { init_collection } from "./game_collection.js";
 import { fetch_all_chats } from "../../utils/functions.js";
+import { stop_all_timeouts } from "../../utils/functions.js";
 if (localStorage.getItem("counter_for_forum") === null) {
     localStorage.setItem("counter_for_forum", 0);
 }
@@ -8,6 +9,10 @@ if (localStorage.getItem("counter_for_forum") === null) {
 export function init_forum() {
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "forum");
+
+    localStorage.removeItem("all_timeouts");
+    localStorage.setItem("all_timeouts", []);
+
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
@@ -69,11 +74,13 @@ async function get_all_friends() {
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
     async function the_whole_juser_element_gets_click_event() {
 
-        document.querySelectorAll(".profile_dom").forEach(profile_dom => {
-
+        document.querySelectorAll(".profile_dom").forEach((profile_dom,index) => {
             profile_dom.classList.remove("selected");
 
             profile_dom.addEventListener("click", fetch_all_chats);
+            profile_dom.addEventListener("click", () => {
+                stop_all_timeouts(localStorage.getItem("all_timeouts"));
+            });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
             profile_dom.addEventListener("click", async (event) => {

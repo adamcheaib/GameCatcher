@@ -764,17 +764,19 @@ export async function fetch_all_chats(event) {
         }
         
         
-        let interval_id = setTimeout(async () => {
+        let timeout_id = setTimeout(async () => {
             if(localStorage.getItem("where_att") !== "forum"){
-                stop_intervals(interval_id);   
+                stop_all_timeouts(localStorage.getItem("all_timeouts"));   
             }
             document.querySelector("#forum_display").innerHTML = "";
             fetch_all_chats(event)
         }, 5000);
-        
-        function stop_intervals(interval_id){
-            clearTimeout(interval_id);
-        }
+        localStorage.getItem("all_timeouts").push(timeout_id);
+    }
+    export function stop_all_timeouts(timeout_id_array){
+        timeout_id_array.forEach(timeout_id => {
+            clearTimeout(timeout_id);
+        });
     }
 
 

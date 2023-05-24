@@ -5,7 +5,8 @@ import { game_scroll, genre_scroll, registration_notification, } from "../../uti
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
-
+localStorage.removeItem("all_timeouts");
+localStorage.setItem("all_timeouts", []);
 
 if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
@@ -23,8 +24,12 @@ else {
 
 
 export function init_frontpage() {
+
+
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "frontpage");
+
+  
     document.body.innerHTML = "";
 
     document.querySelector("link").setAttribute("href", "./frontpage/css/frontpage.css");
