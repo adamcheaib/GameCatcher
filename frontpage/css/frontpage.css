@@ -167,7 +167,7 @@ p {
     border-radius: 20px;
     background-color: gray;
     position: relative;
-    transition-property: transform, right, top, opacity;
+    transition-property: transform, right, filter, border;
 }
 
 #second_genra {
@@ -197,7 +197,7 @@ p {
     border-radius: 20px;
     background-color: gray;
     position: relative;
-    transition-property: transform, left, top, opacity;
+    transition-property: transform, left, filter;
 }
 
 #first_arrow,
@@ -271,6 +271,13 @@ p {
     width: 200px;
     height: 200px;
     border-radius: 12px;
+}
+
+.game_1,
+.game_4 {
+    transition-property: left, right, transform, filter;
+    transition-duration: 200ms;
+    position: relative;
 }
 
 .gamesSearchResults {

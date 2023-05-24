@@ -124,6 +124,19 @@
                     exit();
                 }
             }
+
+            // Denna biten kod körs om användaren inte har några vänner sen tidgare
+             for ($w = 0; $w < count($all_users); $w++) { 
+                if($all_users[$w]["username"] === $fetch_data["added_friend_username2"]){
+                    $all_friends = [];
+                    header("Content-Type: application/json");
+                    $all_friends[] = $fetch_data["logged_in_user"];
+                    $all_users[$w]["friends"] = $all_friends;
+                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                    echo json_encode($all_friends);
+                    exit();
+                }
+            }
         }
 
     }
