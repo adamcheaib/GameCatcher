@@ -267,8 +267,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
         })
     }
 
-    console.log(localStorage);
-
     async function click_left_arrow(event) {
 
 
@@ -442,8 +440,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
 
     function click_right_arrow() {
-
-
         if (counter === genre_names.length - 4) {
             document.querySelector("#second_arrow").style.backgroundColor = "gray";
             document.querySelector("#second_arrow").removeEventListener("click", click_right_arrow)
@@ -512,6 +508,7 @@ export async function genre_scroll() { // Scroll function for the displayed genr
         }
         else {
 
+
             const first_box = document.getElementById("first_genra");
             first_box.style.right = "25px";
             first_box.style.opacity = "0%";
@@ -556,8 +553,20 @@ export async function genre_scroll() { // Scroll function for the displayed genr
                 <div class="genre_text">${the_new_genre_names[i]}</div>
                 </div>
                 
-            `;
+                `;
             }
+
+            const genre_scroll_names = document.querySelectorAll(".genre_text");
+            genre_scroll_names.forEach(genre_dom => {
+                const genre_name = genre_dom.textContent;
+                if (localStorage.getItem("selected_genre") === genre_name) {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
+                    genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                } else {
+                    genre_dom.parentElement.parentElement.style.transform = "scale(1)";
+                    genre_dom.parentElement.parentElement.style.border = "none";
+                }
+            })
 
         }
     }
@@ -593,7 +602,6 @@ export function remove_message(event) {
 }
 
 export function registration_notification(dialog_box_text, action) {
-    console.log(action);
     const registration_dialog = document.createElement("dialog");
     registration_dialog.style.height = "100vh";
     registration_dialog.style.width = "100vw";
@@ -677,4 +685,18 @@ export function general_notifications_search(event) {
     setTimeout(() => {
         notification.remove();
     }, 2300);
+}
+
+
+export async function fetch_all_chats(event) {
+
+
+
+    setInterval(async () => {
+        console.log("hello")
+    }, 5000);
+
+
+
+
 }
