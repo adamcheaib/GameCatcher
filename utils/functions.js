@@ -763,10 +763,19 @@ export async function fetch_all_chats(event) {
             })
         }
         
-        setInterval(async () => {
+        
+        let interval_id = setInterval(async () => {
+            if(localStorage.getItem("where_att") !== "forum"){
+                stop_intervals(interval_id);   
+            }
+            document.querySelector("#forum_display").innerHTML = "";
             fetch_all_chats(event)
         }, 5000);
+        
+        function stop_intervals(interval_id){
+            clearInterval(interval_id);
+        }
+    }
 
-}
 
 

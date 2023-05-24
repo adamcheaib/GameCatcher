@@ -23,6 +23,8 @@ else {
 
 
 export function init_frontpage() {
+    localStorage.removeItem("where_att");
+    localStorage.setItem("where_att", "frontpage");
     document.body.innerHTML = "";
 
     document.querySelector("link").setAttribute("href", "./frontpage/css/frontpage.css");

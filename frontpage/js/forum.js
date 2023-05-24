@@ -6,6 +6,8 @@ if (localStorage.getItem("counter_for_forum") === null) {
 }
 
 export function init_forum() {
+    localStorage.removeItem("where_att");
+    localStorage.setItem("where_att", "forum");
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }

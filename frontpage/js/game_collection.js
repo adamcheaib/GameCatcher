@@ -2,6 +2,8 @@ import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 
 export async function init_collection() {
+    localStorage.setItem("where_att", "game_collection");
+
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
