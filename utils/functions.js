@@ -211,6 +211,9 @@ export async function game_scroll() { // Scroll function for the displayed genre
             document.querySelector("#second_arrow2").removeEventListener("click", click_right_arrow)
         }
         else {
+
+            console.log("hej");
+
             index2 += 1;
             counter2 += 1;
             if (counter2 !== 0) {
@@ -422,6 +425,16 @@ export async function genre_scroll() { // Scroll function for the displayed genr
             document.querySelector("#second_arrow").removeEventListener("click", click_right_arrow)
         }
         else {
+
+            const fourth_box = document.getElementById("fourth_genra");
+            fourth_box.style.left = "25px";
+            fourth_box.style.opacity = "0%";
+            setTimeout(() => {
+                fourth_box.style.left = "0px";
+                fourth_box.style.opacity = "100%";
+            }, 200);
+
+
             index += 1;
             counter += 1;
             if (counter !== 0) {
@@ -459,6 +472,15 @@ export async function genre_scroll() { // Scroll function for the displayed genr
             document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
         }
         else {
+
+            const first_box = document.getElementById("first_genra");
+            first_box.style.right = "25px";
+            first_box.style.opacity = "0%";
+            setTimeout(() => {
+                first_box.style.right = "0px";
+                first_box.style.opacity = "100%";
+            }, 200);
+
             index -= 1;
             counter -= 1;
             if (counter !== genre_names.length - 4) {
