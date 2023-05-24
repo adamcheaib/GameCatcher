@@ -11,7 +11,7 @@ export function init_forum() {
     localStorage.setItem("where_att", "forum");
 
     localStorage.removeItem("all_timeouts");
-    localStorage.setItem("all_timeouts", []);
+    localStorage.setItem("all_timeouts", JSON.stringify({timeouts: []}));
 
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
@@ -75,23 +75,20 @@ async function get_all_friends() {
     async function the_whole_juser_element_gets_click_event() {
 
         document.querySelectorAll(".profile_dom").forEach((profile_dom,index) => {
-            profile_dom.classList.remove("selected");
+            profile_dom.classList.add("unselected");
 
             profile_dom.addEventListener("click", fetch_all_chats);
-            profile_dom.addEventListener("click", () => {
-                stop_all_timeouts(localStorage.getItem("all_timeouts"));
-            });
         })
         document.querySelectorAll(".profile_picture").forEach(profile_dom => {
             profile_dom.addEventListener("click", async (event) => {
-                console.log(event.target.parentElement.querySelector(".username").innerHTML)
+                profile_dom.addEventListener("click", fetch_all_chats);
                 event.stopImmediatePropagation();
             });
         })
 
         document.querySelectorAll(".username").forEach(profile_dom => {
             profile_dom.addEventListener("click", async (event) => {
-                console.log(event.target.parentElement.querySelector(".username").innerHTML)
+                profile_dom.addEventListener("click", fetch_all_chats);
                 event.stopImmediatePropagation();
             });
         })

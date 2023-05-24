@@ -771,13 +771,17 @@ export async function fetch_all_chats(event) {
             document.querySelector("#forum_display").innerHTML = "";
             fetch_all_chats(event)
         }, 5000);
-        localStorage.getItem("all_timeouts").push(timeout_id);
+        let new_push_for_array_timeout = JSON.parse(localStorage.getItem("all_timeouts")).timeouts.push(timeout_id);
+        localStorage.removeItem("all_timeouts");
+        localStorage.setItem(all_timeouts, JSON.stringify(new_push_for_array_timeout));
     }
-    export function stop_all_timeouts(timeout_id_array){
+    export function stop_all_timeouts(timeout_id_array){ // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
         timeout_id_array.forEach(timeout_id => {
             clearTimeout(timeout_id);
         });
     }
+
+    
 
 
 

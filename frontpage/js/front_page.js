@@ -5,8 +5,9 @@ import { game_scroll, genre_scroll, registration_notification, } from "../../uti
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
-localStorage.removeItem("all_timeouts");
-localStorage.setItem("all_timeouts", []);
+if(localStorage.getItem("all_timeouts") != null){
+    localStorage.setItem("all_timeouts", JSON.stringify({timeouts: [1]}));
+}
 
 if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
