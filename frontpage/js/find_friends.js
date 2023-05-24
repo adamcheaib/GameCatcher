@@ -12,6 +12,9 @@ export async function init_friends_page() {
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
+    if (document.querySelector(".friends_list") !== null) {
+        document.querySelector(".friends_list").remove();
+    }
     document.querySelector("link").setAttribute("href", "./frontpage/css/friends_page.css");
 
     document.querySelector("#center_piece").innerHTML = `
@@ -27,6 +30,7 @@ export async function init_friends_page() {
 
     show_my_friends()
 
+    document.querySelector("#chat").addEventListener("click", init_forum);
     document.querySelector("#add_friends").addEventListener("click", init_add_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }

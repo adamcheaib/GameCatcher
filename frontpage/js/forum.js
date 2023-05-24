@@ -8,6 +8,7 @@ export function init_forum() {
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
+    document.querySelector("#chat").removeEventListener("click", init_forum);
     document.querySelector("link").setAttribute("href", "./frontpage/css/forum.css");
     let friends_list = document.createElement("div");
     friends_list.classList.add("friends_list");
@@ -18,9 +19,9 @@ export function init_forum() {
     `;
 
     document.querySelector("#frontpage_wrapper").appendChild(friends_list)
+
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
-    document.querySelector("#chat").addEventListener("click", init_forum);
     get_all_friends();
     create_post();
 

@@ -5,6 +5,10 @@ export async function init_collection() {
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
+    if (document.querySelector(".friends_list") !== null) {
+        document.querySelector(".friends_list").remove();
+    }
+
     document.querySelector("link").setAttribute("href", "./frontpage/css/collection.css");
 
     document.querySelector("#center_piece").innerHTML = `
@@ -33,7 +37,6 @@ export async function init_collection() {
         document.querySelector(".collection_grid_container").appendChild(a_favorite_game_dom);
     }
 
-    document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
 
