@@ -764,7 +764,7 @@ export async function fetch_all_chats(event) {
         }
         
         
-        let interval_id = setInterval(async () => {
+        let interval_id = setTimeout(async () => {
             if(localStorage.getItem("where_att") !== "forum"){
                 stop_intervals(interval_id);   
             }
@@ -773,7 +773,7 @@ export async function fetch_all_chats(event) {
         }, 5000);
         
         function stop_intervals(interval_id){
-            clearInterval(interval_id);
+            clearTimeout(interval_id);
         }
     }
 
