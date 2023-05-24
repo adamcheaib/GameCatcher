@@ -78,11 +78,11 @@ function show_game_display_dom(game_data) {
                 body: JSON.stringify(send_object),
             }).then(r => r.json()).then(data => {
                 console.log(data);
-                general_notifications();
             });
 
             notification.textContent = "Added to your list!";
-            notification.style.color = "green";
+            notification.style.color = "lightgreen";
+            notification.style.fontWeight = "bold";
             console.log(parentNode);
             event.target.textContent = "Remove game from your list";
 
@@ -103,6 +103,7 @@ function show_game_display_dom(game_data) {
 
             notification.textContent = "Removed from your list!";
             notification.style.color = "red";
+            notification.style.fontWeight = "bold";
             event.target.textContent = "Add to liked games";
 
             event.target.style.pointerEvents = "none";
@@ -354,30 +355,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
                     like_or_remove_button.textContent = "Remove game from collection";
                 }
             })
-
-            // user_favorite_library.fav_games.forEach(game => {
-            //     if (game.name === localStorage.getItem("selected_game")) {
-            //         document.getElementById("liked_games_button").remove();
-            //         const remove_game_from_collection_button = document.createElement("div");
-            //         remove_game_from_collection_button.style.fontSize = "30px";
-            //         remove_game_from_collection_button.innerHTML = "&#128465;";
-            //         remove_game_from_collection_button.id = "liked_games_button";
-            //         document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
-
-            //         remove_game_from_collection_button.addEventListener("click", async () => {
-            //             let body_for_fetch = {
-            //                 username: localStorage.getItem("username"),
-            //                 the_game_to_delete: localStorage.getItem("selected_game"),
-            //             }
-
-            //             let response = await fetch("./frontpage/php/game_collection.php", {
-            //                 method: "DELETE",
-            //                 headers: { "Content-Type": "application/json" },
-            //                 body: JSON.stringify(body_for_fetch),
-            //             });
-            //         })
-            //     }
-            // })
         })
     })
 }
@@ -537,8 +514,8 @@ export function registration_notification(dialog_box_text, action) {
     registration_dialog.style.backgroundColor = "white";
     registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
     const registration_notification_container = document.createElement("div");
-    
-    if(action === "account_management"){
+
+    if (action === "account_management") {
         registration_notification_container.className = "account_management";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -548,7 +525,7 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === "show_options"){
+    if (action === "show_options") {
         registration_notification_container.className = "show_options";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -556,7 +533,7 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === registration_notification){
+    if (action === registration_notification) {
         registration_notification_container.className = "registration_notification";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
