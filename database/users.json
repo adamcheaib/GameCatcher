@@ -1,6 +1,6 @@
 [
     {
-        "username": "eeee",
+        "username": "adam",
         "password": "eeee",
         "favorite_games": [
             {
@@ -11,7 +11,7 @@
         "id": 1
     },
     {
-        "username": "adamcheaib",
+        "username": "adamcheai",
         "password": "adamcheaib",
         "favorite_games": [
             {
@@ -50,7 +50,6 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/dbb\/dbba6100aae179b5f24052c9141d426d.jpg"
             }
         ],
-
         "id": 3,
         "pending": [],
         "friends": [
@@ -59,7 +58,7 @@
         ]
     },
     {
-        "username": "calle",
+        "username": "adam",
         "password": "calle",
         "favorite_games": [
             {
@@ -91,15 +90,9 @@
         ],
         "pending": [],
         "friends": [
-            "adamcheaib",
-            "eeee"
-        ],
-        "blocked": [
-            "aaaa",
+            "adam",
             "eqqq"
-        ]
-
-        
-
+        ],
+        "blocked": []
     }
 ]

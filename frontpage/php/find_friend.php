@@ -129,25 +129,40 @@
 
     }
 
-    if($_SERVER["REQUEST_METHOD"] === "PATCH"){
+    $fetch_data = json_decode(file_get_contents("php://input"), true);
+    $all_users = json_decode(file_get_contents("../../database/users.json"), true);
 
-    }
 
-    if($_SERVER["REQUEST_METHOD"] === "DELETE"){
-        $fetch_data = json_decode(file_get_contents("php://input"), true);
-        $all_users = json_decode(file_get_contents("../../database/users.json"), true);
-
+    if($fetch_data["action"] === "block" || $fetch_data["action"] === "unblock"){
         foreach ($all_users as $index => $user) {
             if($user["username"] === $fetch_data["me"]){
                 for($i = 0;$i < count($user["friends"]);$i++){
                     if($user["friends"][$i] === $fetch_data["username"]){
-                        array_splice($all_users[$index]["friends"], $i, 1);
-                        $all_users[$index]["blocked"][] = $fetch_data["username"];
-                        break;
+                        if($fetch_data["action"] === "block"){
+                            array_splice($all_users[$index]["friends"], $i, 1);
+                            $all_users[$index]["blocked"][] = $fetch_data["username"];
+                            
+                            foreach ($all_users as $index => $user) {
+                                if($user["username"] === $fetch_data["username"]){
+                                    for($j = 0; $j < count($user["username"]["friends"]); $j++){
+                                        if($user["username"]["friends"][$j] === $fetch_data["me"]){
+                                            array_splice($all_users[$index]["friends"], $i, 1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if($user["blocked"][$i] === $fetch_data["username"]){
+                        if($fetch_data["action"] == "unblock"){
+                            array_splice($all_users[$index]["blocked"], $i, 1);
+                            break;
+                        }
                     }
                 }
             }
         }
+       
         file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
         $message = [
             "message" => "Success!",
@@ -156,5 +171,7 @@
         header("Content-Type: application/json");
         echo json_encode($message);
         exit();
+         
     }
+     
 ?>

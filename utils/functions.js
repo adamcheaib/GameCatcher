@@ -548,7 +548,7 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === "show_options"){
+    if(action === "show_options_blocked"){
         registration_notification_container.className = "show_options";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -556,7 +556,15 @@ export function registration_notification(dialog_box_text, action) {
         <button id="close">Close</button>
         `;
     }
-    if(action === registration_notification){
+    if(action === "show_options_unblocked"){
+        registration_notification_container.className = "show_options";
+        registration_notification_container.innerHTML = `
+        <h3>${dialog_box_text}</h3>
+        <div id="unblock_user">Unblock User</div>
+        <button id="close">Close</button>
+        `;
+    }
+    if(action === "registration_notification"){
         registration_notification_container.className = "registration_notification";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
@@ -568,28 +576,6 @@ export function registration_notification(dialog_box_text, action) {
     registration_dialog.showModal();
     document.querySelector("#close").addEventListener("click", () => registration_dialog.remove());
 }
-/*
-export function registration_notification(dialog_box_text) {
-    const registration_dialog = document.createElement("dialog");
-    registration_dialog.style.height = "100vh";
-    registration_dialog.style.width = "100vw";
-    registration_dialog.style.backgroundColor = "black";
-    registration_dialog.style.background = "rgba(0, 0, 0, 0.6)";
-
-    const registration_notification_container = document.createElement("div");
-    registration_notification_container.className = "registration_notification";
-    registration_notification_container.innerHTML = `
-    <h3>${dialog_box_text}</h3>
-    <button id="close">Close</button>
-    `;
-
-    registration_dialog.appendChild(registration_notification_container);
-    document.body.appendChild(registration_dialog);
-    registration_dialog.showModal();
-    document.querySelector("#close").addEventListener("click", () => registration_dialog.remove());
-}
-*/
-
 export function general_notifications(event) {
     const general_notifications_container = document.getElementById("general_notifications_container");
 

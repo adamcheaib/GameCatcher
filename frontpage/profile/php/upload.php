@@ -109,7 +109,9 @@ if(isset($info["change"])){
         }
     }
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-    $message = ["message" => "Success!"];
+    $message = [
+        "message" => "Success!",
+        "username" => $info["new_value"]];
     echo json_encode($message);
     exit();
 }
