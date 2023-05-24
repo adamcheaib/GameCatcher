@@ -75,5 +75,11 @@
         "password": "aaaa",
         "favorite_games": [],
         "id": 5
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [],
+        "id": 6
     }
 ]

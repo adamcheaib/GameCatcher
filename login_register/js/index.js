@@ -66,9 +66,9 @@ async function tryToRegister(register_object) {
         const resource = await response.json();
 
         if (!response.ok) {
-            registration_notification(resource.message);
+            registration_notification(resource.message, "registration_notification");
         } else {
-            registration_notification(resource.message);
+            registration_notification(resource.message, "registration_notification");
         }
 
     } catch (err) {

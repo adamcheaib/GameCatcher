@@ -267,8 +267,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
         })
     }
 
-    console.log(localStorage);
-
     async function click_left_arrow(event) {
 
 
@@ -604,7 +602,6 @@ export function remove_message(event) {
 }
 
 export function registration_notification(dialog_box_text, action) {
-    console.log(action);
     const registration_dialog = document.createElement("dialog");
     registration_dialog.style.height = "100vh";
     registration_dialog.style.width = "100vw";

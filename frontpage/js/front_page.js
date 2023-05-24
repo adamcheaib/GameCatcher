@@ -8,7 +8,7 @@ import { search_popup } from "./search_game.js";
 
 
 if (!window.localStorage.hasOwnProperty("username")) {
-    window.location.replace("http://localhost:1234/login_register");
+    window.location.replace("./login_register");
 }
 else {
     if (localStorage.getItem("selected_genre") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
@@ -121,6 +121,8 @@ export function init_frontpage() {
                 }
             })
         });
+
+
     })
 
     document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
@@ -151,6 +153,7 @@ export function init_frontpage() {
         localStorage.clear();
         window.location.replace("./login_register");
     })
+
 }
 
 document.querySelector("#settings").addEventListener("click", show_settings)
