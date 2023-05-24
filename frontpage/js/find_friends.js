@@ -10,6 +10,9 @@ import { game_scroll, genre_scroll, registration_notification, } from "../../uti
 
 export async function init_friends_page() {
 
+    localStorage.removeItem("where_att");
+    localStorage.setItem("where_att", "friends_page");
+
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
