@@ -1,5 +1,6 @@
 import { init_frontpage } from "./front_page.js";
 import { init_collection } from "./game_collection.js";
+import { fetch_all_chats } from "../../utils/functions.js";
 if (localStorage.getItem("counter_for_forum") === null) {
     localStorage.setItem("counter_for_forum", 0);
 }
@@ -70,7 +71,7 @@ async function get_all_friends() {
 
             profile_dom.classList.remove("selected");
 
-            profile_dom.addEventListener("click", async (event) => {
+            profile_dom.addEventListener("click", async () => {
                 localStorage.removeItem("selected_chat_id")
 
                 document.querySelector("#forum_display").innerHTML = "";
@@ -126,25 +127,24 @@ async function get_all_friends() {
                     body: JSON.stringify(body_for_fetch2),
                 })
 
-                let data3 = await response_all_previous_messages.text();
+                let data3 = await response_all_previous_messages.json();
 
                 console.log(data3);
 
-                // if (data3.count !== 0 && data3 !== null) {
-                //     data3.forEach(each_message => {
-                //         let message_dom = document.createElement("div");
-                //         message_dom.classList.add("post_dom");
-                //         message_dom.innerHTML = `
-                //         <div id="profile_picture"></div >
-                //         <div id="username">A Username Fix It</div>
-                //         <div id="the_post_text">
-                //             <p>${each_message}</p>
-                //         </div>
-                //     `
-                //         document.querySelector("#forum_display").appendChild(message_dom)
-                //     })
-                // }
-
+                if (data3.count !== 0 && data3 !== null) {
+                    data3.forEach(each_message => {
+                        let message_dom = document.createElement("div");
+                        message_dom.classList.add("post_dom");
+                        message_dom.innerHTML = `
+                        <div id="profile_picture"></div >
+                        <div id="username">A Username Fix It</div>
+                        <div id="the_post_text">
+                            <p>${each_message}</p>
+                        </div>
+                    `
+                        document.querySelector("#forum_display").appendChild(message_dom)
+                    })
+                }
 
             });
         })

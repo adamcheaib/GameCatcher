@@ -678,3 +678,17 @@ export function general_notifications_search(event) {
         notification.remove();
     }, 2300);
 }
+
+
+export async function fetch_all_chats(event) {
+
+
+
+    setInterval(async () => {
+        console.log("hello")
+    }, 5000);
+
+
+
+
+}
