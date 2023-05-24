@@ -87,8 +87,9 @@ function show_game_display_dom(game_data) {
             event.target.textContent = "Remove game from your list";
 
             event.target.style.pointerEvents = "none";
+            event.target.style.opacity = "40%";
 
-            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+            setTimeout(() => { event.target.style.pointerEvents = "all"; event.target.style.opacity = "100%"; notification.remove() }, 2000);
         } else {
             let body_for_fetch = {
                 username: localStorage.getItem("username"),
@@ -107,8 +108,10 @@ function show_game_display_dom(game_data) {
             event.target.textContent = "Add to liked games";
 
             event.target.style.pointerEvents = "none";
+            event.target.style.opacity = "40%";
 
-            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+
+            setTimeout(() => { event.target.style.pointerEvents = "all"; event.target.style.opacity = "100%"; notification.remove() }, 2000);
         }
 
     });
