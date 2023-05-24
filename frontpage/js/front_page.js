@@ -177,20 +177,7 @@ function change_username_password(event){
     console.log(localStorage); 
 
     if(check === "change_username"){
-        fetch("../../../../database/users.json")
-            .then(resource => resource.json())
-            .then(users => {
-                for(let i = 0; i < users.length; i++){
-                    console.log(users[i]);
-                    console.log(changed_value);
-                    if(users[i].username === changed_value){
-                        document.getElementById("changed_message").textContent = "Username already taken, try another one!"
-                        console.log("AJAJAJ");
-                        return false;
-                    }
-                }
-            })
-            action = "change_username"        
+        action = "change_username"        
     }else{
         action = "change_password"
     }
@@ -209,10 +196,17 @@ function change_username_password(event){
         .then(resource => resource.json())
         .then(data => {
             console.log(data)
-            document.getElementById("changed_message").textContent = "Success!"
+            if(data.ok === "Fail"){
+                document.getElementById("changed_message").textContent = "Failed!"
+            }
+            if(data.ok === "Success"){
+                localStorage.setItem("username", changed_value);
+                location.reload();
+                console.log(localStorage);
+                document.getElementById("changed_message").textContent = "Success!"
+            }
+            
         })
-        localStorage.setItem("username", changed_value);
-        //location.reload();
-        console.log(localStorage);  
+          
 }
 

@@ -1,34 +1,14 @@
 [
     {
-
-        "username": "calle",
-        "password": "calle",
+        "username": "Calle",
+        "password": "dej",
         "favorite_games": [],
         "id": 1,
-        "pending": [
-            "wille"
-        ]
-    },
-    {
-        "username": "wille",
-        "password": "wille",
-        "favorite_games": [],
-        "id": 2,
-
-        "username": "adam",
-        "password": "eeee",
-        "favorite_games": [
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
-            }
-        ],
-        "id": 1,
-        "pending": [],
-        "friends": [
-            "adam",
-            "eqqq"
-        ]
+        "friends": [],
+        "blocked": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg"
     },
     {
         "username": "adamcheai",
@@ -50,7 +30,7 @@
         "id": 3
     },
     {
-        "username": "adam",
+        "username": "ada",
         "password": "adam",
         "favorite_games": [
             {
@@ -101,6 +81,5 @@
         "friends": [
             "adam"
         ]
-
     }
 ]

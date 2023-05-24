@@ -50,7 +50,7 @@ if(isset($_FILES["upload"])){
 ?>
 
 <?php
-if(isset($info["text"])){    
+if(isset($info["text"])){   
     foreach($users as $index => $user) {
         if ($user["username"] === $info["username"]) {
             if (!isset($users[$index]["profile_comments"])) {
@@ -100,19 +100,33 @@ if(isset($info["action"])){
 if(isset($info["change"])){
     $username = $info["username"];
     foreach ($users as $index => $user) {
-        if ($user["username"] === $info["username"]){
-            if($info["change"] === "change_username"){
+        if($user["username"] === $info["new_value"]){
+            $message = [
+                "message" => "Username already taken, try another one!",
+                "ok" => "Fail"
+                ];
+                http_response_code(400);
+                echo json_encode($message);
+            exit();
+        }else{
+            if($info["change"] === "change_username" && $user["username"] === $username) {
                 $users[$index]["username"] = $info["new_value"];
-            }else{
-                $users[$index]["password"] = $info["new_value"];
             }
+            if($info["change"] === "change_password") {
+                $users[$index]["password"] = $info["new_value"];  
+            }
+            
         }
+    
+        
     }
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-    $message = [
-        "message" => "Success!",
-        "username" => $info["new_value"]];
-    echo json_encode($message);
-    exit();
+            $message = [
+                "message" => "Success!",
+                "username" => $info["new_value"],
+                "ok" => "Success"
+            ];
+            echo json_encode($message);
+            exit();
 }
 ?>
