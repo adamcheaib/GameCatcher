@@ -71,16 +71,7 @@
             }
         ],
         "id": 3,
-
-        "pending": [
-            "calle",
-            "calle",
-            "calle",
-            "calle"
-        ],
-
         "pending": [],
-
         "friends": [
             "adamcheaib",
             "calle"
@@ -89,7 +80,16 @@
     {
         "username": "calle",
         "password": "calle",
-        "favorite_games": [],
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Skater XL",
+                "image": "https:\/\/media.rawg.io\/media\/games\/b95\/b957080fc9e91b2c781618f207e69846.jpg"
+            }
+        ],
         "id": 6,
         "favorite_game_images": "elden-ring-new-header-mobile.jpg",
         "profile_picture": "guts.jpg",
@@ -110,7 +110,12 @@
         ],
         "pending": [],
         "friends": [
+            "adamcheaib",
             "eeee"
+        ],
+        "blocked": [
+            "aaaa",
+            "eqqq"
         ]
     }
 ]

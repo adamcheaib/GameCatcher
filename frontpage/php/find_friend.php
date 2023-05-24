@@ -111,4 +111,28 @@
 
     }
 
+    if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+        $fetch_data = json_decode(file_get_contents("php://input"), true);
+        $all_users = json_decode(file_get_contents("../../database/users.json"), true);
+
+        foreach ($all_users as $index => $user) {
+            if($user["username"] === $fetch_data["me"]){
+                for($i = 0;$i < count($user["friends"]);$i++){
+                    if($user["friends"][$i] === $fetch_data["username"]){
+                        array_splice($all_users[$index]["friends"], $i, 1);
+                        $all_users[$index]["blocked"][] = $fetch_data["username"];
+                        break;
+                    }
+                }
+            }
+        }
+        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+        $message = [
+            "message" => "Success!",
+            "username" => $fetch_data["username"]
+            ];
+        header("Content-Type: application/json");
+        echo json_encode($message);
+        exit();
+    }
 ?>

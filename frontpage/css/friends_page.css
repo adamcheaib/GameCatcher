@@ -308,3 +308,18 @@ body {
     color: black;
     font-size: 25px;
 }
+.show_options{
+    height: 130px;
+    width: 130px;
+    background-color: aliceblue;
+    position: absolute;
+    top: 183px;
+    right: 338px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.show_options div:hover{
+    background-color: aquamarine;
+}

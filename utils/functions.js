@@ -530,6 +530,7 @@ export function remove_message(event) {
 }
 
 export function registration_notification(dialog_box_text, action) {
+    console.log(action);
     const registration_dialog = document.createElement("dialog");
     registration_dialog.style.height = "100vh";
     registration_dialog.style.width = "100vw";
@@ -546,11 +547,20 @@ export function registration_notification(dialog_box_text, action) {
         <div id="logout">Logout</div>
         <button id="close">Close</button>
         `;
-    }else{
+    }
+    if(action === "show_options"){
+        registration_notification_container.className = "show_options";
+        registration_notification_container.innerHTML = `
+        <h3>${dialog_box_text}</h3>
+        <div id="block_user">Block User</div>
+        <button id="close">Close</button>
+        `;
+    }
+    if(action === registration_notification){
         registration_notification_container.className = "registration_notification";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
-        button id="close">Close</button>
+        <button id="close">Close</button>
         `;
     }
     registration_dialog.appendChild(registration_notification_container);

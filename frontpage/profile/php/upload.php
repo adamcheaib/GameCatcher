@@ -84,7 +84,6 @@ if(isset($info["action"])){
         if ($user["username"] === $info["username"]){
             foreach ($users[$index]["profile_comments"] as $commentIndex => $comment) {
                 if($comment["timestamp"] === $info["timestamp"]){
-                    
                     array_splice($users[$index]["profile_comments"], $commentIndex, 1);
                     break; 
                 }
