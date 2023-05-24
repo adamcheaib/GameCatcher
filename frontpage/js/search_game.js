@@ -94,24 +94,63 @@ export async function search_popup(event) {
 
                     dialog_dom.appendChild(searched_game_dialog);
                     searched_game_dialog.showModal();
-                    document.getElementById("liked_games_button").addEventListener("click", async (event) => {
-                        const game_data = search_results[0];
-                        console.log(search_results)
+                    document.querySelector("#liked_games_button").addEventListener("click", async (event) => {
 
-                        let send_object = {
-                            name: game_data.name,
-                            image: game_data.background_image,
-                            username: localStorage.getItem("username"),
-                        };
+                        const parentNode = event.target.parentNode;
+                        const notification = document.createElement("span");
+                        parentNode.insertBefore(notification, parentNode.querySelector("h2"));
+                        notification.id = "game_collection_notification";
+                        notification.style.flexGrow = "1";
+                        notification.style.textAlign = "center";
 
-                        fetch("../frontpage/php/game_collection.php", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(send_object),
-                        }).then(r => r.json()).then(data => {
-                            console.log(data);
-                            general_notifications_search();
-                        });
+                        if (event.target.textContent === "Add to liked games") {
+                            let send_object = {
+                                name: the_clicked_game.name,
+                                image: the_clicked_game.background_image,
+                                username: localStorage.getItem("username"),
+                            };
+                            fetch("../frontpage/php/game_collection.php", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(send_object),
+                            }).then(r => r.json()).then(data => {
+                                console.log(data);
+                                general_notifications();
+                            });
+
+                            notification.textContent = "Added to your list!";
+                            notification.style.color = "lightgreen";
+                            notification.style.fontWeight = "bold";
+                            console.log(parentNode);
+                            event.target.textContent = "Remove game from your list";
+
+                            event.target.style.pointerEvents = "none";
+                            event.target.style.opacity = "40%";
+
+                            setTimeout(() => { event.target.style.pointerEvents = "all"; event.target.style.opacity = "100%"; notification.remove() }, 3000);
+                        } else {
+                            let body_for_fetch = {
+                                username: localStorage.getItem("username"),
+                                the_game_to_delete: localStorage.getItem("selected_game"),
+                            }
+
+                            let response = await fetch("./frontpage/php/game_collection.php", {
+                                method: "DELETE",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(body_for_fetch),
+                            });
+
+                            notification.textContent = "Removed from your list!";
+                            notification.style.color = "red";
+                            notification.style.fontWeight = "bold";
+                            event.target.textContent = "Add to liked games";
+
+                            event.target.style.pointerEvents = "none";
+                            event.target.style.opacity = "40%";
+
+                            setTimeout(() => { event.target.style.pointerEvents = "all"; event.target.style.opacity = "100%"; notification.remove() }, 3000);
+                        }
+
                     });
                     document.querySelector(".search_game_dialog_close_button").addEventListener("click", (event) => searched_game_dialog.remove());
                 }
