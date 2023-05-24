@@ -71,7 +71,7 @@ async function get_all_friends() {
 
             profile_dom.classList.remove("selected");
 
-            profile_dom.addEventListener("click", async () => {
+            profile_dom.addEventListener("click", async (event) => {
                 localStorage.removeItem("selected_chat_id")
 
                 document.querySelector("#forum_display").innerHTML = "";

@@ -1,6 +1,6 @@
 [
     {
-        "username": "adamcheai",
+        "username": "adamcheaib",
         "password": "adamcheaib",
         "favorite_games": [
             {
@@ -28,11 +28,10 @@
         "id": 3,
         "friends": [
             "eeee",
-            "adam"
-        ],
-        "pending": [
+            "adam",
             "adamcheaib"
-        ]
+        ],
+        "pending": []
     },
     {
         "username": "qeqe",
