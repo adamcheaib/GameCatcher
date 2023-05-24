@@ -1,6 +1,7 @@
 import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
+import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
 
 // TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
 // nu får bara ena user pending medanst andra har ingen anning om den har blivit acceptad eller inte man måste skicka
@@ -34,8 +35,12 @@ export async function init_friends_page() {
     document.querySelector("#add_friends").addEventListener("click", init_add_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 
+    document.querySelector("#blocked").addEventListener("click", init_blocked_users)
+
+
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+
 }
 
 async function show_my_friends(event) {
@@ -93,7 +98,50 @@ async function show_my_friends(event) {
 
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+
+
+    document.querySelectorAll(".more_options").forEach(element => {
+        element.addEventListener("click", show_options);
+    });
+}
+function show_options(event) {
+    if (document.getElementById("my_friends").classList.contains("selected")) {
+        registration_notification("Options", "show_options_blocked");
+        document.getElementById("block_user").addEventListener("click", block_unblock_user);
+        event.target.parentElement.children[1].setAttribute("id", "to_be_blocked");
+    } else {
+        registration_notification("Options", "show_options_unblocked");
+        document.getElementById("unblock_user").addEventListener("click", block_unblock_user);
+        event.target.parentElement.children[1].setAttribute("id", "to_be_unblocked");
+    }
+}
+function block_unblock_user(event) {
+    let actions;
+    let user;
+    if (event.target.id === "block_user") {
+        actions = "block";
+        user = document.getElementById("to_be_blocked").textContent;
+    }
+    if (event.target.id === "unblock_user") {
+        actions = "unblock";
+        user = document.getElementById("to_be_unblocked").textContent;
+    }
+    console.log(user);
+    fetch("./frontpage/php/find_friend.php", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            username: user,
+            me: localStorage.getItem("username"),
+            action: actions,
+        })
+    })
+        .then(resource => resource.json())
+        .then(data => console.log(data))
+
     document.querySelector("#add_friends").addEventListener("click", init_add_friends);
+    //user.removeAttribute("id");
+
 }
 
 async function send_friend_request(event) {
@@ -122,9 +170,23 @@ async function find_user() {
     let response = await fetch(`./frontpage/php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
     let account_data = await response.json();
     console.log(account_data);
+
     for (let i = 0; i < account_data.length; i++) {
         if (account_data[i].profile_picture === undefined) {
             account_data[i].profile_picture = "./frontpage/general_media/default_profile_pic.svg";
+        }
+        console.log(account_data[i].username);
+        let responses = await fetch(`../../../database/users.json`);
+        let users = await responses.json();
+        for (let i = 0; i < users.length; i++) {
+
+            if (users[i].hasOwnProperty("blocked")) {
+                if (users[i].username === localStorage.getItem("username")) {
+                    if (users[i].blocked.includes(account_data[0].username)) {
+                        return;
+                    }
+                }
+            }
         }
 
         let profile_dom = document.createElement("div");
@@ -298,6 +360,53 @@ async function decline_friend(event) {
     console.log(data);
 
     event.target.parentElement.parentElement.remove();
+}
+
+async function init_blocked_users(event) {
+    document.querySelector("#display").innerHTML = "";
+
+    document.querySelector("#center_piece").innerHTML = `
+    <div id="navigation">
+        <div id="my_friends" class="unselected">My Friends</div>
+        <div id="add_friends" class="unselected">Add Friends</div>
+        <div id="pending" class="unselected" >Pending</div>
+        <div id="blocked" class="selected" >Blocked</div>
+    </div>
+    <div id="display"></div>
+`;
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    let response = await fetch(`../../../database/users.json`);
+    let users = await response.json();
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username === localStorage.getItem("username")) {
+            users[i].blocked.forEach(element => {
+                let profile_dom = document.createElement("div");
+                profile_dom.textContent = element
+                profile_dom.classList.add("profile_dom");
+                profile_dom.innerHTML = `
+        
+                <div id="profile_wrapper">
+                <div class="profile_picture"></div>
+                <div class="username">${element}</div>
+                
+                <div class="more_options">...</div>
+            </div>
+
+            `;
+                document.querySelector("#display").appendChild(profile_dom);
+            });
+        }
+    }
+    document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
+        profile_pic.style.backgroundImage = `url(./frontpage/general_media/default_profile_pic.svg)`
+    })
+    document.querySelectorAll(".chat").forEach((profile_pic, index) => {
+        profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
+    })
+    document.querySelectorAll(".more_options").forEach(element => {
+        element.addEventListener("click", show_options);
+    });
 }
 
 document.querySelector("#main_page").addEventListener("click", init_frontpage);

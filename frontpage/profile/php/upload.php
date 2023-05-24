@@ -84,7 +84,6 @@ if(isset($info["action"])){
         if ($user["username"] === $info["username"]){
             foreach ($users[$index]["profile_comments"] as $commentIndex => $comment) {
                 if($comment["timestamp"] === $info["timestamp"]){
-                    
                     array_splice($users[$index]["profile_comments"], $commentIndex, 1);
                     break; 
                 }
@@ -110,7 +109,9 @@ if(isset($info["change"])){
         }
     }
     file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
-    $message = ["message" => "Success!"];
+    $message = [
+        "message" => "Success!",
+        "username" => $info["new_value"]];
     echo json_encode($message);
     exit();
 }
