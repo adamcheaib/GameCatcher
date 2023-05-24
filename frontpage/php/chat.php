@@ -40,8 +40,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $receivedInformation = json_decode(file_get_contents("php://input"), true);
+
+    // Behöver vara här annars får vi error för att de två variablena blir undefined array keys och då stoppas koden
+    if(array_key_exists("chatid", $receivedInformation)){
+        $all_previous_messages = [];
+        for ($e = 0; $e < count($chat_database); $e++) { 
+            if($chat_database[$e]["chatid"] == $receivedInformation["chatid"]){
+               for ($y = 0; $y < count($chat_database[$e]["chatlog"]); $y++) { 
+                    $all_previous_messages[] = $chat_database[$e]["chatlog"][$y];
+               }
+            }
+        }
+        header("Content-Type:application/json");
+        sendJSON($all_previous_messages);
+        exit();
+    }
+
+    
     $loggedOnUserId = $receivedInformation["loggedID"];
     $chatTargetUserId = $receivedInformation["user2_id"];
     $the_latest_id = 1;
@@ -62,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
             
         }
         
+        
+
         // Här körs koden om den inte hittar de två personerna id man skickar inte hittas
         $chatlog = [
             "chatid" => $the_latest_id + 1,
@@ -74,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
         $chat_database[] = $chatlog;
         file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
-        sendJSON(["First chat has been created"]);
+        sendJSON($chatlog["chatid"]);
         exit();
     }
 
@@ -99,6 +118,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         exit();
     }
 
+
+    if(array_key_exists("send_message", $receivedInformation)){
+        
+    }
+
+}
+
+    
 
 // $id = 0;
 //     if (0 <= count($users)) {

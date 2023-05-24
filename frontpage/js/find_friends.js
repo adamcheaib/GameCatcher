@@ -13,6 +13,9 @@ export async function init_friends_page() {
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();
     }
+    if (document.querySelector(".friends_list") !== null) {
+        document.querySelector(".friends_list").remove();
+    }
     document.querySelector("link").setAttribute("href", "./frontpage/css/friends_page.css");
 
     document.querySelector("#center_piece").innerHTML = `
@@ -28,9 +31,16 @@ export async function init_friends_page() {
 
     show_my_friends()
 
+    document.querySelector("#chat").addEventListener("click", init_forum);
     document.querySelector("#add_friends").addEventListener("click", init_add_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+
     document.querySelector("#blocked").addEventListener("click", init_blocked_users)
+
+
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+
 }
 
 async function show_my_friends(event) {
@@ -85,8 +95,10 @@ async function show_my_friends(event) {
         profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
     })
 
-    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+
 
     document.querySelectorAll(".more_options").forEach(element => {
         element.addEventListener("click", show_options);
@@ -112,6 +124,9 @@ function block_user(event){
     })
         .then(resource => resource.json())
         .then(data => console.log(data))
+
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends);
+
 }
 
 async function send_friend_request(event) {
@@ -196,10 +211,12 @@ async function get_all_pending_friend_requests(event) {
                 <div id="search_image"></div>
             </div>
             <div id="display"></div>
-        `;
+    `;
 
-    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
 
     let username = localStorage.getItem("username");
     let body_for_fetch = {
@@ -239,6 +256,8 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
+
+
 
 }
 
@@ -282,15 +301,25 @@ async function add_friend(event) {
     let data = await response.json();
     console.log(data);
 
+    // Denna fetch behövs för att man måste skicka till usern som skickas 
+
+    let a_fetch_body = {
+        logged_in_user: localStorage.getItem("username"),
+        added_friend_username2: event.target.parentElement.parentElement.querySelector(".account_username_pending").innerHTML,
+        send_back_for_user_that_sent_friend_req: true,
+    };
+
     let response2 = await fetch("./frontpage/php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body_for_fetch)
+        body: JSON.stringify(a_fetch_body)
     });
 
 
     let data2 = await response2.json();
-    console.log(data2);
+
+    console.log(data2)
+
 
 
 }
