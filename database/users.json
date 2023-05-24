@@ -18,7 +18,8 @@
         ],
         "id": 3,
         "pending": [
-            "aaaa"
+            "aaaa",
+            "eqqq"
         ]
     },
     {
@@ -28,8 +29,7 @@
         "id": 3,
         "friends": [
             "eeee",
-            "adam",
-            "adamcheaib"
+            "adam"
         ],
         "pending": []
     },
