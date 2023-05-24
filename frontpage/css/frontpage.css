@@ -166,6 +166,8 @@ p {
     height: 200px;
     border-radius: 20px;
     background-color: gray;
+    position: relative;
+    transition-property: transform, right, top, opacity;
 }
 
 #second_genra {
@@ -194,6 +196,8 @@ p {
     height: 200px;
     border-radius: 20px;
     background-color: gray;
+    position: relative;
+    transition-property: transform, left, top, opacity;
 }
 
 #first_arrow,
@@ -277,13 +281,13 @@ p {
     width: 100%;
     height: 100%;
     border-radius: 12px;
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
 }
 
 .gamesSearchResults:hover {
     transform: scale(1.07);
     cursor: pointer;
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
 }
 
 #games_wrapper {
@@ -323,7 +327,7 @@ p {
 }
 
 .wrapper>div {
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
 }
 
 .wrapper>div:hover
@@ -331,7 +335,7 @@ p {
 /* ändra namn kanse till platfrom_wrapper */
     {
     transform: scale(1.1);
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
     cursor: pointer;
 }
 
@@ -345,12 +349,12 @@ p {
 }
 
 #games_wrapper>div {
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
 }
 
 #games_wrapper>div:hover {
     transform: scale(1.1);
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
     cursor: pointer;
 }
 
@@ -479,7 +483,7 @@ dialog>div {
 
 #dialogCloseButtonContainer>span {
     transition-property: background-color;
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
     text-align: center;
     border-radius: 3px;
     font-size: 25px;
@@ -489,7 +493,7 @@ dialog>div {
 }
 
 #dialogCloseButtonContainer>span:hover {
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
     transition-property: background-color;
     text-align: center;
     cursor: pointer;
@@ -580,7 +584,7 @@ dialog>div {
     justify-self: end;
     margin-right: 10px;
     transition-property: background-color;
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
     text-align: center;
     border-radius: 3px;
     font-size: 25px;
@@ -592,7 +596,7 @@ dialog>div {
 }
 
 #add_to_collection_container>.search_game_dialog_close_button:hover {
-    transition-duration: 0.5s;
+    transition-duration: 200ms;
     transition-property: background-color;
     text-align: center;
     cursor: pointer;
@@ -655,7 +659,8 @@ dialog>div {
     width: 300px;
     border-radius: 10px;
 }
-.account_management{
+
+.account_management {
     gap: 10px;
     display: flex;
     flex-direction: column;
@@ -666,16 +671,19 @@ dialog>div {
     text-align: center;
     align-items: center;
 }
-.account_management div:hover{
+
+.account_management div:hover {
     background-color: rgb(41, 41, 86);
 }
-#close{
+
+#close {
     width: 10vw;
     display: flex;
     align-self: center;
     justify-content: center;
 }
-#profile{
+
+#profile {
     background-position: center;
     background-size: cover;
 }
