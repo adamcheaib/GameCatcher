@@ -103,6 +103,10 @@
                     exit();
                 }
             }
+            // Här körs koden om det inte finns några vänner
+            header("Content-Type: application/json");
+            echo json_encode(["message" => "User has no friends"]);
+            exit();
         }
 
 

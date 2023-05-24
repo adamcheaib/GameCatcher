@@ -33,6 +33,9 @@ export async function init_friends_page() {
     document.querySelector("#chat").addEventListener("click", init_forum);
     document.querySelector("#add_friends").addEventListener("click", init_add_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 }
 
 async function show_my_friends(event) {
@@ -87,8 +90,10 @@ async function show_my_friends(event) {
         profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
     })
 
-    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+
+    document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends);
 }
 
 async function send_friend_request(event) {
@@ -163,10 +168,12 @@ async function get_all_pending_friend_requests(event) {
                 <div id="search_image"></div>
             </div>
             <div id="display"></div>
-        `;
+    `;
 
-    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
+    document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
 
     let username = localStorage.getItem("username");
     let body_for_fetch = {
@@ -206,6 +213,8 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
+
+
 
 }
 
