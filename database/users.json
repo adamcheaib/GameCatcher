@@ -11,7 +11,7 @@
         "favorite_game_images": "elden-ring-new-header-mobile.jpg"
     },
     {
-        "username": "adamcheai",
+        "username": "adamcheaib",
         "password": "adamcheaib",
         "favorite_games": [
             {
@@ -30,7 +30,7 @@
         "id": 3
     },
     {
-        "username": "ada",
+        "username": "adam",
         "password": "adam",
         "favorite_games": [
             {
@@ -52,7 +52,6 @@
         ],
         "id": 2,
         "friends": [
-            "eeee",
             "eqqq",
             "qeqe"
         ],
@@ -64,8 +63,8 @@
         "favorite_games": [],
         "id": 3,
         "friends": [
-            "eeee",
-            "adam"
+            "adam",
+            "qeqe"
         ]
     },
     {
@@ -79,7 +78,9 @@
         ],
         "id": 4,
         "friends": [
-            "adam"
-        ]
+            "adam",
+            "eqqq"
+        ],
+        "pending": []
     }
 ]
