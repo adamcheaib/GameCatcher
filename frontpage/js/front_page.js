@@ -169,6 +169,7 @@ function new_value(event){
 }
 
 function change_username_password(event){ 
+    //MÅSTE FIVA SKITEN
     let action;
     let check = event.target.id;
     let user = localStorage.getItem("username");
@@ -180,6 +181,8 @@ function change_username_password(event){
             .then(resource => resource.json())
             .then(users => {
                 for(let i = 0; i < users.length; i++){
+                    console.log(users[i]);
+                    console.log(changed_value);
                     if(users[i].username === changed_value){
                         document.getElementById("changed_message").textContent = "Username already taken, try another one!"
                         console.log("AJAJAJ");

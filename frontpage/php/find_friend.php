@@ -109,7 +109,6 @@
             exit();
         }
 
-
         if(array_key_exists("send_back_for_user_that_sent_friend_req", $fetch_data) === true){
             for ($w = 0; $w < count($all_users); $w++) { 
                 if($all_users[$w]["username"] === $fetch_data["added_friend_username2"] && array_key_exists("friends", $all_users[$w]) == true){
@@ -132,46 +131,55 @@
     $fetch_data = json_decode(file_get_contents("php://input"), true);
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);
 
-
-    if($fetch_data["action"] === "block" || $fetch_data["action"] === "unblock"){
+if($fetch_data["action"] === "block"){
         foreach ($all_users as $index => $user) {
             if($user["username"] === $fetch_data["me"]){
                 for($i = 0;$i < count($user["friends"]);$i++){
                     if($user["friends"][$i] === $fetch_data["username"]){
-                        if($fetch_data["action"] === "block"){
                             array_splice($all_users[$index]["friends"], $i, 1);
                             $all_users[$index]["blocked"][] = $fetch_data["username"];
-                            
-                            foreach ($all_users as $index => $user) {
-                                if($user["username"] === $fetch_data["username"]){
-                                    for($j = 0; $j < count($user["username"]["friends"]); $j++){
-                                        if($user["username"]["friends"][$j] === $fetch_data["me"]){
-                                            array_splice($all_users[$index]["friends"], $i, 1);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if($user["blocked"][$i] === $fetch_data["username"]){
-                        if($fetch_data["action"] == "unblock"){
-                            array_splice($all_users[$index]["blocked"], $i, 1);
-                            break;
-                        }
+                        }              
+                }
+            }
+        }  
+        foreach ($all_users as $index => $user) {
+            if ($user["username"] === $fetch_data["username"]) {
+                foreach ($user["friends"] as $friend_index => $friend) {
+                    if ($friend === $fetch_data["me"]) {
+                        array_splice($all_users[$index]["friends"], $friend_index, 1);      
                     }
                 }
             }
+         }
+         file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+            $message = [
+                "message" => "Success!",
+                "username" => $fetch_data["username"]
+                ];
+                header("Content-Type: application/json");
+                echo json_encode($message);
+                exit();
+}
+    if($fetch_data["action"] === "unblock"){
+        foreach ($all_users as $index => $user) {
+            if($user["username"] === $fetch_data["me"]){
+                foreach ($user["blocked"] as $block_index => $blocked) {
+                    if($blocked === $fetch_data["username"]){
+                        if($fetch_data["action"] == "unblock"){
+                            array_splice($all_users[$index]["blocked"], $block_index, 1);
+                            
+                            file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                                $message = [
+                                    "message" => "Success!",
+                                    "username" => $fetch_data["username"]
+                                ];
+                                header("Content-Type: application/json");
+                                echo json_encode($message);
+                                exit();
+                        }
+                    }   
+                }
+            }
         }
-       
-        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-        $message = [
-            "message" => "Success!",
-            "username" => $fetch_data["username"]
-            ];
-        header("Content-Type: application/json");
-        echo json_encode($message);
-        exit();
-         
-    }
-     
+}  
 ?>
