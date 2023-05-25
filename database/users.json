@@ -28,7 +28,8 @@
             }
         ],
         "id": 3,
-        "pending": [
+        "pending": [],
+        "friends": [
             "eqqq"
         ]
     },
@@ -83,7 +84,8 @@
         "id": 3,
         "friends": [
             "adam",
-            "qeqe"
+            "qeqe",
+            "adamcheaib"
         ]
     }
 ]

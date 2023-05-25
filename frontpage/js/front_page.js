@@ -132,8 +132,6 @@ export function init_frontpage() {
             })
 
         });
-        console.log(genre);
-        console.log(genre.innerHTML)
     })
 
     document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
