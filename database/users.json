@@ -31,9 +31,8 @@
         "pending": [
             "calle"
         ],
-        "friends": [
-            "eqqq"
-        ]
+        "friends": [],
+        "blocked": []
     },
     {
         "username": "adam",
@@ -85,8 +84,7 @@
         "id": 3,
         "friends": [
             "adam",
-            "qeqe",
-            "adamcheaib"
+            "qeqe"
         ]
     }
 ]
