@@ -31,5 +31,15 @@
             "fdsfsdfsd",
             "aaaaaa"
         ]
+    },
+    {
+        "chatid": 4,
+        "chat_between": [
+            1,
+            5
+        ],
+        "chatlog": [
+            "fsdfsdfsdfsd"
+        ]
     }
 ]
