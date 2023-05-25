@@ -1,3 +1,8 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
 body {
     margin: 0;
 }
@@ -48,7 +53,7 @@ body {
     order: 1;
 }
 
-button {
+#send{
     width: 150px;
     height: 50px;
 }
@@ -222,4 +227,27 @@ textarea {
     background-repeat: no-repeat;
 }
 
+
 .selected {}
+
+.account_management {
+    color: white;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(73, 73, 112);
+    height: 30vh;
+    width: 30vw;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.account_management div:hover {
+    background-color: rgb(41, 41, 86);
+    width: 80%;
+}

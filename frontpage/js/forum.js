@@ -24,7 +24,7 @@ export function init_forum() {
     document.querySelector("#center_piece").innerHTML = `
         <div id="forum_display"></div>
         <textarea></textarea>
-        <button>Send</button>
+        <button id="send">Send</button>
     `;
 
     document.querySelector("#frontpage_wrapper").appendChild(friends_list)
