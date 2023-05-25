@@ -110,7 +110,9 @@ async function show_my_friends(event) {
 }
 function show_options(event) {
     if (document.getElementById("my_friends").classList.contains("selected")) {
+        
         registration_notification("Options", "show_options_blocked");
+        event.target.parentElement.children[1].classList.add("show_profile");
         document.getElementById("visit_profile").addEventListener("click", visit_profile)
         document.getElementById("block_user").addEventListener("click", block_unblock_user);
         event.target.parentElement.children[1].setAttribute("id", "to_be_blocked");
@@ -431,5 +433,110 @@ async function init_blocked_users(event) {
 function take_to_chat(event){
     let user = event.target.parentElement.children[1].textContent;
     init_forum(user)
+}
 
+function visit_profile(event){    
+
+    let user_profile = document.querySelector(".show_profile").textContent;
+    console.log(user_profile);
+        fetch("../../database/users.json")
+        .then(resource => resource.json())
+        .then(users => {
+            users.forEach(user => {
+                if(user.username === user_profile){
+                    console.log(user);
+                    document.querySelector("h2").textContent = user.username
+                    if(!user.hasOwnProperty('profile_picture')){
+                        console.log("hrj");
+                        document.querySelector("#profile_image").style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)"
+                    }else{
+                        console.log(user);
+                        document.querySelector("#profile_image").style.backgroundImage = `url(./frontpage/profile/images/${user.profile_picture})`;
+                    }
+                    if(!user.hasOwnProperty('banner_picture')){
+                        document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
+                    }else{
+                        document.querySelector("main").style.backgroundImage = `url(./frontpage/profile/images/${user.banner_picture})`;
+                    }
+                    if(!user.hasOwnProperty('favorite_game_images')){
+                        document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
+                    }else{
+                        document.querySelector("#favorite_game_image").style.backgroundImage = `url(./frontpage/profile/images/${user.favorite_game_images})`;
+                    }
+                    if(!user.hasOwnProperty('profile_comments')){
+                        //idk
+                    }else{
+                        user.profile_comments.forEach(element => {
+                            console.log(element);
+                            let section = document.querySelector("#profile_forum")
+                            let div = document.createElement("div");
+                            div.classList.add("comments_section");
+                            div.innerHTML = `
+                            <div class="profile_picture" style='background-image: url(./frontpage/profile/images/${user.profile_picture}'></div>
+                            <p>${element.message}</p>
+                            <p id="timestamp">${element.timestamp}</p>
+                            `
+                            section.appendChild(div)  
+                            
+                        });
+                    }
+                    
+                }
+            });
+        })
+    
+    document.querySelector("body").innerHTML = `
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontpage/profile/css/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <header>
+            <div id="profile_image"  alt="Profile Picture"></div>
+            <h2>Callw</h2>
+        </header>
+    </main>
+
+<div id="split">
+    <div id="nav">
+        <div>home</div>
+        <div>games</div>
+        <div>chat</div>
+        <div>settings</div>
+    </div>
+    <div id="profile_stuff">
+        <div id="feeling">
+            <p>How i'm feeling</p>
+            <p>Mood</p>
+            <p id="emoji"></p>
+        </div>
+
+        <div id="transparency"></div>
+
+        <div id="favorite">
+            <p>Favorite Game</p>
+            <div id="favorite_game_image" alt="Favorite Game"></div>
+        </div>
+        
+    </div>
+
+    <div id="profile_forum">
+        <div id="comment_profile" alt="Profile Picture"></div>
+    </div>
+   
+</div>
+
+</body>
+<script src="/frontpage/profile/js/index.js"></script>
+</html>
+`
+
+
+    
 }

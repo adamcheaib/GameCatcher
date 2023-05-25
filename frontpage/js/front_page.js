@@ -129,7 +129,7 @@ export function init_frontpage() {
         });
     })
 
-    document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
+    document.getElementById("profile").style.backgroundImage = `url(./frontpage/profile/images/${localStorage.profile_picture})`
 
     document.querySelectorAll(".platform").forEach(platform => {
 

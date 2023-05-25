@@ -16,6 +16,7 @@ img{
 }
 header > h2{
     text-align: center;
+    margin: 0;
 }
 main{
     display: flex;

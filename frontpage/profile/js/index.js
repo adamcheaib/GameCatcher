@@ -7,12 +7,24 @@ function get_preset_information(){
     .then(users => {
         users.forEach(user => {
             if(user.username === localStorage.username){
-                document.getElementById("profile_image").style.backgroundImage = `url(./profile/images/${user.profile_picture})`;
-                document.getElementById("favorite_game_image").style.backgroundImage = `url(./profile/images/${user.favorite_game_images})`;
-                document.querySelector("main").style.backgroundImage = `url(./profile/images/${user.banner_picture})`;
-                document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${user.profile_picture})`;
-
-                if(user.profile_comments.length !== 0){
+                if(!user.hasOwnProperty('profile_picture')){
+                    console.log("hrj");
+                    document.querySelector("#profile_image").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)"
+                }else{
+                    console.log(user);
+                    document.querySelector("#profile_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
+                }
+                if(!user.hasOwnProperty('banner_picture')){
+                    document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
+                }else{
+                    document.querySelector("main").style.backgroundImage = `url(../../../frontpage/profile/images/${user.banner_picture})`;
+                }
+                if(!user.hasOwnProperty('favorite_game_images')){
+                    document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
+                }else{
+                    document.querySelector("#favorite_game_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.favorite_game_images})`;
+                }
+                if(user.hasOwnProperty("profile_comments")){
                     show_messages(user.profile_comments);
                 }
                 localStorage.setItem("profile_picture", user.profile_picture);
@@ -150,6 +162,3 @@ function remove_comment(event){
         })
 }
 
-function visit_profile(event){
-    console.log(hello);
-}

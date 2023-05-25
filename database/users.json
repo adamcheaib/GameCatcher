@@ -4,7 +4,9 @@
         "password": "calle",
         "favorite_games": [],
         "id": 1,
-        "friends": [],
+        "friends": [
+            "eqqq"
+        ],
         "blocked": [],
         "profile_picture": "guts.jpg",
         "banner_picture": "Vagabond-2.avif",
@@ -35,8 +37,8 @@
         "blocked": []
     },
     {
-        "username": "grgerge",
-        "password": "adam",
+        "username": "callwen",
+        "password": "callwen",
         "favorite_games": [
             {
                 "name": "Stardew Valley",
@@ -60,7 +62,13 @@
             "eqqq",
             "yyyy"
         ],
-        "pending": []
+        "pending": [],
+        "profile_comments": [
+            {
+                "message": "YO",
+                "timestamp": "2023-05-25 18:39:59"
+            }
+        ]
     },
     {
         "username": "link",
@@ -85,12 +93,27 @@
         "favorite_games": [],
         "id": 3,
         "friends": [
+            "callwen",
+            "calle",
             "adam",
             "qeqe",
             "adamcheaib",
             "yyyy"
         ],
-        "pending": []
+        "pending": [],
+        "profile_picture": "pp.webp",
+        "banner_picture": "200022490340-0-1000.png",
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_comments": [
+            {
+                "message": "YO",
+                "timestamp": "2023-05-25 18:39:59"
+            },
+            {
+                "message": "3213O",
+                "timestamp": "2023-05-25 18:39:23"
+            }
+        ]
     },
     {
         "username": "yyyy",
