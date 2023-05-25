@@ -206,12 +206,12 @@ export async function game_scroll() { // Scroll function for the displayed genre
 
 
     async function click_right_arrow() {
-
         if (counter2 === game_names.length - 4) {
             document.querySelector("#second_arrow2").style.backgroundColor = "gray";
             document.querySelector("#second_arrow2").removeEventListener("click", click_right_arrow)
         }
         else {
+
 
             const fourth_game_box = document.querySelector(".game_4");
             console.log(fourth_game_box);
@@ -251,6 +251,19 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 
             `;
             }
+
+            const all_game_boxes = document.querySelectorAll("#games_wrapper > div");
+            all_game_boxes.forEach(async game_dom => {
+                const game_name = game_dom.querySelector(".game_text").textContent;
+                console.log(game_name);
+                if (localStorage.getItem("selected_game") === game_name) {
+                    game_dom.style.transform = "scale(1.15)";
+                    game_dom.style.border = "2px solid white";
+                } else {
+                    game_dom.style.transform = "scale(1)";
+                    game_dom.style.border = "none";
+                }
+            })
         }
 
         /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
@@ -259,6 +272,20 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
                 localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
                 let the_game = await search_game(localStorage.getItem("selected_game"));
+
+                const all_game_boxes = document.querySelectorAll("#games_wrapper > div");
+                all_game_boxes.forEach(async game_dom => {
+                    const game_name = game_dom.querySelector(".game_text").textContent;
+                    console.log(game_name);
+                    if (localStorage.getItem("selected_game") === game_name) {
+                        game_dom.style.transform = "scale(1.15)";
+                        game_dom.style.border = "2px solid white";
+                    } else {
+                        game_dom.style.transform = "scale(1)";
+                        game_dom.style.border = "none";
+                    }
+                })
+
                 if (document.querySelector(".display_game_dom") !== null) {
                     document.querySelector(".display_game_dom").remove();
                 }
@@ -327,6 +354,19 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 </div>
                 
             `;
+
+                const all_game_boxes = document.querySelectorAll("#games_wrapper > div");
+                all_game_boxes.forEach(async game_dom => {
+                    const game_name = game_dom.querySelector(".game_text").textContent;
+                    console.log(game_name);
+                    if (localStorage.getItem("selected_game") === game_name) {
+                        game_dom.style.transform = "scale(1.15)";
+                        game_dom.style.border = "2px solid white";
+                    } else {
+                        game_dom.style.transform = "scale(1)";
+                        game_dom.style.border = "none";
+                    }
+                })
             }
             /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
             document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
@@ -354,7 +394,6 @@ export async function game_scroll() { // Scroll function for the displayed genre
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
             let the_game = await search_game(localStorage.getItem("selected_game"));
-            console.log(localStorage);
 
             // Kollar om användaren redan har spelet i sin library.
             const user_favorite_library = await (await fetch("../login_register/php/user_database.php",
@@ -364,6 +403,17 @@ export async function game_scroll() { // Scroll function for the displayed genre
                     body: JSON.stringify({ username: localStorage.getItem("username"), action: "favorite_library" })
                 })).json();
 
+            const all_game_boxes = document.querySelectorAll("#games_wrapper > div");
+            all_game_boxes.forEach(game_dom => {
+                const game_name = game_dom.querySelector(".game_text").textContent;
+                if (localStorage.getItem("selected_game") === game_name) {
+                    game_dom.style.transform = "scale(1.15)";
+                    game_dom.style.border = "2px solid white";
+                } else {
+                    game_dom.style.transform = "scale(1)";
+                    game_dom.style.border = "none";
+                }
+            })
 
             if (document.querySelector(".display_game_dom") !== null) {
                 document.querySelector(".display_game_dom").remove();
@@ -380,29 +430,8 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 }
             })
 
-            // user_favorite_library.fav_games.forEach(game => {
-            //     if (game.name === localStorage.getItem("selected_game")) {
-            //         document.getElementById("liked_games_button").remove();
-            //         const remove_game_from_collection_button = document.createElement("div");
-            //         remove_game_from_collection_button.style.fontSize = "30px";
-            //         remove_game_from_collection_button.innerHTML = "&#128465;";
-            //         remove_game_from_collection_button.id = "liked_games_button";
-            //         document.querySelector(".display_game_dom").prepend(remove_game_from_collection_button);
+            console.log(document.querySelectorAll("#games_wrapper > div"));
 
-            //         remove_game_from_collection_button.addEventListener("click", async () => {
-            //             let body_for_fetch = {
-            //                 username: localStorage.getItem("username"),
-            //                 the_game_to_delete: localStorage.getItem("selected_game"),
-            //             }
-
-            //             let response = await fetch("./frontpage/php/game_collection.php", {
-            //                 method: "DELETE",
-            //                 headers: { "Content-Type": "application/json" },
-            //                 body: JSON.stringify(body_for_fetch),
-            //             });
-            //         })
-            //     }
-            // })
         })
     })
 }
@@ -501,8 +530,6 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
 
     function click_left_arrow(event) {
-        console.log("hej");
-
         if (counter === 0) {
             document.querySelector("#first_arrow").style.backgroundColor = "gray";
             document.querySelector("#first_arrow").removeEventListener("click", click_left_arrow)
