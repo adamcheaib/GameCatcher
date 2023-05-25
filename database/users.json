@@ -1,17 +1,5 @@
 [
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "favorite_games": [],
-        "id": 2,
-        "friends": [
-            "elliot"
-        ],
-        "pending": [
-            "adameliasson"
-        ]
-    },
-    {
         "username": "rastaman123",
         "password": "quart",
         "favorite_games": [
@@ -67,5 +55,22 @@
         "password": "besh",
         "favorite_games": [],
         "id": 5
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            }
+        ],
+        "id": 2,
+        "friends": [
+            "elliot"
+        ],
+        "pending": [
+            "adameliasson"
+        ]
     }
 ]
