@@ -139,10 +139,20 @@ function block_unblock_user(event) {
         })
     })
         .then(resource => resource.json())
-        .then(data => console.log(data))
+        .then(data => {console.log(data);
+            if(data.action === "block"){
+            show_my_friends();
+            document.querySelector("dialog").remove();
+
+        }
+        if(data.action === "unblock"){
+            init_blocked_users()
+            document.querySelector("dialog").remove();
+        }})
+
 
     document.querySelector("#add_friends").addEventListener("click", init_add_friends);
-    //user.removeAttribute("id");
+    
 
 }
 

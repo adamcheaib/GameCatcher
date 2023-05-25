@@ -167,7 +167,8 @@ if($fetch_data["action"] === "block"){
          file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
             $message = [
                 "message" => "Success!",
-                "username" => $fetch_data["username"]
+                "username" => $fetch_data["username"],
+                "action" => $fetch_data["action"],
                 ];
                 header("Content-Type: application/json");
                 echo json_encode($message);
@@ -184,7 +185,8 @@ if($fetch_data["action"] === "block"){
                             file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
                                 $message = [
                                     "message" => "Success!",
-                                    "username" => $fetch_data["username"]
+                                    "username" => $fetch_data["username"],
+                                    "action" => $fetch_data["action"],
                                 ];
                                 header("Content-Type: application/json");
                                 echo json_encode($message);

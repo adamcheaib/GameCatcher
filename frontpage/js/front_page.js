@@ -169,8 +169,8 @@ function new_value(event){
     document.querySelector("#change_password").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
     event.target.parentElement.style.height = "45vh"
 
-function new_value(event) {
-    event.target.parentElement.style.height = "40vh"
+
+
     let parent = event.target.parentElement;
     let paragraph = document.createElement("p");
     paragraph.setAttribute("id", "changed_message")
@@ -189,13 +189,9 @@ function new_value(event) {
     parent.append(button)
     button.addEventListener("click", change_username_password)
 }
-}
-
 
 
 function change_username_password(event) {
-    //MÅSTE FIVA SKITEN
-
     let action;
     let check = event.target.id;
     let user = localStorage.getItem("username");
