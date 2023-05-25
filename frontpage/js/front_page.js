@@ -111,8 +111,7 @@ export function init_frontpage() {
     document.querySelector("#friends").addEventListener("click", init_friends_page);
 
 
-    document.querySelectorAll("#genre_wrapper div").forEach(genre => {
-
+    document.querySelectorAll("#genre_wrapper div").forEach(async genre => {
 
         genre.addEventListener("click", () => {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
