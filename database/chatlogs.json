@@ -75,13 +75,5 @@
             "wwwwwww",
             "fdsfdsfds"
         ]
-    },
-    {
-        "chatid": 7,
-        "chat_between": [
-            3,
-            null
-        ],
-        "chatlog": []
     }
 ]
