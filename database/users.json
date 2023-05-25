@@ -37,7 +37,7 @@
         "blocked": []
     },
     {
-        "username": "adam",
+        "username": "grgerge",
         "password": "adam",
         "favorite_games": [
             {
@@ -75,7 +75,8 @@
         ],
         "id": 4,
         "friends": [
-            "eqqq"
+            "eqqq",
+            "qeqe"
         ],
         "pending": [],
         "blocked": []

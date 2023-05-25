@@ -8,7 +8,7 @@ if (localStorage.getItem("counter_for_forum") === null) {
 }
 
 
-export function init_forum() {
+export function init_forum(user) {
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "forum");
 
@@ -32,14 +32,14 @@ export function init_forum() {
 
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
-    get_all_friends();
+    get_all_friends(user);
     create_post();
 
 }
 
 document.querySelector("#chat").addEventListener("click", init_forum)
 
-async function get_all_friends() {
+async function get_all_friends(user) {
 
     let body_for_fetch = {
         the_user: localStorage.getItem("username"),
@@ -74,189 +74,187 @@ async function get_all_friends() {
     })
 
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
-    the_whole_juser_element_gets_click_event();
+    the_whole_juser_element_gets_click_event(user);
 }
-async function the_whole_juser_element_gets_click_event() {
+export async function the_whole_juser_element_gets_click_event(user) {
     document.querySelectorAll(".profile_dom").forEach(async (profile_dom, index) => {
-        profile_dom.classList.add("unselected");
-
-
+        profile_dom.classList.add("unselected");      
         // per klick av profile_dom så skapas det en interval men samtidgt så clears det i början så att det inte blir så att fler kör samtidgt
-        profile_dom.addEventListener("click", async (event) => {
-            console.log(all_intervals);
+        profile_dom.addEventListener("click", fetch_chat)
+        
+    })
+}
 
-            stop_all_intervals();
+async function fetch_chat(event) {
+    console.log(all_intervals);
+    console.log(event);
 
-            document.querySelector("#forum_display").innerHTML = "";
+    stop_all_intervals();
+    document.querySelector("#forum_display").innerHTML = "";
+    localStorage.removeItem("selected_chat_id")
 
+    document.querySelector("#forum_display").innerHTML = "";
+    const username = localStorage.getItem("username");
+    const targetUsername = event.target.querySelector(".username").innerHTML;
 
-            localStorage.removeItem("selected_chat_id")
-
-            document.querySelector("#forum_display").innerHTML = "";
-            const username = localStorage.getItem("username");
-            const targetUsername = event.target.querySelector(".username").innerHTML;
-
-            document.querySelectorAll(".selected").forEach(all_selected => {
-                console.log(all_selected)
-                all_selected.classList.remove("selected");
-                all_selected.style.backgroundColor = "lightGray";
-                all_selected.querySelector(".username").style.color = "black";
-            })
-
-            let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
-            let response_data = await response_user1.json();
-            console.log(response_data);
-
-
-
-
-            let fetch_bod_first = {
-                get_chatlog_id: true,
-                loggedID: response_data.loggedID,
-                user2_id: response_data.user2_id,
-            }
-
-            let response2 = await fetch(`./frontpage/php/chat.php`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(fetch_bod_first),
-            })
-
-            let chat_id = await response2.json(); // Här får vi chatid:et!
-
-            console.log(chat_id);
-            localStorage.setItem("selected_chat_id", chat_id.chatid)
-
-
-
-            event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
-            event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
-            event.target.parentElement.querySelector(".username").style.color = "white";
-
-            let body_for_fetch2 = {
-                chatid: localStorage.getItem("selected_chat_id"),
-                da_user_logged_in: response_data.loggedID,
-                target_user: response_data.user2_id,
-            };
-
-            let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body_for_fetch2),
-            })
-
-            let data3 = await response_all_previous_messages.json();
-
-            console.log(data3);
-
-            if (data3.count !== 0 && data3 !== null) {
-                data3.forEach(each_message => {
-                    let message_dom = document.createElement("div");
-                    message_dom.classList.add("post_dom");
-                    message_dom.innerHTML = `
-                    <div id="profile_picture"></div >
-                    <div id="username">A Username Fix It</div>
-                    <div id="the_post_text">
-                        <p>${each_message}</p>
-                    </div>
-                `
-                    document.querySelector("#forum_display").appendChild(message_dom)
-                })
-            }
-
-
-
-
-            let interval_id = setInterval(async () => {
-                console.log(all_intervals);
-                if (localStorage.getItem("where_att") !== "forum") {
-                    stop_all_intervals(all_intervals);
-                }
-
-                document.querySelector("#forum_display").innerHTML = "";
-
-
-                localStorage.removeItem("selected_chat_id")
-
-                document.querySelector("#forum_display").innerHTML = "";
-                const username = localStorage.getItem("username");
-                const targetUsername = event.target.querySelector(".username").innerHTML;
-
-                document.querySelectorAll(".selected").forEach(all_selected => {
-                    console.log(all_selected)
-                    all_selected.classList.remove("selected");
-                    all_selected.style.backgroundColor = "lightGray";
-                    all_selected.querySelector(".username").style.color = "black";
-                })
-
-                let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
-                let response_data = await response_user1.json();
-                console.log(response_data);
-
-
-
-
-                let fetch_bod_first = {
-                    get_chatlog_id: true,
-                    loggedID: response_data.loggedID,
-                    user2_id: response_data.user2_id,
-                }
-
-                let response2 = await fetch(`./frontpage/php/chat.php`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(fetch_bod_first),
-                })
-
-                let chat_id = await response2.json(); // Här får vi chatid:et!
-
-                console.log(chat_id);
-                localStorage.setItem("selected_chat_id", chat_id.chatid)
-
-
-
-                event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
-                event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
-                event.target.parentElement.querySelector(".username").style.color = "white";
-
-                let body_for_fetch2 = {
-                    chatid: localStorage.getItem("selected_chat_id"),
-                    da_user_logged_in: response_data.loggedID,
-                    target_user: response_data.user2_id,
-                };
-
-                let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(body_for_fetch2),
-                })
-
-                let data3 = await response_all_previous_messages.json();
-
-                console.log(data3);
-
-                if (data3.count !== 0 && data3 !== null) {
-                    data3.forEach(each_message => {
-                        let message_dom = document.createElement("div");
-                        message_dom.classList.add("post_dom");
-                        message_dom.innerHTML = `
-                        <div id="profile_picture"></div >
-                        <div id="username">A Username Fix It</div>
-                        <div id="the_post_text">
-                            <p>${each_message}</p>
-                        </div>
-                `
-                        document.querySelector("#forum_display").appendChild(message_dom)
-                    })
-                }
-
-            }, 5000);
-
-            all_intervals.push(interval_id)
-        });
+    document.querySelectorAll(".selected").forEach(all_selected => {
+        console.log(all_selected)
+        all_selected.classList.remove("selected");
+        all_selected.style.backgroundColor = "lightGray";
+        all_selected.querySelector(".username").style.color = "black";
     })
 
-}
+    let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+    let response_data = await response_user1.json();
+    console.log(response_data);
+
+
+
+
+    let fetch_bod_first = {
+        get_chatlog_id: true,
+        loggedID: response_data.loggedID,
+        user2_id: response_data.user2_id,
+    }
+
+    let response2 = await fetch(`./frontpage/php/chat.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fetch_bod_first),
+    })
+
+    let chat_id = await response2.json(); // Här får vi chatid:et!
+
+    console.log(chat_id);
+    localStorage.setItem("selected_chat_id", chat_id.chatid)
+
+    event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
+    event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
+    event.target.parentElement.querySelector(".username").style.color = "white";
+
+    let body_for_fetch2 = {
+        chatid: localStorage.getItem("selected_chat_id"),
+        da_user_logged_in: response_data.loggedID,
+        target_user: response_data.user2_id,
+    };
+
+    let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body_for_fetch2),
+    })
+
+    let data3 = await response_all_previous_messages.json();
+
+    console.log(data3);
+
+    if (data3.count !== 0 && data3 !== null) {
+        data3.forEach(each_message => {
+            let message_dom = document.createElement("div");
+            message_dom.classList.add("post_dom");
+            message_dom.innerHTML = `
+            <div id="profile_picture"></div >
+            <div id="username">A Username Fix It</div>
+            <div id="the_post_text">
+                <p>${each_message}</p>
+            </div>
+        `
+            document.querySelector("#forum_display").appendChild(message_dom)
+        })
+    }
+
+
+
+
+    let interval_id = setInterval(async () => {
+        console.log(all_intervals);
+        if (localStorage.getItem("where_att") !== "forum") {
+            stop_all_intervals(all_intervals);
+        }
+
+        document.querySelector("#forum_display").innerHTML = "";
+
+
+        localStorage.removeItem("selected_chat_id")
+
+        document.querySelector("#forum_display").innerHTML = "";
+        const username = localStorage.getItem("username");
+        const targetUsername = event.target.querySelector(".username").innerHTML;
+
+        document.querySelectorAll(".selected").forEach(all_selected => {
+            console.log(all_selected)
+            all_selected.classList.remove("selected");
+            all_selected.style.backgroundColor = "lightGray";
+            all_selected.querySelector(".username").style.color = "black";
+        })
+
+        let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+        let response_data = await response_user1.json();
+        console.log(response_data);
+
+
+
+
+        let fetch_bod_first = {
+            get_chatlog_id: true,
+            loggedID: response_data.loggedID,
+            user2_id: response_data.user2_id,
+        }
+
+        let response2 = await fetch(`./frontpage/php/chat.php`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(fetch_bod_first),
+        })
+
+        let chat_id = await response2.json(); // Här får vi chatid:et!
+
+        console.log(chat_id);
+        localStorage.setItem("selected_chat_id", chat_id.chatid)
+
+
+
+        event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
+        event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
+        event.target.parentElement.querySelector(".username").style.color = "white";
+
+        let body_for_fetch2 = {
+            chatid: localStorage.getItem("selected_chat_id"),
+            da_user_logged_in: response_data.loggedID,
+            target_user: response_data.user2_id,
+        };
+
+        let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body_for_fetch2),
+        })
+
+        let data3 = await response_all_previous_messages.json();
+
+        console.log(data3);
+
+        if (data3.count !== 0 && data3 !== null) {
+            data3.forEach(each_message => {
+                let message_dom = document.createElement("div");
+                message_dom.classList.add("post_dom");
+                message_dom.innerHTML = `
+                <div id="profile_picture"></div >
+                <div id="username">A Username Fix It</div>
+                <div id="the_post_text">
+                    <p>${each_message}</p>
+                </div>
+        `
+                document.querySelector("#forum_display").appendChild(message_dom)
+            })
+        }
+
+    }, 5000);
+
+    all_intervals.push(interval_id)
+};
+
+
 
 
 function stop_all_intervals() { // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
