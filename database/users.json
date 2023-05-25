@@ -1,7 +1,7 @@
 [
     {
-        "username": "Calle",
-        "password": "dej",
+        "username": "callw",
+        "password": "calle",
         "favorite_games": [],
         "id": 1,
         "friends": [],
@@ -12,7 +12,7 @@
     },
     {
         "username": "adamcheaib",
-        "password": "adamcheaib",
+        "password": "calle",
         "favorite_games": [
             {
                 "name": "Counter-Strike: Global Offensive",
@@ -28,14 +28,15 @@
             }
         ],
         "id": 3,
-        "pending": [],
-        "friends": [
-            "eqqq"
-        ]
+        "pending": [
+            "calle"
+        ],
+        "friends": [],
+        "blocked": []
     },
     {
         "username": "adam",
-        "password": "adam",
+        "password": "calle",
         "favorite_games": [
             {
                 "name": "Stardew Valley",
@@ -56,14 +57,13 @@
         ],
         "id": 2,
         "friends": [
-            "eqqq",
-            "qeqe"
+            "eqqq"
         ],
         "pending": []
     },
     {
-        "username": "qeqe",
-        "password": "qeqe",
+        "username": "link",
+        "password": "calle",
         "favorite_games": [
             {
                 "name": "Grand Theft Auto V",
@@ -72,14 +72,14 @@
         ],
         "id": 4,
         "friends": [
-            "adam",
             "eqqq"
         ],
-        "pending": []
+        "pending": [],
+        "blocked": []
     },
     {
         "username": "eqqq",
-        "password": "eqqq",
+        "password": "calle",
         "favorite_games": [],
         "id": 3,
         "friends": [

@@ -98,21 +98,16 @@ export function init_frontpage() {
                 
                 <div id="general_notifications_container"></div>
                 <div id="general_notifications_container_search"></div>
-
-
-                <footer>
-                    <button>Logout</button>
-                </footer>
         </div>
     </div>`;
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#friends").addEventListener("click", init_friends_page);
+    document.querySelector("#settings").addEventListener("click", show_settings)
 
 
-    document.querySelectorAll("#genre_wrapper div").forEach(genre => {
-
+    document.querySelectorAll("#genre_wrapper div").forEach(async genre => {
 
         genre.addEventListener("click", () => {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
@@ -137,10 +132,23 @@ export function init_frontpage() {
     document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
 
     document.querySelectorAll(".platform").forEach(platform => {
+
         platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id);
             game_scroll();
+
+            const all_platform_buttons = document.querySelectorAll(".platform");
+            all_platform_buttons.forEach(platform_dom => {
+                const platform_id = platform_dom.dataset.id;
+                if (localStorage.getItem("platform_selected") == platform_id) {
+                    platform_dom.style.transform = "scale(1.15)";
+                    platform_dom.style.border = "2px solid white";
+                } else {
+                    platform_dom.style.transform = "scale(1)";
+                    platform_dom.style.border = "none";
+                }
+            })
         })
     })
     genre_scroll();
@@ -148,12 +156,6 @@ export function init_frontpage() {
 
     const search_icon_button = document.getElementById("search_function");
     search_icon_button.addEventListener("click", search_popup);
-
-    document.querySelector("button").addEventListener("click", () => {
-        console.log("click");
-        localStorage.clear();
-        window.location.replace("./login_register");
-    })
 }
 
 document.querySelector("#settings").addEventListener("click", show_settings)
@@ -171,8 +173,16 @@ function show_settings(event) {
     }))
 }
 
+
 function new_value(event) {
-    event.target.parentElement.style.height = "40vh"
+    document.querySelector("#change_username").removeEventListener("click", new_value)
+    document.querySelector("#change_username").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
+    document.querySelector("#change_password").removeEventListener("click", new_value)
+    document.querySelector("#change_password").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
+    event.target.parentElement.style.height = "45vh"
+
+
+
     let parent = event.target.parentElement;
     let paragraph = document.createElement("p");
     paragraph.setAttribute("id", "changed_message")
@@ -192,8 +202,8 @@ function new_value(event) {
     button.addEventListener("click", change_username_password)
 }
 
+
 function change_username_password(event) {
-    //MÅSTE FIVA SKITEN
     let action;
     let check = event.target.id;
     let user = localStorage.getItem("username");
