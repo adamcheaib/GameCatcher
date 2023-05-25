@@ -85,7 +85,18 @@
         "friends": [
             "adam",
             "qeqe",
-            "adamcheaib"
+            "adamcheaib",
+            "yyyy"
+        ],
+        "pending": []
+    },
+    {
+        "username": "yyyy",
+        "password": "yyyy",
+        "favorite_games": [],
+        "id": 5,
+        "friends": [
+            "eqqq"
         ]
     }
 ]
