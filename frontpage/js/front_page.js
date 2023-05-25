@@ -98,17 +98,13 @@ export function init_frontpage() {
                 
                 <div id="general_notifications_container"></div>
                 <div id="general_notifications_container_search"></div>
-
-
-                <footer>
-                    <button>Logout</button>
-                </footer>
         </div>
     </div>`;
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#friends").addEventListener("click", init_friends_page);
+    document.querySelector("#settings").addEventListener("click", show_settings)
 
     document.querySelectorAll("#genre_wrapper div").forEach(genre => {
         genre.addEventListener("click", () => {
@@ -132,12 +128,6 @@ export function init_frontpage() {
 
     const search_icon_button = document.getElementById("search_function");
     search_icon_button.addEventListener("click", search_popup);
-
-    document.querySelector("button").addEventListener("click", () => {
-        console.log("click");
-        localStorage.clear();
-        window.location.replace("./login_register");
-    })
 }
 
 document.querySelector("#settings").addEventListener("click", show_settings)
@@ -156,7 +146,11 @@ function show_settings(event){
 }
 
 function new_value(event){
-    event.target.parentElement.style.height = "40vh"
+    document.querySelector("#change_username").removeEventListener("click", new_value)
+    document.querySelector("#change_username").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
+    document.querySelector("#change_password").removeEventListener("click", new_value)
+    document.querySelector("#change_password").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
+    event.target.parentElement.style.height = "45vh"
     let parent = event.target.parentElement;
     let paragraph = document.createElement("p");
     paragraph.setAttribute("id", "changed_message")
@@ -177,7 +171,6 @@ function new_value(event){
 }
 
 function change_username_password(event){ 
-    //MÅSTE FIVA SKITEN
     let action;
     let check = event.target.id;
     let user = localStorage.getItem("username");

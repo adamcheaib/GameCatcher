@@ -23,9 +23,6 @@ function get_preset_information(){
 
 }
 
-let friends = document.getElementById("friends");
-friends.addEventListener("click", show_friends);
-
 let favorite_game = document.querySelector("#upload_favorite_game");
 favorite_game.addEventListener("change", upload_picture);
 
@@ -34,113 +31,6 @@ profile_picture.addEventListener("change", upload_picture);
 
 let banner_picture = document.querySelector("#banner_picture");
 banner_picture.addEventListener("change", upload_picture);
-
-function show_friends(event){
-    console.log(event);
-    let body = document.querySelector("body");
-    body.innerHTML = `
-    <body>
-        <main>
-            <header>
-                <img alt="">
-                <h2>Callw</h2>
-            </header>
-        </main>
-    <section>
-        <div id="menu">
-            <p id="friends">Friends</p>
-            <p id="about">About</p>
-        </div>
-    </section>
-    <div id="friends_list">
-        <div>
-        <div id="profile_forum">
-        
-        </div>
-    </div>
-    </div>
-    </body>
-    `;
-    let your_profile = document.querySelector("#about");
-    your_profile.addEventListener("click", go_back);
-}
-
-function go_back(event){
-    let body = document.querySelector("body");
-    body.innerHTML = `
-    <body>
-    <main>
-        <header>
-            <img id="profile_image" src="./profile/php/images/200022490340-0-1000.png" alt="Profile Picture">
-            <form id="profile_pic_form"  action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
-                <input type="file" id="upload_profile_picture" name="upload"></input>
-                <button type="submit">UPLOAD</button>
-            </form>
-            
-            <h2>Callw</h2>
-        </header>
-    </main>
-<section>
-    <div id="menu">
-       <p id="friends">Friends</p>
-       <p id="about">About</p>
-    </div>
-</section>
-<div id="split">
-    <div id="nav">
-        <div>home</div>
-        <div>games</div>
-        <div>chat</div>
-        <div>settings</div>
-    </div>
-    <div id="profile_stuff">
-        <div id="feeling">
-            <p>How i'm feeling</p>
-            <p>Mood</p>
-            <p id="emoji"></p>
-        </div>
-
-        <div id="transparency"></div>
-
-        <div id="favorite">
-            <p>Favorite Game</p>
-            <img id="favorite_game_image" alt="Favorite Game">
-        </div>
-        <form id="upload" action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
-            <input type="file" id="upload_favorite" name="upload"></input>
-            <button type="submit">UPLOAD</button>
-        </form>
-        
-    </div>
-
-    <div id="profile_forum">
-        <div class="comments_section">
-            <img id="comment_profile" alt="Profile Picture">
-            <input id="message" name="profile_message" type="text" placeholder="Write something..." >
-            <button id="send_message">Send Message!</button>
-        </div>
-    </div>
-</div>
-
-</body>
-`
-fetch("../../../../database/users.json")
-    .then(resource => resource.json())
-    .then(users => {
-        users.forEach(user => {
-            if(user.username === localStorage.username){
-                document.getElementById("profile_image").src = "./profile/images/" + user.profile_picture;
-                document.getElementById("favorite_game_image").src = "./profile/images/" + user.favorite_game_images;
-            }
-        });
-    })
-
-let message = document.querySelector("#send_message");
-message.addEventListener("click", send_message);
-let friends = document.getElementById("friends");
-friends.addEventListener("click", show_friends);
-
-}
 
 function upload_picture(event){
     event.preventDefault();

@@ -37,10 +37,7 @@ export async function init_friends_page() {
     document.querySelector("#chat").addEventListener("click", init_forum);
     document.querySelector("#add_friends").addEventListener("click", init_add_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
-
     document.querySelector("#blocked").addEventListener("click", init_blocked_users)
-
-
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
 
@@ -101,6 +98,8 @@ async function show_my_friends(event) {
 
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    document.querySelector("#blocked").addEventListener("click", init_blocked_users)
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
 
 
     document.querySelectorAll(".more_options").forEach(element => {
@@ -239,6 +238,7 @@ async function get_all_pending_friend_requests(event) {
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
     document.querySelector("#add_friends").addEventListener("click", init_add_friends)
+    document.querySelector("#blocked").addEventListener("click", init_blocked_users)
 
     let username = localStorage.getItem("username");
     let body_for_fetch = {
@@ -302,6 +302,7 @@ function init_add_friends() {
     document.querySelector("#search_image").addEventListener("click", find_user)
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
+    document.querySelector("#blocked").addEventListener("click", init_blocked_users)
 }
 
 async function add_friend(event) {
@@ -341,9 +342,6 @@ async function add_friend(event) {
     let data2 = await response2.json();
 
     console.log(data2)
-
-
-
 }
 
 async function decline_friend(event) {
@@ -410,8 +408,10 @@ async function init_blocked_users(event) {
     document.querySelectorAll(".more_options").forEach(element => {
         element.addEventListener("click", show_options);
     });
+    document.querySelector("#main_page").addEventListener("click", init_frontpage);
+    document.querySelector("#chat").addEventListener("click", init_forum)
+    document.querySelector("#saved").addEventListener("click", init_collection);
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends)
 }
 
-document.querySelector("#main_page").addEventListener("click", init_frontpage);
-document.querySelector("#chat").addEventListener("click", init_forum)
-document.querySelector("#saved").addEventListener("click", init_collection);
+
