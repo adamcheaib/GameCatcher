@@ -2,102 +2,14 @@
     {
         "chatid": 1,
         "chat_between": [
-            2,
-            3
+            1,
+            2
         ],
         "chatlog": [
-            "fdsfsdf",
-            "fdsfdsfd",
-            "fdsfds",
-            "dasdasdas",
-            "aaaaaaaaaaa",
-            "\u00f6rw\u00f6erwerw"
-        ]
-    },
-    {
-        "chatid": 2,
-        "chat_between": [
-            2,
-            4
-        ],
-        "chatlog": [
-            "fdsfdsfsdfs",
-            "dsadasd"
-        ]
-    },
-    {
-        "chatid": 3,
-        "chat_between": [
-            2,
-            5
-        ],
-        "chatlog": [
-            "fdsfdsfds",
-            "wwww eyyyy"
-        ]
-    },
-    {
-        "chatid": 4,
-        "chat_between": [
-            3,
-            3
-        ],
-        "chatlog": [
-            "fdsfdsfsd",
-            "fdsfdsfd",
-            "dsadsadas",
-            "hej adam",
-            "hej elliot din lilla fucking kuksugare",
-            "hej s\u00f6tis",
-            "bob marley \u00e4r b\u00e4st"
-        ]
-    },
-    {
-        "chatid": 5,
-        "chat_between": [
-            4,
-            3
-        ],
-        "chatlog": [
-            "fsdfdsfsd",
-            "aaaaa",
-            "fdsfds",
-            "eqeqeqeq",
-            "sdfsfsdfs",
-            "qqqqqqqq"
-        ]
-    },
-    {
-        "chatid": 6,
-        "chat_between": [
-            3,
-            5
-        ],
-        "chatlog": [
-            "fdsfdsfdsfsdf",
-            "wwwwwww",
-            "fdsfdsfds"
-        ]
-    },
-    {
-        "chatid": 7,
-        "chat_between": [
-            3,
-            null
-        ],
-        "chatlog": []
-    },
-    {
-        "chatid": 8,
-        "chat_between": [
-            3,
-            1
-        ],
-        "chatlog": [
-            "fdsfsdfdsfsd",
-            "",
-            "fdsfsdfds",
-            "aaaaaaa"
+            "Hej Adam. Jag vill \u00e4lskas med dig &lt;3",
+            "Hej Elliot, Jag hade j\u00e4tteg\u00e4rna tagit emot din kuk i min anal",
+            "alksdkjalsdjasldjasd",
+            "hej\n"
         ]
     }
 ]
