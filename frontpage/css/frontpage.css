@@ -385,7 +385,37 @@ p {
     flex-direction: column;
 }
 
+#like_and_close_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+}
+
+#game_information_close_button {
+    grid-column: 4;
+    grid-row: 1;
+    margin-right: 10px;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+#game_information_close_button:hover {
+    cursor: pointer;
+}
+
 #liked_games_button {
+    margin-left: 36px;
+    justify-self: center;
+    grid-row: 1;
+    grid-column: 1 / 4;
     margin-top: 20px;
     width: 50%;
     height: 40px;

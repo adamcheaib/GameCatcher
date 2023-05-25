@@ -230,10 +230,10 @@ function change_username_password(event) {
         .then(resource => resource.json())
         .then(data => {
             console.log(data)
-            if (data.ok === "Fail") {
+            if (data.action === "Fail") {
                 document.getElementById("changed_message").textContent = "Failed!"
             }
-            if (data.ok === "Success") {
+            if (data.action === "change_username") {
                 localStorage.setItem("username", changed_value);
                 location.reload();
                 console.log(localStorage);
