@@ -3,20 +3,20 @@ import { api_key } from "./fetch_functions.js";
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 
-async function add_to_game_collection() {
-    let send_object = {
-        name: game_data.name,
-        image: game_data.background_image,
-        username: localStorage.getItem("username"),
-    };
-    fetch("../frontpage/php/game_collection.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(send_object),
-    }).then(r => r.json()).then(data => {
-        console.log(data);
-    });
-}
+// async function add_to_game_collection() {
+//     let send_object = {
+//         name: game_data.name,
+//         image: game_data.background_image,
+//         username: localStorage.getItem("username"),
+//     };
+//     fetch("../frontpage/php/game_collection.php", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(send_object),
+//     }).then(r => r.json()).then(data => {
+//         console.log(data);
+//     });
+// }
 
 
 function show_game_display_dom(game_data) {
@@ -732,10 +732,3 @@ export function general_notifications_search(event) {
         notification.remove();
     }, 2300);
 }
-
-
-
-
-
-
-

@@ -5,18 +5,14 @@ import { game_scroll, genre_scroll, registration_notification, } from "../../uti
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
-if (localStorage.getItem("all_timeouts") != null) {
-    localStorage.setItem("all_timeouts", JSON.stringify({ timeouts: [1] }));
-}
-
+// Ifall ingen användare är inloggad, skickar besökaren tillbaka till login/register-sidan.
+// Annars är man kvar på hemsidan och den selekterar Action som genre och PC som platform per automatik.
 if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("http://localhost:1234/login_register");
 }
 else {
-    if (localStorage.getItem("selected_genre") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected genre så att spelen inte blir tomma
+    if (localStorage.getItem("selected_genre") === null && localStorage.getItem("platform_selected") === null) {
         localStorage.setItem("selected_genre", "action");
-    }
-    if (localStorage.getItem("platform_selected") === null) { // Denna finns för att om en användare är helt ny så ger den automatiskt en selected platform så att spelen inte blir tomma
         localStorage.setItem("platform_selected", "4");
     }
     init_frontpage();
@@ -25,14 +21,14 @@ else {
 
 
 export function init_frontpage() {
-
-
+    // Används i Forum/Chat sidan för att stoppa forumet/chattens live-funktionalitet.
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "frontpage");
 
-
+    // Tömmer hela body:n för att ladda frontpage för att inte ha oönskade HTML-element på sidan.
     document.body.innerHTML = "";
 
+    // Laddar frontpage-CSS:et och appendar den nya HTML:n.
     document.querySelector("link").setAttribute("href", "./frontpage/css/frontpage.css");
     document.body.innerHTML = `
         <div id="frontpage_wrapper">
@@ -42,64 +38,66 @@ export function init_frontpage() {
                 <div id="chat"></div>
                 <div id="friends"></div>
                 <div id="settings"></div>
-
-            </div>
-
-
-            <div id="center_piece">
-
-                <div id="profile_and_welcome_text">
-                    <div id="welcome_text">
-                        <h1>Hello ${localStorage.getItem("username")}!</h1>
-                        <p>Lets begin todays game browsing</p>
-                    </div>
-
-                    <div id="profile_and_welcome_text_wrapper">
-                        <div id="search_function"></div>
-                        <div id="profile"></div>
-                    </div>
-                </div>
-
-                <div id="games_section">
-
-                    <div id="genres">
-                        <div id="first_arrow">&#8592;</div>
-                            <div id="genre_wrapper">
-                                <div id="first_genra"></div>
-                                <div id="second_genra"></div>
-                                <div id="third_genra"></div>
-                                <div id="fourth_genra"></div>
-                            </div>
-                        <div id="second_arrow">&#8594;</div>
-                    </div>
-
-                    <div id="platfroms">
-                        <div id="platfroms_Text"></div>
-                        <div class="wrapper">
-                            <div data-id="186" class="platform" id="Xbox"></div>
-                            <div data-id="187" class="platform" id="Playstation"></div>
-                            <div data-id="7" class="platform" id="Nintendo_Switch"></div>
-                            <div data-id="4" class="platform" id="PC"></div>
-                        </div>
-
-                    </div>
-
-                    <div id="games">
-                        <div id="first_arrow2">&#8592;</div>
-                            <div id="games_wrapper">
-                                <div class="game_1"></div>
-                                <div class="game_2"></div>
-                                <div class="game_3"></div>
-                                <div class="game_4"></div>
-                            </div>
-                        <div id="second_arrow2"> &#8594; </div>
-                    </div>
+                
                 </div>
                 
-                <div id="general_notifications_container"></div>
-                <div id="general_notifications_container_search"></div>
-        </div>
-    </div>`;
+                
+                <div id="center_piece">
+                
+                <div id="profile_and_welcome_text">
+                <div id="welcome_text">
+                <h1>Hello ${localStorage.getItem("username")}!</h1>
+                <p>Lets begin todays game browsing</p>
+                </div>
+                
+                <div id="profile_and_welcome_text_wrapper">
+                <div id="search_function"></div>
+                <div id="profile"></div>
+                </div>
+                </div>
+                
+                <div id="games_section">
+                
+                <div id="genres">
+                <div id="first_arrow">&#8592;</div>
+                <div id="genre_wrapper">
+                <div id="first_genra"></div>
+                <div id="second_genra"></div>
+                <div id="third_genra"></div>
+                <div id="fourth_genra"></div>
+                </div>
+                <div id="second_arrow">&#8594;</div>
+                </div>
+                
+                <div id="platfroms">
+                <div id="platfroms_Text"></div>
+                <div class="wrapper">
+                <div data-id="186" class="platform" id="Xbox"></div>
+                <div data-id="187" class="platform" id="Playstation"></div>
+                <div data-id="7" class="platform" id="Nintendo_Switch"></div>
+                            <div data-id="4" class="platform" id="PC"></div>
+                        </div>
+                        
+                        </div>
+                        
+                        <div id="games">
+                        <div id="first_arrow2">&#8592;</div>
+                        <div id="games_wrapper">
+                        <div class="game_1"></div>
+                        <div class="game_2"></div>
+                        <div class="game_3"></div>
+                        <div class="game_4"></div>
+                        </div>
+                        <div id="second_arrow2"> &#8594; </div>
+                        </div>
+                        </div>
+                        
+                        <div id="general_notifications_container"></div>
+                        <div id="general_notifications_container_search"></div>
+                        </div>
+                        </div>`;
+
+    // Här lägger vi alla navigations funktionerna på sidebaren.
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     document.querySelector("#chat").addEventListener("click", init_forum)
     document.querySelector("#saved").addEventListener("click", init_collection);
@@ -107,6 +105,7 @@ export function init_frontpage() {
     document.querySelector("#settings").addEventListener("click", show_settings)
 
 
+    // Laddar alla genre i genre_scroll:n så att man har de från början.
     document.querySelectorAll("#genre_wrapper div").forEach(async genre => {
 
         genre.addEventListener("click", () => {
@@ -129,6 +128,7 @@ export function init_frontpage() {
         });
     })
 
+    // Användarens profilbild visas på frontpage.
     document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
 
     document.querySelectorAll(".platform").forEach(platform => {
@@ -138,6 +138,7 @@ export function init_frontpage() {
             localStorage.setItem("platform_selected", platform.dataset.id);
             game_scroll();
 
+            // Kan kanske abstraheras.
             const all_platform_buttons = document.querySelectorAll(".platform");
             all_platform_buttons.forEach(platform_dom => {
                 const platform_id = platform_dom.dataset.id;
@@ -154,30 +155,32 @@ export function init_frontpage() {
     genre_scroll();
     game_scroll();
 
+    // Lägger eventListener på search-knappen.
     const search_icon_button = document.getElementById("search_function");
     search_icon_button.addEventListener("click", search_popup);
+
 }
 
-document.querySelector("#settings").addEventListener("click", show_settings)
 
+// Pop-up funktionen för User-Settings.
 function show_settings(event) {
-    console.log(event);
     registration_notification("Manage Account", "account_management");
-    document.querySelector("#change_username").addEventListener("click", new_value);
-    document.querySelector("#change_password").addEventListener("click", new_value);
+    document.querySelector("#change_username").addEventListener("click", init_changeUserSettings_DOM);
+    document.querySelector("#change_password").addEventListener("click", init_changeUserSettings_DOM);
 
-    document.querySelector("#logout").addEventListener("click", ("click", () => {
-        console.log("click");
+    document.querySelector("#logout").addEventListener("click", () => {
         localStorage.clear();
         window.location.replace("./login_register");
-    }))
+    })
 }
 
 
-function new_value(event) {
-    document.querySelector("#change_username").removeEventListener("click", new_value)
+// Skapar Input fälten i User-settings om man vill ändra Username eller Lösenord.
+function init_changeUserSettings_DOM(event) {
+    // Ändra så att man kan ändra mellan "Change Password" och "Change Username" om man redan har klickat på en av dem.
+    document.querySelector("#change_username").removeEventListener("click", init_changeUserSettings_DOM)
     document.querySelector("#change_username").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
-    document.querySelector("#change_password").removeEventListener("click", new_value)
+    document.querySelector("#change_password").removeEventListener("click", init_changeUserSettings_DOM)
     document.querySelector("#change_password").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
     event.target.parentElement.style.height = "45vh"
 
@@ -203,6 +206,7 @@ function new_value(event) {
 }
 
 
+// Skickar de nya värden baserat på om man ändrar Username eller Password.
 function change_username_password(event) {
     let action;
     let check = event.target.id;

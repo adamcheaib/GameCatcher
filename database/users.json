@@ -61,5 +61,11 @@
             }
         ],
         "id": 4
+    },
+    {
+        "username": "besh",
+        "password": "besh",
+        "favorite_games": [],
+        "id": 5
     }
 ]
