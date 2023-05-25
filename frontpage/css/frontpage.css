@@ -37,6 +37,12 @@ p {
     gap: 100px;
 }
 
+#sidebar>div:hover {
+    cursor: pointer;
+    transition-duration: 200ms;
+    transform: scale(1.2);
+}
+
 #center_piece {
     width: 100%;
     min-height: 100vh;
@@ -683,7 +689,7 @@ dialog>div {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .account_management div:hover {

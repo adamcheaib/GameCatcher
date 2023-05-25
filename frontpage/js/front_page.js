@@ -107,8 +107,7 @@ export function init_frontpage() {
     document.querySelector("#settings").addEventListener("click", show_settings)
 
 
-    document.querySelectorAll("#genre_wrapper div").forEach(genre => {
-
+    document.querySelectorAll("#genre_wrapper div").forEach(async genre => {
 
         genre.addEventListener("click", () => {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
@@ -133,10 +132,23 @@ export function init_frontpage() {
     document.getElementById("profile").style.backgroundImage = `url(/frontpage/profile/images/${localStorage.getItem("profile_picture")})`
 
     document.querySelectorAll(".platform").forEach(platform => {
+
         platform.addEventListener("click", () => {
             localStorage.removeItem("platform_selected");
             localStorage.setItem("platform_selected", platform.dataset.id);
             game_scroll();
+
+            const all_platform_buttons = document.querySelectorAll(".platform");
+            all_platform_buttons.forEach(platform_dom => {
+                const platform_id = platform_dom.dataset.id;
+                if (localStorage.getItem("platform_selected") == platform_id) {
+                    platform_dom.style.transform = "scale(1.15)";
+                    platform_dom.style.border = "2px solid white";
+                } else {
+                    platform_dom.style.transform = "scale(1)";
+                    platform_dom.style.border = "none";
+                }
+            })
         })
     })
     genre_scroll();
@@ -162,7 +174,7 @@ function show_settings(event) {
 }
 
 
-function new_value(event){
+function new_value(event) {
     document.querySelector("#change_username").removeEventListener("click", new_value)
     document.querySelector("#change_username").addEventListener("mouseover", element => element.target.style.backgroundColor = "rgb(73, 73, 112)")
     document.querySelector("#change_password").removeEventListener("click", new_value)
