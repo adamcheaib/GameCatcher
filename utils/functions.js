@@ -732,3 +732,5 @@ export function general_notifications_search(event) {
         notification.remove();
     }, 2300);
 }
+
+

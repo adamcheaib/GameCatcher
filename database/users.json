@@ -1,28 +1,5 @@
 [
     {
-        "username": "calle",
-        "password": "calle",
-        "favorite_games": [],
-        "id": 1,
-        "friends": [
-            "eqqq"
-        ],
-        "blocked": [],
-        "profile_picture": "online-web-design.jpg",
-        "banner_picture": "online-web-design.jpg",
-        "favorite_game_images": "online-web-design.jpg",
-        "profile_comments": [
-            {
-                "message": "fsdfsdfsd",
-                "timestamp": "2023-05-25 19:26:11"
-            },
-            {
-                "message": "aaaaaaaaaaaa",
-                "timestamp": "2023-05-25 19:26:17"
-            }
-        ]
-    },
-    {
         "username": "adamcheaib",
         "password": "calle",
         "favorite_games": [
@@ -40,10 +17,10 @@
             }
         ],
         "id": 3,
-        "pending": [
+        "pending": [],
+        "friends": [
             "calle"
         ],
-        "friends": [],
         "blocked": []
     },
     {
@@ -125,5 +102,34 @@
         "profile_picture": "guts.jpg",
         "banner_picture": "Vagabond-2.avif",
         "favorite_game_images": "elden-ring-new-header-mobile.jpg"
+    },
+    {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [
+            {
+                "name": "Limbo",
+                "image": "https:\/\/media.rawg.io\/media\/games\/942\/9424d6bb763dc38d9378b488603c87fa.jpg"
+            }
+        ],
+        "id": 1,
+        "friends": [
+            "eqqq",
+            "adamcheaib"
+        ],
+        "blocked": [],
+        "profile_picture": "online-web-design.jpg",
+        "banner_picture": "online-web-design.jpg",
+        "favorite_game_images": "online-web-design.jpg",
+        "profile_comments": [
+            {
+                "message": "fsdfsdfsd",
+                "timestamp": "2023-05-25 19:26:11"
+            },
+            {
+                "message": "aaaaaaaaaaaa",
+                "timestamp": "2023-05-25 19:26:17"
+            }
+        ]
     }
 ]

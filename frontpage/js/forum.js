@@ -249,7 +249,7 @@ async function fetch_chat(event) {
             })
         }
 
-    }, 5000);
+    }, 10000);
 
     all_intervals.push(interval_id)
 };

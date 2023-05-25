@@ -1,5 +1,5 @@
-"use strict"
-get_preset_information()
+get_preset_information();
+
 
 function get_preset_information(){
     fetch("../../../../database/users.json")

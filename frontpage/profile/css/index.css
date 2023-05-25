@@ -3,27 +3,48 @@
 }
 body{
     background-color: rgb(24, 24, 33);
-    height: 100vh;
+    height: auto;
     margin: 0;
+    display: flex;
 }
+
+#whole_flex_display_wrapper{
+    width: 100%;
+}
+
 header{
+    margin-top: 20px;
     height: 200px;
-    width: 200px;
+    width: 250px;
+    margin-left: 40px;
+}
+#profile_pic_form{
+    margin-top: 20px;
+}
+#wrapper_for_name_and_profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    
 }
 img{
     border-radius: 50%;
-    width: 100%;
+    width: 100%
 }
-header > h2{
+h2{
     text-align: center;
     margin: 0;
+    font-size: 30px;
+    color: white;
 }
 main{
-    display: flex;
     background-position: center;
     background-size: cover;
-    
+    display: flex;
+    width: 100%;
 }
+
 
 #menu{
     display: flex;
@@ -112,8 +133,9 @@ main{
 }
 #split{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 10px;
+    
 }
 .comments_section{
     background-color: rgb(41, 41, 86);
@@ -131,21 +153,7 @@ main{
     display: flex;
     align-self: center;
 }
-#nav{
-    background-color: rgb(73, 73, 112);
-    width: 100px;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-#nav div:hover{
-    background-color: rgb(41, 41, 86);
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+
 .friend{
     margin: 5px;
     border-radius: 10px;
@@ -158,7 +166,8 @@ main{
 #profile_image{
     background-size: cover;
     background-position: center;
-    height: 200px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
 }
 .profile_picture{
@@ -167,4 +176,74 @@ main{
     height: 30px;
     width: 30px;
     border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
+#chat {
+    width: 50px;
+    height: 50px;
+    background-image: url("../../general_media/chat.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#main_page {
+    width: 50px;
+    height: 50px;
+    background-image: url("../../general_media/logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#saved {
+    width: 50px;
+    height: 50px;
+    background-image: url("../../general_media/collection.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#friends {
+    width: 50px;
+    height: 50px;
+    background-image: url("../../general_media/friends_logo.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#settings {
+    width: 50px;
+    height: 50px;
+    background-image: url("../../general_media/settings.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#sidebar {
+    width: 100px;
+    height: 100vh;
+    background-color: rgb(34, 34, 46);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+#sidebar>div:hover {
+    cursor: pointer;
+    transition-duration: 200ms;
+    transform: scale(1.2);
 }

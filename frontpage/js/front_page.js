@@ -39,63 +39,61 @@ export function init_frontpage() {
                 <div id="friends"></div>
                 <div id="settings"></div>
                 
-                </div>
+            </div>
                 
                 
-                <div id="center_piece">
+            <div id="center_piece">
                 
                 <div id="profile_and_welcome_text">
-                <div id="welcome_text">
-                <h1>Hello ${localStorage.getItem("username")}!</h1>
-                <p>Lets begin todays game browsing</p>
-                </div>
+                    <div id="welcome_text">
+                        <h1>Hello ${localStorage.getItem("username")}!</h1>
+                        <p>Lets begin todays game browsing</p>
+                    </div>
                 
-                <div id="profile_and_welcome_text_wrapper">
-                <div id="search_function"></div>
-                <div id="profile"></div>
-                </div>
+                    <div id="profile_and_welcome_text_wrapper">
+                        <div id="search_function"></div>
+                        <div id="profile"></div>
+                    </div>
                 </div>
                 
                 <div id="games_section">
+                    <div id="genres">
+                        <div id="first_arrow">&#8592;</div>
+                        <div id="genre_wrapper">
+                            <div id="first_genra"></div>
+                            <div id="second_genra"></div>
+                            <div id="third_genra"></div>
+                            <div id="fourth_genra"></div>
+                        </div>
+                        <div id="second_arrow">&#8594;</div>
+                    </div>
                 
-                <div id="genres">
-                <div id="first_arrow">&#8592;</div>
-                <div id="genre_wrapper">
-                <div id="first_genra"></div>
-                <div id="second_genra"></div>
-                <div id="third_genra"></div>
-                <div id="fourth_genra"></div>
-                </div>
-                <div id="second_arrow">&#8594;</div>
-                </div>
-                
-                <div id="platfroms">
-                <div id="platfroms_Text"></div>
-                <div class="wrapper">
-                <div data-id="186" class="platform" id="Xbox"></div>
-                <div data-id="187" class="platform" id="Playstation"></div>
-                <div data-id="7" class="platform" id="Nintendo_Switch"></div>
+                    <div id="platfroms">
+                        <div id="platfroms_Text"></div>
+                        <div class="wrapper">
+                            <div data-id="186" class="platform" id="Xbox"></div>
+                            <div data-id="187" class="platform" id="Playstation"></div>
+                            <div data-id="7" class="platform" id="Nintendo_Switch"></div>
                             <div data-id="4" class="platform" id="PC"></div>
-                        </div>
+                        </div>     
+                    </div>
                         
-                        </div>
-                        
-                        <div id="games">
+                    <div id="games">
                         <div id="first_arrow2">&#8592;</div>
                         <div id="games_wrapper">
-                        <div class="game_1"></div>
-                        <div class="game_2"></div>
-                        <div class="game_3"></div>
-                        <div class="game_4"></div>
+                            <div class="game_1"></div>
+                            <div class="game_2"></div>
+                            <div class="game_3"></div>
+                            <div class="game_4"></div>
                         </div>
                         <div id="second_arrow2"> &#8594; </div>
                         </div>
-                        </div>
+                    </div>
                         
-                        <div id="general_notifications_container"></div>
-                        <div id="general_notifications_container_search"></div>
-                        </div>
-                        </div>`;
+                <div id="general_notifications_container"></div>
+                <div id="general_notifications_container_search"></div>
+            </div>
+        </div>`;
 
     // Här lägger vi alla navigations funktionerna på sidebaren.
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
