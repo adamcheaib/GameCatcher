@@ -7,7 +7,7 @@ if (localStorage.getItem("counter_for_forum") === null) {
 }
 
 
-export function init_forum() {
+export function init_forum(user) {
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "forum");
 
@@ -31,14 +31,14 @@ export function init_forum() {
 
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
-    get_all_friends();
+    get_all_friends(user);
     create_post();
 
 }
 
 document.querySelector("#chat").addEventListener("click", init_forum)
 
-async function get_all_friends() {
+async function get_all_friends(user) {
 
     let body_for_fetch = {
         the_user: localStorage.getItem("username"),
@@ -78,6 +78,10 @@ async function get_all_friends() {
         let all_intervals = [];
         document.querySelectorAll(".profile_dom").forEach((profile_dom, index) => {
             profile_dom.classList.add("unselected");
+            let users = profile_dom.children[0].children[1].textContent;
+            if(users === user){
+                console.log(user);
+            }
 
             profile_dom.addEventListener("click", async (event) => {
 

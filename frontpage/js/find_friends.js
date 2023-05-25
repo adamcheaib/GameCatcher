@@ -1,6 +1,7 @@
 import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
+//import { init_profile } from "../../frontpage/profile/js/index.js";
 import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
 
 // TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
@@ -93,6 +94,7 @@ async function show_my_friends(event) {
     })
     document.querySelectorAll(".chat").forEach((profile_pic, index) => {
         profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
+        profile_pic.addEventListener("click", take_to_chat)
     })
 
 
@@ -109,6 +111,7 @@ async function show_my_friends(event) {
 function show_options(event) {
     if (document.getElementById("my_friends").classList.contains("selected")) {
         registration_notification("Options", "show_options_blocked");
+        document.getElementById("visit_profile").addEventListener("click", visit_profile)
         document.getElementById("block_user").addEventListener("click", block_unblock_user);
         event.target.parentElement.children[1].setAttribute("id", "to_be_blocked");
     } else {
@@ -425,3 +428,8 @@ async function init_blocked_users(event) {
 }
 
 
+function take_to_chat(event){
+    let user = event.target.parentElement.children[1].textContent;
+    init_forum(user)
+
+}

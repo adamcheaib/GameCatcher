@@ -150,3 +150,6 @@ function remove_comment(event){
         })
 }
 
+function visit_profile(event){
+    console.log(hello);
+}

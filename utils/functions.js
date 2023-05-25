@@ -24,8 +24,6 @@ function show_game_display_dom(game_data) {
     the_dom.classList.add("display_game_dom");
     let the_parent_dom = document.querySelector("#frontpage_wrapper");
 
-
-
     the_dom.innerHTML = `
         <div id="liked_games_button">Add to liked games</div>
 
@@ -624,6 +622,7 @@ export function registration_notification(dialog_box_text, action) {
         registration_notification_container.className = "show_options";
         registration_notification_container.innerHTML = `
         <h3>${dialog_box_text}</h3>
+        <div id="visit_profile">Visit profile</div>
         <div id="block_user">Block User</div>
         <button id="close">Close</button>
         `;
