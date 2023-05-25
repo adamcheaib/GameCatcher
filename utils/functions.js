@@ -27,7 +27,10 @@ function show_game_display_dom(game_data) {
 
 
     the_dom.innerHTML = `
+    <div id="like_and_close_container">
         <div id="liked_games_button">Add to liked games</div>
+        <span id="game_information_close_button">X</span>
+    </div>
 
         <h2>${game_data.name}</h2>
         <div id="game_image"></div>
@@ -84,6 +87,9 @@ function show_game_display_dom(game_data) {
 
             notification.textContent = "Added to your list!";
             notification.style.color = "green";
+            notification.style.gridRow = "2";
+            notification.style.gridColumn = "1 / 4";
+            notification.style.justifySelf = "center";
             console.log(parentNode);
             event.target.textContent = "Remove game from your list";
 
@@ -104,6 +110,9 @@ function show_game_display_dom(game_data) {
 
             notification.textContent = "Removed from your list!";
             notification.style.color = "red";
+            notification.style.gridRow = "2";
+            notification.style.gridColumn = "1 / 4";
+            notification.style.justifySelf = "center";
             event.target.textContent = "Add to liked games";
 
             event.target.style.pointerEvents = "none";
@@ -113,6 +122,16 @@ function show_game_display_dom(game_data) {
 
     });
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
+    document.getElementById("game_information_close_button").addEventListener("click", () => {
+        document.querySelector(".display_game_dom").remove();
+        document.querySelectorAll("#games_wrapper > div").forEach(game_dom => {
+            game_dom.style.border = "none";
+            game_dom.style.transform = "scale(1)";
+            game_dom.addEventListener("mouseover", function hej(event) { event.target.parentElement.style.transform = "scale(1.1)" });
+            game_dom.addEventListener("mouseout", event => event.target.parentElement.style.transform = "scale(1)");
+        })
+    });
+
 }
 
 
