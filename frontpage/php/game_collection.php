@@ -90,4 +90,17 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
 
 }
 
+
+if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
+    $all_users = json_decode(file_get_contents("../../database/users.json"), true);
+    $data = json_decode(file_get_contents("php://input"), true);
+    for ($i = 0; $i < count($all_users); $i++) {
+        if ($data["username"] == $all_users[$i]["username"]) {    
+            $all_users[$i]["favorite_games"] = [];
+            file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+            sendJSON($all_users[$i]["favorite_games"]);     
+        }
+    }
+}
+
 ?>

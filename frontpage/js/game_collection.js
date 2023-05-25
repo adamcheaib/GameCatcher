@@ -60,6 +60,20 @@ export async function init_collection() {
         })
     })
 
+    document.querySelector(".clear_button").addEventListener("click", clear_all_games)
+}
+
+async function clear_all_games() {
+    let response = await fetch("./frontpage/php/game_collection.php", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: localStorage.getItem("username") })
+
+    })
+
+    let data = response.json();
+    console.log(data);
+    document.querySelector(".collection_grid_container").innerHTML = "";
 }
 
 document.querySelector("#saved").addEventListener("click", init_collection)
