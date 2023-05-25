@@ -1,54 +1,74 @@
 [
     {
-        "username": "rastaman123",
-        "password": "quart",
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [],
+        "id": 1,
+        "friends": [
+            "eqqq"
+        ],
+        "blocked": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg"
+    },
+    {
+        "username": "adamcheaib",
+        "password": "calle",
         "favorite_games": [
             {
-                "name": "DOOM (2016)",
-                "image": "https:\/\/media.rawg.io\/media\/games\/c4b\/c4b0cab189e73432de3a250d8cf1c84e.jpg"
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
             },
             {
-                "name": "Metro: Last Light Redux",
-                "image": "https:\/\/media.rawg.io\/media\/games\/7a4\/7a45e4cdc5b07f316d49cf147b083b27.jpg"
+                "name": "Monster Hunter(Contraband Entertainment)",
+                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
             },
             {
-                "name": "PlanetSide 2",
-                "image": "https:\/\/media.rawg.io\/media\/games\/2fd\/2fd1b58116b10cc1f4442bee5593ca7c.jpg"
-            },
-            {
-                "name": "Limbo",
-                "image": "https:\/\/media.rawg.io\/media\/games\/942\/9424d6bb763dc38d9378b488603c87fa.jpg"
-            },
-            {
-                "name": "Hades",
-                "image": "https:\/\/media.rawg.io\/media\/games\/1f4\/1f47a270b8f241e4676b14d39ec620f7.jpg"
-            },
-            {
-                "name": "The Witcher 3: Wild Hunt",
-                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
             }
         ],
-        "id": 1,
-        "pending": [],
+        "id": 3,
+        "pending": [
+            "calle"
+        ],
         "friends": [],
         "blocked": []
     },
     {
-        "username": "aslkadjlasdlk",
-        "password": "lkajsdlkjas",
-        "favorite_games": [],
-        "id": 3
-    },
-    {
-        "username": "adameliasson",
-        "password": "adam",
+        "username": "callwen",
+        "password": "callwen",
         "favorite_games": [
             {
-                "name": "Hentai Furry",
-                "image": "https:\/\/media.rawg.io\/media\/screenshots\/dfd\/dfdb95620ee2242dfd0bf36091d2d591.jpg"
+                "name": "Stardew Valley",
+                "image": "https:\/\/media.rawg.io\/media\/games\/713\/713269608dc8f2f40f5a670a14b2de94.jpg"
+            },
+            {
+                "name": "Grand Theft Auto V",
+                "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
+            },
+            {
+                "name": "Monster Hunter(Contraband Entertainment)",
+                "image": "https:\/\/media.rawg.io\/media\/screenshots\/651\/651bb5fc33460267087f3262abeee7c5.jpg"
+            },
+            {
+                "name": "Monster Hunter Rise",
+                "image": "https:\/\/media.rawg.io\/media\/games\/dbb\/dbba6100aae179b5f24052c9141d426d.jpg"
             }
         ],
-        "id": 4
+        "id": 2,
+        "friends": [
+            "eqqq",
+            "yyyy"
+        ],
+        "pending": [],
+        "profile_comments": [
+            {
+                "message": "YO",
+                "timestamp": "2023-05-25 18:39:59"
+            }
+        ]
     },
     {
         "username": "besh",
@@ -77,7 +97,7 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
             }
         ],
-        "id": 2,
+        "id": 4,
         "friends": [
             "adamcheaib"
         ],
