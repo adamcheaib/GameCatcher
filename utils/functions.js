@@ -1,4 +1,5 @@
 import { api_key } from "./fetch_functions.js";
+
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 
@@ -681,107 +682,15 @@ export function general_notifications_search(event) {
 
     search_dialog_notifications_container.prepend(notification);
     document.getElementById("searched_game_dialog").appendChild(search_dialog_notifications_container);
-
+    3
     setTimeout(() => {
         notification.remove();
     }, 2300);
 }
 
 
-export async function fetch_all_chats(event) {
-        localStorage.removeItem("selected_chat_id")
-
-        document.querySelector("#forum_display").innerHTML = "";
-        const username = localStorage.getItem("username");
-        const targetUsername = event.target.querySelector(".username").innerHTML;
-
-        document.querySelectorAll(".selected").forEach(all_selected => {
-            console.log(all_selected)
-            all_selected.classList.remove("selected");
-            all_selected.style.backgroundColor = "lightGray";
-            all_selected.querySelector(".username").style.color = "black";
-        })
-
-        let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
-        let response_data = await response_user1.json();
-        console.log(response_data);
 
 
-
-
-        let fetch_bod_first = {
-            get_chatlog_id: true,
-            loggedID: response_data.loggedID,
-            user2_id: response_data.user2_id,
-        }
-
-        let response2 = await fetch(`./frontpage/php/chat.php`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(fetch_bod_first),
-        })
-
-        let chat_id = await response2.json(); // Här får vi chatid:et!
-
-        console.log(chat_id);
-        localStorage.setItem("selected_chat_id", chat_id.chatid)
-
-
-
-        event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
-        event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
-        event.target.parentElement.querySelector(".username").style.color = "white";
-
-        let body_for_fetch2 = {
-            chatid: localStorage.getItem("selected_chat_id"),
-            da_user_logged_in: response_data.loggedID,
-            target_user: response_data.user2_id,
-        };
-
-        let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body_for_fetch2),
-        })
-
-        let data3 = await response_all_previous_messages.json();
-
-        console.log(data3);
-
-        if (data3.count !== 0 && data3 !== null) {
-            data3.forEach(each_message => {
-                let message_dom = document.createElement("div");
-                message_dom.classList.add("post_dom");
-                message_dom.innerHTML = `
-                <div id="profile_picture"></div >
-                <div id="username">A Username Fix It</div>
-                <div id="the_post_text">
-                    <p>${each_message}</p>
-                </div>
-            `
-                document.querySelector("#forum_display").appendChild(message_dom)
-            })
-        }
-        
-        
-        let timeout_id = setTimeout(async () => {
-            if(localStorage.getItem("where_att") !== "forum"){
-                stop_all_timeouts(localStorage.getItem("all_timeouts"));   
-            }
-            document.querySelector("#forum_display").innerHTML = "";
-            fetch_all_chats(event)
-        }, 5000);
-        let new_push_for_array_timeout = JSON.parse(localStorage.getItem("all_timeouts")).timeouts.push(timeout_id);
-        localStorage.removeItem("all_timeouts");
-        localStorage.setItem(all_timeouts, JSON.stringify(new_push_for_array_timeout));
-    }
-    export function stop_all_timeouts(timeout_id_array){ // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
-        timeout_id_array.forEach(timeout_id => {
-            clearTimeout(timeout_id);
-        });
-    }
-
-    
 
 
 

@@ -27,7 +27,11 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/456\/456dea5e1c7e3cd07060c14e96612001.jpg"
             }
         ],
-        "id": 3
+        "id": 3,
+        "pending": [],
+        "friends": [
+            "eqqq"
+        ]
     },
     {
         "username": "adam",
@@ -58,16 +62,6 @@
         "pending": []
     },
     {
-        "username": "eqqq",
-        "password": "eqqq",
-        "favorite_games": [],
-        "id": 3,
-        "friends": [
-            "adam",
-            "qeqe"
-        ]
-    },
-    {
         "username": "qeqe",
         "password": "qeqe",
         "favorite_games": [
@@ -82,5 +76,16 @@
             "eqqq"
         ],
         "pending": []
+    },
+    {
+        "username": "eqqq",
+        "password": "eqqq",
+        "favorite_games": [],
+        "id": 3,
+        "friends": [
+            "adam",
+            "qeqe",
+            "adamcheaib"
+        ]
     }
 ]
