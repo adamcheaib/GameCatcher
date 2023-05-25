@@ -1,37 +1,39 @@
 import { registration_notification } from "../../utils/functions.js"
 "use strict"
 
-console.log(window.location);
+// Om en användare redan är inloggad så gör denna if-satsen att man åker tillbaka till Frontpagen.
 if (localStorage.getItem("username") !== null) {
     window.location.pathname = "./frontpage";
 }
 
 const form = document.getElementById("form");
-const to_register = document.getElementById("too_register");
 
+// Dessa plockar ut input-fieldsen genom att selektera dem genom deras CSS-attribut.
 const username_field = document.querySelector("form > input[name=username]");
 const password_field = document.querySelector("form > input[name=password]");
+
+// Tömmer username field och lösenord fielden när man först besöker hemsidan.
 username_field.value = "";
 password_field.value = "";
 
+// Lägger till eventListener på hela Form HTML-elementet.
 form.addEventListener("submit", register_or_login);
 
+// Kontrollerar om det är inloggning eller registreringsfunktionen. Anropar antingen inloggnings-funktionen eller registreringsfunktionen
 function register_or_login(event) {
     event.preventDefault();
-    const usernamee = username_field.value;
-    const passwordd = password_field.value;
+    const username_value = username_field.value;
+    const password_value = password_field.value;
     const submit_button = document.querySelector("button[type=submit]");
     if (submit_button.textContent == "LOGIN") {
-        tryToLogin({ username: usernamee, password: passwordd });
+        tryToLogin({ username: username_value, password: password_value });
     } else {
-        tryToRegister({ username: usernamee, password: passwordd });
+        tryToRegister({ username: username_value, password: password_value });
     }
 }
 
-
+// Försöker att logga in användaren genom en POST-request till user_database.php och kollar om användarnamnet OCH lösenordet stämmer överens med någon av de i databasen
 async function tryToLogin(login_object) {
-    const feedback = document.getElementById("status");
-
     try {
         const response = await fetch("../login_register/php/user_database.php", {
             method: "POST",
@@ -43,18 +45,19 @@ async function tryToLogin(login_object) {
 
 
         if (!response.ok) {
-            registration_notification(resource.message, "registration_notification"); // Add the popup function instead or add text that gets appended just below the "LOGIN" element.
+            registration_notification(resource.message, "registration_notification"); // Anropar notifikationen för att ge feedback till användaren ifall användaren ej finns!
         } else {
-            localStorage.setItem("username", resource.username); // Gör så att spelen sparas hos användarna även fast man inte har nyckeln "favorite_games".
+            localStorage.setItem("username", resource.username); // Sparar användarens användarnamn i localStorage för att kunna identifiera inloggad användaren.
             window.location.replace("./frontpage");
         }
         username_field.value = "";
         password_field.value = "";
     } catch (error) {
-        alert(error.message) // Add the popup function or change the innerHTML so that plain text is shown of the current status!
+        registration_notification(error.message, "registration_notification"); // Lägger till notifikation ifall något skulle gå snett med fetchen!
     }
 };
 
+// Denna funktionen försöker lägga till en användare i databasen. Ger notifikation beroende på om det går eller inte går att registrera en användare.
 async function tryToRegister(register_object) {
     try {
         const response = await fetch("../login_register/php/user_database.php", {
@@ -65,6 +68,7 @@ async function tryToRegister(register_object) {
 
         const resource = await response.json();
 
+        // Lägger till notifikation ifall användarnamnet redan finns!
         if (!response.ok) {
             registration_notification(resource.message, "registration_notification");
         } else {
@@ -72,19 +76,21 @@ async function tryToRegister(register_object) {
         }
 
     } catch (err) {
-        registration_notification(err.message);
+        registration_notification("Oops! Something went wrong...", "registration_notification"); // Lägger till notifikation ifall något skulle gå snett med fetchen!
     }
 }
 
 
+// Denna biten är för att lägga till transition på att byta sidan mellan Login och Register.
 const register_page = document.getElementById("too_register");
 register_page.addEventListener("click", (event) => {
     document.getElementById("container").style.filter = "blur(1.5rem)";
-
     setTimeout(() => document.getElementById("container").style.filter = "blur(0)", 200);
-})
-register_page.addEventListener("click", register);
+});
 
+
+// Detta ändrar mellan Login och Register.
+register_page.addEventListener("click", register);
 function register(event) {
     setTimeout(
         () => {
