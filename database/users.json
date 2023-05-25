@@ -58,16 +58,6 @@
         "pending": []
     },
     {
-        "username": "eqqq",
-        "password": "eqqq",
-        "favorite_games": [],
-        "id": 3,
-        "friends": [
-            "adam",
-            "qeqe"
-        ]
-    },
-    {
         "username": "qeqe",
         "password": "qeqe",
         "favorite_games": [
@@ -82,5 +72,15 @@
             "eqqq"
         ],
         "pending": []
+    },
+    {
+        "username": "eqqq",
+        "password": "eqqq",
+        "favorite_games": [],
+        "id": 3,
+        "friends": [
+            "adam",
+            "qeqe"
+        ]
     }
 ]
