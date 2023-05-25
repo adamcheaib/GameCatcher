@@ -1,13 +1,14 @@
 import { init_frontpage } from "./front_page.js";
 import { init_collection } from "./game_collection.js";
 
+let all_intervals = [];
 
 if (localStorage.getItem("counter_for_forum") === null) {
     localStorage.setItem("counter_for_forum", 0);
 }
 
 
-export function init_forum(user) {
+export function init_forum() {
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "forum");
 
@@ -31,14 +32,14 @@ export function init_forum(user) {
 
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
-    get_all_friends(user);
+    get_all_friends();
     create_post();
 
 }
 
 document.querySelector("#chat").addEventListener("click", init_forum)
 
-async function get_all_friends(user) {
+async function get_all_friends() {
 
     let body_for_fetch = {
         the_user: localStorage.getItem("username"),
@@ -73,27 +74,104 @@ async function get_all_friends(user) {
     })
 
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
-    async function the_whole_juser_element_gets_click_event() {
+    the_whole_juser_element_gets_click_event();
+}
+async function the_whole_juser_element_gets_click_event() {
+    document.querySelectorAll(".profile_dom").forEach(async (profile_dom, index) => {
+        profile_dom.classList.add("unselected");
 
-        let all_intervals = [];
-        document.querySelectorAll(".profile_dom").forEach((profile_dom, index) => {
-            profile_dom.classList.add("unselected");
-            let users = profile_dom.children[0].children[1].textContent;
-            if(users === user){
-                console.log(user);
+
+        // per klick av profile_dom så skapas det en interval men samtidgt så clears det i början så att det inte blir så att fler kör samtidgt
+        profile_dom.addEventListener("click", async (event) => {
+            console.log(all_intervals);
+
+            stop_all_intervals();
+
+            document.querySelector("#forum_display").innerHTML = "";
+
+
+            localStorage.removeItem("selected_chat_id")
+
+            document.querySelector("#forum_display").innerHTML = "";
+            const username = localStorage.getItem("username");
+            const targetUsername = event.target.querySelector(".username").innerHTML;
+
+            document.querySelectorAll(".selected").forEach(all_selected => {
+                console.log(all_selected)
+                all_selected.classList.remove("selected");
+                all_selected.style.backgroundColor = "lightGray";
+                all_selected.querySelector(".username").style.color = "black";
+            })
+
+            let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+            let response_data = await response_user1.json();
+            console.log(response_data);
+
+
+
+
+            let fetch_bod_first = {
+                get_chatlog_id: true,
+                loggedID: response_data.loggedID,
+                user2_id: response_data.user2_id,
             }
 
-            profile_dom.addEventListener("click", async (event) => {
+            let response2 = await fetch(`./frontpage/php/chat.php`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(fetch_bod_first),
+            })
 
-                if (all_intervals.length !== 0) {
-                    stop_all_intervals(all_intervals);
-                }
+            let chat_id = await response2.json(); // Här får vi chatid:et!
 
+            console.log(chat_id);
+            localStorage.setItem("selected_chat_id", chat_id.chatid)
+
+
+
+            event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
+            event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
+            event.target.parentElement.querySelector(".username").style.color = "white";
+
+            let body_for_fetch2 = {
+                chatid: localStorage.getItem("selected_chat_id"),
+                da_user_logged_in: response_data.loggedID,
+                target_user: response_data.user2_id,
+            };
+
+            let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body_for_fetch2),
+            })
+
+            let data3 = await response_all_previous_messages.json();
+
+            console.log(data3);
+
+            if (data3.count !== 0 && data3 !== null) {
+                data3.forEach(each_message => {
+                    let message_dom = document.createElement("div");
+                    message_dom.classList.add("post_dom");
+                    message_dom.innerHTML = `
+                    <div id="profile_picture"></div >
+                    <div id="username">A Username Fix It</div>
+                    <div id="the_post_text">
+                        <p>${each_message}</p>
+                    </div>
+                `
+                    document.querySelector("#forum_display").appendChild(message_dom)
+                })
+            }
+
+
+
+
+            let interval_id = setInterval(async () => {
+                console.log(all_intervals);
                 if (localStorage.getItem("where_att") !== "forum") {
                     stop_all_intervals(all_intervals);
                 }
-
-
 
                 document.querySelector("#forum_display").innerHTML = "";
 
@@ -167,128 +245,29 @@ async function get_all_friends(user) {
                         <div id="the_post_text">
                             <p>${each_message}</p>
                         </div>
-                    `
+                `
                         document.querySelector("#forum_display").appendChild(message_dom)
                     })
                 }
 
+            }, 5000);
 
+            all_intervals.push(interval_id)
+        });
+    })
 
-
-                let interval_id = setInterval(async () => {
-
-                    document.querySelector("#forum_display").innerHTML = "";
-
-
-                    localStorage.removeItem("selected_chat_id")
-
-                    document.querySelector("#forum_display").innerHTML = "";
-                    const username = localStorage.getItem("username");
-                    const targetUsername = event.target.querySelector(".username").innerHTML;
-
-                    document.querySelectorAll(".selected").forEach(all_selected => {
-                        console.log(all_selected)
-                        all_selected.classList.remove("selected");
-                        all_selected.style.backgroundColor = "lightGray";
-                        all_selected.querySelector(".username").style.color = "black";
-                    })
-
-                    let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
-                    let response_data = await response_user1.json();
-                    console.log(response_data);
-
-
-
-
-                    let fetch_bod_first = {
-                        get_chatlog_id: true,
-                        loggedID: response_data.loggedID,
-                        user2_id: response_data.user2_id,
-                    }
-
-                    let response2 = await fetch(`./frontpage/php/chat.php`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(fetch_bod_first),
-                    })
-
-                    let chat_id = await response2.json(); // Här får vi chatid:et!
-
-                    console.log(chat_id);
-                    localStorage.setItem("selected_chat_id", chat_id.chatid)
-
-
-
-                    event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
-                    event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
-                    event.target.parentElement.querySelector(".username").style.color = "white";
-
-                    let body_for_fetch2 = {
-                        chatid: localStorage.getItem("selected_chat_id"),
-                        da_user_logged_in: response_data.loggedID,
-                        target_user: response_data.user2_id,
-                    };
-
-                    let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(body_for_fetch2),
-                    })
-
-                    let data3 = await response_all_previous_messages.json();
-
-                    console.log(data3);
-
-                    if (data3.count !== 0 && data3 !== null) {
-                        data3.forEach(each_message => {
-                            let message_dom = document.createElement("div");
-                            message_dom.classList.add("post_dom");
-                            message_dom.innerHTML = `
-                            <div id="profile_picture"></div >
-                            <div id="username">A Username Fix It</div>
-                            <div id="the_post_text">
-                                <p>${each_message}</p>
-                            </div>
-                    `
-                            document.querySelector("#forum_display").appendChild(message_dom)
-                        })
-                    }
-
-                    all_intervals.push(interval_id)
-                }, 5000);
-
-
-                function stop_all_intervals(all_intervals) { // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
-                    all_intervals.forEach(each_interval => {
-                        clearInterval(each_interval);
-
-                    })
-
-                }
-
-
-            });
-        })
-
-
-
-        document.querySelectorAll(".profile_picture").forEach(profile_dom => {
-            profile_dom.addEventListener("click", async (event) => {
-                profile_dom.addEventListener("click", fetch_all_chats);
-                event.stopImmediatePropagation();
-            });
-        })
-
-        document.querySelectorAll(".username").forEach(profile_dom => {
-            profile_dom.addEventListener("click", async (event) => {
-                profile_dom.addEventListener("click", fetch_all_chats);
-                event.stopImmediatePropagation();
-            });
-        })
-    }
-
-    the_whole_juser_element_gets_click_event()
 }
+
+
+function stop_all_intervals() { // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
+    all_intervals.forEach(each_interval => {
+        clearInterval(each_interval);
+    })
+
+}
+
+
+
 
 
 function create_post() {
