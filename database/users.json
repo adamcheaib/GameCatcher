@@ -1,6 +1,6 @@
 [
     {
-        "username": "callw",
+        "username": "calle",
         "password": "calle",
         "favorite_games": [],
         "id": 1,
@@ -36,7 +36,7 @@
     },
     {
         "username": "adam",
-        "password": "calle",
+        "password": "adam",
         "favorite_games": [
             {
                 "name": "Stardew Valley",
@@ -57,7 +57,8 @@
         ],
         "id": 2,
         "friends": [
-            "eqqq"
+            "eqqq",
+            "yyyy"
         ],
         "pending": []
     },
@@ -84,7 +85,20 @@
         "id": 3,
         "friends": [
             "adam",
-            "qeqe"
+            "qeqe",
+            "adamcheaib",
+            "yyyy"
+        ],
+        "pending": []
+    },
+    {
+        "username": "yyyy",
+        "password": "yyyy",
+        "favorite_games": [],
+        "id": 5,
+        "friends": [
+            "eqqq",
+            "adam"
         ]
     }
 ]
