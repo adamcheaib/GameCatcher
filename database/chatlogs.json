@@ -11,5 +11,25 @@
             "alksdkjalsdjasldjasd",
             "hej\n"
         ]
+    },
+    {
+        "chatid": 2,
+        "chat_between": [
+            2,
+            null
+        ],
+        "chatlog": []
+    },
+    {
+        "chatid": 3,
+        "chat_between": [
+            2,
+            2
+        ],
+        "chatlog": [
+            "fsdfsdfsd",
+            "fdsfsdfsd",
+            "aaaaaa"
+        ]
     }
 ]

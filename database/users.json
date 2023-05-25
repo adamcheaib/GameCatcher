@@ -59,6 +59,18 @@
     {
         "username": "adamcheaib",
         "password": "adamcheaib",
+        "favorite_games": [],
+        "id": 2,
+        "friends": [
+            "elliot"
+        ],
+        "pending": [
+            "adameliasson"
+        ]
+    },
+    {
+        "username": "elliot",
+        "password": "elliot",
         "favorite_games": [
             {
                 "name": "Grand Theft Auto V",
@@ -67,10 +79,8 @@
         ],
         "id": 2,
         "friends": [
-            "elliot"
+            "adamcheaib"
         ],
-        "pending": [
-            "adameliasson"
-        ]
+        "pending": []
     }
 ]
