@@ -100,10 +100,13 @@ if(isset($info["action"])){
 if(isset($info["change"])){
     $username = $info["username"];
     foreach ($users as $index => $user) {
-        if($user["username"] === $info["new_value"]){
+        if($info["change"] === "change_password" && $user["username"] === $username) {
+            $users[$index]["password"] = $info["new_value"];  
+        }
+        if($user["username"] === $info["new_value"] && $info["change"] === "change_username"){
             $message = [
                 "message" => "Username already taken, try another one!",
-                "ok" => "Fail"
+                "action" => "Fail"
                 ];
                 http_response_code(400);
                 echo json_encode($message);
@@ -112,9 +115,7 @@ if(isset($info["change"])){
             if($info["change"] === "change_username" && $user["username"] === $username) {
                 $users[$index]["username"] = $info["new_value"];
             }
-            if($info["change"] === "change_password") {
-                $users[$index]["password"] = $info["new_value"];  
-            }
+            
             
         }
     
@@ -124,7 +125,7 @@ if(isset($info["change"])){
             $message = [
                 "message" => "Success!",
                 "username" => $info["new_value"],
-                "ok" => "Success"
+                "action" => $info["change"]
             ];
             echo json_encode($message);
             exit();
