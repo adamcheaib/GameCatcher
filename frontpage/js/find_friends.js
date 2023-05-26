@@ -355,7 +355,7 @@ async function add_friend(event) {
     }
 
     let response = await fetch("./frontpage/php/find_friend.php", {
-        method: "POST",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     });

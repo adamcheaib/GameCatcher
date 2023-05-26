@@ -1,5 +1,39 @@
 <?php
 
+    if($_SERVER["REQUEST_METHOD"] === "PATCH"){ 
+        if(array_key_exists("accepted_friend_request", $fetch_data) === true){
+
+                for ($w = 0; $w < count($all_users); $w++) { 
+                    if($all_users[$w]["username"] === $fetch_data["the_username"] && array_key_exists("friends", $all_users[$w]) == true){
+                        $all_users[$w]["friends"][] = $fetch_data["added_friend_username"];
+                        for ($n = 0; $n < count($all_users[$w]["pending"]); $n++) { 
+                            if($fetch_data["added_friend_username"] === $all_users[$w]["pending"][$n]){
+                                array_splice( $all_users[$w]["pending"], $n, 1);
+                                break;
+                            }
+                        }
+                        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                        header("Content-Type: application/json");
+                        echo json_encode($all_users[$w]);
+                        exit();
+                    }
+                    elseif($all_users[$w]["username"] === $fetch_data["the_username"] && array_key_exists("friends", $all_users[$w]) !== true){
+                        $all_users[$w]["friends"] = [];
+                        $all_users[$w]["friends"][] = $fetch_data["added_friend_username"];
+                        for ($n = 0; $n < count($all_users[$w]["pending"]); $n++) { 
+                            if($fetch_data["added_friend_username"] === $all_users[$w]["pending"][$n]){
+                                array_splice( $all_users[$w]["pending"], $n, 1);
+                                break;
+                            }
+                        }
+                        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                        header("Content-Type: application/json");
+                        echo json_encode($all_users[$w]);
+                        exit();
+                    }
+                }
+            }
+    }
     if($_SERVER["REQUEST_METHOD"] === "GET"){
         $all_users = json_decode(file_get_contents("../../database/users.json"), true);
         
@@ -59,39 +93,6 @@
             }
         }
 
-        if(array_key_exists("accepted_friend_request", $fetch_data) === true){
-
-            for ($w = 0; $w < count($all_users); $w++) { 
-                if($all_users[$w]["username"] === $fetch_data["the_username"] && array_key_exists("friends", $all_users[$w]) == true){
-                    $all_users[$w]["friends"][] = $fetch_data["added_friend_username"];
-                    for ($n = 0; $n < count($all_users[$w]["pending"]); $n++) { 
-                        if($fetch_data["added_friend_username"] === $all_users[$w]["pending"][$n]){
-                            array_splice( $all_users[$w]["pending"], $n, 1);
-                            break;
-                        }
-                    }
-                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-                    header("Content-Type: application/json");
-                    echo json_encode($all_users[$w]);
-                    exit();
-                }
-                elseif($all_users[$w]["username"] === $fetch_data["the_username"] && array_key_exists("friends", $all_users[$w]) !== true){
-                    $all_users[$w]["friends"] = [];
-                    $all_users[$w]["friends"][] = $fetch_data["added_friend_username"];
-                    for ($n = 0; $n < count($all_users[$w]["pending"]); $n++) { 
-                        if($fetch_data["added_friend_username"] === $all_users[$w]["pending"][$n]){
-                            array_splice( $all_users[$w]["pending"], $n, 1);
-                            break;
-                        }
-                    }
-                    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-                    header("Content-Type: application/json");
-                    echo json_encode($all_users[$w]);
-                    exit();
-                }
-            }
-        }
-
 
         if(array_key_exists("find_all_friends", $fetch_data) === true){
             for ($w = 0; $w < count($all_users); $w++) { 
@@ -146,7 +147,7 @@
     $fetch_data = json_decode(file_get_contents("php://input"), true);
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);
 
-if($fetch_data["action"] === "block"){
+    if($fetch_data["action"] === "block"){
         foreach ($all_users as $index => $user) {
             if($user["username"] === $fetch_data["me"]){
                 for($i = 0;$i < count($user["friends"]);$i++){
@@ -166,16 +167,18 @@ if($fetch_data["action"] === "block"){
                 }
             }
          }
-         file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-            $message = [
-                "message" => "Success!",
-                "username" => $fetch_data["username"],
-                "action" => $fetch_data["action"],
-                ];
-                header("Content-Type: application/json");
-                echo json_encode($message);
-                exit();
-}
+        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+        $message = [
+            "message" => "Success!",
+            "username" => $fetch_data["username"],
+            "action" => $fetch_data["action"],
+        ];
+        
+        header("Content-Type: application/json");
+        echo json_encode($message);
+        exit();
+    }
+    
     if($fetch_data["action"] === "unblock"){
         foreach ($all_users as $index => $user) {
             if($user["username"] === $fetch_data["me"]){
