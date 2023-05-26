@@ -2,39 +2,40 @@
 get_preset_information();
 
 
-function get_preset_information(){
+function get_preset_information() {
     fetch("../../../../database/users.json")
-    .then(resource => resource.json())
-    .then(users => {
-        users.forEach(user => {
-            if(user.username === localStorage.username){
-                if(!user.hasOwnProperty('profile_picture')){
-                    console.log("hrj");
-                    document.querySelector("#profile_image").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)"
-                    document.getElementById("comment_profile").style.backgroundImage =  "url(../../../frontpage/general_media/default_profile_pic.svg)";
-                }else{
-                    console.log(user);
-                    document.querySelector("#profile_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
-                    document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
-                }
-                if(!user.hasOwnProperty('banner_picture')){
-                    document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
-                }else{
-                    document.querySelector("main").style.backgroundImage = `url(../../../frontpage/profile/images/${user.banner_picture})`;
-                }
-                if(!user.hasOwnProperty('favorite_game_images')){
-                    document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
-                }else{
-                    document.querySelector("#favorite_game_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.favorite_game_images})`;
-                }
-                if(user.hasOwnProperty("profile_comments")){
-                    show_messages(user.profile_comments);
-                }
-                localStorage.setItem("profile_picture", user.profile_picture);
+        .then(resource => resource.json())
+        .then(users => {
+            users.forEach(user => {
+                if (user.username === localStorage.username) {
+                    document.querySelector("h2").textContent = user.username;
+                    if (!user.hasOwnProperty('profile_picture')) {
+                        console.log("hrj");
+                        document.querySelector("#profile_image").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)"
+                        document.getElementById("comment_profile").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)";
+                    } else {
+                        console.log(user);
+                        document.querySelector("#profile_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
+                        document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
+                    }
+                    if (!user.hasOwnProperty('banner_picture')) {
+                        document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
+                    } else {
+                        document.querySelector("main").style.backgroundImage = `url(../../../frontpage/profile/images/${user.banner_picture})`;
+                    }
+                    if (!user.hasOwnProperty('favorite_game_images')) {
+                        document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
+                    } else {
+                        document.querySelector("#favorite_game_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.favorite_game_images})`;
+                    }
+                    if (user.hasOwnProperty("profile_comments")) {
+                        show_messages(user.profile_comments);
+                    }
+                    localStorage.setItem("profile_picture", user.profile_picture);
 
-            }
-        });
-    })
+                }
+            });
+        })
 
 }
 
@@ -47,23 +48,23 @@ profile_picture.addEventListener("change", upload_picture);
 let banner_picture = document.querySelector("#banner_picture");
 banner_picture.addEventListener("change", upload_picture);
 
-function upload_picture(event){
+function upload_picture(event) {
     event.preventDefault();
     let image;
     let formData;
     let check_profile_pic = false;
-    if(event.target.id === "upload_profile_picture"){
+    if (event.target.id === "upload_profile_picture") {
         image = document.querySelector("#profile_image");
         formData = new FormData(profile_picture);
         formData.append("action", "profile_picture");
         check_profile_pic = true;
     }
-    if(event.target.id === "upload_banner_picture"){
+    if (event.target.id === "upload_banner_picture") {
         image = document.querySelector("main");
         formData = new FormData(banner_picture);
         formData.append("action", "banner_picture");
     }
-    if(event.target.id === "upload_favorite"){
+    if (event.target.id === "upload_favorite") {
         image = document.querySelector("#favorite_game_image");
         formData = new FormData(favorite_game);
         formData.append("action", "favorite_game_picture");
@@ -74,19 +75,19 @@ function upload_picture(event){
         method: "POST",
         body: formData,
     });
-    
+
     fetch(request)
         .then(response => response.json())
         .then(data => {
             console.log(data);
             image.style.backgroundImage = `url(./profile/images/${data.filename})`;
 
-            if(check_profile_pic === true){
+            if (check_profile_pic === true) {
                 localStorage.setItem("profile_picture", data.filename);
                 document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
                 document.querySelectorAll(".profile_picture").forEach(element => {
-                console.log(element);
-                element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                    console.log(element);
+                    element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
                 })
             }
         })
@@ -95,11 +96,11 @@ function upload_picture(event){
 let message = document.querySelector("#send_message");
 message.addEventListener("click", send_message);
 
-function send_message(event){
+function send_message(event) {
     event.preventDefault();
     let section = document.querySelector("#profile_forum")
     let message = document.querySelector("#message").value
-    if(message.length > 25){
+    if (message.length > 25) {
         alert("Message is too long, it needs to be shorter than 25 characters")
         return;
     }
@@ -107,7 +108,7 @@ function send_message(event){
     let div = document.createElement("div");
     div.textContent = message;
     div.classList.add("comments_section");
-   
+
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({
@@ -119,7 +120,7 @@ function send_message(event){
 
     fetch(request)
         .then(resource => resource.json())
-        .then(data => { 
+        .then(data => {
             div.innerHTML = `
                 <div id="chat_comments">
                     <div class="profile_picture" style='background-image: url("../profile/images/${localStorage.getItem("profile_picture")}'></div>
@@ -132,7 +133,7 @@ function send_message(event){
                     <div class="delete">delete</div>
                 </div>
                 `
-                document.querySelectorAll(".delete").forEach(element => element.addEventListener("click", remove_comment));
+            document.querySelectorAll(".delete").forEach(element => element.addEventListener("click", remove_comment));
         })
     section.appendChild(div)
     document.querySelector("#message").value = ""
@@ -140,10 +141,10 @@ function send_message(event){
 
 function show_messages(messages) {
     console.log(messages);
-    for(let i = 0;i < messages.length;i++){
+    for (let i = 0; i < messages.length; i++) {
         let section = document.querySelector("#profile_forum")
         let div = document.createElement("div");
-        
+
         div.classList.add("comments_section");
 
         div.innerHTML = `
@@ -159,15 +160,15 @@ function show_messages(messages) {
             </div>
         
         `
-        section.appendChild(div)  
+        section.appendChild(div)
         let deleteButtons = document.querySelectorAll(".delete");
-            deleteButtons.forEach(button => {
+        deleteButtons.forEach(button => {
             button.addEventListener("click", remove_comment);
         });
     }
 }
 
-function remove_comment(event){
+function remove_comment(event) {
     let timestamp = event.target.parentElement.querySelector("#timestamp").innerHTML;
     let request = new Request("/frontpage/profile/php/upload.php", {
         method: "POST",
@@ -180,25 +181,28 @@ function remove_comment(event){
     });
     fetch(request)
         .then(resource => resource.json())
-        .then(data => { console.log(data)
+        .then(data => {
+            console.log(data)
             event.target.parentElement.remove();
         })
-        document.querySelectorAll(".comments_section").forEach(element => element.remove());
+    document.querySelectorAll(".comments_section").forEach(element => element.remove());
 
-        fetch("../../../../database/users.json")
+    fetch("../../../../database/users.json")
         .then(resource => resource.json())
         .then(users => {
             users.forEach(user => {
-                if(user.username === localStorage.username){
-                    if(user.hasOwnProperty("profile_comments")){
+                if (user.username === localStorage.username) {
+                    if (user.hasOwnProperty("profile_comments")) {
                         show_messages(user.profile_comments);
                     }
 
-                }})})
+                }
+            })
+        })
 
 }
 
 document.querySelector("#go_home").addEventListener("click", go_home)
-function go_home(event){
+function go_home(event) {
     window.location.replace("/index.html");
 }

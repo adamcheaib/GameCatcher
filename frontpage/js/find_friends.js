@@ -522,6 +522,53 @@ async function visit_profile(event) {
     }
 
     const users = await response.json();
+    document.querySelector("body").innerHTML = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontpage/profile/css/index.css">
+    <title>Document</title>
+    </head>
+    <body>
+    <div id="whole_flex_display_wrapper">
+        <main>
+            <header>
+                <div id="profile_flex_div">
+                    <div id="profile_image"  alt="Profile Picture"></div>
+                    <h2></h2>
+                </div>    
+            </header>
+            
+        </main>
+        <div id="split">
+            <div id="profile_stuff">
+                <div id="transparency"></div>
+                <div id="favorite">
+                    <p>Favorite Game</p>
+                    <div id="favorite_game_image" alt="Favorite Game"></div>
+                </div>
+        </div>
+    
+        <div id="profile_forum">    
+            <div id="chat_comments">
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer id="go_home">Go Home!</footer>
+    
+    </body>
+    <script src="/frontpage/profile/js/index.js"></script>
+    <script src="../../utils/functions.js"></script>
+    </html>
+    `
+    document.querySelector("#go_home").addEventListener("click", go_home);
+    function go_home(event) {
+        window.location.replace("/index.html");
+    }
 
     users.forEach(user => {
         if (user.username === user_profile) {
@@ -561,53 +608,6 @@ async function visit_profile(event) {
         }
     });
 
-    document.querySelector("body").innerHTML = `
-    <!DOCTYPE html>
-    <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/frontpage/profile/css/index.css">
-<title>Document</title>
-</head>
-<body>
-    <div id="whole_flex_display_wrapper">
-        <main>
-            <header>
-                <div id="profile_flex_div">
-                    <div id="profile_image"  alt="Profile Picture"></div>
-                    <h2></h2>
-                </div>    
-            </header>
-            
-        </main>
-        <div id="split">
-            <div id="profile_stuff">
-                <div id="transparency"></div>
-                <div id="favorite">
-                    <p>Favorite Game</p>
-                    <div id="favorite_game_image" alt="Favorite Game"></div>
-                </div>
-        </div>
-
-        <div id="profile_forum">    
-            <div id="chat_comments">
-            </div>
-        </div>
-    </div>
-</div>
-    <footer id="go_home">Go Home!</footer>
-
-</body>
-    <script src="/frontpage/profile/js/index.js"></script>
-    <script src="../../utils/functions.js"></script>
-</html>
-`
-    document.querySelector("#go_home").addEventListener("click", go_home);
-    function go_home(event) {
-        window.location.replace("/index.html");
-    }
 
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,15 +8,17 @@
     <link rel="stylesheet" href="/frontpage/profile/css/index.css">
     <title>Document</title>
 </head>
+
 <body>
     <div id="whole_flex_display_wrapper">
         <main>
             <header>
                 <div id="profile_flex_div">
-                    <div id="profile_image"  alt="Profile Picture"></div>
+                    <div id="profile_image" alt="Profile Picture"></div>
                     <h2>Callw</h2>
                 </div>
-                <form id="profile_pic_form"  action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
+                <form id="profile_pic_form" action="./profile/php/upload.php" method="POST"
+                    enctype="multipart/form-data">
                     <input type="file" id="upload_profile_picture" name="upload"></input>
                 </form>
             </header>
@@ -27,7 +30,7 @@
         <div id="split">
 
             <div id="profile_stuff">
-                
+
 
                 <div id="transparency"></div>
 
@@ -35,25 +38,31 @@
                     <p>Favorite Game</p>
                     <div id="favorite_game_image" alt="Favorite Game"></div>
                 </div>
-                <form id="upload_favorite_game" action="./profile/php/upload.php" method="POST" enctype="multipart/form-data">
+                <form id="upload_favorite_game" action="./profile/php/upload.php" method="POST"
+                    enctype="multipart/form-data">
                     <input type="file" id="upload_favorite" name="upload"></input>
-                    
-                </form>
-            
-        </div>
 
-        <form id="profile_forum" action="./profile/php/upload.php" method="POST">
-            <div class="send_message_section">
-                <div id="comment_profile" alt="Profile Picture"></div>
-                <input id="message" name="profile_message" type="text" placeholder="Write something..." >
-                <button id="send_message">Send Message!</button>
+                </form>
+
             </div>
-        </form>
+
+            <form id="profile_forum" action="./profile/php/upload.php" method="POST">
+                <div class="send_message_section">
+                    <div id="comment_profile" alt="Profile Picture"></div>
+                    <input id="message" name="profile_message" type="text" placeholder="Write something...">
+                    <button id="send_message">Send Message!</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
     <footer id="go_home">Go Home!</footer>
 
 </body>
-    <script src="/frontpage/profile/js/index.js"></script>
-    <script src="../../utils/functions.js"></script>
+<script type="module" src="../utils/fetch_functions.js"></script>
+<script type="module" src="./utils/functions.js"></script>
+<script type="module" src="./frontpage/js/front_page.js"></script>
+<script type="module" src="./frontpage/js/forum.js"></script>
+<script type="module" src="./frontpage/js/game_collection.js"></script>
+<script type="module" src="./frontpage/js/search_game.js"></script>
+
 </html>
