@@ -80,7 +80,6 @@
             "kakariko",
             "elliot"
         ],
-
         "blocked": [],
         "profile_picture": "guts.jpg",
         "banner_picture": "Vagabond-2.avif",
@@ -109,9 +108,6 @@
                 "message": "hej jag heter calle",
                 "timestamp": "2023-05-26 10:33:49"
             }
-        ],
-
-        "blocked": []
-
+        ]
     }
 ]
