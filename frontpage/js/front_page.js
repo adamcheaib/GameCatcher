@@ -1,7 +1,7 @@
-import { fetch_all_games } from "../../utils/fetch_functions.js";
+import { fetch_all_games } from "../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
+import { game_scroll, genre_scroll, registration_notification } from "../../utils/functions.js";
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
@@ -77,6 +77,7 @@ export function init_frontpage() {
                             <div data-id="7" class="platform" id="Nintendo_Switch"></div>
                             <div data-id="4" class="platform" id="PC"></div>
                         </div>     
+                        <div id="currently_shown_games"><h1 id="currently_shown_genre">Action,</h1><h1 id="currently_shown_platform">PC</h1></div>
                     </div>
                         
                     <div id="games">
@@ -119,6 +120,7 @@ export function init_frontpage() {
                 if (localStorage.getItem("selected_genre") === genre_name) {
                     genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
                     genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                    document.getElementById("currently_shown_genre").textContent = genre_name + ","
                 } else {
                     genre_dom.parentElement.parentElement.style.transform = "scale(1)";
                     genre_dom.parentElement.parentElement.style.border = "none";
@@ -145,9 +147,11 @@ export function init_frontpage() {
             const all_platform_buttons = document.querySelectorAll(".platform");
             all_platform_buttons.forEach(platform_dom => {
                 const platform_id = platform_dom.dataset.id;
+                const platform_name = platform_dom.id.replace("_", " ");
                 if (localStorage.getItem("platform_selected") == platform_id) {
                     platform_dom.style.transform = "scale(1.15)";
                     platform_dom.style.border = "2px solid white";
+                    document.getElementById("currently_shown_platform").textContent = platform_name;
                 } else {
                     platform_dom.style.transform = "scale(1)";
                     platform_dom.style.border = "none";
@@ -245,7 +249,7 @@ function change_username_password(event) {
                 document.getElementById("changed_message").textContent = "Success!"
                 location.reload();
                 console.log(localStorage);
-                
+
             }
             if (data.action === "change_password") {
                 document.getElementById("changed_message").textContent = "Success!"
@@ -254,7 +258,7 @@ function change_username_password(event) {
 }
 
 document.querySelector("#profile").addEventListener("click", go_to_profile);
-function go_to_profile(event){
+function go_to_profile(event) {
     window.location.replace("./frontpage/profile/index.html");
 }
 
