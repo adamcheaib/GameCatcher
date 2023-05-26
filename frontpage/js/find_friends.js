@@ -2,7 +2,7 @@ import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 //import { init_profile } from "../../frontpage/profile/js/index.js";
-import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
+import { registration_notification, } from "../../utils/functions.js";
 
 // TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
 // nu får bara ena user pending medanst andra har ingen anning om den har blivit acceptad eller inte man måste skicka
@@ -110,7 +110,7 @@ async function show_my_friends(event) {
 }
 function show_options(event) {
     if (document.getElementById("my_friends").classList.contains("selected")) {
-        
+
         registration_notification("Options", "show_options_blocked");
         event.target.parentElement.children[1].classList.add("show_profile");
         document.getElementById("visit_profile").addEventListener("click", visit_profile)
@@ -144,20 +144,22 @@ function block_unblock_user(event) {
         })
     })
         .then(resource => resource.json())
-        .then(data => {console.log(data);
-            if(data.action === "block"){
-            show_my_friends();
-            document.querySelector("dialog").remove();
+        .then(data => {
+            console.log(data);
+            if (data.action === "block") {
+                show_my_friends();
+                document.querySelector("dialog").remove();
 
-        }
-        if(data.action === "unblock"){
-            init_blocked_users()
-            document.querySelector("dialog").remove();
-        }})
+            }
+            if (data.action === "unblock") {
+                init_blocked_users()
+                document.querySelector("dialog").remove();
+            }
+        })
 
 
     document.querySelector("#add_friends").addEventListener("click", init_add_friends);
-    
+
 
 }
 
@@ -184,44 +186,68 @@ async function find_user() {
     document.querySelector("#display").innerHTML = "";
     let find_account_name = document.querySelector("input").value;
     let request_account_name = localStorage.getItem("username");
+
     let response = await fetch(`./frontpage/php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
     let account_data = await response.json();
-    console.log(account_data);
 
+    let response_for_all_friends = await fetch(`./frontpage/php/find_friend.php`, {
+        method: "POST",
+        header: { "Content-Type": "application/json" },
+        body: JSON.stringify({ the_user: localStorage.getItem("username"), find_all_friends: true })
+    });
+
+    let all_friends_of_user = await response_for_all_friends.json();
+    console.log(all_friends_of_user);
+    let the_check = "";
     for (let i = 0; i < account_data.length; i++) {
-        if (account_data[i].profile_picture === undefined) {
-            account_data[i].profile_picture = "./frontpage/general_media/default_profile_pic.svg";
-        }
-        console.log(account_data[i].username);
-        let responses = await fetch(`../../../database/users.json`);
-        let users = await responses.json();
-        for (let i = 0; i < users.length; i++) {
-
-            if (users[i].hasOwnProperty("blocked")) {
-                if (users[i].username === localStorage.getItem("username")) {
-                    if (users[i].blocked.includes(account_data[0].username)) {
-                        return;
-                    }
-                }
+        for (let index = 0; index < all_friends_of_user.length; index++) {
+            if (all_friends_of_user[index] === account_data[i].username) {
+                the_check = "stop";
+                break;
             }
         }
+        if (the_check !== "stop") {
+            if (account_data[i].username !== localStorage.getItem("username")) {
+                // Kollar att den man är loggad in som inte finns med  i account_data så att man inte kan adda sig själv
+                if (account_data[i].profile_picture === undefined) {
+                    account_data[i].profile_picture = "./frontpage/general_media/default_profile_pic.svg";
+                }
+                console.log(account_data[i].username);
+                let responses = await fetch(`../../../database/users.json`);
+                let users = await responses.json();
+                for (let i = 0; i < users.length; i++) {
 
-        let profile_dom = document.createElement("div");
-        profile_dom.classList.add("profile_dom");
-        profile_dom.innerHTML = `
-        
-            <div id="profile_wrapper">
-                <div class="profile_picture"></div>
-                <div class="username">${account_data[i].username}</div>
-                
-                <div class="add_friend">Add Friend</div>
-                <div class="block_friend">Block</div>
-            </div>
+                    if (users[i].hasOwnProperty("blocked")) {
+                        if (users[i].username === localStorage.getItem("username")) {
+                            if (users[i].blocked.includes(account_data[0].username)) {
+                                return;
+                            }
+                        }
+                    }
+                }
 
-        `;
+                let profile_dom = document.createElement("div");
+                profile_dom.classList.add("profile_dom");
+                profile_dom.innerHTML = `
+                    
+                        <div id="profile_wrapper">
+                            <div class="profile_picture"></div>
+                            <div class="username">${account_data[i].username}</div>
+                            
+                            <div class="add_friend">Add Friend</div>
+                            <div class="block_friend">Block</div>
+                        </div>
+            
+                    `;
 
-        document.querySelector("#display").appendChild(profile_dom);
+                document.querySelector("#display").appendChild(profile_dom);
+
+            }
+
+        }
     }
+
+
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
         profile_pic.style.backgroundImage = `url(${account_data[index].profile_picture})`
     })
@@ -229,25 +255,28 @@ async function find_user() {
     document.querySelectorAll(".add_friend").forEach((add_btn) => {
         add_btn.addEventListener("click", send_friend_request);
     })
-
 }
+
+
+
+
 
 async function get_all_pending_friend_requests(event) {
     document.querySelector("#center_piece").innerHTML = ""
 
     document.querySelector("#center_piece").innerHTML = `
-            <div id="navigation">
-                <div id="my_friends" class="unselected">My Friends</div>
-                <div id="add_friends" class="unselected">Add Friends</div>
-                <div id="pending" class="selected" >Pending</div>
-                <div id="blocked" class="unselected" >Blocked</div>
-            </div>
-            <div id="search_wrapper">
-                <input id="search"></input>
-                <div id="search_image"></div>
-            </div>
-            <div id="display"></div>
-    `;
+                    <div id="navigation">
+                        <div id="my_friends" class="unselected">My Friends</div>
+                        <div id="add_friends" class="unselected">Add Friends</div>
+                        <div id="pending" class="selected" >Pending</div>
+                        <div id="blocked" class="unselected" >Blocked</div>
+                    </div>
+                    <div id="search_wrapper">
+                        <input id="search"></input>
+                        <div id="search_image"></div>
+                    </div>
+                    <div id="display"></div>
+            `;
 
 
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
@@ -273,13 +302,13 @@ async function get_all_pending_friend_requests(event) {
         let pending_dom = document.createElement("div");
         pending_dom.classList.add("pending_wrapper")
         pending_dom.innerHTML = `
-            <div class="profile_picture"></div>
-            <div class="account_username_pending">${data[i]}</div>
-            <div class="wrapper_for_alternatives">
-                <div class="accept">Accept</div>
-                <div class="decline">Decline</div>
-            </div>
-        `;
+                    <div class="profile_picture"></div>
+                    <div class="account_username_pending">${data[i]}</div>
+                    <div class="wrapper_for_alternatives">
+                        <div class="accept">Accept</div>
+                        <div class="decline">Decline</div>
+                    </div>
+                `;
 
         document.querySelector("#display").appendChild(pending_dom);
         document.querySelectorAll(".profile_picture").forEach(pic => {
@@ -293,11 +322,7 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
-
-
-
 }
-
 
 function init_add_friends() {
     document.querySelector("#display").innerHTML = "";
@@ -430,42 +455,42 @@ async function init_blocked_users(event) {
 }
 
 
-function take_to_chat(event){
+function take_to_chat(event) {
     let user = event.target.parentElement.children[1].textContent;
     init_forum(user)
 }
 
-function visit_profile(event){    
+function visit_profile(event) {
 
     let user_profile = document.querySelector(".show_profile").textContent;
     console.log(user_profile);
-        fetch("../../database/users.json")
+    fetch("../../database/users.json")
         .then(resource => resource.json())
         .then(users => {
             users.forEach(user => {
-                if(user.username === user_profile){
+                if (user.username === user_profile) {
                     console.log(user);
                     document.querySelector("h2").textContent = user.username
-                    if(!user.hasOwnProperty('profile_picture')){
+                    if (!user.hasOwnProperty('profile_picture')) {
                         console.log("hrj");
                         document.querySelector("#profile_image").style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)"
-                    }else{
+                    } else {
                         console.log(user);
                         document.querySelector("#profile_image").style.backgroundImage = `url(./frontpage/profile/images/${user.profile_picture})`;
                     }
-                    if(!user.hasOwnProperty('banner_picture')){
+                    if (!user.hasOwnProperty('banner_picture')) {
                         document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
-                    }else{
+                    } else {
                         document.querySelector("main").style.backgroundImage = `url(./frontpage/profile/images/${user.banner_picture})`;
                     }
-                    if(!user.hasOwnProperty('favorite_game_images')){
+                    if (!user.hasOwnProperty('favorite_game_images')) {
                         document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
-                    }else{
+                    } else {
                         document.querySelector("#favorite_game_image").style.backgroundImage = `url(./frontpage/profile/images/${user.favorite_game_images})`;
                     }
-                    if(!user.hasOwnProperty('profile_comments')){
+                    if (!user.hasOwnProperty('profile_comments')) {
                         //idk
-                    }else{
+                    } else {
                         user.profile_comments.forEach(element => {
                             console.log(element);
                             let section = document.querySelector("#profile_forum")
@@ -476,15 +501,15 @@ function visit_profile(event){
                             <p>${element.message}</p>
                             <p id="timestamp">${element.timestamp}</p>
                             `
-                            section.appendChild(div)  
-                            
+                            section.appendChild(div)
+
                         });
                     }
-                    
+
                 }
             });
         })
-    
+
     document.querySelector("body").innerHTML = `
     <!DOCTYPE html>
 <html lang="en">
@@ -538,5 +563,5 @@ function visit_profile(event){
 `
 
 
-    
+
 }

@@ -1,4 +1,5 @@
 <?php
+
     if($_SERVER["REQUEST_METHOD"] === "GET"){
         $all_users = json_decode(file_get_contents("../../database/users.json"), true);
         
@@ -21,6 +22,7 @@
         $all_users = json_decode(file_get_contents("../../database/users.json"), true);
         $fetch_data = json_decode(file_get_contents("php://input"), true);
         
+
         if(array_key_exists("user_that_wants_to_befriend", $fetch_data) === true){
             for ($j = 0; $j < count($all_users); $j++) { 
                 if($all_users[$j]["username"] === $fetch_data["the_request_user"] and array_key_exists("pending", $all_users[$j]) === false  ){
@@ -108,7 +110,7 @@
             echo json_encode(["message" => "User has no friends"]);
             exit();
         }
-
+        
         if(array_key_exists("send_back_for_user_that_sent_friend_req", $fetch_data) === true){
             for ($w = 0; $w < count($all_users); $w++) { 
                 if($all_users[$w]["username"] === $fetch_data["added_friend_username2"] && array_key_exists("friends", $all_users[$w]) == true){
