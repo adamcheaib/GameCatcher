@@ -2,6 +2,7 @@ import { search_for_game } from "../../utils/fetch_functions.js";
 import { searched_game_information } from "../../utils/fetch_functions.js";
 
 
+
 // Den här functionen gör att man får popup rutan med sökfältet när man klickar på förstornings glaset i frontpage
 export async function search_popup(event) {
 

@@ -18,6 +18,13 @@ import { api_key } from "./fetch_functions.js";
 //     });
 // }
 
+document.addEventListener("keydown", function remove_dialog(event) {
+    console.log("HOLAA");
+    if (event.key === "Escape") {
+        document.querySelector("dialog").remove();
+        event.target.removeEventListener("keydown", remove_dialog);
+    }
+})
 
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
@@ -120,8 +127,9 @@ function show_game_display_dom(game_data) {
         document.querySelectorAll("#games_wrapper > div").forEach(game_dom => {
             game_dom.style.border = "none";
             game_dom.style.transform = "scale(1)";
-            game_dom.addEventListener("mouseover", function hej(event) { event.target.parentElement.style.transform = "scale(1.1)" });
+            game_dom.addEventListener("mouseover", (event) => { event.target.parentElement.style.transform = "scale(1.1)" });
             game_dom.addEventListener("mouseout", event => event.target.parentElement.style.transform = "scale(1)");
+            game_dom.addEventListener("click", event => event.target.parentElement.style.transform = "scale(1.1)");
         })
     });
 

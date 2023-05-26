@@ -37,6 +37,11 @@ body {
     gap: 100px;
 }
 
+#sidebar>div:hover {
+    cursor: pointer;
+    transition-duration: 200ms;
+    transform: scale(1.2);
+}
 
 #profile {
     width: 70px;
@@ -257,7 +262,8 @@ body {
     font-size: 30px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.wrapper_for_alternatives{
+
+.wrapper_for_alternatives {
     width: 220px;
     height: 100%;
     display: flex;
@@ -265,7 +271,7 @@ body {
     align-items: center;
 }
 
-.accept{
+.accept {
     width: 100px;
     height: 50px;
     border-radius: 20px;
@@ -274,7 +280,8 @@ body {
     justify-content: center;
     align-items: center;
 }
-.decline{
+
+.decline {
     width: 100px;
     height: 50px;
     border-radius: 20px;
@@ -284,7 +291,7 @@ body {
     background-color: lightcoral;
 }
 
-.pending_wrapper{
+.pending_wrapper {
     border-radius: 20px;
     background-color: lightgray;
     width: 90%;
@@ -295,7 +302,7 @@ body {
     margin: 20px;
 }
 
-.chat{
+.chat {
     width: 50px;
     height: 50px;
     background-image: url("../general_media/chat.svg");
@@ -304,7 +311,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.more_options{
+.more_options {
     width: 50px;
     height: 25px;
     display: flex;
@@ -312,7 +319,8 @@ body {
     color: black;
     font-size: 25px;
 }
-.show_options{
+
+.show_options {
     height: 180px;
     width: 180px;
     background-color: rgb(73, 73, 112);
@@ -325,13 +333,15 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-    gap:7px;
+    transform: translate(-50%, -50%);
+    gap: 7px;
 }
-.show_options div:hover{
+
+.show_options div:hover {
     background-color: rgb(41, 41, 86);
     width: 80%;
 }
+
 .account_management {
     color: white;
     gap: 10px;
@@ -346,7 +356,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .account_management div:hover {
