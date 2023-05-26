@@ -114,11 +114,9 @@ async function init_search() {
                 </div>
                 
                 <h2>${the_clicked_game.name}</h2>
-                <div id="gmage" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
+                <div id="image" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
                 
-                <div id="gext" class="searched_game_text">
-                This game is really good wow i really like it, dam it makes me feel  pretty cool. I like Minecraft.
-                </div>
+           
                 
                 <div id="rating_header">Rating</div>
                 
@@ -216,4 +214,113 @@ async function init_search() {
         // Om sök resultatet är 0 så visas detta istället.
         dom_search_results.innerHTML = "<h1 id='search_status'>No games were found...</h1>";
     }
+}
+
+
+function show_game_display_dom(game_data) {
+    let the_dom = document.createElement("div");
+    the_dom.classList.add("display_game_dom");
+    let the_parent_dom = document.querySelector("#frontpage_wrapper");
+
+    the_dom.innerHTML = `
+    <div id="like_and_close_container">
+        <div id="liked_games_button">Add to liked games</div>
+        <span id="game_information_close_button">X</span>
+    </div>
+
+        <h2>${game_data.name}</h2>
+        <div id="game_image"></div>
+        <div id="rating_header">Rating</div>
+        <div id="wrapper_ratings">
+            <div class="rating">${game_data.ratings[0].percent}</div>
+            <div class="rating">${game_data.ratings[1].percent}</div>
+            <div class="rating">${game_data.ratings[2].percent}</div>
+        </div>
+        <div id="rating_names_wrapper">
+            <div class="rating_name">${game_data.ratings[0].title}</div>
+            <div class="rating_name">${game_data.ratings[1].title}</div>
+            <div class="rating_name">${game_data.ratings[2].title}</div>
+        </div>
+        <div id="gameplay"></div>
+    `;
+
+    let counter_for_interval = [1]; // behöver passa by refrence för att den sen ska kunna resetas
+    the_parent_dom.appendChild(the_dom);
+    document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
+    setInterval(() => {
+        counter_for_interval[0] += 1;
+        // document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
+        if (counter_for_interval[0] === game_data.short_screenshots.length - 1) {
+            counter_for_interval[0] = 1
+        }
+    }, 3000);
+    document.querySelector("#liked_games_button").addEventListener("click", async (event) => {
+
+        const parentNode = event.target.parentNode;
+        const notification = document.createElement("span");
+        parentNode.insertBefore(notification, parentNode.querySelector("h2"));
+        notification.id = "game_collection_notification";
+
+        if (event.target.textContent === "Add to liked games") {
+            let send_object = {
+                name: game_data.name,
+                image: game_data.background_image,
+                username: localStorage.getItem("username"),
+            };
+            fetch("../frontpage/php/game_collection.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(send_object),
+            }).then(r => r.json()).then(data => {
+                console.log(data);
+                general_notifications();
+            });
+
+            notification.textContent = "Added to your list!";
+            notification.style.color = "green";
+            notification.style.gridRow = "2";
+            notification.style.gridColumn = "1 / 4";
+            notification.style.justifySelf = "center";
+            console.log(parentNode);
+            event.target.textContent = "Remove game from your list";
+
+            event.target.style.pointerEvents = "none";
+
+            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+        } else {
+            let body_for_fetch = {
+                username: localStorage.getItem("username"),
+                the_game_to_delete: localStorage.getItem("selected_game"),
+            }
+
+            let response = await fetch("./frontpage/php/game_collection.php", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body_for_fetch),
+            });
+
+            notification.textContent = "Removed from your list!";
+            notification.style.color = "red";
+            notification.style.gridRow = "2";
+            notification.style.gridColumn = "1 / 4";
+            notification.style.justifySelf = "center";
+            event.target.textContent = "Add to liked games";
+
+            event.target.style.pointerEvents = "none";
+
+            setTimeout(() => { event.target.style.pointerEvents = "all"; notification.remove() }, 2000);
+        }
+
+    });
+    document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
+    document.getElementById("game_information_close_button").addEventListener("click", () => {
+        document.querySelector(".display_game_dom").remove();
+        document.querySelectorAll("#games_wrapper > div").forEach(game_dom => {
+            game_dom.style.border = "none";
+            game_dom.style.transform = "scale(1)";
+            game_dom.addEventListener("mouseover", function hej(event) { event.target.parentElement.style.transform = "scale(1.1)" });
+            game_dom.addEventListener("mouseout", event => event.target.parentElement.style.transform = "scale(1)");
+        })
+    });
+
 }

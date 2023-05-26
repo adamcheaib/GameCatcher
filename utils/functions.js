@@ -32,11 +32,6 @@ function show_game_display_dom(game_data) {
 
         <h2>${game_data.name}</h2>
         <div id="game_image"></div>
-        <div id="game_text">
-            This game is really good
-            wow i really like it, dam it makes me feel 
-            pretty cool. I like Minecraft.
-        </div>
         <div id="rating_header">Rating</div>
         <div id="wrapper_ratings">
             <div class="rating">${game_data.ratings[0].percent}</div>
