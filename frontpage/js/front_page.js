@@ -5,6 +5,7 @@ import { game_scroll, genre_scroll, registration_notification, } from "../../uti
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
+
 // Ifall ingen användare är inloggad, skickar besökaren tillbaka till login/register-sidan.
 // Annars är man kvar på hemsidan och den selekterar Action som genre och PC som platform per automatik.
 if (!window.localStorage.hasOwnProperty("username")) {
@@ -131,7 +132,7 @@ export function init_frontpage() {
     document.getElementById("profile").style.backgroundImage = `url(./frontpage/profile/images/${localStorage.profile_picture})`
 
     // Användarens profilbild visas på frontpage.
- 
+
 
     document.querySelectorAll(".platform").forEach(platform => {
 

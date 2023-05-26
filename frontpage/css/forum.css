@@ -53,7 +53,13 @@ body {
     order: 1;
 }
 
-#send{
+#sidebar>div:hover {
+    cursor: pointer;
+    transition-duration: 200ms;
+    transform: scale(1.2);
+}
+
+#send {
     width: 150px;
     height: 50px;
 }
@@ -244,7 +250,7 @@ textarea {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .account_management div:hover {
