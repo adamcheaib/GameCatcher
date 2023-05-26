@@ -1,3 +1,4 @@
+//import { registration_notification } from "../../../utils/functions.js";
 get_preset_information();
 
 
@@ -10,9 +11,11 @@ function get_preset_information(){
                 if(!user.hasOwnProperty('profile_picture')){
                     console.log("hrj");
                     document.querySelector("#profile_image").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)"
+                    document.getElementById("comment_profile").style.backgroundImage =  "url(../../../frontpage/general_media/default_profile_pic.svg)";
                 }else{
                     console.log(user);
                     document.querySelector("#profile_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
+                    document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
                 }
                 if(!user.hasOwnProperty('banner_picture')){
                     document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
@@ -80,10 +83,10 @@ function upload_picture(event){
 
             if(check_profile_pic === true){
                 localStorage.setItem("profile_picture", data.filename);
-                document.getElementById("comment_profile").style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
                 document.querySelectorAll(".profile_picture").forEach(element => {
-                    console.log(element);
-                    element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                console.log(element);
+                element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
                 })
             }
         })
@@ -96,6 +99,11 @@ function send_message(event){
     event.preventDefault();
     let section = document.querySelector("#profile_forum")
     let message = document.querySelector("#message").value
+    if(message.length > 25){
+        alert("Message is too long, it needs to be shorter than 25 characters")
+        return;
+    }
+
     let div = document.createElement("div");
     div.textContent = message;
     div.classList.add("comments_section");
@@ -113,12 +121,18 @@ function send_message(event){
         .then(resource => resource.json())
         .then(data => { 
             div.innerHTML = `
-                <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}")'></div>
-                <p>${message}</p>
-                <p id="timestamp">${data.timestamp}</p>
-                <div class="delete">delete</div>
+                <div id="chat_comments">
+                    <div class="profile_picture" style='background-image: url("../profile/images/${localStorage.getItem("profile_picture")}'></div>
+                    <div id="text_message">
+                        <p>${message}</p>
+                    </div>
+                </div>
+                <div id="info_delete">
+                    <p id="timestamp">${data.timestamp}</p>
+                    <div class="delete">delete</div>
+                </div>
                 `
-                document.querySelector(".delete").addEventListener("click", remove_comment);
+                document.querySelectorAll(".delete").forEach(element => element.addEventListener("click", remove_comment));
         })
     section.appendChild(div)
 }
@@ -131,10 +145,17 @@ function show_messages(messages) {
         div.classList.add("comments_section");
 
         div.innerHTML = `
-        <div class="profile_picture" style='background-image: url("./profile/images/${localStorage.getItem("profile_picture")}'></div>
-        <p>${messages[i].message}</p>
-        <p id="timestamp">${messages[i].timestamp}</p>
-        <div class="delete">delete</div>
+        <div id="chat_comments">
+        <div class="profile_picture" style='background-image: url("../profile/images/${localStorage.getItem("profile_picture")}'></div>
+            <div id="text_message">
+                <p>${messages[i].message}</p>
+            </div>
+            </div>
+            <div id="info_delete">
+                <p id="timestamp">${messages[i].timestamp}</p>
+                <div class="delete">delete</div>
+            </div>
+        
         `
         section.appendChild(div)  
         let deleteButtons = document.querySelectorAll(".delete");
@@ -160,5 +181,22 @@ function remove_comment(event){
         .then(data => { console.log(data)
             event.target.parentElement.remove();
         })
+        document.querySelectorAll(".comments_section").forEach(element => element.remove());
+
+        fetch("../../../../database/users.json")
+        .then(resource => resource.json())
+        .then(users => {
+            users.forEach(user => {
+                if(user.username === localStorage.username){
+                    if(user.hasOwnProperty("profile_comments")){
+                        show_messages(user.profile_comments);
+                    }
+
+                }})})
+
 }
 
+document.querySelector("#go_home").addEventListener("click", go_home)
+function go_home(event){
+    window.location.replace("/index.html");
+}

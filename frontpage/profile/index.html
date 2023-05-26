@@ -8,14 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="sidebar">
-        <div id="main_page"></div>
-        <div id="saved"></div>
-        <div id="chat"></div>
-        <div id="friends"></div>
-        <div id="settings"></div>
-    
-    </div>
     <div id="whole_flex_display_wrapper">
         <main>
             <header>
@@ -35,11 +27,7 @@
         <div id="split">
 
             <div id="profile_stuff">
-                <div id="feeling">
-                    <p>How i'm feeling</p>
-                    <p>Mood</p>
-                    <p id="emoji"></p>
-                </div>
+                
 
                 <div id="transparency"></div>
 
@@ -55,7 +43,7 @@
         </div>
 
         <form id="profile_forum" action="./profile/php/upload.php" method="POST">
-            <div class="comments_section">
+            <div class="send_message_section">
                 <div id="comment_profile" alt="Profile Picture"></div>
                 <input id="message" name="profile_message" type="text" placeholder="Write something..." >
                 <button id="send_message">Send Message!</button>
@@ -63,8 +51,9 @@
         </form>
     </div>
 </div>
-        
+    <footer id="go_home">Go Home!</footer>
 
 </body>
     <script src="/frontpage/profile/js/index.js"></script>
+    <script src="../../utils/functions.js"></script>
 </html>

@@ -104,7 +104,7 @@
         "favorite_game_images": "elden-ring-new-header-mobile.jpg"
     },
     {
-        "username": "calle",
+        "username": "momo",
         "password": "calle",
         "favorite_games": [
             {
@@ -118,17 +118,13 @@
             "adamcheaib"
         ],
         "blocked": [],
-        "profile_picture": "online-web-design.jpg",
-        "banner_picture": "online-web-design.jpg",
-        "favorite_game_images": "online-web-design.jpg",
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
         "profile_comments": [
             {
-                "message": "fsdfsdfsd",
-                "timestamp": "2023-05-25 19:26:11"
-            },
-            {
-                "message": "aaaaaaaaaaaa",
-                "timestamp": "2023-05-25 19:26:17"
+                "message": "hej jag heter calle",
+                "timestamp": "2023-05-26 10:33:49"
             }
         ]
     }
