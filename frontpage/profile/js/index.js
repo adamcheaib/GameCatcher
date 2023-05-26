@@ -1,32 +1,32 @@
-// import { registration_notification } from "../../../utils/functions.js";
 get_preset_information();
 
 
 function get_preset_information() {
-    fetch("../../../../database/users.json")
+    fetch("../../database/users.json")
         .then(resource => resource.json())
         .then(users => {
             users.forEach(user => {
+                console.log(user);
                 if (user.username === localStorage.username) {
                     document.querySelector("h2").textContent = user.username;
                     if (!user.hasOwnProperty('profile_picture')) {
                         console.log("hrj");
-                        document.querySelector("#profile_image").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)"
-                        document.getElementById("comment_profile").style.backgroundImage = "url(../../../frontpage/general_media/default_profile_pic.svg)";
+                        document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
+                        document.getElementById("comment_profile").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)";
                     } else {
                         console.log(user);
-                        document.querySelector("#profile_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
-                        document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
+                        document.querySelector("#profile_image").style.backgroundImage = `url(./images/${user.profile_picture})`;
+                        document.getElementById("comment_profile").style.backgroundImage = `url(./images/${user.profile_picture})`;
                     }
                     if (!user.hasOwnProperty('banner_picture')) {
                         document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
                     } else {
-                        document.querySelector("main").style.backgroundImage = `url(../../../frontpage/profile/images/${user.banner_picture})`;
+                        document.querySelector("main").style.backgroundImage = `url(./images/${user.banner_picture})`;
                     }
                     if (!user.hasOwnProperty('favorite_game_images')) {
                         document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
                     } else {
-                        document.querySelector("#favorite_game_image").style.backgroundImage = `url(../../../frontpage/profile/images/${user.favorite_game_images})`;
+                        document.querySelector("#favorite_game_image").style.backgroundImage = `url(./images/${user.favorite_game_images})`;
                     }
                     if (user.hasOwnProperty("profile_comments")) {
                         show_messages(user.profile_comments);
@@ -71,7 +71,7 @@ function upload_picture(event) {
     }
     formData.append("username", localStorage.getItem("username"));
 
-    let request = new Request("./profile/php/upload.php", {
+    let request = new Request("./php/upload.php", {
         method: "POST",
         body: formData,
     });
@@ -80,14 +80,14 @@ function upload_picture(event) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            image.style.backgroundImage = `url(./profile/images/${data.filename})`;
+            image.style.backgroundImage = `url(./images/${data.filename})`;
 
             if (check_profile_pic === true) {
                 localStorage.setItem("profile_picture", data.filename);
-                document.getElementById("comment_profile").style.backgroundImage = `url(../../../frontpage/profile/images/${user.profile_picture})`;
+                document.getElementById("comment_profile").style.backgroundImage = `url(./images/${data.filename})`;
                 document.querySelectorAll(".profile_picture").forEach(element => {
                     console.log(element);
-                    element.style.backgroundImage = `url(./profile/images/${localStorage.getItem("profile_picture")})`;
+                    element.style.backgroundImage = `url(./images/${localStorage.getItem("profile_picture")})`;
                 })
             }
         })
@@ -109,7 +109,7 @@ function send_message(event) {
     div.textContent = message;
     div.classList.add("comments_section");
 
-    let request = new Request("/frontpage/profile/php/upload.php", {
+    let request = new Request("./php/upload.php", {
         method: "POST",
         body: JSON.stringify({
             text: message,
@@ -123,7 +123,7 @@ function send_message(event) {
         .then(data => {
             div.innerHTML = `
                 <div id="chat_comments">
-                    <div class="profile_picture" style='background-image: url("../profile/images/${localStorage.getItem("profile_picture")}'></div>
+                    <div class="profile_picture" style='background-image: url("./images/${localStorage.getItem("profile_picture")}'></div>
                     <div id="text_message">
                         <p>${message}</p>
                     </div>
@@ -149,7 +149,7 @@ function show_messages(messages) {
 
         div.innerHTML = `
         <div id="chat_comments">
-        <div class="profile_picture" style='background-image: url("../profile/images/${localStorage.getItem("profile_picture")}'></div>
+        <div class="profile_picture" style='background-image: url("./images/${localStorage.getItem("profile_picture")}'></div>
             <div id="text_message">
                 <p>${messages[i].message}</p>
             </div>
@@ -170,7 +170,7 @@ function show_messages(messages) {
 
 function remove_comment(event) {
     let timestamp = event.target.parentElement.querySelector("#timestamp").innerHTML;
-    let request = new Request("/frontpage/profile/php/upload.php", {
+    let request = new Request("./php/upload.php", {
         method: "POST",
         body: JSON.stringify({
             action: "remove",
@@ -187,7 +187,7 @@ function remove_comment(event) {
         })
     document.querySelectorAll(".comments_section").forEach(element => element.remove());
 
-    fetch("../../../../database/users.json")
+    fetch("../../database/users.json")
         .then(resource => resource.json())
         .then(users => {
             users.forEach(user => {
@@ -204,5 +204,5 @@ function remove_comment(event) {
 
 document.querySelector("#go_home").addEventListener("click", go_home)
 function go_home(event) {
-    window.location.replace("/index.html");
+    window.location.replace("../");
 }

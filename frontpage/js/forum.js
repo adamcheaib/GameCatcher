@@ -20,7 +20,7 @@ export function init_forum(user) {
         document.querySelector(".display_game_dom").remove();
     }
     document.querySelector("#chat").removeEventListener("click", init_forum);
-    document.querySelector("link").setAttribute("href", "./frontpage/css/forum.css");
+    document.querySelector("link").setAttribute("href", "./css/forum.css");
     let friends_list = document.createElement("div");
     friends_list.classList.add("friends_list");
     document.querySelector("#center_piece").innerHTML = `
@@ -47,7 +47,7 @@ async function get_all_friends(user) {
         the_user: localStorage.getItem("username"),
         find_all_friends: true,
     }
-    let response = await fetch("./frontpage/php/find_friend.php", {
+    let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
@@ -75,10 +75,10 @@ async function get_all_friends(user) {
         document.querySelector(".friends_list").appendChild(profile_dom);
     }
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(./frontpage/general_media/default_profile_pic.svg)`
+        profile_pic.style.backgroundImage = `url(./general_media/default_profile_pic.svg)`
     })
     document.querySelectorAll(".chat").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
+        profile_pic.style.backgroundImage = `url(./general_media/chat.svg)`
     })
 
     // Ger allt i account elementen inuti forumet ett click event så det inte är bara en del som kan clickas
@@ -114,7 +114,7 @@ async function fetch_chat(event) {
     })
 
     */
-    let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`);
+    let response_user1 = await fetch(`./php/chat.php?username=${username}&targetUsername=${targetUsername}`);
     loading_screen();
 
     let response_data = await response_user1.json();
@@ -128,7 +128,7 @@ async function fetch_chat(event) {
         user2_id: response_data.user2_id,
     }
 
-    let response2 = await fetch(`./frontpage/php/chat.php`, {
+    let response2 = await fetch(`./php/chat.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(fetch_bod_first),
@@ -149,7 +149,7 @@ async function fetch_chat(event) {
         target_user: response_data.user2_id,
     };
 
-    let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
+    let response_all_previous_messages = await fetch(`./php/chat.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch2),
@@ -196,7 +196,7 @@ async function fetch_chat(event) {
         const username = localStorage.getItem("username");
         const targetUsername = event.target.querySelector(".username").innerHTML;
 
-        let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+        let response_user1 = await fetch(`./php/chat.php?username=${username}&targetUsername=${targetUsername}`)
         let response_data = await response_user1.json();
         console.log(response_data);
 
@@ -209,7 +209,7 @@ async function fetch_chat(event) {
             user2_id: response_data.user2_id,
         }
 
-        let response2 = await fetch(`./frontpage/php/chat.php`, {
+        let response2 = await fetch(`./php/chat.php`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(fetch_bod_first),
@@ -232,7 +232,7 @@ async function fetch_chat(event) {
             target_user: response_data.user2_id,
         };
 
-        let response_all_previous_messages = await fetch(`./frontpage/php/chat.php`, {
+        let response_all_previous_messages = await fetch(`./php/chat.php`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body_for_fetch2),
@@ -304,7 +304,7 @@ async function send_message(the_post_dom) {
         message: the_post_dom.querySelector("#the_post_text > p").innerHTML,
     }
 
-    let response = await fetch("./frontpage/php/forum.php", {
+    let response = await fetch("./php/forum.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)

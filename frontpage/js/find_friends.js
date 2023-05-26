@@ -1,7 +1,7 @@
 import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-//import { init_profile } from "../../frontpage/profile/js/index.js";
+//import { init_profile } from "../../profile/js/index.js";
 import { loading_screen, registration_notification, remove_loading_screen, } from "../../utils/functions.js";
 
 // TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
@@ -20,12 +20,12 @@ export async function init_friends_page() {
     if (document.querySelector(".friends_list") !== null) {
         document.querySelector(".friends_list").remove();
     }
-    document.querySelector("link").setAttribute("href", "./frontpage/css/friends_page.css");
+    document.querySelector("link").setAttribute("href", "./css/friends_page.css");
 
     document.querySelector("#center_piece").innerHTML = `
         <div id="navigation">
             <div id="my_friends" class="selected"> My Friends</div>
-            <div id="add_friends" class="unselected" ">Add Friends</div>
+            <div id="add_friends" class="unselected">Add Friends</div>
             <div id="pending" class="unselected" >Pending</div>
             <div id="blocked" class="unselected" >Blocked</div>
         </div>
@@ -62,7 +62,7 @@ async function show_my_friends(event) {
         the_user: localStorage.getItem("username"),
         find_all_friends: true,
     }
-    let response = await fetch("./frontpage/php/find_friend.php", {
+    let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
@@ -96,10 +96,10 @@ async function show_my_friends(event) {
         document.querySelector("#display").appendChild(profile_dom);
     }
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(./frontpage/general_media/default_profile_pic.svg)`
+        profile_pic.style.backgroundImage = `url(./general_media/default_profile_pic.svg)`
     })
     document.querySelectorAll(".chat").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
+        profile_pic.style.backgroundImage = `url(./general_media/chat.svg)`
         profile_pic.addEventListener("click", take_to_chat)
     })
 
@@ -142,7 +142,7 @@ async function block_unblock_user(event) {
         user = document.getElementById("to_be_unblocked").textContent;
     }
 
-    const block_response = await fetch("./frontpage/php/find_friend.php", {
+    const block_response = await fetch("./php/find_friend.php", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -182,7 +182,7 @@ async function send_friend_request(event) {
         user_that_wants_to_befriend: localStorage.getItem("username"),
         the_request_user: username,
     }
-    let response = await fetch("./frontpage/php/find_friend.php", {
+    let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
@@ -205,11 +205,11 @@ async function find_user() {
     document.querySelector("#display").innerHTML = "";
     let find_account_name = document.querySelector("input").value;
     let request_account_name = localStorage.getItem("username");
-    let response = await fetch(`./frontpage/php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
+    let response = await fetch(`./php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
     let account_data = await response.json();
     console.log(account_data);
 
-    let response_for_all_friends = await fetch(`./frontpage/php/find_friend.php`, {
+    let response_for_all_friends = await fetch(`./php/find_friend.php`, {
         method: "POST",
         header: { "Content-Type": "application/json" },
         body: JSON.stringify({ the_user: localStorage.getItem("username"), find_all_friends: true })
@@ -226,16 +226,16 @@ async function find_user() {
     let the_check = "";
     for (let i = 0; i < account_data.length; i++) {
         if (account_data[i].profile_picture === undefined) {
-            account_data[i].profile_picture = "./frontpage/general_media/default_profile_pic.svg";
+            account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
         }
         if (the_check !== "stop") {
             if (account_data[i].username !== localStorage.getItem("username")) {
                 // Kollar att den man är loggad in som inte finns med  i account_data så att man inte kan adda sig själv
                 if (account_data[i].profile_picture === undefined) {
-                    account_data[i].profile_picture = "./frontpage/general_media/default_profile_pic.svg";
+                    account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
                 }
                 console.log(account_data[i].username);
-                let responses = await fetch(`../../../database/users.json`);
+                let responses = await fetch(`../database/users.json`);
                 loading_screen();
 
                 if (responses.ok) {
@@ -311,7 +311,7 @@ async function get_all_pending_friend_requests(event) {
         the_request_user: username,
     }
 
-    let response = await fetch("./frontpage/php/find_friend.php", {
+    let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
@@ -340,7 +340,7 @@ async function get_all_pending_friend_requests(event) {
 
         document.querySelector("#display").appendChild(pending_dom);
         document.querySelectorAll(".profile_picture").forEach(pic => {
-            pic.style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)";
+            pic.style.backgroundImage = "url(./general_media/default_profile_pic.svg)";
         })
 
         document.querySelectorAll(".accept").forEach(accept_btn => {
@@ -383,7 +383,7 @@ async function add_friend(event) {
         accepted_friend_request: true,
     }
 
-    let response = await fetch("./frontpage/php/find_friend.php", {
+    let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
@@ -404,7 +404,7 @@ async function add_friend(event) {
         send_back_for_user_that_sent_friend_req: true,
     };
 
-    let response2 = await fetch("./frontpage/php/find_friend.php", {
+    let response2 = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(a_fetch_body)
@@ -427,7 +427,7 @@ async function decline_friend(event) {
         declined_friend_username: declined_friend_username,
         the_username: localStorage.getItem("username"),
     }
-    let response = await fetch("./frontpage/php/find_friend.php", {
+    let response = await fetch("./php/find_friend.php", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
@@ -459,7 +459,7 @@ async function init_blocked_users(event) {
 `;
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
-    let response = await fetch(`../../../database/users.json`);
+    let response = await fetch(`../database/users.json`);
 
     loading_screen();
 
@@ -489,10 +489,10 @@ async function init_blocked_users(event) {
         }
     }
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(./frontpage/general_media/default_profile_pic.svg)`
+        profile_pic.style.backgroundImage = `url(./general_media/default_profile_pic.svg)`
     })
     document.querySelectorAll(".chat").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(./frontpage/general_media/chat.svg)`
+        profile_pic.style.backgroundImage = `url(./general_media/chat.svg)`
     })
     document.querySelectorAll(".more_options").forEach(element => {
         element.addEventListener("click", show_options);
@@ -513,7 +513,7 @@ async function visit_profile(event) {
 
     let user_profile = document.querySelector(".show_profile").textContent;
     console.log(user_profile);
-    const response = await fetch("../../database/users.json")
+    const response = await fetch("../database/users.json")
 
     loading_screen();
 
@@ -529,7 +529,7 @@ async function visit_profile(event) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontpage/profile/css/index.css">
+    <link rel="stylesheet" href="./css/friends_page.css">
     <title>Document</title>
     </head>
     <body>
@@ -561,7 +561,7 @@ async function visit_profile(event) {
     <footer id="go_home">Go Home!</footer>
     
     </body>
-    <script src="/frontpage/profile/js/index.js"></script>
+    <script src="./profile/js/index.js"></script>
     <script src="../../utils/functions.js"></script>
     </html>
     `
@@ -576,20 +576,20 @@ async function visit_profile(event) {
             document.querySelector("h2").textContent = user.username
             if (!user.hasOwnProperty('profile_picture')) {
                 console.log("hrj");
-                document.querySelector("#profile_image").style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)"
+                document.querySelector("#profile_image").style.backgroundImage = "url(./general_media/default_profile_pic.svg)"
             } else {
                 console.log(user);
-                document.querySelector("#profile_image").style.backgroundImage = `url(./frontpage/profile/images/${user.profile_picture})`;
+                document.querySelector("#profile_image").style.backgroundImage = `url(./profile/images/${user.profile_picture})`;
             }
             if (!user.hasOwnProperty('banner_picture')) {
                 document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
             } else {
-                document.querySelector("main").style.backgroundImage = `url(./frontpage/profile/images/${user.banner_picture})`;
+                document.querySelector("main").style.backgroundImage = `url(./profile/images/${user.banner_picture})`;
             }
             if (!user.hasOwnProperty('favorite_game_images')) {
                 document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
             } else {
-                document.querySelector("#favorite_game_image").style.backgroundImage = `url(./frontpage/profile/images/${user.favorite_game_images})`;
+                document.querySelector("#favorite_game_image").style.backgroundImage = `url(./profile/images/${user.favorite_game_images})`;
             }
             if (user.hasOwnProperty('profile_comments')) {
                 console.log(element);
@@ -597,7 +597,7 @@ async function visit_profile(event) {
                 let div = document.createElement("div");
                 div.classList.add("comments_section");
                 div.innerHTML = `
-                            <div class="profile_picture" style='background-image: url(./frontpage/profile/images/${user.profile_picture}'></div>
+                            <div class="profile_picture" style='background-image: url(./profile/images/${user.profile_picture}'></div>
                             <p>${element.message}</p>
                             <p id="timestamp">${element.timestamp}</p>
                             `

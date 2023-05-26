@@ -35,7 +35,7 @@ function register_or_login(event) {
 // Försöker att logga in användaren genom en POST-request till user_database.php och kollar om användarnamnet OCH lösenordet stämmer överens med någon av de i databasen
 async function tryToLogin(login_object) {
     try {
-        const response = await fetch("../login_register/php/user_database.php", {
+        const response = await fetch("./php/user_database.php", {
             method: "POST",
             header: { "Content-type": "application/json" },
             body: JSON.stringify({ username: login_object.username, password: login_object.password, action: "login" })
@@ -48,7 +48,7 @@ async function tryToLogin(login_object) {
             registration_notification(resource.message, "registration_notification"); // Anropar notifikationen för att ge feedback till användaren ifall användaren ej finns!
         } else {
             localStorage.setItem("username", resource.username); // Sparar användarens användarnamn i localStorage för att kunna identifiera inloggad användaren.
-            window.location.replace("./frontpage");
+            window.location.replace("../frontpage");
         }
         username_field.value = "";
         password_field.value = "";
@@ -102,7 +102,7 @@ function register(event) {
                 document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
                 document.querySelector("button").textContent = "REGISTER"
                 document.querySelector("h1").innerHTML = "Register";
-                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/registration.jpg)";
+                document.querySelector("#container").style.backgroundImage = "url(../media/registration.jpg)";
 
             }
             else {

@@ -30,7 +30,7 @@ export function init_frontpage() {
     document.body.innerHTML = "";
 
     // Laddar frontpage-CSS:et och appendar den nya HTML:n.
-    document.querySelector("link").setAttribute("href", "./frontpage/css/frontpage.css");
+    document.querySelector("link").setAttribute("href", "./css/frontpage.css");
     document.body.innerHTML = `
         <div id="frontpage_wrapper">
             <div id="sidebar">
@@ -130,8 +130,11 @@ export function init_frontpage() {
         });
     })
 
-
-    document.getElementById("profile").style.backgroundImage = `url(./frontpage/profile/images/${localStorage.profile_picture})`
+    if (localStorage.getItem("profile_picture") !== null) {
+        document.getElementById("profile").style.backgroundImage = `url(./profile/images/${localStorage.profile_picture})`
+    } else {
+        document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`
+    }
 
     // Användarens profilbild visas på frontpage.
 
@@ -227,7 +230,7 @@ function change_username_password(event) {
         action = "change_password"
     }
 
-    let request = new Request("/frontpage/profile/php/upload.php", {
+    let request = new Request("./profile/php/upload.php", {
         method: "POST",
         body: JSON.stringify({
             username: user,
@@ -258,6 +261,6 @@ function change_username_password(event) {
 
 document.querySelector("#profile").addEventListener("click", go_to_profile);
 function go_to_profile(event) {
-    window.location.replace("./frontpage/profile/index.html");
+    window.location.replace("./profile/index.html");
 }
 

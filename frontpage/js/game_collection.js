@@ -16,7 +16,7 @@ export async function init_collection() {
     }
 
     // Laddar rätt CSS-fil.
-    document.querySelector("link").setAttribute("href", "./frontpage/css/collection.css");
+    document.querySelector("link").setAttribute("href", "./css/collection.css");
 
     // Ändrar själva HTML-elementen i center_piece HTML-elementet så att man får game_collection-looken.
     document.querySelector("#center_piece").innerHTML = `
@@ -27,7 +27,7 @@ export async function init_collection() {
     
     `
     // Fetchen här hämtar användarens favorit-spel dvs de som man har tryckt gilla på.
-    let response = await fetch(`./frontpage/php/game_collection.php?username=${localStorage.getItem("username")}`);
+    let response = await fetch(`./php/game_collection.php?username=${localStorage.getItem("username")}`);
     let collection_data = await response.json();
 
     // Laddar alla spelen som har gillats av användaren och skapar HTML-element av dem.
@@ -59,7 +59,7 @@ export async function init_collection() {
                 username: localStorage.getItem("username"),
                 the_game_to_delete: button.parentElement.querySelector("p").innerHTML,
             }
-            let response = await fetch("./frontpage/php/game_collection.php", {
+            let response = await fetch("./php/game_collection.php", {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body_for_fetch),

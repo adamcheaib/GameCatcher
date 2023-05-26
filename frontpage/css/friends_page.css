@@ -80,7 +80,8 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 }
-.chat:hover{
+
+.chat:hover {
     cursor: pointer;
 }
 
