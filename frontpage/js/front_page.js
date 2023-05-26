@@ -77,6 +77,7 @@ export function init_frontpage() {
                             <div data-id="7" class="platform" id="Nintendo_Switch"></div>
                             <div data-id="4" class="platform" id="PC"></div>
                         </div>     
+                        <div id="currently_shown_games"><h1 id="currently_shown_genre">Action,</h1><h1 id="currently_shown_platform">PC</h1></div>
                     </div>
                         
                     <div id="games">
@@ -118,6 +119,7 @@ export function init_frontpage() {
                 if (localStorage.getItem("selected_genre") === genre_name) {
                     genre_dom.parentElement.parentElement.style.transform = "scale(1.15)";
                     genre_dom.parentElement.parentElement.style.border = "2px solid white";
+                    document.getElementById("currently_shown_genre").textContent = genre_name + ","
                 } else {
                     genre_dom.parentElement.parentElement.style.transform = "scale(1)";
                     genre_dom.parentElement.parentElement.style.border = "none";
@@ -144,9 +146,11 @@ export function init_frontpage() {
             const all_platform_buttons = document.querySelectorAll(".platform");
             all_platform_buttons.forEach(platform_dom => {
                 const platform_id = platform_dom.dataset.id;
+                const platform_name = platform_dom.id.replace("_", " ");
                 if (localStorage.getItem("platform_selected") == platform_id) {
                     platform_dom.style.transform = "scale(1.15)";
                     platform_dom.style.border = "2px solid white";
+                    document.getElementById("currently_shown_platform").textContent = platform_name;
                 } else {
                     platform_dom.style.transform = "scale(1)";
                     platform_dom.style.border = "none";
