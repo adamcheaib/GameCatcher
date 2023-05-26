@@ -18,6 +18,13 @@ import { api_key } from "./fetch_functions.js";
 //     });
 // }
 
+document.addEventListener("keydown", function remove_dialog(event) {
+    console.log("HOLAA");
+    if (event.key === "Escape") {
+        document.querySelector("dialog").remove();
+        event.target.removeEventListener("keydown", remove_dialog);
+    }
+})
 
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");

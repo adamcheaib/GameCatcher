@@ -49,6 +49,12 @@ body {
     gap: 100px;
 }
 
+#sidebar>div:hover {
+    cursor: pointer;
+    transition-duration: 200ms;
+    transform: scale(1.2);
+}
+
 
 .clear_button {
     border-radius: 20px;
@@ -166,6 +172,7 @@ body {
     background-color: gray;
     border-radius: 20px;
 }
+
 .account_management {
     color: white;
     gap: 10px;
@@ -180,7 +187,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .account_management div:hover {

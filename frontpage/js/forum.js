@@ -34,6 +34,7 @@ export function init_forum(user) {
     document.querySelector("#main_page").addEventListener("click", init_frontpage);
     get_all_friends(user);
     create_post();
+    document.getElementById("send").disabled = true;
 
 }
 
@@ -78,10 +79,10 @@ async function get_all_friends(user) {
 }
 export async function the_whole_juser_element_gets_click_event(user) {
     document.querySelectorAll(".profile_dom").forEach(async (profile_dom, index) => {
-        profile_dom.classList.add("unselected");      
+        profile_dom.classList.add("unselected");
         // per klick av profile_dom så skapas det en interval men samtidgt så clears det i början så att det inte blir så att fler kör samtidgt
         profile_dom.addEventListener("click", fetch_chat)
-        
+
     })
 }
 
@@ -89,6 +90,7 @@ async function fetch_chat(event) {
     console.log(all_intervals);
     console.log(event);
 
+    document.getElementById("send").disabled = false;
     stop_all_intervals();
     document.querySelector("#forum_display").innerHTML = "";
     localStorage.removeItem("selected_chat_id")
@@ -181,13 +183,6 @@ async function fetch_chat(event) {
         const username = localStorage.getItem("username");
         const targetUsername = event.target.querySelector(".username").innerHTML;
 
-        document.querySelectorAll(".selected").forEach(all_selected => {
-            console.log(all_selected)
-            all_selected.classList.remove("selected");
-            all_selected.style.backgroundColor = "lightGray";
-            all_selected.querySelector(".username").style.color = "black";
-        })
-
         let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
         let response_data = await response_user1.json();
         console.log(response_data);
@@ -263,9 +258,6 @@ function stop_all_intervals() { // Om man loopar igenom alla och använder clear
     })
 
 }
-
-
-
 
 
 function create_post() {
