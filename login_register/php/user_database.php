@@ -10,6 +10,10 @@ function sendJSON($message, $http_code = 200)
     exit();
 }
 
+if (!isset($received_data["username"], $received_data["password"], $received_data["action"])) {
+    $message = ["message" => "Invalid Request!"];
+    sendJSON($message, 400);
+}
 $filename = "../../database/users.json";
 if (file_exists($filename)) {
     $users = json_decode(file_get_contents($filename), true);
@@ -24,6 +28,7 @@ $username = $received_data["username"];
 
 
 if ($action == "register") {
+
     $password = $received_data["password"];
     if ($users == null) {
         $users = [];
