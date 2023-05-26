@@ -80,6 +80,38 @@
             "kakariko",
             "elliot"
         ],
+
+        "blocked": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg"
+    },
+    {
+        "username": "momo",
+        "password": "calle",
+        "favorite_games": [
+            {
+                "name": "Limbo",
+                "image": "https:\/\/media.rawg.io\/media\/games\/942\/9424d6bb763dc38d9378b488603c87fa.jpg"
+            }
+        ],
+        "id": 1,
+        "friends": [
+            "eqqq",
+            "adamcheaib"
+        ],
+        "blocked": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_comments": [
+            {
+                "message": "hej jag heter calle",
+                "timestamp": "2023-05-26 10:33:49"
+            }
+        ],
+
         "blocked": []
+
     }
 ]

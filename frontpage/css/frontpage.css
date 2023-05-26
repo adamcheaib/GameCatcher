@@ -711,7 +711,7 @@ dialog>div {
     display: flex;
     flex-direction: column;
     background-color: rgb(73, 73, 112);
-    height: 30vh;
+    height: 220px;
     width: 30vw;
     border-radius: 20px;
     text-align: center;
@@ -737,4 +737,7 @@ dialog>div {
 #profile {
     background-position: center;
     background-size: cover;
+}
+#profile:hover{
+    cursor: pointer;
 }
