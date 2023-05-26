@@ -350,9 +350,6 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
-
-
-
 }
 
 
