@@ -6,6 +6,8 @@ body{
     height: auto;
     margin: 0;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #whole_flex_display_wrapper{
@@ -15,11 +17,12 @@ body{
 header{
     margin-top: 20px;
     height: 200px;
-    width: 250px;
+    width: 150px;
     margin-left: 40px;
 }
 #profile_pic_form{
-    margin-top: 20px;
+    margin-top: -26px;
+    margin-left: 126px;
 }
 #wrapper_for_name_and_profile{
     display: flex;
@@ -27,6 +30,9 @@ header{
     align-items: center;
     width: 250px;
     
+}
+#banner_picture{
+    margin-left: 1100px;
 }
 img{
     border-radius: 50%;
@@ -36,7 +42,7 @@ h2{
     text-align: center;
     margin: 0;
     font-size: 30px;
-    color: white;
+    color: black;
 }
 main{
     background-position: center;
@@ -123,6 +129,7 @@ main{
     border-radius: 25px;
     margin: 10px;
     padding: 3px;
+    overflow-y: scroll;
 }
 #comment_profile{
     height: 30px;
@@ -130,6 +137,8 @@ main{
     background-size: cover;
     background-position: center;
     border-radius: 50%;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 #split{
     display: flex;
@@ -139,6 +148,18 @@ main{
 }
 .comments_section{
     background-color: rgb(41, 41, 86);
+    color: white;
+    align-items: center;
+    display: flex;
+    margin: 10px;
+    border-radius: 10px;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+}
+.send_message_section{
+    background-color: rgb(41, 41, 86);
+    color: white;
     align-items: center;
     display: flex;
     margin: 10px;
@@ -147,6 +168,9 @@ main{
 }
 .comments p{
     margin-left: 5px;
+}
+#send_message{
+    margin-left: 132px;
 }
 #message{
     height: 25px;
@@ -176,15 +200,11 @@ main{
     height: 30px;
     width: 30px;
     border-radius: 50%;
+    margin-right: 5px;
+    display: flex;
+    align-self: center;
+    margin-left: 5px;
 }
-
-
-
-
-
-
-
-
 
 #chat {
     width: 50px;
@@ -246,4 +266,41 @@ main{
     cursor: pointer;
     transition-duration: 200ms;
     transform: scale(1.2);
+}
+#go_home{
+    background-color: rgb(73, 73, 112);
+    color: white;
+    height: 60px;
+    width: 100px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#go_home:hover{
+    cursor: pointer;
+}
+.delete{
+    display: flex;
+    align-items: center;
+    background-color: rgb(73, 73, 112);
+    color: white;
+    height: 20px;
+    width: 50px;
+    border-radius: 5px;
+    align-self: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.delete:hover{
+    cursor: pointer;
+}
+#info_delete{
+    display: flex;
+    flex-direction: row;
+}
+#chat_comments{
+    display: flex;
+    flex-direction: row;
 }

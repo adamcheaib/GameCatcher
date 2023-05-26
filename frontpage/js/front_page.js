@@ -1,7 +1,7 @@
-import { fetch_all_games } from "../../utils/fetch_functions.js";
+import { fetch_all_games } from "../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
+import { game_scroll, genre_scroll, registration_notification } from "../../utils/functions.js";
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
@@ -103,6 +103,7 @@ export function init_frontpage() {
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#friends").addEventListener("click", init_friends_page);
     document.querySelector("#settings").addEventListener("click", show_settings)
+    document.querySelector("#profile").addEventListener("click", go_to_profile);
 
 
     // Laddar alla genre i genre_scroll:n så att man har de från början.
@@ -245,12 +246,19 @@ function change_username_password(event) {
             }
             if (data.action === "change_username") {
                 localStorage.setItem("username", changed_value);
+                document.getElementById("changed_message").textContent = "Success!"
                 location.reload();
                 console.log(localStorage);
+
+            }
+            if (data.action === "change_password") {
                 document.getElementById("changed_message").textContent = "Success!"
             }
-
         })
+}
 
+document.querySelector("#profile").addEventListener("click", go_to_profile);
+function go_to_profile(event) {
+    window.location.replace("./frontpage/profile/index.html");
 }
 

@@ -18,8 +18,6 @@ if ($chat_database == null) {
 }
 // Denna gör så att vi hittar och ser att users finns och retunerar ID:sen som vi ska använda
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-
-
     $loggedOnUsername = $_GET["username"];
     $chatTargetUser = $_GET["targetUsername"];
 

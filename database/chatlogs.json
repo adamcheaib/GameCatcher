@@ -20,5 +20,15 @@
             "Hej elliot, vill du knulla?",
             "lsakdjajdadsakjasljdlasdladjlasjdlsak"
         ]
+    },
+    {
+        "chatid": 5,
+        "chat_between": [
+            3,
+            2
+        ],
+        "chatlog": [
+            "fdsfdsfdsfsd"
+        ]
     }
 ]

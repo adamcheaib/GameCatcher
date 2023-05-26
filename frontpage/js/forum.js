@@ -98,7 +98,7 @@ async function fetch_chat(event) {
     document.querySelector("#forum_display").innerHTML = "";
     const username = localStorage.getItem("username");
     const targetUsername = event.target.querySelector(".username").innerHTML;
-
+    /*
     document.querySelectorAll(".selected").forEach(all_selected => {
         console.log(all_selected)
         all_selected.classList.remove("selected");
@@ -106,6 +106,7 @@ async function fetch_chat(event) {
         all_selected.querySelector(".username").style.color = "black";
     })
 
+    */
     let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
     let response_data = await response_user1.json();
     console.log(response_data);
@@ -162,6 +163,7 @@ async function fetch_chat(event) {
             </div>
         `
             document.querySelector("#forum_display").appendChild(message_dom)
+            //document.querySelector("#username").textContent
         })
     }
 
