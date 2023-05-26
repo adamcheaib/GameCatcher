@@ -1,5 +1,6 @@
 import { init_frontpage } from "./front_page.js";
 import { init_collection } from "./game_collection.js";
+import { loading_screen, remove_loading_screen } from "../../utils/functions.js";
 
 let all_intervals = [];
 
@@ -51,6 +52,12 @@ async function get_all_friends(user) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     })
+
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
 
     let friend_data = await response.json();
     console.log(friend_data);
@@ -107,9 +114,10 @@ async function fetch_chat(event) {
     })
 
     */
-    let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`)
+    let response_user1 = await fetch(`./frontpage/php/chat.php?username=${username}&targetUsername=${targetUsername}`);
+    loading_screen();
+
     let response_data = await response_user1.json();
-    console.log(response_data);
 
 
 
@@ -147,6 +155,9 @@ async function fetch_chat(event) {
         body: JSON.stringify(body_for_fetch2),
     })
 
+    if (response_user1.ok && response2.ok && response_all_previous_messages.ok) {
+        remove_loading_screen();
+    }
     let data3 = await response_all_previous_messages.json();
 
     console.log(data3);
@@ -169,7 +180,7 @@ async function fetch_chat(event) {
 
 
 
-
+    // Loading screen tillagd!
     let interval_id = setInterval(async () => {
         console.log(all_intervals);
         if (localStorage.getItem("where_att") !== "forum") {
@@ -299,7 +310,12 @@ async function send_message(the_post_dom) {
         body: JSON.stringify(body_for_fetch)
     });
 
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
+
     let data = await response.json();
-    console.log(data);
 }
 
