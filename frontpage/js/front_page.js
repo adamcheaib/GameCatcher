@@ -1,4 +1,4 @@
-import { fetch_all_games } from "../../utils/fetch_functions.js";
+import { fetch_all_games, } from "../../utils/fetch_functions.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll, registration_notification } from "../../utils/functions.js";
@@ -240,7 +240,6 @@ function change_username_password(event) {
     fetch(request)
         .then(resource => resource.json())
         .then(data => {
-            console.log(data)
             if (data.action === "Fail") {
                 document.getElementById("changed_message").textContent = "Failed!"
             }

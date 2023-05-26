@@ -2,7 +2,7 @@ import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 //import { init_profile } from "../../frontpage/profile/js/index.js";
-import { registration_notification, } from "../../utils/functions.js";
+import { loading_screen, registration_notification, remove_loading_screen, } from "../../utils/functions.js";
 
 // TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
 // nu får bara ena user pending medanst andra har ingen anning om den har blivit acceptad eller inte man måste skicka
@@ -68,6 +68,12 @@ async function show_my_friends(event) {
         body: JSON.stringify(body_for_fetch)
     })
 
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen()
+    }
+
     let friend_data = await response.json();
     console.log(friend_data);
 
@@ -122,7 +128,8 @@ function show_options(event) {
         event.target.parentElement.children[1].setAttribute("id", "to_be_unblocked");
     }
 }
-function block_unblock_user(event) {
+
+async function block_unblock_user(event) {
     let actions;
     let user;
     if (event.target.id === "block_user") {
@@ -133,8 +140,8 @@ function block_unblock_user(event) {
         actions = "unblock";
         user = document.getElementById("to_be_unblocked").textContent;
     }
-    console.log(user);
-    fetch("./frontpage/php/find_friend.php", {
+
+    const block_response = await fetch("./frontpage/php/find_friend.php", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -143,25 +150,31 @@ function block_unblock_user(event) {
             action: actions,
         })
     })
-        .then(resource => resource.json())
-        .then(data => {
-            console.log(data);
-            if (data.action === "block") {
-                show_my_friends();
-                document.querySelector("dialog").remove();
 
-            }
-            if (data.action === "unblock") {
-                init_blocked_users()
-                document.querySelector("dialog").remove();
-            }
-        })
+    loading_screen();
 
+    if (block_response.ok) {
+        remove_loading_screen();
+    }
 
-    document.querySelector("#add_friends").addEventListener("click", init_add_friends);
+    const data = await block_response.json()
 
+    if (data.action === "block") {
+        show_my_friends();
+        document.querySelector("dialog").remove();
 
+    }
+    if (data.action === "unblock") {
+        init_blocked_users()
+        document.querySelector("dialog").remove();
+    }
 }
+
+
+document.querySelector("#add_friends").addEventListener("click", init_add_friends);
+
+
+
 
 async function send_friend_request(event) {
     let username = event.target.parentElement.querySelector(".username").innerHTML;
@@ -174,6 +187,12 @@ async function send_friend_request(event) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     })
+
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen()
+    }
 
     event.target.parentElement.remove();
 
@@ -196,6 +215,12 @@ async function find_user() {
         body: JSON.stringify({ the_user: localStorage.getItem("username"), find_all_friends: true })
     });
 
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
+
     let all_friends_of_user = await response_for_all_friends.json();
     console.log(all_friends_of_user);
     let the_check = "";
@@ -214,6 +239,12 @@ async function find_user() {
                 }
                 console.log(account_data[i].username);
                 let responses = await fetch(`../../../database/users.json`);
+                loading_screen();
+
+                if (responses.ok) {
+                    remove_loading_screen();
+                }
+
                 let users = await responses.json();
                 for (let i = 0; i < users.length; i++) {
 
@@ -289,11 +320,18 @@ async function get_all_pending_friend_requests(event) {
         all_pending: "get_all_pending",
         the_request_user: username,
     }
+
     let response = await fetch("./frontpage/php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     })
+
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
 
     let data = await response.json();
     console.log(data);
@@ -360,6 +398,9 @@ async function add_friend(event) {
         body: JSON.stringify(body_for_fetch)
     });
 
+    loading_screen();
+
+
     event.target.parentElement.parentElement.remove();
     let data = await response.json();
     console.log(data);
@@ -379,6 +420,10 @@ async function add_friend(event) {
     });
 
 
+    if (response.ok && response2.ok) {
+        remove_loading_screen();
+    }
+
     let data2 = await response2.json();
 
     console.log(data2)
@@ -396,6 +441,12 @@ async function decline_friend(event) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body_for_fetch)
     });
+
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
 
     let data = response.json();
     console.log(data);
@@ -418,6 +469,13 @@ async function init_blocked_users(event) {
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
     let response = await fetch(`../../../database/users.json`);
+
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
+
     let users = await response.json();
     for (let i = 0; i < users.length; i++) {
         if (users[i].username === localStorage.getItem("username")) {
@@ -460,108 +518,109 @@ function take_to_chat(event) {
     init_forum(user)
 }
 
-function visit_profile(event) {
+async function visit_profile(event) {
 
     let user_profile = document.querySelector(".show_profile").textContent;
     console.log(user_profile);
-    fetch("../../database/users.json")
-        .then(resource => resource.json())
-        .then(users => {
-            users.forEach(user => {
-                if (user.username === user_profile) {
-                    console.log(user);
-                    document.querySelector("h2").textContent = user.username
-                    if (!user.hasOwnProperty('profile_picture')) {
-                        console.log("hrj");
-                        document.querySelector("#profile_image").style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)"
-                    } else {
-                        console.log(user);
-                        document.querySelector("#profile_image").style.backgroundImage = `url(./frontpage/profile/images/${user.profile_picture})`;
-                    }
-                    if (!user.hasOwnProperty('banner_picture')) {
-                        document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
-                    } else {
-                        document.querySelector("main").style.backgroundImage = `url(./frontpage/profile/images/${user.banner_picture})`;
-                    }
-                    if (!user.hasOwnProperty('favorite_game_images')) {
-                        document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
-                    } else {
-                        document.querySelector("#favorite_game_image").style.backgroundImage = `url(./frontpage/profile/images/${user.favorite_game_images})`;
-                    }
-                    if (!user.hasOwnProperty('profile_comments')) {
-                        //idk
-                    } else {
-                        user.profile_comments.forEach(element => {
-                            console.log(element);
-                            let section = document.querySelector("#profile_forum")
-                            let div = document.createElement("div");
-                            div.classList.add("comments_section");
-                            div.innerHTML = `
+    const response = await fetch("../../database/users.json")
+
+    loading_screen();
+
+    if (response.ok) {
+        remove_loading_screen();
+    }
+
+    const users = await response.json();
+
+    users.forEach(user => {
+        if (user.username === user_profile) {
+            console.log(user);
+            document.querySelector("h2").textContent = user.username
+            if (!user.hasOwnProperty('profile_picture')) {
+                console.log("hrj");
+                document.querySelector("#profile_image").style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)"
+            } else {
+                console.log(user);
+                document.querySelector("#profile_image").style.backgroundImage = `url(./frontpage/profile/images/${user.profile_picture})`;
+            }
+            if (!user.hasOwnProperty('banner_picture')) {
+                document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
+            } else {
+                document.querySelector("main").style.backgroundImage = `url(./frontpage/profile/images/${user.banner_picture})`;
+            }
+            if (!user.hasOwnProperty('favorite_game_images')) {
+                document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
+            } else {
+                document.querySelector("#favorite_game_image").style.backgroundImage = `url(./frontpage/profile/images/${user.favorite_game_images})`;
+            }
+            if (user.hasOwnProperty('profile_comments')) {
+                console.log(element);
+                let section = document.querySelector("#profile_forum")
+                let div = document.createElement("div");
+                div.classList.add("comments_section");
+                div.innerHTML = `
                             <div class="profile_picture" style='background-image: url(./frontpage/profile/images/${user.profile_picture}'></div>
                             <p>${element.message}</p>
                             <p id="timestamp">${element.timestamp}</p>
                             `
-                            section.appendChild(div)
+                section.appendChild(div)
 
-                        });
-                    }
+            }
 
-                }
-            });
-        })
+        }
+    });
 
     document.querySelector("body").innerHTML = `
     <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontpage/profile/css/index.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/frontpage/profile/css/index.css">
+<title>Document</title>
 </head>
 <body>
-    <main>
-        <header>
+<main>
+<header>
             <div id="profile_image"  alt="Profile Picture"></div>
             <h2>Callw</h2>
         </header>
     </main>
-
-<div id="split">
+    
+    <div id="split">
     <div id="nav">
-        <div>home</div>
-        <div>games</div>
-        <div>chat</div>
+    <div>home</div>
+    <div>games</div>
+    <div>chat</div>
         <div>settings</div>
-    </div>
-    <div id="profile_stuff">
+        </div>
+        <div id="profile_stuff">
         <div id="feeling">
-            <p>How i'm feeling</p>
-            <p>Mood</p>
+        <p>How i'm feeling</p>
+        <p>Mood</p>
             <p id="emoji"></p>
         </div>
 
         <div id="transparency"></div>
-
+        
         <div id="favorite">
-            <p>Favorite Game</p>
-            <div id="favorite_game_image" alt="Favorite Game"></div>
+        <p>Favorite Game</p>
+        <div id="favorite_game_image" alt="Favorite Game"></div>
         </div>
         
-    </div>
-
-    <div id="profile_forum">
+        </div>
+        
+        <div id="profile_forum">
         <div id="comment_profile" alt="Profile Picture"></div>
-    </div>
-   
-</div>
-
+        </div>
+        
+        </div>
+        
 </body>
 <script src="/frontpage/profile/js/index.js"></script>
 </html>
-`
+`;
 
-
-
+    document.querySelector("#go_home")
 }

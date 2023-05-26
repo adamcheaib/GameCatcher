@@ -18,7 +18,6 @@ import { api_key } from "../utils/fetch_functions.js";
 // }
 
 document.addEventListener("keydown", function remove_dialog(event) {
-    console.log("HOLAA");
     if (event.key === "Escape") {
         document.querySelector("dialog").remove();
         event.target.removeEventListener("keydown", remove_dialog);
@@ -736,3 +735,19 @@ export function general_notifications_search(event) {
 }
 
 
+export function loading_screen() {
+    const cover = document.createElement("div");
+    cover.id = "loading_cover";
+
+    const loading_icon = document.createElement("div");
+    loading_icon.id = "loading_icon";
+    loading_icon.textContent = "Fetching data...";
+    cover.appendChild(loading_icon);
+
+    document.body.appendChild(cover);
+}
+
+
+export function remove_loading_screen() {
+    document.getElementById("loading_cover").remove();
+}

@@ -363,3 +363,37 @@ body {
     background-color: rgb(41, 41, 86);
     width: 80%;
 }
+
+#loading_cover {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 60%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#loading_icon {
+    font-size: 50px;
+    animation-name: loading_animation;
+    animation-duration: 2s;
+    animation-fill-mode: backwards;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes loading_animation {
+    from {
+        color: purple;
+    }
+
+    to {
+        color: red;
+    }
+}
