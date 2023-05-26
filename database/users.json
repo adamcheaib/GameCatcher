@@ -89,7 +89,14 @@
         "blocked": [],
         "profile_picture": "guts.jpg",
         "banner_picture": "Vagabond-2.avif",
-        "favorite_game_images": "elden-ring-new-header-mobile.jpg"
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_comments": [
+            {
+                "message": "hej jag heter calle",
+                "timestamp": "2023-05-26 10:33:49"
+            }
+        ]
+
     },
     {
         "username": "momo",
@@ -102,7 +109,7 @@
         ],
         "id": 1,
         "friends": [
-            "eqqq",
+            "elliot",
             "adamcheaib"
         ],
         "blocked": [],

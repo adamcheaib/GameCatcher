@@ -447,10 +447,8 @@ function visit_profile(event){
                     console.log(user);
                     document.querySelector("h2").textContent = user.username
                     if(!user.hasOwnProperty('profile_picture')){
-                        console.log("hrj");
                         document.querySelector("#profile_image").style.backgroundImage = "url(./frontpage/general_media/default_profile_pic.svg)"
                     }else{
-                        console.log(user);
                         document.querySelector("#profile_image").style.backgroundImage = `url(./frontpage/profile/images/${user.profile_picture})`;
                     }
                     if(!user.hasOwnProperty('banner_picture')){
@@ -463,22 +461,28 @@ function visit_profile(event){
                     }else{
                         document.querySelector("#favorite_game_image").style.backgroundImage = `url(./frontpage/profile/images/${user.favorite_game_images})`;
                     }
-                    if(!user.hasOwnProperty('profile_comments')){
-                        //idk
-                    }else{
-                        user.profile_comments.forEach(element => {
-                            console.log(element);
-                            let section = document.querySelector("#profile_forum")
-                            let div = document.createElement("div");
-                            div.classList.add("comments_section");
-                            div.innerHTML = `
-                            <div class="profile_picture" style='background-image: url(./frontpage/profile/images/${user.profile_picture}'></div>
-                            <p>${element.message}</p>
-                            <p id="timestamp">${element.timestamp}</p>
-                            `
-                            section.appendChild(div)  
+                    if(user.hasOwnProperty('profile_comments')){
+                        {
+                            user.profile_comments.forEach(element => {
+                                let section = document.querySelector("#profile_forum")
+                                let div = document.createElement("div");
+                                div.classList.add("comments_section");
+                                div.innerHTML = `
+                                <div id="chat_comments">
+                                <div class="profile_picture" style='background-image: url(./frontpage/profile/images/${user.profile_picture}'></div>
+                                <div id="text_message">
+                                <p>${element.message}</p>
+                                </div>
+                                </div>
+                                <div id="info_delete">
+                                <p id="timestamp">${element.timestamp}</p>
+                                </div>
+                                `
                             
-                        });
+                                section.appendChild(div)  
+                                
+                            });
+                        }
                     }
                     
                 }
@@ -496,47 +500,42 @@ function visit_profile(event){
     <title>Document</title>
 </head>
 <body>
-    <main>
-        <header>
-            <div id="profile_image"  alt="Profile Picture"></div>
-            <h2>Callw</h2>
-        </header>
-    </main>
-
-<div id="split">
-    <div id="nav">
-        <div>home</div>
-        <div>games</div>
-        <div>chat</div>
-        <div>settings</div>
-    </div>
-    <div id="profile_stuff">
-        <div id="feeling">
-            <p>How i'm feeling</p>
-            <p>Mood</p>
-            <p id="emoji"></p>
+    <div id="whole_flex_display_wrapper">
+        <main>
+            <header>
+                <div id="profile_flex_div">
+                    <div id="profile_image"  alt="Profile Picture"></div>
+                    <h2></h2>
+                </div>    
+            </header>
+            
+        </main>
+        <div id="split">
+            <div id="profile_stuff">
+                <div id="transparency"></div>
+                <div id="favorite">
+                    <p>Favorite Game</p>
+                    <div id="favorite_game_image" alt="Favorite Game"></div>
+                </div>
         </div>
 
-        <div id="transparency"></div>
-
-        <div id="favorite">
-            <p>Favorite Game</p>
-            <div id="favorite_game_image" alt="Favorite Game"></div>
+        <div id="profile_forum">    
+            <div id="chat_comments">
+            </div>
         </div>
-        
     </div>
-
-    <div id="profile_forum">
-        <div id="comment_profile" alt="Profile Picture"></div>
-    </div>
-   
 </div>
+    <footer id="go_home">Go Home!</footer>
 
 </body>
-<script src="/frontpage/profile/js/index.js"></script>
+    <script src="/frontpage/profile/js/index.js"></script>
+    <script src="../../utils/functions.js"></script>
 </html>
 `
-
+    document.querySelector("#go_home").addEventListener("click", go_home);
+    function go_home(event){
+        window.location.replace("/index.html");
+    }
 
     
 }
