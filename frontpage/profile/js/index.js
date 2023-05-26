@@ -1,4 +1,4 @@
-//import { registration_notification } from "../../../utils/functions.js";
+// import { registration_notification } from "../../../utils/functions.js";
 get_preset_information();
 
 
@@ -135,7 +135,9 @@ function send_message(event){
                 document.querySelectorAll(".delete").forEach(element => element.addEventListener("click", remove_comment));
         })
     section.appendChild(div)
+    document.querySelector("#message").value = ""
 }
+
 function show_messages(messages) {
     console.log(messages);
     for(let i = 0;i < messages.length;i++){

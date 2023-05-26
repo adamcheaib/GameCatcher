@@ -1,4 +1,5 @@
 import { api_key } from "../utils/fetch_functions.js";
+
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 

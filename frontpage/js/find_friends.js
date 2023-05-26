@@ -114,6 +114,7 @@ async function show_my_friends(event) {
         element.addEventListener("click", show_options);
     });
 }
+
 function show_options(event) {
     if (document.getElementById("my_friends").classList.contains("selected")) {
 
@@ -168,10 +169,9 @@ async function block_unblock_user(event) {
         init_blocked_users()
         document.querySelector("dialog").remove();
     }
+
+    document.querySelector("#add_friends").addEventListener("click", init_add_friends);
 }
-
-
-document.querySelector("#add_friends").addEventListener("click", init_add_friends);
 
 
 
@@ -205,9 +205,9 @@ async function find_user() {
     document.querySelector("#display").innerHTML = "";
     let find_account_name = document.querySelector("input").value;
     let request_account_name = localStorage.getItem("username");
-
     let response = await fetch(`./frontpage/php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
     let account_data = await response.json();
+    console.log(account_data);
 
     let response_for_all_friends = await fetch(`./frontpage/php/find_friend.php`, {
         method: "POST",
@@ -225,11 +225,8 @@ async function find_user() {
     console.log(all_friends_of_user);
     let the_check = "";
     for (let i = 0; i < account_data.length; i++) {
-        for (let index = 0; index < all_friends_of_user.length; index++) {
-            if (all_friends_of_user[index] === account_data[i].username) {
-                the_check = "stop";
-                break;
-            }
+        if (account_data[i].profile_picture === undefined) {
+            account_data[i].profile_picture = "./frontpage/general_media/default_profile_pic.svg";
         }
         if (the_check !== "stop") {
             if (account_data[i].username !== localStorage.getItem("username")) {
@@ -260,54 +257,47 @@ async function find_user() {
                 let profile_dom = document.createElement("div");
                 profile_dom.classList.add("profile_dom");
                 profile_dom.innerHTML = `
-                    
-                        <div id="profile_wrapper">
-                            <div class="profile_picture"></div>
-                            <div class="username">${account_data[i].username}</div>
-                            
-                            <div class="add_friend">Add Friend</div>
-                            <div class="block_friend">Block</div>
-                        </div>
-            
-                    `;
+        
+            <div id="profile_wrapper">
+                <div class="profile_picture"></div>
+                <div class="username">${account_data[i].username}</div>
+                
+                <div class="add_friend">Add Friend</div>
+                <div class="block_friend">Block</div>
+            </div>
+
+        `;
 
                 document.querySelector("#display").appendChild(profile_dom);
+                document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
+                    profile_pic.style.backgroundImage = `url(${account_data[index].profile_picture})`
+                })
+
+                document.querySelectorAll(".add_friend").forEach((add_btn) => {
+                    add_btn.addEventListener("click", send_friend_request);
+                })
 
             }
-
         }
     }
-
-
-    document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
-        profile_pic.style.backgroundImage = `url(${account_data[index].profile_picture})`
-    })
-
-    document.querySelectorAll(".add_friend").forEach((add_btn) => {
-        add_btn.addEventListener("click", send_friend_request);
-    })
 }
-
-
-
-
 
 async function get_all_pending_friend_requests(event) {
     document.querySelector("#center_piece").innerHTML = ""
 
     document.querySelector("#center_piece").innerHTML = `
-                    <div id="navigation">
-                        <div id="my_friends" class="unselected">My Friends</div>
-                        <div id="add_friends" class="unselected">Add Friends</div>
-                        <div id="pending" class="selected" >Pending</div>
-                        <div id="blocked" class="unselected" >Blocked</div>
-                    </div>
-                    <div id="search_wrapper">
-                        <input id="search"></input>
-                        <div id="search_image"></div>
-                    </div>
-                    <div id="display"></div>
-            `;
+            <div id="navigation">
+                <div id="my_friends" class="unselected">My Friends</div>
+                <div id="add_friends" class="unselected">Add Friends</div>
+                <div id="pending" class="selected" >Pending</div>
+                <div id="blocked" class="unselected" >Blocked</div>
+            </div>
+            <div id="search_wrapper">
+                <input id="search"></input>
+                <div id="search_image"></div>
+            </div>
+            <div id="display"></div>
+    `;
 
 
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
@@ -340,13 +330,13 @@ async function get_all_pending_friend_requests(event) {
         let pending_dom = document.createElement("div");
         pending_dom.classList.add("pending_wrapper")
         pending_dom.innerHTML = `
-                    <div class="profile_picture"></div>
-                    <div class="account_username_pending">${data[i]}</div>
-                    <div class="wrapper_for_alternatives">
-                        <div class="accept">Accept</div>
-                        <div class="decline">Decline</div>
-                    </div>
-                `;
+            <div class="profile_picture"></div>
+            <div class="account_username_pending">${data[i]}</div>
+            <div class="wrapper_for_alternatives">
+                <div class="accept">Accept</div>
+                <div class="decline">Decline</div>
+            </div>
+        `;
 
         document.querySelector("#display").appendChild(pending_dom);
         document.querySelectorAll(".profile_picture").forEach(pic => {
@@ -360,7 +350,11 @@ async function get_all_pending_friend_requests(event) {
             decline_btn.addEventListener("click", decline_friend)
         });
     }
+
+
+
 }
+
 
 function init_add_friends() {
     document.querySelector("#display").innerHTML = "";
@@ -581,46 +575,42 @@ async function visit_profile(event) {
 <title>Document</title>
 </head>
 <body>
-<main>
-<header>
-            <div id="profile_image"  alt="Profile Picture"></div>
-            <h2>Callw</h2>
-        </header>
-    </main>
-    
-    <div id="split">
-    <div id="nav">
-    <div>home</div>
-    <div>games</div>
-    <div>chat</div>
-        <div>settings</div>
-        </div>
-        <div id="profile_stuff">
-        <div id="feeling">
-        <p>How i'm feeling</p>
-        <p>Mood</p>
-            <p id="emoji"></p>
+    <div id="whole_flex_display_wrapper">
+        <main>
+            <header>
+                <div id="profile_flex_div">
+                    <div id="profile_image"  alt="Profile Picture"></div>
+                    <h2></h2>
+                </div>    
+            </header>
+            
+        </main>
+        <div id="split">
+            <div id="profile_stuff">
+                <div id="transparency"></div>
+                <div id="favorite">
+                    <p>Favorite Game</p>
+                    <div id="favorite_game_image" alt="Favorite Game"></div>
+                </div>
         </div>
 
-        <div id="transparency"></div>
-        
-        <div id="favorite">
-        <p>Favorite Game</p>
-        <div id="favorite_game_image" alt="Favorite Game"></div>
+        <div id="profile_forum">    
+            <div id="chat_comments">
+            </div>
         </div>
-        
-        </div>
-        
-        <div id="profile_forum">
-        <div id="comment_profile" alt="Profile Picture"></div>
-        </div>
-        
-        </div>
-        
+    </div>
+</div>
+    <footer id="go_home">Go Home!</footer>
+
 </body>
-<script src="/frontpage/profile/js/index.js"></script>
+    <script src="/frontpage/profile/js/index.js"></script>
+    <script src="../../utils/functions.js"></script>
 </html>
-`;
+`
+    document.querySelector("#go_home").addEventListener("click", go_home);
+    function go_home(event) {
+        window.location.replace("/index.html");
+    }
 
-    document.querySelector("#go_home")
+
 }

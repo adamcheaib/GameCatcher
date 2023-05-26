@@ -80,6 +80,9 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 }
+.chat:hover{
+    cursor: pointer;
+}
 
 #saved {
     width: 50px;
