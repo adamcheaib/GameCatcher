@@ -132,8 +132,9 @@ function show_game_display_dom(game_data) {
         document.querySelectorAll("#games_wrapper > div").forEach(game_dom => {
             game_dom.style.border = "none";
             game_dom.style.transform = "scale(1)";
-            game_dom.addEventListener("mouseover", function hej(event) { event.target.parentElement.style.transform = "scale(1.1)" });
+            game_dom.addEventListener("mouseover", (event) => { event.target.parentElement.style.transform = "scale(1.1)" });
             game_dom.addEventListener("mouseout", event => event.target.parentElement.style.transform = "scale(1)");
+            game_dom.addEventListener("click", event => event.target.parentElement.style.transform = "scale(1.1)");
         })
     });
 
