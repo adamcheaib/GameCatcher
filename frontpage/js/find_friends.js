@@ -100,7 +100,7 @@ async function show_my_friends(event) {
             friends_display.appendChild(profile_dom);
         }
     } else {
-        friends_display.innerHTML = `<h1>${friend_data.message}...</h1>`;
+        friends_display.innerHTML = `<h1>No friends in your friendlist</h1>`;
         friends_display.style.color = "black";
     }
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
