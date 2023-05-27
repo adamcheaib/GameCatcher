@@ -17,7 +17,7 @@ if (isset($_FILES["upload"])) {
     $source = $_FILES["upload"]["tmp_name"];
     $name = $_FILES["upload"]["name"];
     $size = $_FILES["upload"]["size"];
-    $destination = "../images" . $name;
+    $destination = "../images/" . $name;
 
     if (move_uploaded_file($source, $destination)) {
         header("Content-Type: application/json");
@@ -27,6 +27,7 @@ if (isset($_FILES["upload"])) {
             "filename" => $name,
             "size" => $size,
             "action" => $_POST["action"],
+            "destination" => $destination
         ]);
         foreach ($users as $index => $user) {
             if ($user["username"] === $username) {
