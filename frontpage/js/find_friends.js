@@ -234,13 +234,13 @@ async function find_user() {
     console.log(all_friends_of_user);
     let the_check = "";
     for (let i = 0; i < account_data.length; i++) {
-        if (account_data[i].profile_picture === undefined) {
+        if (account_data[i].profile_picture == "undefined") {
             account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
         }
         if (the_check !== "stop") {
             if (account_data[i].username !== localStorage.getItem("username")) {
                 // Kollar att den man är loggad in som inte finns med  i account_data så att man inte kan adda sig själv
-                if (account_data[i].profile_picture === undefined) {
+                if (account_data[i].profile_picture == "undefined") {
                     account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
                 }
                 console.log(account_data[i].username);
