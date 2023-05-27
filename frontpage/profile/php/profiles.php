@@ -15,7 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $singleUser["banner_picture"] = NULL;
         }
 
-        if ($registeredUser["profile_comments"] !== NULL) {
+        $singleUser["favorite_game_images"] = $registeredUser["favorite_game_images"];
+
+
+        if ($registeredUser["profile_comments"] != NULL) {
             $singleUser["profile_comments"] = $registeredUser["profile_comments"];
         }
 

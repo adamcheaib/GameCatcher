@@ -1,3 +1,8 @@
+let message = document.querySelector("#send_message");
+let banner_picture = document.querySelector("#banner_picture");
+let profile_picture = document.querySelector("#profile_pic_form");
+let favorite_game = document.querySelector("#upload_favorite_game");
+
 console.log(window.location.search);
 const profile_to_fetch = window.location.search.split("?username=")[1];
 get_all_users(profile_to_fetch);
@@ -49,20 +54,16 @@ async function go_to_own_profile(user) {
             document.querySelector("#favorite_game_image").style.backgroundImage = `url(./images/${user.favorite_game_images})`;
         }
         if (user.hasOwnProperty("profile_comments")) {
-            show_messages(user.profile_comments);
+            show_messages(user.profile_comments, user);
         }
         localStorage.setItem("profile_picture", user.profile_picture);
     }
-    let favorite_game = document.querySelector("#upload_favorite_game");
     favorite_game.addEventListener("change", upload_picture);
 
-    let profile_picture = document.querySelector("#profile_pic_form");
     profile_picture.addEventListener("change", upload_picture);
 
-    let banner_picture = document.querySelector("#banner_picture");
     banner_picture.addEventListener("change", upload_picture);
 
-    let message = document.querySelector("#send_message");
     message.addEventListener("click", send_message);
 };
 
@@ -252,5 +253,5 @@ function remove_comment(event) {
 
 document.querySelector("#go_home").addEventListener("click", go_home)
 function go_home(event) {
-    window.location.replace("../");
+    window.location.replace("../../frontpage");
 }
