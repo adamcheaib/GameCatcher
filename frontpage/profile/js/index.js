@@ -1,41 +1,49 @@
-get_preset_information();
+get_all_users();
 
+async function get_all_users() {
+    try {
+        const response = await fetch("../../database/users.json");
+        const all_users = await response.json();
 
-function get_preset_information() {
-    fetch("../../database/users.json")
-        .then(resource => resource.json())
-        .then(users => {
-            users.forEach(user => {
-                console.log(user);
-                if (user.username === localStorage.username) {
-                    document.querySelector("h2").textContent = user.username;
-                    if (user.profile_picture == "undefined") {
-                        document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
-                        document.getElementById("comment_profile").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)";
-                    } else {
-                        console.log(user);
-                        document.querySelector("#profile_image").style.backgroundImage = `url(./images/${user.profile_picture})`;
-                        document.getElementById("comment_profile").style.backgroundImage = `url(./images/${user.profile_picture})`;
-                    }
-                    if (!user.hasOwnProperty('banner_picture')) {
-                        document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
-                    } else {
-                        document.querySelector("main").style.backgroundImage = `url(./images/${user.banner_picture})`;
-                    }
-                    if (!user.hasOwnProperty('favorite_game_images')) {
-                        document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
-                    } else {
-                        document.querySelector("#favorite_game_image").style.backgroundImage = `url(./images/${user.favorite_game_images})`;
-                    }
-                    if (user.hasOwnProperty("profile_comments")) {
-                        show_messages(user.profile_comments);
-                    }
-                    localStorage.setItem("profile_picture", user.profile_picture);
-                }
-            });
+        all_users.forEach(user => {
+            if (user.username === localStorage.getItem("username")) {
+                go_to_own_profile(user);
+            }
         })
 
+    } catch (err) {
+        alert("error");
+    }
 }
+
+async function go_to_own_profile(user) {
+    console.log(user);
+    if (user.username === localStorage.username) {
+        document.querySelector("h2").textContent = user.username;
+        if (user.profile_picture == "undefined") {
+            document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
+            document.getElementById("comment_profile").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)";
+        } else {
+            console.log(user);
+            document.querySelector("#profile_image").style.backgroundImage = `url(./images/${user.profile_picture})`;
+            document.getElementById("comment_profile").style.backgroundImage = `url(./images/${user.profile_picture})`;
+        }
+        if (!user.hasOwnProperty('banner_picture')) {
+            document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
+        } else {
+            document.querySelector("main").style.backgroundImage = `url(./images/${user.banner_picture})`;
+        }
+        if (!user.hasOwnProperty('favorite_game_images')) {
+            document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
+        } else {
+            document.querySelector("#favorite_game_image").style.backgroundImage = `url(./images/${user.favorite_game_images})`;
+        }
+        if (user.hasOwnProperty("profile_comments")) {
+            show_messages(user.profile_comments);
+        }
+        localStorage.setItem("profile_picture", user.profile_picture);
+    }
+};
 
 let favorite_game = document.querySelector("#upload_favorite_game");
 favorite_game.addEventListener("change", upload_picture);
@@ -189,11 +197,10 @@ function remove_comment(event) {
         .then(resource => resource.json())
         .then(users => {
             users.forEach(user => {
-                if (user.username === localStorage.username) {
+                if (user.username === localStorage.getItem("username")) {
                     if (user.hasOwnProperty("profile_comments")) {
                         show_messages(user.profile_comments);
                     }
-
                 }
             })
         })
