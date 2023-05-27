@@ -1,15 +1,20 @@
-get_all_users();
+get_all_users("rastaman123");
 
-async function get_all_users() {
+async function get_all_users(username) {
     try {
-        const response = await fetch("../../database/users.json");
+        const response = await fetch("./php/profiles.php");
         const all_users = await response.json();
+        console.log(all_users);
 
-        all_users.forEach(user => {
+        for (const user of all_users) {
             if (user.username === localStorage.getItem("username")) {
-                go_to_own_profile(user);
+                go_to_own_profile(user)
+                break;
+            } else if (user.username === username) {
+                other_users_profiles(username);
+                break;
             }
-        })
+        }
 
     } catch (err) {
         alert("error");
@@ -28,7 +33,7 @@ async function go_to_own_profile(user) {
             document.querySelector("#profile_image").style.backgroundImage = `url(./images/${user.profile_picture})`;
             document.getElementById("comment_profile").style.backgroundImage = `url(./images/${user.profile_picture})`;
         }
-        if (!user.hasOwnProperty('banner_picture')) {
+        if (user.banner_picture === null) {
             document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
         } else {
             document.querySelector("main").style.backgroundImage = `url(./images/${user.banner_picture})`;
@@ -53,6 +58,17 @@ profile_picture.addEventListener("change", upload_picture);
 
 let banner_picture = document.querySelector("#banner_picture");
 banner_picture.addEventListener("change", upload_picture);
+
+let message = document.querySelector("#send_message");
+message.addEventListener("click", send_message);
+
+function other_users_profiles(other_user) {
+    favorite_game.remove();
+    profile_picture.remove();
+    banner_picture.remove();
+    message.remove();
+}
+
 
 function upload_picture(event) {
     event.preventDefault();
@@ -99,8 +115,6 @@ function upload_picture(event) {
         })
 }
 
-let message = document.querySelector("#send_message");
-message.addEventListener("click", send_message);
 
 function send_message(event) {
     event.preventDefault();
