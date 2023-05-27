@@ -105,17 +105,9 @@ async function fetch_chat(event) {
     document.querySelector("#forum_display").innerHTML = "";
     const username = localStorage.getItem("username");
     const targetUsername = event.target.querySelector(".username").innerHTML;
-    /*
-    document.querySelectorAll(".selected").forEach(all_selected => {
-        console.log(all_selected)
-        all_selected.classList.remove("selected");
-        all_selected.style.backgroundColor = "lightGray";
-        all_selected.querySelector(".username").style.color = "black";
-    })
 
-    */
-    let response_user1 = await fetch(`./php/chat.php?username=${username}&targetUsername=${targetUsername}`);
     loading_screen();
+    let response_user1 = await fetch(`./php/chat.php?username=${username}&targetUsername=${targetUsername}`);
 
     let response_data = await response_user1.json();
 
@@ -138,6 +130,15 @@ async function fetch_chat(event) {
 
     console.log(chat_id);
     localStorage.setItem("selected_chat_id", chat_id.chatid)
+
+    document.querySelectorAll(".profile_dom").forEach(friends => {
+        // if (event.target.parentElement.querySelector(".username").textContent === friends.)
+        if (event.target.querySelector(".username") !== friends.querySelector(".username")) {
+            friends.querySelector("#profile_wrapper").style.backgroundColor = "lightgray";
+            friends.querySelector(".username").style.color = "black";
+        };
+    })
+    console.log(event.target.parentElement.querySelector(".username").textContent);
 
     event.target.parentElement.querySelector("#profile_wrapper").classList.add("selected");
     event.target.parentElement.querySelector("#profile_wrapper").style.backgroundColor = "rgb(114, 49, 114)";
@@ -174,7 +175,6 @@ async function fetch_chat(event) {
             </div>
         `
             document.querySelector("#forum_display").appendChild(message_dom)
-            //document.querySelector("#username").textContent
         })
     }
 
