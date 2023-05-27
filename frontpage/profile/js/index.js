@@ -1,4 +1,6 @@
-get_all_users("rastaman123");
+console.log(window.location.search);
+const profile_to_fetch = window.location.search.split("?username=")[1];
+get_all_users(profile_to_fetch);
 
 async function get_all_users(username) {
     console.log(username);

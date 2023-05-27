@@ -103,7 +103,7 @@ export function init_frontpage() {
     document.querySelector("#saved").addEventListener("click", init_collection);
     document.querySelector("#friends").addEventListener("click", init_friends_page);
     document.querySelector("#settings").addEventListener("click", show_settings)
-    document.querySelector("#profile").addEventListener("click", go_to_profile);
+    document.querySelector("#profile").addEventListener("click", go_to_own_profile);
 
 
     // Laddar alla genre i genre_scroll:n så att man har de från början.
@@ -259,8 +259,9 @@ function change_username_password(event) {
         })
 }
 
-document.querySelector("#profile").addEventListener("click", go_to_profile);
-function go_to_profile(event) {
-    window.location.replace("./profile/index.html");
+document.querySelector("#profile").addEventListener("click", go_to_own_profile);
+function go_to_own_profile(event) {
+    window.location.replace(`./profile?username=${localStorage.getItem("username")}`);
 }
+
 
