@@ -130,10 +130,10 @@ export function init_frontpage() {
         });
     })
 
-    if (localStorage.getItem("profile_picture") !== null) {
-        document.getElementById("profile").style.backgroundImage = `url(./profile/images/${localStorage.profile_picture})`
-    } else {
+    if (localStorage.getItem("profile_picture") === "undefined") {
         document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`
+    } else {
+        document.getElementById("profile").style.backgroundImage = `url(..//images/${localStorage.profile_picture})`
     }
 
     // Användarens profilbild visas på frontpage.
@@ -244,17 +244,17 @@ function change_username_password(event) {
         .then(resource => resource.json())
         .then(data => {
             if (data.action === "Fail") {
-                document.getElementById("changed_message").textContent = "Failed!"
+                document.getElementById("changed_message").textContent = "Try something else!"
             }
             if (data.action === "change_username") {
                 localStorage.setItem("username", changed_value);
-                document.getElementById("changed_message").textContent = "Success!"
+                document.getElementById("changed_message").textContent = "Username changed!"
                 location.reload();
                 console.log(localStorage);
 
             }
             if (data.action === "change_password") {
-                document.getElementById("changed_message").textContent = "Success!"
+                document.getElementById("changed_message").textContent = "Password changed!"
             }
         })
 }
