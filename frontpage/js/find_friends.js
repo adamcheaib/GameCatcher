@@ -512,10 +512,9 @@ function take_to_chat(event) {
 async function visit_profile(event) {
 
     let user_profile = document.querySelector(".show_profile").textContent;
-    console.log(user_profile);
-    const response = await fetch("../database/users.json")
-
     loading_screen();
+    const response = await fetch("../database/users.json");
+
 
     if (response.ok) {
         remove_loading_screen();
