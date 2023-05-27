@@ -9,7 +9,7 @@ import { search_popup } from "./search_game.js";
 // Ifall ingen användare är inloggad, skickar besökaren tillbaka till login/register-sidan.
 // Annars är man kvar på hemsidan och den selekterar Action som genre och PC som platform per automatik.
 if (!window.localStorage.hasOwnProperty("username")) {
-    window.location.replace("http://localhost:1234/login_register");
+    window.location.replace("../login_register");
 }
 else {
     if (localStorage.getItem("selected_genre") === null && localStorage.getItem("platform_selected") === null) {
