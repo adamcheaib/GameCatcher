@@ -26,8 +26,8 @@ export async function init_friends_page() {
         <div id="navigation">
             <div id="my_friends" class="selected"> My Friends</div>
             <div id="add_friends" class="unselected">Add Friends</div>
-            <div id="pending" class="unselected" >Pending</div>
-            <div id="blocked" class="unselected" >Blocked</div>
+            <div id="pending" class="unselected">Pending</div>
+            <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="display"></div>
     
@@ -52,8 +52,8 @@ async function show_my_friends(event) {
         <div id="navigation">
             <div id="my_friends" class="selected"> My Friends</div>
             <div id="add_friends" class="unselected" ">Add Friends</div>
-            <div id="pending" class="unselected" >Pending</div>
-            <div id="blocked" class="unselected" >Blocked</div>
+            <div id="pending" class="unselected">Pending</div>
+            <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="display"></div>
 
@@ -77,23 +77,32 @@ async function show_my_friends(event) {
     let friend_data = await response.json();
     console.log(friend_data);
 
-    for (let i = 0; i < friend_data.length; i++) {
+    const friends_display = document.getElementById("display");
 
-        let profile_dom = document.createElement("div");
-        profile_dom.classList.add("profile_dom");
-        profile_dom.innerHTML = `
-        
+    if (Array.isArray(friend_data)) {
+
+        for (let i = 0; i < friend_data.length; i++) {
+
+            let profile_dom = document.createElement("div");
+            profile_dom.classList.add("profile_dom");
+            profile_dom.innerHTML = `
+            
             <div id="profile_wrapper">
                 <div class="profile_picture"></div>
                 <div class="username">${friend_data[i]}</div>
                 
                 <div class="chat"></div>
                 <div class="more_options">...</div>
-            </div>
+                </div>
+                
+                `;
 
-        `;
-
-        document.querySelector("#display").appendChild(profile_dom);
+            friends_display.appendChild(profile_dom);
+        }
+    } else {
+        // friends_display.innerHTML = `<h1>${friend_data.message}...</h1>`;
+        // friends_display.style.color = "black";
+        console.log("HEJ PÅ DIG")
     }
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
         profile_pic.style.backgroundImage = `url(./general_media/default_profile_pic.svg)`
@@ -257,7 +266,7 @@ async function find_user() {
                 let profile_dom = document.createElement("div");
                 profile_dom.classList.add("profile_dom");
                 profile_dom.innerHTML = `
-        
+
             <div id="profile_wrapper">
                 <div class="profile_picture"></div>
                 <div class="username">${account_data[i].username}</div>
@@ -266,7 +275,7 @@ async function find_user() {
                 <div class="block_friend">Block</div>
             </div>
 
-        `;
+            `;
 
                 document.querySelector("#display").appendChild(profile_dom);
                 document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
@@ -289,15 +298,15 @@ async function get_all_pending_friend_requests(event) {
             <div id="navigation">
                 <div id="my_friends" class="unselected">My Friends</div>
                 <div id="add_friends" class="unselected">Add Friends</div>
-                <div id="pending" class="selected" >Pending</div>
-                <div id="blocked" class="unselected" >Blocked</div>
+                <div id="pending" class="selected">Pending</div>
+                <div id="blocked" class="unselected">Blocked</div>
             </div>
             <div id="search_wrapper">
                 <input id="search"></input>
                 <div id="search_image"></div>
             </div>
             <div id="display"></div>
-    `;
+        `;
 
 
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
@@ -356,18 +365,18 @@ async function get_all_pending_friend_requests(event) {
 function init_add_friends() {
     document.querySelector("#display").innerHTML = "";
     document.querySelector("#center_piece").innerHTML = `
-        <div id="navigation">
+            <div id="navigation">
             <div id="my_friends" class="unselected">My Friends</div>
             <div id="add_friends" class="selected">Add Friends</div>
-            <div id="pending" class="unselected" >Pending</div>
-            <div id="blocked" class="unselected" >Blocked</div>
+            <div id="pending" class="unselected">Pending</div>
+            <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="search_wrapper">
             <input id="search"></input>
             <div id="search_image"></div>
         </div>
         <div id="display"></div>
-    `;
+        `;
     document.querySelector("#search_image").addEventListener("click", find_user)
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
@@ -449,14 +458,14 @@ async function init_blocked_users(event) {
     document.querySelector("#display").innerHTML = "";
 
     document.querySelector("#center_piece").innerHTML = `
-    <div id="navigation">
+            <div id="navigation">
         <div id="my_friends" class="unselected">My Friends</div>
         <div id="add_friends" class="unselected">Add Friends</div>
-        <div id="pending" class="unselected" >Pending</div>
-        <div id="blocked" class="selected" >Blocked</div>
+        <div id="pending" class="unselected">Pending</div>
+        <div id="blocked" class="selected">Blocked</div>
     </div>
-    <div id="display"></div>
-`;
+            <div id="display"></div>
+        `;
     document.querySelector("#my_friends").addEventListener("click", show_my_friends)
     document.querySelector("#pending").addEventListener("click", get_all_pending_friend_requests);
     let response = await fetch(`../database/users.json`);
@@ -475,8 +484,8 @@ async function init_blocked_users(event) {
                 profile_dom.textContent = element
                 profile_dom.classList.add("profile_dom");
                 profile_dom.innerHTML = `
-        
-                <div id="profile_wrapper">
+
+            <div id="profile_wrapper">
                 <div class="profile_picture"></div>
                 <div class="username">${element}</div>
                 
@@ -523,48 +532,48 @@ async function visit_profile(event) {
 
     const users = await response.json();
     document.querySelector("body").innerHTML = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/friends_page.css">
-    <title>Document</title>
-    </head>
-    <body>
-    <div id="whole_flex_display_wrapper">
-        <main>
-            <header>
-                <div id="profile_flex_div">
-                    <div id="profile_image"  alt="Profile Picture"></div>
-                    <h2></h2>
-                </div>    
-            </header>
-            
-        </main>
-        <div id="split">
-            <div id="profile_stuff">
-                <div id="transparency"></div>
-                <div id="favorite">
-                    <p>Favorite Game</p>
-                    <div id="favorite_game_image" alt="Favorite Game"></div>
-                </div>
-        </div>
-    
-        <div id="profile_forum">    
-            <div id="chat_comments">
-            </div>
-        </div>
-    </div>
-    </div>
-    <footer id="go_home">Go Home!</footer>
-    
-    </body>
-    <script src="./profile/js/index.js"></script>
-    <script src="../../utils/functions.js"></script>
-    </html>
-    `
+            <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                    <link rel="stylesheet" href="./css/friends_page.css">
+                                        <title>Document</title>
+                                    </head>
+                                    <body>
+                                        <div id="whole_flex_display_wrapper">
+                                            <main>
+                                                <header>
+                                                    <div id="profile_flex_div">
+                                                        <div id="profile_image" alt="Profile Picture"></div>
+                                                        <h2></h2>
+                                                    </div>
+                                                </header>
+
+                                            </main>
+                                            <div id="split">
+                                                <div id="profile_stuff">
+                                                    <div id="transparency"></div>
+                                                    <div id="favorite">
+                                                        <p>Favorite Game</p>
+                                                        <div id="favorite_game_image" alt="Favorite Game"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="profile_forum">
+                                                    <div id="chat_comments">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <footer id="go_home">Go Home!</footer>
+
+                                    </body>
+                                    <script src="./profile/js/index.js"></script>
+                                    <script src="../../utils/functions.js"></script>
+                                </html>
+                                `
     document.querySelector("#go_home").addEventListener("click", go_home);
     function go_home(event) {
         window.location.replace("/index.html");
@@ -597,10 +606,10 @@ async function visit_profile(event) {
                 let div = document.createElement("div");
                 div.classList.add("comments_section");
                 div.innerHTML = `
-                            <div class="profile_picture" style='background-image: url(./profile/images/${user.profile_picture}'></div>
-                            <p>${element.message}</p>
-                            <p id="timestamp">${element.timestamp}</p>
-                            `
+                                <div class="profile_picture" style='background-image: url(./profile/images/${user.profile_picture}'></div>
+                                <p>${element.message}</p>
+                                <p id="timestamp">${element.timestamp}</p>
+                                `
                 section.appendChild(div)
 
             }
