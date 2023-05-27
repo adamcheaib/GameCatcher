@@ -32,7 +32,6 @@ function get_preset_information() {
                         show_messages(user.profile_comments);
                     }
                     localStorage.setItem("profile_picture", user.profile_picture);
-
                 }
             });
         })
