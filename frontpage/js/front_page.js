@@ -48,7 +48,7 @@ export function init_frontpage() {
                 <div id="profile_and_welcome_text">
                     <div id="welcome_text">
                         <h1>Hello ${localStorage.getItem("username")}!</h1>
-                        <p>Lets begin todays game browsing</p>
+                        <p>Let's begin todays game browsing</p>
                     </div>
                 
                     <div id="profile_and_welcome_text_wrapper">
