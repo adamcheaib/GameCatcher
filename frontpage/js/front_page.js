@@ -181,7 +181,7 @@ function show_settings(event) {
 
     document.querySelector("#logout").addEventListener("click", () => {
         localStorage.clear();
-        window.location.replace("./login_register");
+        window.location.replace("../login_register");
     })
 }
 
