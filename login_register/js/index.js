@@ -48,6 +48,7 @@ async function tryToLogin(login_object) {
             registration_notification(resource.message, "registration_notification"); // Anropar notifikationen för att ge feedback till användaren ifall användaren ej finns!
         } else {
             localStorage.setItem("username", resource.username); // Sparar användarens användarnamn i localStorage för att kunna identifiera inloggad användaren.
+            localStorage.setItem("profile_picture", resource.profile_picture);
             window.location.replace("../frontpage");
         }
         username_field.value = "";
@@ -113,7 +114,7 @@ function register(event) {
                 const register_page = document.getElementById("too_register");
                 register_page.addEventListener("click", register);
 
-                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/login.jpg)";
+                document.querySelector("#container").style.backgroundImage = "url(./media/login.jpg)";
             }
 
         }

@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $id = 0;
         if (0 <= count($users)) {
-            $new_user = ["username" => $username, "password" => $password, "favorite_games" => []];
+            $new_user = ["username" => $username, "password" => $password, "favorite_games" => [], "profile_picture" => ""];
             foreach ($users as $single_user) {
                 if ($id < $single_user["id"]) {
                     $id = $single_user["id"];
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "message" => "Login successful!"];
                     sendJSON($message, 200);
                 }
-                $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "favorite_games" => $single_user["favorite_games"], "message" => "Login successful!"];
+                $message = ["userid" => $single_user["id"], "username" => $single_user["username"], "favorite_games" => $single_user["favorite_games"], "profile_picture" => $single_user["profile_picture"], $single_user["banner_picture"], "message" => "Login successful!"];
                 sendJSON($message, 200);
             }
         }

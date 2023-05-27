@@ -130,11 +130,10 @@ export function init_frontpage() {
         });
     })
 
-    if (localStorage.getItem("profile_picture") === null || localStorage.getItem("profile_picture") === undefined) {
-        document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`
+    if (localStorage.getItem("profile_picture") == "undefined") {
+        document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`;
     } else {
         document.getElementById("profile").style.backgroundImage = `url(./profile/images/${localStorage.profile_picture})`;
-        console.log("it is false");
     }
 
     // Användarens profilbild visas på frontpage.
