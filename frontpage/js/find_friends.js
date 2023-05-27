@@ -100,9 +100,8 @@ async function show_my_friends(event) {
             friends_display.appendChild(profile_dom);
         }
     } else {
-        // friends_display.innerHTML = `<h1>${friend_data.message}...</h1>`;
-        // friends_display.style.color = "black";
-        console.log("HEJ PÅ DIG")
+        friends_display.innerHTML = `<h1>${friend_data.message}...</h1>`;
+        friends_display.style.color = "black";
     }
     document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
         profile_pic.style.backgroundImage = `url(./general_media/default_profile_pic.svg)`
@@ -236,12 +235,22 @@ async function find_user() {
     for (let i = 0; i < account_data.length; i++) {
         if (account_data[i].profile_picture == "undefined") {
             account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
+        } else {
+            const image_name = account_data[i].profile_picture;
+            console.log(image_name);
+            account_data[i].profile_picture = "./profile/images/" + image_name;
         }
+
         if (the_check !== "stop") {
             if (account_data[i].username !== localStorage.getItem("username")) {
                 // Kollar att den man är loggad in som inte finns med  i account_data så att man inte kan adda sig själv
-                if (account_data[i].profile_picture == "undefined") {
+                account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
+                if (account_data[i].profile_picture == "undefined" || account_data[i].profile_picture == "./general_media/default_profile_pic.svg") {
                     account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
+                } else {
+                    const image_name = account_data[i].profile_picture;
+                    console.log(image_name);
+                    account_data[i].profile_picture = "./profile/images/" + image_name;
                 }
                 console.log(account_data[i].username);
                 let responses = await fetch(`../database/users.json`);
@@ -279,7 +288,8 @@ async function find_user() {
 
                 document.querySelector("#display").appendChild(profile_dom);
                 document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
-                    profile_pic.style.backgroundImage = `url(${account_data[index].profile_picture})`
+                    profile_pic.style.backgroundImage = `url(${account_data[index].profile_picture})`;
+                    profile_pic.style.borderRadius = "50%";
                 })
 
                 document.querySelectorAll(".add_friend").forEach((add_btn) => {
