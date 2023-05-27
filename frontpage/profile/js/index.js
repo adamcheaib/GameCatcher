@@ -6,25 +6,20 @@ let favorite_game = document.querySelector("#upload_favorite_game");
 console.log(window.location.search);
 const profile_to_fetch = window.location.search.split("?username=")[1];
 get_all_users(profile_to_fetch);
+console.log(profile_to_fetch);
 
 async function get_all_users(username) {
-    console.log(username);
-    try {
-        const response = await fetch("./php/profiles.php");
-        const all_users = await response.json();
-        console.log(all_users);
 
-        for (const user of all_users) {
-            console.log(user);
-            if (user.username === localStorage.getItem("username")) {
-                console.log(user);
-                go_to_own_profile(user)
-            } else if (user.username === username) {
-                console.log("Hello");
-                other_users_profiles(user);
-                break;
-            }
+    try {
+        const response = await fetch(`./php/profiles.php?username=${username}`);
+        const user = await response.json();
+
+        if (username === localStorage.getItem("username")) {
+            go_to_own_profile(user)
+        } else {
+            other_users_profiles(user);
         }
+
 
     } catch (err) {
         console.log(err);
