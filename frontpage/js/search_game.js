@@ -104,6 +104,8 @@ async function init_search() {
                     }
                 }
 
+                const random_gameplay_image = the_clicked_game.short_screenshots[Math.floor(Math.random() * the_clicked_game.short_screenshots.length)].image;
+
                 // Skapar DOM-element för varje spel med sin rätt information dvs namnet, ratings, knappen för att gilla spelet osv.
                 searched_game_dialog.id = "searched_game_dialog";
                 searched_game_dialog.innerHTML = `
@@ -117,7 +119,7 @@ async function init_search() {
                 <h2>${the_clicked_game.name}</h2>
                 <div id="image" class="searched_game_image" style="background-image: url(${game.background_image})"></div>
                 
-           
+                
                 
                 <div id="rating_header">Rating</div>
                 
@@ -125,13 +127,11 @@ async function init_search() {
                 ${the_ratings}
                 </div>
                 
-                <div id="rating_names_wrapper">
-                <div class="rating_name">${1}</div>
-                </div>                       
                 
-                <div id="gameplay"></div>
+                <div id="gameplay" style="background-image: url(${random_gameplay_image})"></div>
                 </div> 
                 `;
+
 
                 // Appendar elementet till body:n
                 dialog_dom.appendChild(searched_game_dialog);
