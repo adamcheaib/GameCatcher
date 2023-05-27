@@ -9,8 +9,7 @@ function get_preset_information() {
                 console.log(user);
                 if (user.username === localStorage.username) {
                     document.querySelector("h2").textContent = user.username;
-                    if (!user.hasOwnProperty('profile_picture')) {
-                        console.log("hrj");
+                    if (user.profile_picture == "undefined") {
                         document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
                         document.getElementById("comment_profile").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)";
                     } else {
