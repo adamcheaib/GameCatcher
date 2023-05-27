@@ -102,7 +102,7 @@ function register(event) {
                 document.querySelector("#too_register").textContent = "Already have an account? click here to log in!"
                 document.querySelector("button").textContent = "REGISTER"
                 document.querySelector("h1").innerHTML = "Register";
-                document.querySelector("#container").style.backgroundImage = "url(../media/registration.jpg)";
+                document.querySelector("#container").style.backgroundImage = "url(./media/registration.jpg)";
 
             }
             else {
