@@ -113,7 +113,7 @@ function register(event) {
                 const register_page = document.getElementById("too_register");
                 register_page.addEventListener("click", register);
 
-                document.querySelector("#container").style.backgroundImage = "url(./media/login.jpg)";
+                document.querySelector("#container").style.backgroundImage = "url(./login_register/media/login.jpg)";
             }
 
         }

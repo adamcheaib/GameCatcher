@@ -130,10 +130,10 @@ export function init_frontpage() {
         });
     })
 
-    if (localStorage.getItem("profile_picture") === null || localStorage.getItem("profile_picture") == "undefined") {
-        document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`
+    if (localStorage.getItem("profile_picture") !== null) {
+        document.getElementById("profile").style.backgroundImage = `url(./profile/images/${localStorage.profile_picture})`
     } else {
-        document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/${localStorage.profile_picture})`
+        document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`
     }
 
     // Användarens profilbild visas på frontpage.
@@ -180,7 +180,7 @@ function show_settings(event) {
 
     document.querySelector("#logout").addEventListener("click", () => {
         localStorage.clear();
-        window.location.replace("../login_register");
+        window.location.replace("./login_register");
     })
 }
 
