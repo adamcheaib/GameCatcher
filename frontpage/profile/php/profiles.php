@@ -8,11 +8,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     foreach ($userDatabase as $registeredUser) {
         $singleUser = ["username" => $registeredUser["username"], "profile_picture" => $registeredUser["profile_picture"]];
-        // var_dump($singleUser["banner_picture"]);
-        // var_dump($userWithoutPasswords);
-        if ($singleUser["banner_picture"] == NULL) {
+
+        if ($registeredUser["banner_picture"] != NULL) {
             $singleUser["banner_picture"] = $registeredUser["banner_picture"];
+        } else {
+            $singleUser["banner_picture"] = NULL;
         }
+
+        if ($registeredUser["profile_comments"] !== NULL) {
+            $singleUser["profile_comments"] = $registeredUser["profile_comments"];
+        }
+
         $userWithoutPasswords[] = $singleUser;
     }
 

@@ -1,23 +1,26 @@
 get_all_users("rastaman123");
 
 async function get_all_users(username) {
+    console.log(username);
     try {
         const response = await fetch("./php/profiles.php");
         const all_users = await response.json();
         console.log(all_users);
 
         for (const user of all_users) {
+            console.log(user);
             if (user.username === localStorage.getItem("username")) {
+                console.log(user);
                 go_to_own_profile(user)
-                break;
             } else if (user.username === username) {
-                other_users_profiles(username);
+                console.log("Hello");
+                other_users_profiles(user);
                 break;
             }
         }
 
     } catch (err) {
-        alert("error");
+        console.log(err);
     }
 }
 
@@ -48,25 +51,49 @@ async function go_to_own_profile(user) {
         }
         localStorage.setItem("profile_picture", user.profile_picture);
     }
+    let favorite_game = document.querySelector("#upload_favorite_game");
+    favorite_game.addEventListener("change", upload_picture);
+
+    let profile_picture = document.querySelector("#profile_pic_form");
+    profile_picture.addEventListener("change", upload_picture);
+
+    let banner_picture = document.querySelector("#banner_picture");
+    banner_picture.addEventListener("change", upload_picture);
+
+    let message = document.querySelector("#send_message");
+    message.addEventListener("click", send_message);
 };
 
-let favorite_game = document.querySelector("#upload_favorite_game");
-favorite_game.addEventListener("change", upload_picture);
-
-let profile_picture = document.querySelector("#profile_pic_form");
-profile_picture.addEventListener("change", upload_picture);
-
-let banner_picture = document.querySelector("#banner_picture");
-banner_picture.addEventListener("change", upload_picture);
-
-let message = document.querySelector("#send_message");
-message.addEventListener("click", send_message);
 
 function other_users_profiles(other_user) {
-    favorite_game.remove();
-    profile_picture.remove();
-    banner_picture.remove();
-    message.remove();
+    console.log(other_user);
+    document.getElementById("upload_banner_picture").remove();
+    document.getElementById("upload_profile_picture").remove();
+    document.getElementById("upload_favorite").remove();
+    document.querySelector(".send_message_section").remove();
+
+    document.querySelector("h2").textContent = other_user.username;
+    if (other_user.profile_picture === "undefined") {
+        document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
+    } else {
+        console.log(other_user.profile_picture);
+        document.querySelector("#profile_image").style.backgroundImage = `url(./images/${other_user.profile_picture})`;
+    }
+    if (other_user.banner_picture === null) {
+        document.querySelector("main").style.backgroundColor = "rgb(73, 73, 112)"
+    } else {
+        document.querySelector("main").style.backgroundImage = `url(./images/${other_user.banner_picture})`;
+    }
+    if (!other_user.hasOwnProperty('favorite_game_images')) {
+        document.querySelector("#favorite_game_image").style.backgroundColor = "rgb(73, 73, 112)"
+    } else {
+        document.querySelector("#favorite_game_image").style.backgroundImage = `url(./images/${other_user.favorite_game_images})`;
+    }
+    if (other_user.hasOwnProperty("profile_comments")) {
+        show_messages(other_user.profile_comments, other_user);
+    }
+
+    document.querySelectorAll(".delete").forEach(delete_button => delete_button.remove());
 }
 
 
@@ -143,14 +170,14 @@ function send_message(event) {
         .then(data => {
             div.innerHTML = `
                 <div id="chat_comments">
-                    <div class="profile_picture" style='background-image: url("./images/${localStorage.getItem("profile_picture")}'></div>
-                    <div id="text_message">
-                        <p>${message}</p>
-                    </div>
+                <div class="profile_picture" style='background-image: url("./images/${localStorage.getItem("profile_picture")}'></div>
+                <div id="text_message">
+                <p>${message}</p>
+                </div>
                 </div>
                 <div id="info_delete">
-                    <p id="timestamp">${data.timestamp}</p>
-                    <div class="delete">delete</div>
+                <p id="timestamp">${data.timestamp}</p>
+                <div class="delete">delete</div>
                 </div>
                 `
             document.querySelectorAll(".delete").forEach(element => element.addEventListener("click", remove_comment));
@@ -159,7 +186,7 @@ function send_message(event) {
     document.querySelector("#message").value = ""
 }
 
-function show_messages(messages) {
+function show_messages(messages, { profile_picture }) {
     console.log(messages);
     for (let i = 0; i < messages.length; i++) {
         let section = document.querySelector("#profile_forum")
@@ -168,16 +195,16 @@ function show_messages(messages) {
         div.classList.add("comments_section");
 
         div.innerHTML = `
-        <div id="chat_comments">
-        <div class="profile_picture" style='background-image: url("./images/${localStorage.getItem("profile_picture")}'></div>
-            <div id="text_message">
+                <div id="chat_comments">
+                <div class="profile_picture" style='background-image: url("./images/${profile_picture}'></div>
+                <div id="text_message">
                 <p>${messages[i].message}</p>
-            </div>
-            </div>
-            <div id="info_delete">
+                </div>
+                </div>
+                <div id="info_delete">
                 <p id="timestamp">${messages[i].timestamp}</p>
                 <div class="delete">delete</div>
-            </div>
+                </div>
         
         `
         section.appendChild(div)
