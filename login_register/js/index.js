@@ -2,8 +2,8 @@ import { registration_notification } from "../../utils/functions.js"
 "use strict"
 
 // Om en användare redan är inloggad så gör denna if-satsen att man åker tillbaka till Frontpagen.
-if (localStorage.getItem("username") !== null) {
-    window.location.pathname = "./frontpage";
+if (window.localStorage.hasOwnProperty("username")) {
+    window.location.replace("../frontpage");
 }
 
 const form = document.getElementById("form");
