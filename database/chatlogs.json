@@ -6,11 +6,11 @@
             2
         ],
         "chatlog": [
-            "sdlkfjsdj",
-            "hej",
-            "ds\u00f6fls",
-            "ldsf",
-            "Hej p\u00e5 dig"
+            {
+                "username": "adamcheaib",
+                "profile_picture": "cocktails.webp",
+                "message": "asdlkasdas"
+            }
         ]
     },
     {
@@ -19,6 +19,20 @@
             2,
             3
         ],
-        "chatlog": []
+        "chatlog": [
+            {
+                "username": "adamcheaib",
+                "message": "ssss"
+            },
+            {
+                "username": "adamcheaib",
+                "message": "ssss"
+            },
+            {
+                "username": "adamcheaib",
+                "profile_picture": "cocktails.webp",
+                "message": "asd\u00f6laskd\u00f6laskd"
+            }
+        ]
     }
 ]
