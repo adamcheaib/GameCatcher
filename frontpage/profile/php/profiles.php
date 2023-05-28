@@ -11,17 +11,29 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         if ($registeredUser["username"] == $username_to_send) {
             $singleUser = ["username" => $registeredUser["username"], "profile_picture" => $registeredUser["profile_picture"]];
-
-            if ($registeredUser["banner_picture"] != NULL) {
-                $singleUser["banner_picture"] = $registeredUser["banner_picture"];
-            } else {
+            if(array_key_exists("profile_comments", $registeredUser) === false){
+                $registeredUser["profile_comments"] = NULL;
+            }
+            else{
+                $singleUser["profile_comments"] = $registeredUser["profile_comments"];
+            }
+            if (array_key_exists("banner_picture", $registeredUser) === false) {
                 $singleUser["banner_picture"] = NULL;
+            } else {
+                $singleUser["banner_picture"] = $registeredUser["banner_picture"];
+            }
+            if(array_key_exists("favorite_game_images", $registeredUser) === false){
+                $registeredUser["favorite_game_images"] = NULL;
+            }
+            else{
+                $singleUser["favorite_game_images"] = $registeredUser["favorite_game_images"];
             }
 
-            $singleUser["favorite_game_images"] = $registeredUser["favorite_game_images"];
+            if (array_key_exists("profile_comments", $registeredUser) === false) {
+                $singleUser["profile_comments"] = NULL;
+            }
 
-
-            if ($registeredUser["profile_comments"] != NULL) {
+            else {
                 $singleUser["profile_comments"] = $registeredUser["profile_comments"];
             }
 

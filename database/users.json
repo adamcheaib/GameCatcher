@@ -1,28 +1,24 @@
 [
     {
-        "username": "rastaman123",
-        "password": "rastaman123",
+        "username": "eeee",
+        "password": "eeee",
         "favorite_games": [],
-        "profile_picture": "victoria.png",
-        "banner_picture": "darkBackground.jpg",
+        "profile_picture": "online-web-design.jpg",
+        "banner_picture": "online-web-design.jpg",
         "id": 1,
         "pending": [],
         "friends": [
-            "adamcheaib"
-        ]
-    },
-    {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "favorite_games": [],
-        "profile_picture": "cocktails.webp",
-        "banner_picture": "undefined",
-        "id": 2,
-        "friends": [
-            "rastaman123",
+            "aaaa",
             "elliot"
         ],
-        "pending": []
+        "blocked": [],
+        "favorite_game_images": "online-web-design.jpg",
+        "profile_comments": [
+            {
+                "message": "fsdfsdfds",
+                "timestamp": "2023-05-28 20:11:32"
+            }
+        ]
     },
     {
         "username": "elliot",
@@ -32,42 +28,32 @@
         "banner_picture": "undefined",
         "id": 3,
         "friends": [
-            "adamcheaib"
+            "aaaa",
+            "eeee"
         ]
     },
     {
-        "username": "adam123",
-        "password": "adam123",
+        "username": "aaaa",
+        "password": "aaaa",
         "favorite_games": [],
-        "profile_picture": "B_knees.jpg",
-        "banner_picture": "undefined",
-        "id": 4
-    },
-    {
-        "username": "adamrastaman",
-        "password": "adam",
-        "favorite_games": [],
-        "profile_picture": "undefined",
-        "banner_picture": "undefined",
-        "id": 5
-    },
-    {
-        "username": "adamtheking",
-        "password": "adamtheking",
-        "favorite_games": [],
-        "profile_picture": "undefined",
-        "banner_picture": "undefined",
-        "id": 6
-    },
-    {
-        "username": "kakariko",
-        "password": "kakariko",
-        "favorite_games": [],
-        "profile_picture": "OldFashioned.jpg",
-        "banner_picture": "undefined",
-        "id": 7,
-        "pending": [
-            "adamcheaib"
-        ]
+        "profile_picture": "online-web-design.jpg",
+        "banner_picture": "online-web-design.jpg",
+        "id": 2,
+        "friends": [
+            "eeee",
+            "elliot"
+        ],
+        "pending": [],
+        "profile_comments": [
+            {
+                "message": "dsdsadas",
+                "timestamp": "2023-05-28 20:10:53"
+            },
+            {
+                "message": "fsdfsd",
+                "timestamp": "2023-05-28 20:10:55"
+            }
+        ],
+        "favorite_game_images": "online-web-design.jpg"
     }
 ]

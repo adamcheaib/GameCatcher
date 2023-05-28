@@ -186,30 +186,32 @@ function send_message(event) {
 
 function show_messages(messages, { profile_picture }) {
     console.log(messages);
-    for (let i = 0; i < messages.length; i++) {
-        let section = document.querySelector("#profile_forum")
-        let div = document.createElement("div");
-
-        div.classList.add("comments_section");
-
-        div.innerHTML = `
-                <div id="chat_comments">
-                <div class="profile_picture" style='background-image: url("./images/${profile_picture}'></div>
-                <div id="text_message">
-                <p>${messages[i].message}</p>
-                </div>
-                </div>
-                <div id="info_delete">
-                <p id="timestamp">${messages[i].timestamp}</p>
-                <div class="delete">delete</div>
-                </div>
-        
-        `
-        section.appendChild(div)
-        let deleteButtons = document.querySelectorAll(".delete");
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", remove_comment);
-        });
+    if(messages !== null){
+        for (let i = 0; i < messages.length; i++) {
+            let section = document.querySelector("#profile_forum")
+            let div = document.createElement("div");
+    
+            div.classList.add("comments_section");
+    
+            div.innerHTML = `
+                    <div id="chat_comments">
+                    <div class="profile_picture" style='background-image: url("./images/${profile_picture}'></div>
+                    <div id="text_message">
+                    <p>${messages[i].message}</p>
+                    </div>
+                    </div>
+                    <div id="info_delete">
+                    <p id="timestamp">${messages[i].timestamp}</p>
+                    <div class="delete">delete</div>
+                    </div>
+            
+            `
+            section.appendChild(div)
+            let deleteButtons = document.querySelectorAll(".delete");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", remove_comment);
+            });
+        }
     }
 }
 

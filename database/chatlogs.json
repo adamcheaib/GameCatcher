@@ -7,9 +7,19 @@
         ],
         "chatlog": [
             {
-                "username": "adamcheaib",
-                "profile_picture": "cocktails.webp",
-                "message": "asdlkasdas"
+                "username": "eeee",
+                "profile_picture": "undefined",
+                "message": "fsdfdsfsd"
+            },
+            {
+                "username": "eeee",
+                "profile_picture": "undefined",
+                "message": "tjennna dude!\n"
+            },
+            {
+                "username": "aaaa",
+                "profile_picture": "undefined",
+                "message": "tjenaaaa paul!!!"
             }
         ]
     },
@@ -21,17 +31,14 @@
         ],
         "chatlog": [
             {
-                "username": "adamcheaib",
-                "message": "ssss"
+                "username": "aaaa",
+                "profile_picture": "undefined",
+                "message": "fsdfsdfsd"
             },
             {
-                "username": "adamcheaib",
-                "message": "ssss"
-            },
-            {
-                "username": "adamcheaib",
-                "profile_picture": "cocktails.webp",
-                "message": "asd\u00f6laskd\u00f6laskd"
+                "username": "aaaa",
+                "profile_picture": "undefined",
+                "message": "AAAAA les goooo!"
             }
         ]
     }

@@ -20,6 +20,11 @@ export async function init_friends_page() {
     if (document.querySelector(".friends_list") !== null) {
         document.querySelector(".friends_list").remove();
     }
+
+    if(document.querySelector(".timer_display") !== null){
+        document.querySelector(".timer_display").remove();
+    }
+    
     document.querySelector("link").setAttribute("href", "./css/friends_page.css");
 
     document.querySelector("#center_piece").innerHTML = `

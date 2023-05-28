@@ -10,6 +10,8 @@ if (localStorage.getItem("counter_for_forum") === null) {
 
 
 export function init_forum(user) {
+
+    
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "forum");
 
@@ -35,7 +37,12 @@ export function init_forum(user) {
         <textarea></textarea>
         <button id="send">Send</button>
     `;
-
+    
+    // Denna bit kod gör så att det inte appendas fler timer displays om man klickar på forum knappen
+    if(document.querySelectorAll(".timer_display").length >= 2){
+        document.querySelectorAll(".timer_display")[1].remove(); 
+    }
+    
     document.querySelector("#frontpage_wrapper").appendChild(friends_list)
 
     document.querySelector("#saved").addEventListener("click", init_collection);

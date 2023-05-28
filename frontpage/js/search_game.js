@@ -11,6 +11,10 @@ export async function search_popup(event) {
         document.querySelector(".display_game_dom").remove(); // Tar bort spel informationen (som finns till höger) om man har klickat på ett spel utanför search function
     }
 
+    if(document.querySelector(".timer_display") !== null){
+        document.querySelector(".timer_display").remove();
+    }
+
     // Fixa en funktion som skapar en dialog element istället och sedan kan man ändra dens innerHTML.
     // Men här skapas en dialog-element som vi sedan pillar med dens innerHTML.
     const dialog_dom = document.createElement("dialog");

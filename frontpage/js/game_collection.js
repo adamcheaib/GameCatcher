@@ -16,6 +16,10 @@ export async function init_collection() {
         document.querySelector(".friends_list").remove();
     }
 
+    if(document.querySelector(".timer_display") !== null){
+        document.querySelector(".timer_display").remove();
+    }
+
     // Laddar rätt CSS-fil.
     document.querySelector("link").setAttribute("href", "./css/collection.css");
 
