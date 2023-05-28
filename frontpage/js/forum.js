@@ -23,6 +23,13 @@ export function init_forum(user) {
     document.querySelector("link").setAttribute("href", "./css/forum.css");
     let friends_list = document.createElement("div");
     friends_list.classList.add("friends_list");
+    let timer_display_dom = document.createElement("div");
+    timer_display_dom.classList.add("timer_display");
+    timer_display_dom.innerHTML = `
+        <div class="timer_counter">10</div>
+        <div class="fetch_chat_now_btn">Refresh Chat</div>
+    `;
+    document.querySelector("#frontpage_wrapper").appendChild(timer_display_dom);
     document.querySelector("#center_piece").innerHTML = `
         <div id="forum_display"></div>
         <textarea></textarea>
@@ -36,7 +43,6 @@ export function init_forum(user) {
     get_all_friends(user);
     create_post();
     document.getElementById("send").disabled = true;
-
 }
 
 document.querySelector("#chat").addEventListener("click", init_forum)
@@ -95,6 +101,13 @@ export async function the_whole_juser_element_gets_click_event(user) {
 
 async function fetch_chat(event) {
 
+    stop_all_intervals();
+
+    if (document.querySelector(".timer_counter").textContent != 10) {
+        document.querySelector(".timer_counter").textContent = 10;
+    }
+
+
     document.getElementById("send").disabled = false;
     stop_all_intervals();
     document.querySelector("#forum_display").innerHTML = "";
@@ -109,9 +122,6 @@ async function fetch_chat(event) {
 
     let response_data = await response_user1.json();
     localStorage.setItem("loggedOnID", response_data.loggedID);
-
-
-
 
     let fetch_bod_first = {
         get_chatlog_id: true,
@@ -177,14 +187,22 @@ async function fetch_chat(event) {
         })
     }
 
+    // Counter för när chatten skall uppdateras!
+    let time_counter = setInterval(() => {
+        let timer = document.querySelector(".timer_counter").textContent;
+
+        if (timer == 0) {
+            timer = 10;
+        }
+        timer--;
+        document.querySelector(".timer_counter").textContent = timer;
+    }, 1000);
+
+    all_intervals.push(time_counter);
 
 
     // Loading screen tillagd!
     let interval_id = setInterval(async () => {
-        console.log(all_intervals);
-        if (localStorage.getItem("where_att") !== "forum") {
-            stop_all_intervals(all_intervals);
-        }
 
         document.querySelector("#forum_display").innerHTML = "";
 
@@ -258,7 +276,11 @@ async function fetch_chat(event) {
 
     }, 10000);
 
-    all_intervals.push(interval_id)
+    all_intervals.push(interval_id);
+    document.querySelector(".fetch_chat_now_btn").addEventListener("click", function refresh_chat(button) {
+        fetch_chat(event);
+        button.target.removeEventListener("click", refresh_chat)
+    });
 };
 
 

@@ -9,7 +9,16 @@
             "sdlkfjsdj",
             "hej",
             "ds\u00f6fls",
-            "ldsf"
+            "ldsf",
+            "Hej p\u00e5 dig"
         ]
+    },
+    {
+        "chatid": 2,
+        "chat_between": [
+            2,
+            3
+        ],
+        "chatlog": []
     }
 ]
