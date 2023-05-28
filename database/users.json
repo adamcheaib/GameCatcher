@@ -3,7 +3,7 @@
         "username": "rastaman123",
         "password": "rastaman123",
         "favorite_games": [],
-        "profile_picture": "undefined",
+        "profile_picture": "victoria.png",
         "banner_picture": "darkBackground.jpg",
         "id": 1,
         "pending": [],
@@ -15,11 +15,59 @@
         "username": "adamcheaib",
         "password": "adamcheaib",
         "favorite_games": [],
-        "profile_picture": "undefined",
+        "profile_picture": "cocktails.webp",
         "banner_picture": "undefined",
         "id": 2,
         "friends": [
-            "rastaman123"
+            "rastaman123",
+            "elliot"
+        ],
+        "pending": []
+    },
+    {
+        "username": "elliot",
+        "password": "elliot",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 3,
+        "friends": [
+            "adamcheaib"
+        ]
+    },
+    {
+        "username": "adam123",
+        "password": "adam123",
+        "favorite_games": [],
+        "profile_picture": "B_knees.jpg",
+        "banner_picture": "undefined",
+        "id": 4
+    },
+    {
+        "username": "adamrastaman",
+        "password": "adam",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 5
+    },
+    {
+        "username": "adamtheking",
+        "password": "adamtheking",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 6
+    },
+    {
+        "username": "kakariko",
+        "password": "kakariko",
+        "favorite_games": [],
+        "profile_picture": "OldFashioned.jpg",
+        "banner_picture": "undefined",
+        "id": 7,
+        "pending": [
+            "adamcheaib"
         ]
     }
 ]

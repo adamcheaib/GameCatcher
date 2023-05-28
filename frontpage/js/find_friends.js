@@ -233,39 +233,46 @@ async function find_user() {
     console.log(all_friends_of_user);
     let the_check = "";
     for (let i = 0; i < account_data.length; i++) {
-        if (account_data[i].profile_picture == "undefined") {
-            account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
-        } else {
-            const image_name = account_data[i].profile_picture;
-            console.log(image_name);
-            account_data[i].profile_picture = "./profile/images/" + image_name;
-        }
+        // if (account_data[i].profile_picture == "undefined") {
+        //     account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
+        // } else {
+        //     const image_name = account_data[i].profile_picture;
+        //     console.log(image_name);
+        //     account_data[i].profile_picture = image_name;
+        // }
 
         if (the_check !== "stop") {
+            let image_name = "";
             if (account_data[i].username !== localStorage.getItem("username")) {
                 // Kollar att den man är loggad in som inte finns med  i account_data så att man inte kan adda sig själv
-                account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
-                if (account_data[i].profile_picture == "undefined" || account_data[i].profile_picture == "./general_media/default_profile_pic.svg") {
-                    account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
+                // account_data[i].profile_picture = "./general_media/default_profile_pic.svg";
+                if (account_data[i].profile_picture == "undefined") {
+                    image_name = "./general_media/default_profile_pic.svg";
+                    console.log(account_data[i].profile_picture);
                 } else {
-                    const image_name = account_data[i].profile_picture;
+                    account_data[i].profile_picture = "./profile/images/" + account_data[i].profile_picture;
+                    image_name = account_data[i].profile_picture;
+
+                    console.log(account_data[i].profile_picture);
                     console.log(image_name);
-                    account_data[i].profile_picture = "./profile/images/" + image_name;
                 }
-                console.log(account_data[i].username);
-                let responses = await fetch(`../database/users.json`);
+                console.log(account_data[i].profile_picture);
                 loading_screen();
+                let responses = await fetch(`../database/users.json`);
 
                 if (responses.ok) {
                     remove_loading_screen();
+                } else {
+                    remove_loading_screen();
+                    alert("Something went wrong!");
                 }
 
                 let users = await responses.json();
-                for (let i = 0; i < users.length; i++) {
+                for (let j = 0; j < users.length; j++) {
 
-                    if (users[i].hasOwnProperty("blocked")) {
-                        if (users[i].username === localStorage.getItem("username")) {
-                            if (users[i].blocked.includes(account_data[0].username)) {
+                    if (users[j].hasOwnProperty("blocked")) {
+                        if (users[j].username === localStorage.getItem("username")) {
+                            if (users[j].blocked.includes(account_data[0].username)) {
                                 return;
                             }
                         }
@@ -286,16 +293,26 @@ async function find_user() {
 
             `;
 
+
                 document.querySelector("#display").appendChild(profile_dom);
-                document.querySelectorAll(".profile_picture").forEach((profile_pic, index) => {
-                    profile_pic.style.backgroundImage = `url(${account_data[index].profile_picture})`;
-                    profile_pic.style.borderRadius = "50%";
-                })
+                const profile_pic = profile_dom.querySelector(".profile_picture");
+                profile_pic.style.backgroundImage = `url(${image_name})`;
+                profile_pic.style.borderRadius = "50%";
+
 
                 document.querySelectorAll(".add_friend").forEach((add_btn) => {
                     add_btn.addEventListener("click", send_friend_request);
                 })
 
+                // Kollar ifall den inloggade användaren redan har någon av konton i sökresultatet redan finns i sin vänlista
+                document.querySelectorAll(".username").forEach(username => {
+                    for (let i = 0; i < all_friends_of_user.length; i++) {
+                        if (username.textContent === all_friends_of_user[i]) {
+                            profile_dom.remove();
+                        }
+
+                    }
+                })
             }
         }
     }
