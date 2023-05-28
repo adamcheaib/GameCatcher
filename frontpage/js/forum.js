@@ -94,8 +94,6 @@ export async function the_whole_juser_element_gets_click_event(user) {
 }
 
 async function fetch_chat(event) {
-    console.log(all_intervals);
-    console.log(event);
 
     document.getElementById("send").disabled = false;
     stop_all_intervals();
@@ -110,6 +108,7 @@ async function fetch_chat(event) {
     let response_user1 = await fetch(`./php/chat.php?username=${username}&targetUsername=${targetUsername}`);
 
     let response_data = await response_user1.json();
+    localStorage.setItem("loggedOnID", response_data.loggedID);
 
 
 
@@ -265,7 +264,7 @@ async function fetch_chat(event) {
 
 
 
-function stop_all_intervals() { // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
+export function stop_all_intervals() { // Om man loopar igenom alla och använder clearTimeout så försvinner alla timers
     all_intervals.forEach(each_interval => {
         clearInterval(each_interval);
     })
@@ -302,6 +301,7 @@ async function send_message(the_post_dom) {
     let body_for_fetch = {
         chatid: localStorage.getItem("selected_chat_id"),
         message: the_post_dom.querySelector("#the_post_text > p").innerHTML,
+        username: localStorage.getItem("")
     }
 
     let response = await fetch("./php/forum.php", {
@@ -316,6 +316,5 @@ async function send_message(the_post_dom) {
         remove_loading_screen();
     }
 
-    let data = await response.json();
 }
 

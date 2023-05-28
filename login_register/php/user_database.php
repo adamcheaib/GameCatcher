@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $id = 0;
         if (0 <= count($users)) {
-            $new_user = ["username" => $username, "password" => $password, "favorite_games" => [], "profile_picture" => "undefined"];
+            $new_user = ["username" => $username, "password" => $password, "favorite_games" => [], "profile_picture" => "undefined", "banner_picture" => "undefined"];
             foreach ($users as $single_user) {
                 if ($id < $single_user["id"]) {
                     $id = $single_user["id"];

@@ -1,0 +1,25 @@
+[
+    {
+        "username": "rastaman123",
+        "password": "rastaman123",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "darkBackground.jpg",
+        "id": 1,
+        "pending": [],
+        "friends": [
+            "adamcheaib"
+        ]
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 2,
+        "friends": [
+            "rastaman123"
+        ]
+    }
+]

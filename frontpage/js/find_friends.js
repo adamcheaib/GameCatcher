@@ -1,8 +1,8 @@
 import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-//import { init_profile } from "../../profile/js/index.js";
 import { loading_screen, registration_notification, remove_loading_screen, } from "../../utils/functions.js";
+import { stop_all_intervals } from "./forum.js";
 
 // TO-DO: Man måste också göra en sent nyckel i users.json user objecten för att båda parter ska veta att de har blivit vännet
 // nu får bara ena user pending medanst andra har ingen anning om den har blivit acceptad eller inte man måste skicka
@@ -10,7 +10,7 @@ import { loading_screen, registration_notification, remove_loading_screen, } fro
 
 
 export async function init_friends_page() {
-
+    stop_all_intervals();
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "friends_page");
 

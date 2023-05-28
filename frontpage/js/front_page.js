@@ -1,5 +1,5 @@
 import { fetch_all_games, } from "../../utils/fetch_functions.js";
-import { init_forum } from "./forum.js";
+import { init_forum, stop_all_intervals } from "./forum.js";
 import { init_collection } from "./game_collection.js";
 import { game_scroll, genre_scroll, registration_notification } from "../../utils/functions.js";
 import { init_friends_page } from "./find_friends.js";
@@ -25,6 +25,11 @@ export function init_frontpage() {
     // Används i Forum/Chat sidan för att stoppa forumet/chattens live-funktionalitet.
     localStorage.removeItem("where_att");
     localStorage.setItem("where_att", "frontpage");
+    if (localStorage.getItem("loggedOnID") != null) {
+        localStorage.removeItem("loggedOnID");
+    }
+
+    stop_all_intervals();
 
     // Tömmer hela body:n för att ladda frontpage för att inte ha oönskade HTML-element på sidan.
     document.body.innerHTML = "";

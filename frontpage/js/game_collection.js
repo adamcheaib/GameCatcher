@@ -1,10 +1,11 @@
 import { init_frontpage } from "./front_page.js";
 import { init_forum } from "./forum.js";
+import { stop_all_intervals } from "./forum.js";
 
 // Laddar den nuverande inloggade användarens game_collection.
 export async function init_collection() {
     localStorage.setItem("where_att", "game_collection");
-
+    stop_all_intervals();
     // Om display_game_dom inte existerar så tar den bort hela elementet.
     if (document.querySelector(".display_game_dom") !== null) {
         document.querySelector(".display_game_dom").remove();

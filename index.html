@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- <base href="./GameCatcher" target="./GameCatcher/login_register"> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
 <body>
     <script>
         if (!localStorage.hasOwnProperty("username")) {
-            window.location.replace("login_register");
+            window.location.replace("../login_register");
         } else {
             window.location.replace("frontpage")
         }
