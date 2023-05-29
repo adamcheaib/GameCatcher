@@ -1,59 +1,47 @@
 [
     {
-        "username": "eeee",
-        "password": "eeee",
+        "username": "adamcheaib",
+        "password": "adamcheaib",
         "favorite_games": [],
-        "profile_picture": "online-web-design.jpg",
-        "banner_picture": "online-web-design.jpg",
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
         "id": 1,
-        "pending": [],
-        "friends": [
-            "aaaa",
-            "elliot"
+        "pending": [
+            "kakariko"
         ],
-        "blocked": [],
-        "favorite_game_images": "online-web-design.jpg",
-        "profile_comments": [
-            {
-                "message": "fsdfsdfds",
-                "timestamp": "2023-05-28 20:11:32"
-            }
+        "friends": [
+            "rastaman123",
+            "adam"
         ]
     },
     {
-        "username": "elliot",
-        "password": "elliot",
+        "username": "rastaman123",
+        "password": "rastaman123",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 2,
+        "friends": [
+            "adamcheaib"
+        ]
+    },
+    {
+        "username": "adam",
+        "password": "adam",
         "favorite_games": [],
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 3,
         "friends": [
-            "aaaa",
-            "eeee"
+            "adamcheaib"
         ]
     },
     {
-        "username": "aaaa",
-        "password": "aaaa",
+        "username": "kakariko",
+        "password": "kakariko",
         "favorite_games": [],
-        "profile_picture": "online-web-design.jpg",
-        "banner_picture": "online-web-design.jpg",
-        "id": 2,
-        "friends": [
-            "eeee",
-            "elliot"
-        ],
-        "pending": [],
-        "profile_comments": [
-            {
-                "message": "dsdsadas",
-                "timestamp": "2023-05-28 20:10:53"
-            },
-            {
-                "message": "fsdfsd",
-                "timestamp": "2023-05-28 20:10:55"
-            }
-        ],
-        "favorite_game_images": "online-web-design.jpg"
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 4
     }
 ]

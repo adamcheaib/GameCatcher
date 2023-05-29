@@ -5,40 +5,29 @@
             1,
             2
         ],
-        "chatlog": [
-            {
-                "username": "eeee",
-                "profile_picture": "undefined",
-                "message": "fsdfdsfsd"
-            },
-            {
-                "username": "eeee",
-                "profile_picture": "undefined",
-                "message": "tjennna dude!\n"
-            },
-            {
-                "username": "aaaa",
-                "profile_picture": "undefined",
-                "message": "tjenaaaa paul!!!"
-            }
-        ]
+        "chatlog": []
     },
     {
         "chatid": 2,
         "chat_between": [
-            2,
+            1,
             3
         ],
         "chatlog": [
             {
-                "username": "aaaa",
+                "username": "adamcheaib",
                 "profile_picture": "undefined",
-                "message": "fsdfsdfsd"
+                "message": "adasd"
             },
             {
-                "username": "aaaa",
+                "username": "adamcheaib",
                 "profile_picture": "undefined",
-                "message": "AAAAA les goooo!"
+                "message": "sss"
+            },
+            {
+                "username": "adamcheaib",
+                "profile_picture": "undefined",
+                "message": "ssss"
             }
         ]
     }

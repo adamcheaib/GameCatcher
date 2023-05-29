@@ -23,7 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fetch_data = json_decode(file_get_contents("php://input"), true);
 
 
+    // Kollar om nyckeln "user_that_wants_to_befriend" finns med i $fetch_data.
     if (array_key_exists("user_that_wants_to_befriend", $fetch_data) === true) {
+        // Här går den igenom alla användarna som finns och kontrollerar om någon av användarna från databasen är det samma som den som har skickats.
+        // Här kollar den om samma användare från databasen har nyckeln "pending". Om den inte har det så skapar den en array och pushar in den användaren som har skickats i det. 
         for ($j = 0; $j < count($all_users); $j++) {
             if ($all_users[$j]["username"] === $fetch_data["the_request_user"] and array_key_exists("pending", $all_users[$j]) === false) {
                 $all_users[$j]["pending"] = [];
@@ -33,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo json_encode($all_users[$j]);
                 exit();
             } elseif ($all_users[$j]["username"] === $fetch_data["the_request_user"] and array_key_exists("pending", $all_users[$j]) === true) {
+                // Om nycklen pending redan finns, så pushar den in bara in användarens som har mottagits.
                 $all_users[$j]["pending"][] = $fetch_data["user_that_wants_to_befriend"];
                 file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
                 header("Content-Type: application/json");

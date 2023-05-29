@@ -6,7 +6,7 @@ import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
 
-// Ifall ingen användare är inloggad, skickar besökaren tillbaka till login/register-sidan.
+// Ifall ingen användare är inloggad, skickas besökaren tillbaka till login/register-sidan.
 // Annars är man kvar på hemsidan och den selekterar Action som genre och PC som platform per automatik.
 if (!window.localStorage.hasOwnProperty("username")) {
     window.location.replace("../login_register");
@@ -23,12 +23,6 @@ else {
 
 export function init_frontpage() {
     // Används i Forum/Chat sidan för att stoppa forumet/chattens live-funktionalitet.
-    localStorage.removeItem("where_att");
-    localStorage.setItem("where_att", "frontpage");
-    if (localStorage.getItem("loggedOnID") != null) {
-        localStorage.removeItem("loggedOnID");
-    }
-
     stop_all_intervals();
 
     // Tömmer hela body:n för att ladda frontpage för att inte ha oönskade HTML-element på sidan.
@@ -114,6 +108,7 @@ export function init_frontpage() {
     // Laddar alla genre i genre_scroll:n så att man har de från början.
     document.querySelectorAll("#genre_wrapper div").forEach(async genre => {
 
+        // Lägger EventListener så att när man klickar så highlightas den selekterade.
         genre.addEventListener("click", () => {
             localStorage.removeItem("selected_genre"); // Detta är för att man har clickat på en ny genre
             localStorage.setItem("selected_genre", genre.querySelector(".genre_text").innerHTML);
@@ -135,6 +130,7 @@ export function init_frontpage() {
         });
     })
 
+    // Kollar om man har en custom-profil bild. Om man inte har det så väljs den default_profile_pic.svg
     if (localStorage.getItem("profile_picture") == "undefined") {
         document.getElementById("profile").style.backgroundImage = `url(../frontpage/general_media/default_profile_pic.svg)`;
     } else {
@@ -144,6 +140,7 @@ export function init_frontpage() {
     // Användarens profilbild visas på frontpage.
 
 
+    // Lägger EventListener så att när man klickar så highlightas den selekterade.
     document.querySelectorAll(".platform").forEach(platform => {
 
         platform.addEventListener("click", () => {
@@ -183,6 +180,7 @@ function show_settings(event) {
     document.querySelector("#change_username").addEventListener("click", init_changeUserSettings_DOM);
     document.querySelector("#change_password").addEventListener("click", init_changeUserSettings_DOM);
 
+    // Lägger till EventListener till Logout-knappen.
     document.querySelector("#logout").addEventListener("click", () => {
         localStorage.clear();
         window.location.replace("../login_register");
@@ -209,6 +207,7 @@ function init_changeUserSettings_DOM(event) {
     let button = document.createElement("button")
     button.textContent = "Submit!"
 
+    // Kontrollerar vad det är man vill ändra.
     if (event.target.textContent === "Change Username") {
         button.setAttribute("id", "change_username")
     } else {
@@ -221,7 +220,7 @@ function init_changeUserSettings_DOM(event) {
 }
 
 
-// Skickar de nya värden baserat på om man ändrar Username eller Password.
+// Skickar de nya värden baserat på om man ändrar Username eller Password. Skickar en request baserat på vad det är man har valt att göra.
 function change_username_password(event) {
     let action;
     let check = event.target.id;
@@ -264,6 +263,7 @@ function change_username_password(event) {
         })
 }
 
+// Lägger eventListener på profilen så att man kan gå till sen egen sida.
 document.querySelector("#profile").addEventListener("click", go_to_own_profile);
 function go_to_own_profile(event) {
     window.location.replace(`./profile?username=${localStorage.getItem("username")}`);

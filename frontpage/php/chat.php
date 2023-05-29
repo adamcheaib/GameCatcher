@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         $chat_database[] = $chatlog;
         file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
-
+        sendJSON($toSend);
     }
 
 
@@ -146,50 +146,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
             }
-
             sendJSON($all_post_from_before);
         }
 
     }
-
-
-    // elseif(count($chat_database) === 0){
-
-    //     $loggedOnUserId = $receivedInformation["loggedID"];
-    //     $chatTargetUserId = $receivedInformation["user2_id"];
-
-    //     $chatlog = [
-    //         "chatid" => 1,
-    //         "chat_between" => [ 
-    //             $loggedOnUserId,
-    //             $chatTargetUserId
-    //         ],
-    //         "chatlog" => [],
-    //     ];
-
-    //     $chat_database[] = $chatlog;
-    //     file_put_contents($chatlog_path, json_encode($chat_database, JSON_PRETTY_PRINT));
-    //     echo ($chatlog["chatid"]);
-    //     exit();
-    // }
-
-    // Här körs koden om den inte hittar de två personerna id man skickar inte hittas
 }
 
-
-
-// $id = 0;
-//     if (0 <= count($users)) {
-//         $new_user = ["username" => $username, "password" => $password, "favorite_games" => []];
-//         foreach ($users as $single_user) {
-//             if ($id < $single_user["id"]) {
-//                 $id = $single_user["id"];
-//             }
-//         }
-//     }
-// $new_user["id"] = $id + 1;
-
-
-// Fixa så att varje meddelande som skickas gör det i en PATCH-request.
 
 ?>

@@ -1,0 +1,12 @@
+Javascript-kommentarerna:
+
+1. front_page.js <-- Kommenterad!
+2. game_collection.js <-- Kommenterad!
+3. search_game.js <-- Kommenterad!
+4. forum.js <-- Kommenterad!
+5. find_friends.js <-- Kommenterad!
+
+
+PHP-kommentarer:
+
+Ingen av filerna har blivit kommenterad!
