@@ -1,7 +1,7 @@
 import { fetch_all_games, } from "../../utils/fetch_functions.js";
 import { init_forum, stop_all_intervals } from "./forum.js";
 import { init_collection } from "./game_collection.js";
-import { game_scroll, genre_scroll, registration_notification } from "../../utils/functions.js";
+import { game_scroll, genre_scroll, registration_notification, } from "../../utils/functions.js";
 import { init_friends_page } from "./find_friends.js";
 import { search_popup } from "./search_game.js";
 
@@ -17,9 +17,8 @@ else {
         localStorage.setItem("platform_selected", "4");
     }
     init_frontpage();
-    fetch_all_games();
+    // fetch_all_games();
 }
-
 
 export function init_frontpage() {
     // Används i Forum/Chat sidan för att stoppa forumet/chattens live-funktionalitet.

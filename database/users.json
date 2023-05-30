@@ -1,20 +1,5 @@
 [
     {
-        "username": "adamcheaib",
-        "password": "adamcheaib",
-        "favorite_games": [],
-        "profile_picture": "undefined",
-        "banner_picture": "undefined",
-        "id": 1,
-        "pending": [
-            "kakariko"
-        ],
-        "friends": [
-            "rastaman123",
-            "adam"
-        ]
-    },
-    {
         "username": "rastaman123",
         "password": "rastaman123",
         "favorite_games": [],
@@ -43,5 +28,43 @@
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 4
+    },
+    {
+        "username": "hassan",
+        "password": "hassan",
+        "favorite_games": [
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            }
+        ],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 5
+    },
+    {
+        "username": "adamcheaib",
+        "password": "adamcheaib",
+        "favorite_games": [
+            {
+                "name": "Tomb Raider (2013)",
+                "image": "https:\/\/media.rawg.io\/media\/games\/021\/021c4e21a1824d2526f925eff6324653.jpg"
+            },
+            {
+                "name": "The Witcher 3: Wild Hunt",
+                "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            }
+        ],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 1,
+        "pending": [
+            "kakariko",
+            "hassan"
+        ],
+        "friends": [
+            "rastaman123",
+            "adam"
+        ]
     }
 ]

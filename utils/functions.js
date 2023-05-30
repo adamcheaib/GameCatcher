@@ -3,21 +3,7 @@ import { api_key } from "../utils/fetch_functions.js";
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
 
-// async function add_to_game_collection() {
-//     let send_object = {
-//         name: game_data.name,
-//         image: game_data.background_image,
-//         username: localStorage.getItem("username"),
-//     };
-//     fetch("../frontpage/php/game_collection.php", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(send_object),
-//     }).then(r => r.json()).then(data => {
-//         console.log(data);
-//     });
-// }
-
+// Gör så att dialog:n removas istället för att de bara disablas. Vi removar den för att annars skapas en ny som då inte får några eventListeners
 document.addEventListener("keydown", function remove_dialog(event) {
     if (event.key === "Escape") {
         document.querySelector("dialog").remove();
@@ -25,6 +11,7 @@ document.addEventListener("keydown", function remove_dialog(event) {
     }
 })
 
+// Funktionen som anropas när man klickar på någon av spelen (den som syns till höger).
 function show_game_display_dom(game_data) {
     let the_dom = document.createElement("div");
     the_dom.classList.add("display_game_dom");
@@ -52,23 +39,20 @@ function show_game_display_dom(game_data) {
         <div id="gameplay"></div>
     `;
 
-    let counter_for_interval = [1]; // behöver passa by refrence för att den sen ska kunna resetas
     the_parent_dom.appendChild(the_dom);
-    document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
-    setInterval(() => {
-        counter_for_interval[0] += 1;
-        // document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[counter_for_interval].image})`
-        if (counter_for_interval[0] === game_data.short_screenshots.length - 1) {
-            counter_for_interval[0] = 1
-        }
-    }, 3000);
+
+    document.querySelector("#gameplay").style.backgroundImage = `url(${game_data.short_screenshots[1].image})`
+
+    // Lägger till EventListener så att den antingen 
     document.querySelector("#liked_games_button").addEventListener("click", async (event) => {
 
         const parentNode = event.target.parentNode;
         const notification = document.createElement("span");
+        // Appendar notification-DOM:n ovanför H2:an som man har selektat.
         parentNode.insertBefore(notification, parentNode.querySelector("h2"));
         notification.id = "game_collection_notification";
 
+        // Här kontrollerar det om vi vill ta bort eller lägga till baserat på textContent av #liked_games_button.
         if (event.target.textContent === "Add to liked games") {
             let send_object = {
                 name: game_data.name,
@@ -120,7 +104,11 @@ function show_game_display_dom(game_data) {
         }
 
     });
+
+
     document.querySelector("#game_image").style.backgroundImage = `url(${game_data.background_image})`;
+
+    // Gör så att när vi klickar X-knappen på display_game_dom så tas highlighten bort igen och alla spelen får hover-effekt igen.
     document.getElementById("game_information_close_button").addEventListener("click", () => {
         document.querySelector(".display_game_dom").remove();
         document.querySelectorAll("#games_wrapper > div").forEach(game_dom => {
@@ -134,7 +122,7 @@ function show_game_display_dom(game_data) {
 
 }
 
-
+// Detta är för att fetcha spel baserat på det valda genren och platform.
 async function fetch_game_by_plattform_and_genre(genre, platform) {
     if (genre.includes(" ")) {
         genre = genre.replace(" ", "-");
@@ -153,6 +141,9 @@ async function fetch_game_by_plattform_and_genre(genre, platform) {
     }
 }
 
+/* Anropas när man klickar på ett spel från game_scroll:n så söker den efter EXAKT det som står i DOM:ens .game_text och visar första spelet
+i arrayen från sökresultatet som baserat på spelets namn 
+*/
 async function search_game(game_name) {
     let prefix = "https://api.rawg.io/api/";
     /*
@@ -178,32 +169,39 @@ async function search_game(game_name) {
     }
 }
 
-export async function game_scroll() { // Scroll function for the displayed genres.    
+
+// Scroll function for the displayed genres. 
+export async function game_scroll() {
+
     let index2 = 0;
     let counter2 = 0;
 
+    // Här kontrolleras om de olika counter:n är 0 för att då disablas arrowsen för spel-scrollen.
     if (counter2 === 0) {
         document.querySelector("#first_arrow2").style.backgroundColor = "gray";
         document.querySelector("#first_arrow2").removeEventListener("click", click_right_arrow)
         document.querySelector("#second_arrow2").style.backgroundColor = "black";
     }
 
+    // Varje gång game_scroll anropas så fetchas spelen.
     let games_data = await fetch_game_by_plattform_and_genre(localStorage.getItem("selected_genre"), localStorage.getItem("platform_selected"));
 
 
     let game_names = [];
     let game_images = [];
+
+    // Filtrerar så att spelnamnet är i en seperat array och spelbilden är i en seperat array.
     games_data.results.forEach(game => {
         game_names.push(game.name);
         game_images.push(game.background_image);
     });
 
-    /*Denna behövs för att refreshen av spel ska funka då om man klickar på en pil så ska de fyra nya s
-    spelen visas
-    */
 
     let wrapper = document.querySelector("#games_wrapper");
+    /* Denna behövs för att refreshen av spel ska funka då om man klickar på en pil så ska de fyra nya spelen visas */
     wrapper.innerHTML = "";
+
+    // Appendar DOM:n för varje spel.
     for (let n = 1; n <= 4; n++) {
         let game_dom = document.createElement("div");
         game_dom.classList.add(`game_${n}`);
@@ -214,6 +212,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
     let all_dom_boxes = document.querySelectorAll("#games_wrapper div");
 
 
+    // Appendar spelens namn och bilder för varje spel-DOM.
     for (let i = 0; i < 4; i++) {
         all_dom_boxes[i].style.backgroundImage = `url(${game_images[i]})`
         all_dom_boxes[i].innerHTML = `
@@ -225,13 +224,20 @@ export async function game_scroll() { // Scroll function for the displayed genre
 
 
     async function click_right_arrow() {
+        // Kontrollerar om counter2 är lika med arrayens (all_dom_boxes) längd minus 4 eftersom det är 4 spel som visas i taget.
         if (counter2 === game_names.length - 4) {
+            // Om counter2 är lika stor som arrayens längd minus 4 så removas eventListenern och knappen blir grå. 
             document.querySelector("#second_arrow2").style.backgroundColor = "gray";
             document.querySelector("#second_arrow2").removeEventListener("click", click_right_arrow)
         }
         else {
+            // Är counter2 inte lika med Arrayens längd minus 4 så körs samma funktion som tidigare.
 
-
+            /* 
+            Denna lägger effekten för när man klickar på en arrow.
+            Anledningen till varför spelets bild och information hinner komma in trots att den körs längst upp är för att det är async och
+            för att det finns en setTimeout som också på sätt och viss agerar som en async.
+            */
             const fourth_game_box = document.querySelector(".game_4");
             console.log(fourth_game_box);
             fourth_game_box.style.left = "20px";
@@ -245,6 +251,8 @@ export async function game_scroll() { // Scroll function for the displayed genre
 
             index2 += 1;
             counter2 += 1;
+
+            // Om counter2 INTE är lika med 0 så får left_arrow samma funktion fast i reverse dvs den får en EventListener. 
             if (counter2 !== 0) {
                 document.querySelector("#first_arrow2").style.backgroundColor = "black";
                 document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
@@ -254,13 +262,13 @@ export async function game_scroll() { // Scroll function for the displayed genre
             let the_new_game_images = [];
             let the_new_game_names = [];
 
-
+            // Pushar in spelens namn och bilder i två seperata Arrays.
             for (let i = index2; i < (4 + index2); i++) {
                 the_new_game_images.push(game_images[i]);
                 the_new_game_names.push(game_names[i]);
             }
 
-
+            // Appendar spelens bilder och namn i DOMs.
             for (let i = 0; i < 4; i++) {
                 all_dom_boxes[i].style.backgroundImage = `url(${the_new_game_images[i]})`
                 all_dom_boxes[i].innerHTML = `
@@ -271,10 +279,10 @@ export async function game_scroll() { // Scroll function for the displayed genre
             `;
             }
 
+            // Detta ser till så att när man bläddrar i scrollen så behålls den selekterade spelet som highlighted.
             const all_game_boxes = document.querySelectorAll("#games_wrapper > div");
             all_game_boxes.forEach(async game_dom => {
                 const game_name = game_dom.querySelector(".game_text").textContent;
-                console.log(game_name);
                 if (localStorage.getItem("selected_game") === game_name) {
                     game_dom.style.transform = "scale(1.15)";
                     game_dom.style.border = "2px solid white";
@@ -285,13 +293,15 @@ export async function game_scroll() { // Scroll function for the displayed genre
             })
         }
 
-        /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
+        // Detta gör att om man redan har klickat på ett spel och vill klicka på ett nytt så visas det NYA spelets information.
         document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
             game.addEventListener("click", async () => {
                 localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
                 localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
                 let the_game = await search_game(localStorage.getItem("selected_game"));
 
+
+                // Här sätter den animationen för varje spel man har klickat.
                 const all_game_boxes = document.querySelectorAll("#games_wrapper > div");
                 all_game_boxes.forEach(async game_dom => {
                     const game_name = game_dom.querySelector(".game_text").textContent;
@@ -305,6 +315,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
                     }
                 })
 
+
                 if (document.querySelector(".display_game_dom") !== null) {
                     document.querySelector(".display_game_dom").remove();
                 }
@@ -314,6 +325,7 @@ export async function game_scroll() { // Scroll function for the displayed genre
         })
     }
 
+    // Gör precis som click_right_arrow funktionen fast för vänster pilen.
     async function click_left_arrow(event) {
 
 
@@ -336,8 +348,9 @@ export async function game_scroll() { // Scroll function for the displayed genre
 
             index2 -= 1;
             counter2 -= 1;
-            if (counter2 !== game_names.length - 4) {
 
+            // If-satserna kontrollerar om du är längst till höger eller vänster och så omvandlar den passande arrow_knappen till grå och tar bort event.
+            if (counter2 !== game_names.length - 4) {
                 document.querySelector("#second_arrow2").style.backgroundColor = "black";
                 document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow)
             }
@@ -407,14 +420,13 @@ export async function game_scroll() { // Scroll function for the displayed genre
     document.querySelector("#second_arrow2").addEventListener("click", click_right_arrow);
     document.querySelector("#first_arrow2").addEventListener("click", click_left_arrow);
 
-    /*Denna gör så att varje spel kan clickas det måste vara fler för att alla tas bort där uppe kom ihåg det*/
     document.querySelectorAll("#games_wrapper div .game_text_wrapper").forEach(game => {
         game.addEventListener("click", async () => {
             localStorage.removeItem("selected_game") // behövs varje gång för att vi ska bara kunna ha en selected_game
             localStorage.setItem("selected_game", game.querySelector(".game_text").innerHTML);
             let the_game = await search_game(localStorage.getItem("selected_game"));
 
-            // Kollar om användaren redan har spelet i sin library.
+            // Kollar om användaren redan har spelet i sin library och i så fall blir #liked_games_button till "Remove Game"
             const user_favorite_library = await (await fetch("../login_register/php/user_database.php",
                 {
                     method: "PATCH",
@@ -449,14 +461,13 @@ export async function game_scroll() { // Scroll function for the displayed genre
                 }
             })
 
-            console.log(document.querySelectorAll("#games_wrapper > div"));
 
         })
     })
 }
 
-
-export async function genre_scroll() { // Scroll function for the displayed genres.    
+// Exakt det samma som game_scroll fast till genre_scrollen.
+export async function genre_scroll() {
     let index = 0;
     let counter = 0;
 
@@ -623,6 +634,8 @@ export async function genre_scroll() { // Scroll function for the displayed genr
 
 }
 
+
+// ANVÄNDS INTE NÅGONSTANS.
 export function popUpFunction(message) {
     const body = document.querySelector("body");
     document.querySelector("div").style.opacity = "0.5";
@@ -641,6 +654,7 @@ export function popUpFunction(message) {
     popup.appendChild(exit_button);
 }
 
+// ANVÄNDS INTE NÅGONSTANS.
 export function remove_message(event) {
     const div = event.originalTarget.parentElement;
     div.remove();
@@ -648,6 +662,8 @@ export function remove_message(event) {
     document.querySelector("div").style.opacity = "1";
 }
 
+
+// Denna används istället för popUpFunctions för ALLA notifikationer.
 export function registration_notification(dialog_box_text, action) {
     const registration_dialog = document.createElement("dialog");
     registration_dialog.style.height = "100vh";
@@ -715,7 +731,7 @@ export function general_notifications(event) {
 }
 
 
-
+// Det är den animerade notifikationen som är där nere som används BARA en gång.
 export function general_notifications_search(event) {
     const search_dialog_notifications_container = document.getElementById("general_notifications_container_search");
 
@@ -735,7 +751,7 @@ export function general_notifications_search(event) {
     }, 2300);
 }
 
-
+// Loading screenen för när man fetchar data.
 export function loading_screen() {
     const cover = document.createElement("div");
     cover.id = "loading_cover";
@@ -748,7 +764,7 @@ export function loading_screen() {
     document.body.appendChild(cover);
 }
 
-
+// Tar bort loading screenen när man fetchar.
 export function remove_loading_screen() {
     document.getElementById("loading_cover").remove();
 }

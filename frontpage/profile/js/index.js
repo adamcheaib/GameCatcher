@@ -5,8 +5,8 @@ let favorite_game = document.querySelector("#upload_favorite_game");
 
 console.log(window.location.search);
 const profile_to_fetch = window.location.search.split("?username=")[1];
-get_all_users(profile_to_fetch);
 console.log(profile_to_fetch);
+get_all_users(profile_to_fetch);
 
 async function get_all_users(username) {
 
@@ -186,13 +186,13 @@ function send_message(event) {
 
 function show_messages(messages, { profile_picture }) {
     console.log(messages);
-    if(messages !== null){
+    if (messages !== null) {
         for (let i = 0; i < messages.length; i++) {
             let section = document.querySelector("#profile_forum")
             let div = document.createElement("div");
-    
+
             div.classList.add("comments_section");
-    
+
             div.innerHTML = `
                     <div id="chat_comments">
                     <div class="profile_picture" style='background-image: url("./images/${profile_picture}'></div>

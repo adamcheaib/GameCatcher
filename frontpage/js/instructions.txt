@@ -5,6 +5,9 @@ Javascript-kommentarerna:
 3. search_game.js <-- Kommenterad!
 4. forum.js <-- Kommenterad!
 5. find_friends.js <-- Kommenterad!
+6. functions.js <-- Kommenterad
+7. fetch_functions.js <-- Kommenterad!
+8. profile.js <-- Ej kommenterad!
 
 
 PHP-kommentarer:

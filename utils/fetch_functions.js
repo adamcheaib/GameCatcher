@@ -7,7 +7,7 @@ export const api_key = "key=7537434a316c4729b0ac0130147be146";
 let prefix = "https://api.rawg.io/api/";
 
 
-
+// Anropas men gör ingen skillnad.
 export async function fetch_all_games(page = 1) { // Fetches games based on genre!
     const link = prefix + `games?page=${page}&` + api_key;
     try {
@@ -19,8 +19,7 @@ export async function fetch_all_games(page = 1) { // Fetches games based on genr
     }
 };
 
-// fetch_all_games();
-
+// ANVÄNDS INGENSTANS.
 async function TEST_fetch_genre_games(event) {
     // Fetch genre based on a certain DOM that contains the name of the genre. The name of the genre will be placed within the "genre" variable.
     let genre = "action";
@@ -33,7 +32,7 @@ async function TEST_fetch_genre_games(event) {
 };
 
 
-
+// Denna används för att plocka ut input_value:n när man väl söker på spelen.
 export async function search_for_game(game_name = document.querySelector("#searchBarContainer > input").value) {
     /*
     PC: id 4,
@@ -57,6 +56,7 @@ export async function search_for_game(game_name = document.querySelector("#searc
     }
 }
 
+// Detta är när man klickar på sökresultatet och den skapar samma DOM som display_game_dom.
 export async function searched_game_information(game_name) {
     try {
         const link = prefix + `games?search=${game_name}&platforms=4,187,18,186&search_precise=true&` + api_key;
@@ -68,6 +68,7 @@ export async function searched_game_information(game_name) {
     }
 }
 
+// ANVÄNDS INGENSTANS.
 async function specific_game_event(event) {
 
     async function specific_game_search(id) {
