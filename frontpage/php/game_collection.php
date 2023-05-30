@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             array_splice($all_users, $index, 1);
 
+            // Detta kollar om användaren REDAN har en "favorite_games" array.
+            // Sparar varje spels namn och bild i användarens array "favorite_games".
             if (array_key_exists("favorite_games", $old_user) == true) {
 
                 $a_favorite_game = [
@@ -26,31 +28,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "username" => $old_user[0]["username"],
                     "favorite_games" => $old_user[0]["favorite_games"],
                 ];
-            }
-            else
+            } else
+                // Denna kollar om man inte har en "favorite_games" array. Då skapar den och pushar in spelet i arrayen.
+                if (array_key_exists("favorite_games", $old_user) == false) {
 
-            if (array_key_exists("favorite_games", $old_user) == false) { 
 
-
-                foreach ($old_user[0]["favorite_games"] as $game) {
-                    if ($game["name"] == $data["name"]) {
-                        $message = ["message" => "Remove game &#xe020;"];
-                        sendJSON($message);
+                    foreach ($old_user[0]["favorite_games"] as $game) {
+                        if ($game["name"] == $data["name"]) {
+                            $message = ["message" => "Remove game &#xe020;"];
+                            sendJSON($message);
+                        }
                     }
+
+
+                    $old_user["favorite_games"] = [];
+                    $a_favorite_game = [
+                        "name" => $data["name"],
+                        "image" => $data["image"],
+                    ];
+                    $old_user[0]["favorite_games"][] = $a_favorite_game;
+                    $old_user_with_out_password_for_send = [
+                        "username" => $old_user[0]["username"],
+                        "favorite_games" => $old_user[0]["favorite_games"],
+                    ];
                 }
-
-
-                $old_user["favorite_games"] = [];
-                $a_favorite_game = [
-                    "name" => $data["name"],
-                    "image" => $data["image"],
-                ];
-                $old_user[0]["favorite_games"][] = $a_favorite_game;
-                $old_user_with_out_password_for_send = [
-                    "username" => $old_user[0]["username"],
-                    "favorite_games" => $old_user[0]["favorite_games"],
-                ];
-            }
 
 
             $all_users[] = $old_user[0];
@@ -95,10 +96,10 @@ if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);
     $data = json_decode(file_get_contents("php://input"), true);
     for ($i = 0; $i < count($all_users); $i++) {
-        if ($data["username"] == $all_users[$i]["username"]) {    
+        if ($data["username"] == $all_users[$i]["username"]) {
             $all_users[$i]["favorite_games"] = [];
             file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-            sendJSON($all_users[$i]["favorite_games"]);     
+            sendJSON($all_users[$i]["favorite_games"]);
         }
     }
 }

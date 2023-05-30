@@ -1,6 +1,7 @@
 <?php
 require_once "./functions.php";
 
+// Skapar meddelanden och sparar dem. Tanken med detta är att det ska skapa meddelanden på direkten när man väl har skickat.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $message_data = json_decode(file_get_contents("php://input"), true);
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);

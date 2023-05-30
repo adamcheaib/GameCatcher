@@ -12,4 +12,10 @@ Javascript-kommentarerna:
 
 PHP-kommentarer:
 
-Ingen av filerna har blivit kommenterad!
+1. user_database.php <-- Behöver ej kommenteras. Undantag om man är en dum idiot bara.
+2. chat.php <-- Kommenterad!
+3. find_friend.php <-- Kommenterad!
+4. forum.php <-- Kommenterad!
+5. game_collection.php <-- Ej kommenterad!
+6. profiles.php <-- Ej kommenterad!
+7. upload.php <-- Ej kommenterad!

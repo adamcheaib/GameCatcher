@@ -4,6 +4,13 @@ require_once "./functions.php";
 
 ini_set("display_errors", 1);
 
+/* Sammanfattning av vad som händer här:
+    1. Vi tar emot användarnamnen på de som är involverade i chatten.
+    2. Vi skickar tillbaka de två användarnas ID.
+    3. Baserat på deras ID, så hämtar vi rätt chatID.
+    4. Baserat på chatID så skickar vi chatloggen av både användarna.
+    */
+
 
 $chatlog_path = "../../database/chatlogs.json";
 $chat_database = json_decode(file_get_contents($chatlog_path), true);
@@ -99,20 +106,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-    // skickar chat id om userna stämmer överens med det som skickades i php://input
+    // Skickar chat id om userna stämmer överens med det som skickades i php://input
     if ($chat_database != null or count($chat_database) > 0) {
         $the_latest_id = 1;
 
-
-
-
+        // Kollar om $receivedInformation har nyckeln "get_chatlog_id".
         if (array_key_exists("get_chatlog_id", $receivedInformation)) {
 
+            // Ifall nyckeln existerar, så går den igenom chat_database och ifall den hittar rätt chatt så skickar den tillbaka chatloggen.
             $loggedOnUserId = $receivedInformation["loggedID"];
             $chatTargetUserId = $receivedInformation["user2_id"];
             for ($i = 0; $i < count($chat_database); $i++) {
                 $the_latest_id = $chat_database[$i]["chatid"];
 
+
+                // Det finns två if-satser för att kontrollera vilken användare som är inloggad. Om man nu vill fetcha samma chatt.
                 if ($chat_database[$i]["chat_between"][0] === $loggedOnUserId and $chat_database[$i]["chat_between"][1] === $chatTargetUserId) {
 
                     echo json_encode(["chatid" => $the_latest_id]);
@@ -125,12 +133,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
 
             }
-
+            // Denna skickar tillbaka chatid som sedan används i JS.
             sendJSON(["chatid" => ($the_latest_id + 1)]);
 
         }
 
-
+        // Här används chatID som skickades tidigare från if-satsen ovan.
         if (array_key_exists("chatid", $receivedInformation)) {
             $all_post_from_before = [];
             $highest_id = 1;
@@ -146,6 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
             }
+            // Skickar chatloggen mellan de två användarna.
             sendJSON($all_post_from_before);
         }
 

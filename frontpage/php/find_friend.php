@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $user_alternatives = [];
     $username = $_GET["find_account_name"];
 
+    // Förvirrande men funkar! Ajabaja Elliot!
     for ($i = 0; $i < count($all_users); $i++) {
         if (strstr($all_users[$i]["username"], $username) == true) {
             $all_users[$i]["password"] = ""; // tar bort passwords på alla när den skickar men inte i självaste json filen
@@ -47,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Här kollar man om en användare har "all_pending" nyckeln. Dvs om man har några pending requests.
+    // Om det finns så skickar vi tillbaka "all_pending" nyckeln till JS.
     if (array_key_exists("all_pending", $fetch_data) === true) {
 
         for ($w = 0; $w < count($all_users); $w++) {
@@ -62,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Kollar alla pending requests som man har accepterat!
     if (array_key_exists("accepted_friend_request", $fetch_data) === true) {
 
         for ($w = 0; $w < count($all_users); $w++) {
@@ -113,6 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
+    // Skickar tillbaka den uppdaterade "friends"-arrayen så att man ser de vännerna som också har accepterat en väns request.
     if (array_key_exists("send_back_for_user_that_sent_friend_req", $fetch_data) === true) {
         for ($w = 0; $w < count($all_users); $w++) {
             if ($all_users[$w]["username"] === $fetch_data["added_friend_username2"] && array_key_exists("friends", $all_users[$w]) == true) {
@@ -129,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
 
-        // Denna biten kod körs om användaren inte har några vänner sen tidgare
+        // Denna biten kod körs om användaren inte har några vänner sen tidgare.
         for ($w = 0; $w < count($all_users); $w++) {
             if ($all_users[$w]["username"] === $fetch_data["added_friend_username2"]) {
                 $all_friends = [];
@@ -148,6 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $fetch_data = json_decode(file_get_contents("php://input"), true);
 $all_users = json_decode(file_get_contents("../../database/users.json"), true);
 
+// Om man vill blocka en användare så körs denna.
 if ($fetch_data["action"] === "block") {
     foreach ($all_users as $index => $user) {
         if ($user["username"] === $fetch_data["me"]) {
@@ -178,6 +184,8 @@ if ($fetch_data["action"] === "block") {
     echo json_encode($message);
     exit();
 }
+
+// Om man vill unblocka en användare så körs denna.
 if ($fetch_data["action"] === "unblock") {
     foreach ($all_users as $index => $user) {
         if ($user["username"] === $fetch_data["me"]) {

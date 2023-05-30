@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = ["message" => "Invalid Request!"];
         sendJSON($message, 400);
     }
+    // Kontrollerar om vi ska registrera en användare.
     if ($action == "register") {
 
         $password = $received_data["password"];
@@ -36,14 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $users = [];
         }
 
+        // Kollar så att username och password inte är tomma.
         if ($username == "" or $password == "") {
             $message = ["message" => "Username or password are empty!"];
             sendJSON($message, 400);
+
+            // Kollar så att username och password inte är kortare än 3 karaktärer.
         } elseif (strlen($username) <= 3 or strlen($password) <= 3) {
             $message = ["message" => "Username and password cannot be shorter than 3 characters!"];
             sendJSON($message, 400);
         }
 
+        // Gör varje användare ett ID.
         $id = 0;
         if (0 <= count($users)) {
             $new_user = ["username" => $username, "password" => $password, "favorite_games" => [], "profile_picture" => "undefined", "banner_picture" => "undefined"];
@@ -64,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
+        // Sparar varje användare i databasen.
         $new_user["id"] = $id + 1;
         $users[] = $new_user;
         file_put_contents($filename, json_encode($users, JSON_PRETTY_PRINT));
@@ -73,9 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-
+    // Kontrollerar om en användare vill logga in.
     if ($action == "login") {
         $password = $received_data["password"];
+
+        // Går igenom alla användare och kollar om det finns någon av användarna som matchar med användarnamnet och lösenordet.
         foreach ($users as $single_user) {
             if ($username === $single_user["username"] and $password === $single_user["password"]) {
                 if (!isset($single_user["favorite_games"])) {
