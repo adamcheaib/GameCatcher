@@ -247,12 +247,13 @@ function remove_comment(event) {
     fetch(request)
         .then(resource => resource.json())
         .then(data => {
-            console.log(data)
-            event.target.parentElement.remove();
+            console.log(data);
+            console.log(event);
+            event.target.remove();
         })
 
     // Tar bort alla (denna bör inte vara med).
-    document.querySelectorAll(".comments_section").forEach(element => element.remove());
+    //document.querySelectorAll(".comments_section").forEach(element => element.remove());
 
     fetch("../../database/users.json")
         .then(resource => resource.json())
@@ -271,5 +272,5 @@ function remove_comment(event) {
 // Lägger till eventListener på #go_home knappen så att man kan gå tillbaka till framsidan.
 document.querySelector("#go_home").addEventListener("click", go_home)
 function go_home(event) {
-    window.location.replace("../../frontpage");
+    window.location.href = "../../frontpage"
 }

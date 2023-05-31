@@ -76,5 +76,20 @@
                 "timestamp": "2023-05-30 13:24:47"
             }
         ]
+    },
+    {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "id": 6,
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_comments": [
+            {
+                "message": "gre",
+                "timestamp": "2023-05-31 13:00:28"
+            }
+        ]
     }
 ]

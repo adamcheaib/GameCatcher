@@ -265,7 +265,7 @@ function change_username_password(event) {
 // Lägger eventListener på profilen så att man kan gå till sen egen sida.
 document.querySelector("#profile").addEventListener("click", go_to_own_profile);
 function go_to_own_profile(event) {
-    window.location.replace(`./profile?username=${localStorage.getItem("username")}`);
+    window.location.href = `./profile?username=${localStorage.getItem("username")}`
 }
 
 
