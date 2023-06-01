@@ -35,7 +35,6 @@ export async function init_friends_page() {
             <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="display"></div>
-    
     `;
 
     // Anropar funktionen som hämtar den inloggade användarens vänlista och skapar DOMs av dem på direkten efter att man navigerar till sidan.
@@ -64,7 +63,6 @@ async function show_my_friends(event) {
             <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="display"></div>
-
     `;
 
     let body_for_fetch = {

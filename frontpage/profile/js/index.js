@@ -39,7 +39,6 @@ async function go_to_own_profile(user) {
             document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
             document.getElementById("comment_profile").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)";
         } else {
-            console.log(user);
             document.querySelector("#profile_image").style.backgroundImage = `url(./images/${user.profile_picture})`;
             document.getElementById("comment_profile").style.backgroundImage = `url(./images/${user.profile_picture})`;
         }
@@ -80,7 +79,6 @@ function other_users_profiles(other_user) {
     if (other_user.profile_picture === "undefined") {
         document.querySelector("#profile_image").style.backgroundImage = "url(../../frontpage/general_media/default_profile_pic.svg)"
     } else {
-        console.log(other_user.profile_picture);
         document.querySelector("#profile_image").style.backgroundImage = `url(./images/${other_user.profile_picture})`;
     }
     if (other_user.banner_picture === null) {
@@ -195,12 +193,11 @@ function send_message(event) {
             document.querySelectorAll(".delete").forEach(element => element.addEventListener("click", remove_comment));
         })
     section.appendChild(div)
-    document.querySelector("#message").value = ""
+    document.querySelector("#message").value = "";
 }
 
 
 function show_messages(messages, { profile_picture }) {
-    console.log(messages);
     if (messages !== null) {
         for (let i = 0; i < messages.length; i++) {
             let section = document.querySelector("#profile_forum")
@@ -247,26 +244,8 @@ function remove_comment(event) {
     fetch(request)
         .then(resource => resource.json())
         .then(data => {
-            console.log(data);
-            console.log(event);
-            event.target.remove();
+            event.target.parentElement.parentElement.remove();
         })
-
-    // Tar bort alla (denna bör inte vara med).
-    //document.querySelectorAll(".comments_section").forEach(element => element.remove());
-
-    fetch("../../database/users.json")
-        .then(resource => resource.json())
-        .then(users => {
-            users.forEach(user => {
-                if (user.username === localStorage.getItem("username")) {
-                    if (user.hasOwnProperty("profile_comments")) {
-                        show_messages(user.profile_comments);
-                    }
-                }
-            })
-        })
-
 }
 
 // Lägger till eventListener på #go_home knappen så att man kan gå tillbaka till framsidan.
