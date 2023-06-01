@@ -136,7 +136,7 @@ async function fetch_game_by_plattform_and_genre(genre, platform) {
         return data;
     }
     catch (error) {
-        console.log(error);
+        alert("oo something went wrong, try again")
     }
 }
 
@@ -164,7 +164,7 @@ async function search_game(game_name) {
         })
         return the_right_one;
     } catch (err) {
-        console.log(err)
+        alert("oo something went wrong, try again")
     }
 }
 
