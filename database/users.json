@@ -38,9 +38,10 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
             }
         ],
-        "profile_picture": "undefined",
-        "banner_picture": "undefined",
-        "id": 5
+        "profile_picture": "online-web-design.jpg",
+        "banner_picture": "online-web-design.jpg",
+        "id": 5,
+        "favorite_game_images": "online-web-design.jpg"
     },
     {
         "username": "adamcheaib",

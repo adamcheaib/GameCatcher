@@ -171,14 +171,13 @@ async function init_search() {
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(send_object),
                         }).then(r => r.json()).then(data => {
-                            console.log(data);
-                            console.log("Helo!");
+                           
                         });
 
                         notification.textContent = "Added to your list!";
                         notification.style.color = "lightgreen";
                         notification.style.fontWeight = "bold";
-                        console.log(parentNode);
+                       
                         event.target.textContent = "Remove game from your list";
 
                         event.target.style.pointerEvents = "none";
@@ -277,7 +276,7 @@ function show_game_display_dom(game_data) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(send_object),
             }).then(r => r.json()).then(data => {
-                console.log(data);
+        
                 general_notifications();
             });
 
@@ -286,7 +285,7 @@ function show_game_display_dom(game_data) {
             notification.style.gridRow = "2";
             notification.style.gridColumn = "1 / 4";
             notification.style.justifySelf = "center";
-            console.log(parentNode);
+           
             event.target.textContent = "Remove game from your list";
 
             event.target.style.pointerEvents = "none";

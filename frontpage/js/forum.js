@@ -125,7 +125,7 @@ async function fetch_chat(event) {
     let response_user1 = await fetch(`./php/chat.php?username=${username}&targetUsername=${targetUsername}`);
 
     let response_data = await response_user1.json();
-    console.log(response_data)
+    
 
     // Lagrar den inloggade användarens id och den användarens id som man har klickat på i localStorage.
     localStorage.setItem("loggedOnID", response_data.loggedID);
@@ -147,7 +147,7 @@ async function fetch_chat(event) {
 
     // Här får vi chatid:et!
     let chat_id = await response2.json();
-    console.log(chat_id);
+    
 
     // Lagrar chatID:t.
     localStorage.setItem("selected_chat_id", chat_id.chatid);
