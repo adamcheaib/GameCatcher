@@ -1,5 +1,9 @@
 <?php
 
+$fetch_data = json_decode(file_get_contents("php://input"), true);
+$all_users = json_decode(file_get_contents("../../database/users.json"), true);
+
+
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $all_users = json_decode(file_get_contents("../../database/users.json"), true);
 
@@ -149,9 +153,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
 }
-
-$fetch_data = json_decode(file_get_contents("php://input"), true);
-$all_users = json_decode(file_get_contents("../../database/users.json"), true);
 
 // Om man vill blocka en användare så körs denna.
 if ($fetch_data["action"] === "block") {
