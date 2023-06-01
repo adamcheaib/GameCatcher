@@ -225,7 +225,7 @@ function change_username_password(event) {
     let check = event.target.id;
     let user = localStorage.getItem("username");
     let changed_value = document.querySelector("input").value;
-    console.log(localStorage);
+   
 
     if (check === "change_username") {
         action = "change_username"
@@ -253,7 +253,7 @@ function change_username_password(event) {
                 localStorage.setItem("username", changed_value);
                 document.getElementById("changed_message").textContent = "Username changed!"
                 location.reload();
-                console.log(localStorage);
+                
 
             }
             if (data.action === "change_password") {

@@ -2,7 +2,6 @@ import { api_key } from "../utils/fetch_functions.js";
 
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
-
 // Gör så att dialog:n removas istället för att de bara disablas. Vi removar den för att annars skapas en ny som då inte får några eventListeners
 document.addEventListener("keydown", function remove_dialog(event) {
     if (event.key === "Escape") {
@@ -137,7 +136,7 @@ async function fetch_game_by_plattform_and_genre(genre, platform) {
         return data;
     }
     catch (error) {
-        console.log(error);
+        alert("oo something went wrong, try again")
     }
 }
 
@@ -165,7 +164,7 @@ async function search_game(game_name) {
         })
         return the_right_one;
     } catch (err) {
-        console.log(err)
+        alert("oo something went wrong, try again")
     }
 }
 
