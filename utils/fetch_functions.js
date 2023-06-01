@@ -15,7 +15,7 @@ export async function fetch_all_games(page = 1) { // Fetches games based on genr
         return resource;
 
     } catch (error) {
-        alert("TEST");
+        alert("oo something went wrong, try again")
     }
 };
 
@@ -27,7 +27,7 @@ async function TEST_fetch_genre_games(event) {
         const link = prefix + `games?page=1&genres=${genre}&` + api_key;
         const resource = await (await fetch(link)).json();
     } catch (err) {
-        console.log(err);
+        alert("oo something went wrong, try again")
     }
 };
 
@@ -52,7 +52,7 @@ export async function search_for_game(game_name = document.querySelector("#searc
         })
         return filtered_results;
     } catch (err) {
-        console.log(err)
+        alert("oo something went wrong, try again")
     }
 }
 
@@ -64,7 +64,7 @@ export async function searched_game_information(game_name) {
         return fetched_searched_game;
     }
     catch (err) {
-        console.log(err)
+        alert("oo something went wrong, try again")
     }
 }
 
@@ -77,7 +77,7 @@ async function specific_game_event(event) {
         try {
             const specific_game_fetched = await (await fetch(link)).json();
         } catch (err) {
-            console.log(err);
+            alert("oo something went wrong, try again")
         }
     };
 

@@ -2,7 +2,6 @@ import { api_key } from "../utils/fetch_functions.js";
 
 "use strict"
 /*To-Do: Denna är det som ska köras i varje game click då den ska displaya allt om spelet*/
-
 // Gör så att dialog:n removas istället för att de bara disablas. Vi removar den för att annars skapas en ny som då inte får några eventListeners
 document.addEventListener("keydown", function remove_dialog(event) {
     if (event.key === "Escape") {
