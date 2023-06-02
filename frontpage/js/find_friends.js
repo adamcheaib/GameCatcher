@@ -218,6 +218,7 @@ async function send_friend_request(event) {
     }
 
     // Skickar den där uppe.
+    // Denna ska antingen justeras här eller i dokumentationen att det står rätt METHOD.
     let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -246,7 +247,7 @@ async function find_user() {
     let request_account_name = localStorage.getItem("username");
     let response = await fetch(`./php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
     let account_data = await response.json();
-    
+
 
 
     // Hämtar en fetch som hämtar en användarens alla användare för att sedan kontrollera om den redan finns så att man inte kan skicka request till samma!
@@ -275,7 +276,7 @@ async function find_user() {
                 account_data[i].profile_picture = "./profile/images/" + account_data[i].profile_picture;
                 image_name = account_data[i].profile_picture;
 
-    
+
             }
             loading_screen();
             let responses = await fetch(`../database/users.json`);
@@ -600,6 +601,6 @@ function take_to_chat(event) {
 async function visit_profile(event) {
 
     let user_profile = document.querySelector(".show_profile").textContent;
-  
+
     window.location.replace("./profile?username=" + user_profile);
 }
