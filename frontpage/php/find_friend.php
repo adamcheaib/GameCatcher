@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $message = [ "message" => "No users found"];
         header("Content-Type: application/json");
         echo json_encode($message);
+        exit();
     }
     header("Content-Type: application/json");
     echo json_encode($user_alternatives);
