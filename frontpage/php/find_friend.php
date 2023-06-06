@@ -18,6 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
 
     }
+    if(count($user_alternatives) === 0){
+        $message = [ "message" => "No users found"];
+        header("Content-Type: application/json");
+        echo json_encode($message);
+    }
     header("Content-Type: application/json");
     echo json_encode($user_alternatives);
     exit();
