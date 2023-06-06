@@ -154,60 +154,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 }
 
-// Om man vill blocka en användare så körs denna.
-if ($fetch_data["action"] === "block") {
-    foreach ($all_users as $index => $user) {
-        if ($user["username"] === $fetch_data["me"]) {
-            for ($i = 0; $i < count($user["friends"]); $i++) {
-                if ($user["friends"][$i] === $fetch_data["username"]) {
-                    array_splice($all_users[$index]["friends"], $i, 1);
-                    $all_users[$index]["blocked"][] = $fetch_data["username"];
+if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+    if ($fetch_data["action"] === "block") {
+        foreach ($all_users as $index => $user) {
+            if ($user["username"] === $fetch_data["me"]) {
+                for ($i = 0; $i < count($user["friends"]); $i++) {
+                    if ($user["friends"][$i] === $fetch_data["username"]) {
+                        array_splice($all_users[$index]["friends"], $i, 1);
+                        $all_users[$index]["blocked"][] = $fetch_data["username"];
+                    }
                 }
             }
         }
-    }
-    foreach ($all_users as $index => $user) {
-        if ($user["username"] === $fetch_data["username"]) {
-            foreach ($user["friends"] as $friend_index => $friend) {
-                if ($friend === $fetch_data["me"]) {
-                    array_splice($all_users[$index]["friends"], $friend_index, 1);
+        foreach ($all_users as $index => $user) {
+            if ($user["username"] === $fetch_data["username"]) {
+                foreach ($user["friends"] as $friend_index => $friend) {
+                    if ($friend === $fetch_data["me"]) {
+                        array_splice($all_users[$index]["friends"], $friend_index, 1);
+                    }
                 }
             }
         }
+        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+        $message = [
+            "message" => "Success!",
+            "username" => $fetch_data["username"],
+            "action" => $fetch_data["action"],
+        ];
+        header("Content-Type: application/json");
+        echo json_encode($message);
+        exit();
     }
-    file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-    $message = [
-        "message" => "Success!",
-        "username" => $fetch_data["username"],
-        "action" => $fetch_data["action"],
-    ];
-    header("Content-Type: application/json");
-    echo json_encode($message);
-    exit();
-}
-
-// Om man vill unblocka en användare så körs denna.
-if ($fetch_data["action"] === "unblock") {
-    foreach ($all_users as $index => $user) {
-        if ($user["username"] === $fetch_data["me"]) {
-            foreach ($user["blocked"] as $block_index => $blocked) {
-                if ($blocked === $fetch_data["username"]) {
-                    if ($fetch_data["action"] == "unblock") {
-                        array_splice($all_users[$index]["blocked"], $block_index, 1);
-
-                        file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
-                        $message = [
-                            "message" => "Success!",
-                            "username" => $fetch_data["username"],
-                            "action" => $fetch_data["action"],
-                        ];
-                        header("Content-Type: application/json");
-                        echo json_encode($message);
-                        exit();
+    
+    // Om man vill unblocka en användare så körs denna.
+    if ($fetch_data["action"] === "unblock") {
+        foreach ($all_users as $index => $user) {
+            if ($user["username"] === $fetch_data["me"]) {
+                foreach ($user["blocked"] as $block_index => $blocked) {
+                    if ($blocked === $fetch_data["username"]) {
+                        if ($fetch_data["action"] == "unblock") {
+                            array_splice($all_users[$index]["blocked"], $block_index, 1);
+    
+                            file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
+                            $message = [
+                                "message" => "Success!",
+                                "username" => $fetch_data["username"],
+                                "action" => $fetch_data["action"],
+                            ];
+                            header("Content-Type: application/json");
+                            echo json_encode($message);
+                            exit();
+                        }
                     }
                 }
             }
         }
     }
 }
+// Om man vill blocka en användare så körs denna.
 ?>
