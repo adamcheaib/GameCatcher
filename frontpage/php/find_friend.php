@@ -45,14 +45,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $all_users[$j]["pending"][] = $fetch_data["user_that_wants_to_befriend"];
                 file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
                 header("Content-Type: application/json");
-                echo json_encode($all_users[$j]);
+                echo json_encode(["username" => $all_users[$j]["username"]]);
                 exit();
             } elseif ($all_users[$j]["username"] === $fetch_data["the_request_user"] and array_key_exists("pending", $all_users[$j]) === true) {
                 // Om nycklen pending redan finns, så pushar den in bara in användarens som har mottagits.
                 $all_users[$j]["pending"][] = $fetch_data["user_that_wants_to_befriend"];
                 file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
                 header("Content-Type: application/json");
-                echo json_encode($all_users[$j]);
+                echo json_encode(["username" => $all_users[$j]["username"]]);
                 exit();
             }
 

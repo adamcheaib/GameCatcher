@@ -6,7 +6,17 @@
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 2,
-        "friends": []
+        "friends": [],
+        "pending": [
+            "adamcheaib",
+            "adamcheaib",
+            "adamcheaib",
+            "adamcheaib",
+            "adamcheaib",
+            "adamcheaib",
+            "adamcheaib",
+            "adamcheaib"
+        ]
     },
     {
         "username": "adam",
@@ -15,7 +25,11 @@
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 3,
-        "friends": []
+        "friends": [],
+        "pending": [
+            "adamcheaib",
+            "adamcheaib"
+        ]
     },
     {
         "username": "kakariko",
