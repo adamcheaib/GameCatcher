@@ -57,6 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
         }
+        $message = ["invalid_request" => "Missing keys"];
+        sendJSON($message, 400);
+
     }
 
     // Här kollar man om en användare har "all_pending" nyckeln. Dvs om man har några pending requests.
@@ -74,6 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 exit();
             }
         }
+        $message = ["message" => "No pending friend requests"];
+        sendJSON($message, 400);
     }
 
     // Kollar alla pending requests som man har accepterat!
