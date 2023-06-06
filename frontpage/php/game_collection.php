@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     if ($old_user == null) {
-        $message = ["No user found"];
+        $message = ["No user does not exist"];
         sendJSON($message, 404);
     }
     file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
@@ -92,6 +92,9 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
         }
     }
 
+    $message = ["message" => "User does not exist"];
+    sendJSON($message, 404);
+
 
 }
 
@@ -106,6 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
             sendJSON($all_users[$i]["favorite_games"]);
         }
     }
+    $message = ["message" => "User does not exist"];
+    sendJSON($message, 404);
 }
 
 ?>
