@@ -18,10 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
 
     }
-    if(count($user_alternatives) === 0){
-        $message = [ "message" => "No users found"];
+    if (count($user_alternatives) === 0) {
+        $message = ["message" => "No users found"];
         header("Content-Type: application/json");
         echo json_encode($message);
+        http_response_code(400);
         exit();
     }
     header("Content-Type: application/json");
@@ -160,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 }
 
-if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
     if ($fetch_data["action"] === "block") {
         foreach ($all_users as $index => $user) {
             if ($user["username"] === $fetch_data["me"]) {
@@ -191,7 +192,7 @@ if($_SERVER["REQUEST_METHOD"] === "DELETE"){
         echo json_encode($message);
         exit();
     }
-    
+
     // Om man vill unblocka en användare så körs denna.
     if ($fetch_data["action"] === "unblock") {
         foreach ($all_users as $index => $user) {
@@ -200,7 +201,7 @@ if($_SERVER["REQUEST_METHOD"] === "DELETE"){
                     if ($blocked === $fetch_data["username"]) {
                         if ($fetch_data["action"] == "unblock") {
                             array_splice($all_users[$index]["blocked"], $block_index, 1);
-    
+
                             file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
                             $message = [
                                 "message" => "Success!",

@@ -261,6 +261,8 @@ async function find_user() {
 
     if (response.ok) {
         remove_loading_screen();
+    } else {
+        remove_loading_screen();
     }
 
     let all_friends_of_user = await response_for_all_friends.json();

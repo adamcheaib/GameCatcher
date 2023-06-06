@@ -15,9 +15,7 @@
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 3,
-        "friends": [
-            "adamcheaib"
-        ]
+        "friends": []
     },
     {
         "username": "kakariko",
@@ -80,9 +78,7 @@
             "kakariko",
             "hassan"
         ],
-        "friends": [
-            "adam"
-        ],
+        "friends": [],
         "profile_comments": [
             {
                 "message": "qwewqe",
