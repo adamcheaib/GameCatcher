@@ -35,7 +35,6 @@ export async function init_friends_page() {
             <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="display"></div>
-    
     `;
 
     // Anropar funktionen som hämtar den inloggade användarens vänlista och skapar DOMs av dem på direkten efter att man navigerar till sidan.
@@ -64,7 +63,6 @@ async function show_my_friends(event) {
             <div id="blocked" class="unselected">Blocked</div>
         </div>
         <div id="display"></div>
-
     `;
 
     let body_for_fetch = {
@@ -220,6 +218,7 @@ async function send_friend_request(event) {
     }
 
     // Skickar den där uppe.
+    // Denna ska antingen justeras här eller i dokumentationen att det står rätt METHOD.
     let response = await fetch("./php/find_friend.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -248,7 +247,7 @@ async function find_user() {
     let request_account_name = localStorage.getItem("username");
     let response = await fetch(`./php/find_friend.php?find_account_name=${find_account_name}&request_account_name=${request_account_name}`);
     let account_data = await response.json();
-    console.log(account_data);
+
 
 
     // Hämtar en fetch som hämtar en användarens alla användare för att sedan kontrollera om den redan finns så att man inte kan skicka request till samma!
@@ -277,8 +276,7 @@ async function find_user() {
                 account_data[i].profile_picture = "./profile/images/" + account_data[i].profile_picture;
                 image_name = account_data[i].profile_picture;
 
-                console.log(account_data[i].profile_picture);
-                console.log(image_name);
+
             }
             loading_screen();
             let responses = await fetch(`../database/users.json`);
@@ -603,6 +601,6 @@ function take_to_chat(event) {
 async function visit_profile(event) {
 
     let user_profile = document.querySelector(".show_profile").textContent;
-    console.log(user_profile);
+
     window.location.replace("./profile?username=" + user_profile);
 }

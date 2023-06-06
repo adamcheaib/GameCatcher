@@ -38,9 +38,10 @@
                 "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
             }
         ],
-        "profile_picture": "undefined",
-        "banner_picture": "undefined",
-        "id": 5
+        "profile_picture": "online-web-design.jpg",
+        "banner_picture": "online-web-design.jpg",
+        "id": 5,
+        "favorite_game_images": "online-web-design.jpg"
     },
     {
         "username": "adamcheaib",
@@ -68,12 +69,35 @@
         ],
         "profile_comments": [
             {
-                "message": "hej allihopa",
-                "timestamp": "2023-05-30 13:23:18"
+                "message": "qwewqe",
+                "timestamp": "2023-06-01 13:59:42"
             },
             {
-                "message": "asdasddasd",
-                "timestamp": "2023-05-30 13:24:47"
+                "message": "qweqweqwrqwr",
+                "timestamp": "2023-06-01 13:59:44"
+            },
+            {
+                "message": "czxcxzcz",
+                "timestamp": "2023-06-01 13:59:45"
+            },
+            {
+                "message": "vddvdvdv",
+                "timestamp": "2023-06-01 13:59:47"
+            }
+        ]
+    },
+    {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "id": 6,
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_comments": [
+            {
+                "message": "gre",
+                "timestamp": "2023-05-31 13:00:28"
             }
         ]
     }

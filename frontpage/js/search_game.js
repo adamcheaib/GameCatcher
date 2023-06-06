@@ -171,14 +171,13 @@ async function init_search() {
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(send_object),
                         }).then(r => r.json()).then(data => {
-                            console.log(data);
-                            console.log("Helo!");
+
                         });
 
                         notification.textContent = "Added to your list!";
                         notification.style.color = "lightgreen";
                         notification.style.fontWeight = "bold";
-                        console.log(parentNode);
+
                         event.target.textContent = "Remove game from your list";
 
                         event.target.style.pointerEvents = "none";
