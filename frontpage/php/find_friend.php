@@ -200,6 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
         exit();
     }
 
+
     // Om man vill unblocka en användare så körs denna.
     if ($fetch_data["action"] === "unblock") {
         foreach ($all_users as $index => $user) {
@@ -223,7 +224,12 @@ if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
                 }
             }
         }
+        $message = ["message" => "User not found"];
+        sendJSON($message, 404);
     }
+
+    $message = ["invalid_request" => "Missing key"];
+    sendJSON($message, 400);
 }
 // Om man vill blocka en användare så körs denna.
 ?>
