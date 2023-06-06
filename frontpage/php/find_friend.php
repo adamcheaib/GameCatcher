@@ -112,6 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 exit();
             }
         }
+        $message = ["message" => "No pending friend requests"];
+        sendJSON($message, 400);
     }
 
 
