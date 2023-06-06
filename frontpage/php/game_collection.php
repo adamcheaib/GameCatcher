@@ -58,6 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         }
     }
+    if ($old_user == null) {
+        $message = ["No user found"];
+        sendJSON($message, 404);
+    }
     file_put_contents("../../database/users.json", json_encode($all_users, JSON_PRETTY_PRINT));
     sendJSON($old_user_with_out_password_for_send);
 }
