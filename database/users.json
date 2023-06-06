@@ -44,6 +44,21 @@
         "favorite_game_images": "online-web-design.jpg"
     },
     {
+        "username": "calle",
+        "password": "calle",
+        "favorite_games": [],
+        "profile_picture": "guts.jpg",
+        "banner_picture": "Vagabond-2.avif",
+        "id": 6,
+        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
+        "profile_comments": [
+            {
+                "message": "gre",
+                "timestamp": "2023-05-31 13:00:28"
+            }
+        ]
+    },
+    {
         "username": "adamcheaib",
         "password": "adamcheaib",
         "favorite_games": [
@@ -54,6 +69,10 @@
             {
                 "name": "The Witcher 3: Wild Hunt",
                 "image": "https:\/\/media.rawg.io\/media\/games\/618\/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            },
+            {
+                "name": "Counter-Strike: Global Offensive",
+                "image": "https:\/\/media.rawg.io\/media\/games\/736\/73619bd336c894d6941d926bfd563946.jpg"
             }
         ],
         "profile_picture": "russian-blue-cats.jpg",
@@ -83,21 +102,6 @@
             {
                 "message": "vddvdvdv",
                 "timestamp": "2023-06-01 13:59:47"
-            }
-        ]
-    },
-    {
-        "username": "calle",
-        "password": "calle",
-        "favorite_games": [],
-        "profile_picture": "guts.jpg",
-        "banner_picture": "Vagabond-2.avif",
-        "id": 6,
-        "favorite_game_images": "elden-ring-new-header-mobile.jpg",
-        "profile_comments": [
-            {
-                "message": "gre",
-                "timestamp": "2023-05-31 13:00:28"
             }
         ]
     }
