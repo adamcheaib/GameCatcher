@@ -1,14 +1,5 @@
 <?php
-
-ini_set("display_errors", 1);
-
-function sendJSON($message, $http_code = 200)
-{
-    header("content-type: application/json");
-    http_response_code($http_code);
-    echo json_encode($message);
-    exit();
-}
+require_once "../../frontpage/php/functions.php";
 
 $received_data = json_decode(file_get_contents("php://input"), true);
 

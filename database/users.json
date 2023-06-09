@@ -118,5 +118,13 @@
             }
         ],
         "blocked": []
+    },
+    {
+        "username": "eeee",
+        "password": "eeee",
+        "favorite_games": [],
+        "profile_picture": "undefined",
+        "banner_picture": "undefined",
+        "id": 7
     }
 ]
