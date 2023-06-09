@@ -6,7 +6,9 @@
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 2,
-        "friends": [],
+        "friends": [
+            "adam"
+        ],
         "pending": [
             "adamcheaib",
             "adamcheaib",
@@ -25,11 +27,12 @@
         "profile_picture": "undefined",
         "banner_picture": "undefined",
         "id": 3,
-        "friends": [],
-        "pending": [
+        "friends": [
             "adamcheaib",
-            "adamcheaib"
-        ]
+            "adamcheaib",
+            "rastaman123"
+        ],
+        "pending": []
     },
     {
         "username": "kakariko",
@@ -92,7 +95,10 @@
             "kakariko",
             "hassan"
         ],
-        "friends": [],
+        "friends": [
+            "adam",
+            "adam"
+        ],
         "profile_comments": [
             {
                 "message": "qwewqe",

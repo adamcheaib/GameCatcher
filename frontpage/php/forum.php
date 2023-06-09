@@ -16,13 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $toSend["message"] = $message_data["message"];
                     $all_chats[$i]["chatlog"][] = $toSend;
                     file_put_contents("../../database/chatlogs.json", json_encode($all_chats, JSON_PRETTY_PRINT));
+                    http_response_code(200);
                     sendJSON($toSend);
-                    // sendJSON($all_users[$index]["username"]);
+                    
                 }
 
             }
         }
     }
+}
+
+else{
+    http_response_code(405);
+    sendJSON(["message" => "Wrong http method, only execept POST requests"]);
 }
 
 ?>

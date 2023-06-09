@@ -30,5 +30,24 @@
                 "message": "ssss"
             }
         ]
+    },
+    {
+        "chatid": 3,
+        "chat_between": [
+            2,
+            3
+        ],
+        "chatlog": [
+            {
+                "username": "rastaman123",
+                "profile_picture": "undefined",
+                "message": "hej"
+            },
+            {
+                "username": "rastaman123",
+                "profile_picture": "undefined",
+                "message": "eee"
+            }
+        ]
     }
 ]

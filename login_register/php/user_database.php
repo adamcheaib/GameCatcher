@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $message = ["message" => "User not found"];
-        sendJSON($message, 404);
+        sendJSON($message, 400);
 
     }
 }
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
             }
         }
         $message = ["message => No user library found!"];
-        sendJSON($message, 404);
+        sendJSON($message, 400);
     }
 }
 
